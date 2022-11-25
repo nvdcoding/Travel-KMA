@@ -1,0 +1,63 @@
+/* eslint-disable */
+
+import { useEffect } from "react";
+import { logo } from "../../constants/images";
+
+function Footer() {
+    useEffect(() => { }, []);
+    return (
+        <>
+            <footer className="foorwr__wrapper">
+                <div className="tour-footer-sub">
+                    <div className="tour-footer-logo">
+                        <div className="tour-footer-img">
+                            <img src={logo} alt="" />
+                        </div>
+                        <h1 className="tour-footer-logo__text">TravelLocal Guarantees</h1>
+                    </div>
+                    <div className="tour-footer-list">
+                        <ul className="tour-footer-content">
+                            <li className="tour-footer__item">
+                                <i className="fa-regular fa-star"></i>
+                                <p className="tour-footer__text">
+                                    Giá tốt nhất
+                                </p>
+                            </li>
+                            <li className="tour-footer__item">
+                                <i className="fa-brands fa-cc-paypal"></i>
+                                <p className="tour-footer__text">
+                                    Thanh toán dễ dàng
+                                </p>
+                            </li>
+                            <li className="tour-footer__item">
+                                <i className="fa-regular fa-heart"></i>
+                                <p className="tour-footer__text">
+                                    Quality Agencies
+                                </p>
+                            </li>
+                            <li className="tour-footer__item">
+                                <i className="fa-solid fa-shield-halved"></i>
+                                <p className="tour-footer__text">
+                                    Bảo mật tuyệt đối
+                                </p>
+                            </li>
+                            <li className="tour-footer__item">
+                                <i className="fa-solid fa-person-walking-luggage"></i>
+                                <p className="tour-footer__text">
+                                    Personal TravelLocal Contact
+                                </p>
+                            </li>
+                            <li className="tour-footer__item">
+                                <i className="fa-solid fa-comments"></i>
+                                <p className="tour-footer__text">
+                                    Customer Reviews
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </>
+    );
+}
+export default Footer;
