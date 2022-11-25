@@ -1,12 +1,39 @@
 import React, { useEffect } from "react";
 import Layout from "../components/layout/layout";
 import { banner, home } from "../constants/images";
-import { DatePicker } from "antd";
+import { DatePicker, Button, Form, Input, Select } from "antd";
 import "../assets/css/create-tour.css";
 const { RangePicker } = DatePicker;
+const { Option } = Select;
 
 function CreateTour() {
     useEffect(() => { }, []);
+    const onFinish = (values) => {
+        console.log('Success:', values);
+    };
+    const onFinishFailed = (errorInfo) => {
+        console.log('Failed:', errorInfo);
+    };
+    const onGenderChange = (value) => {
+        switch (value) {
+            case 'male':
+                this.formRef.current.setFieldsValue({
+                    note: 'Hi, man!',
+                });
+                return;
+            case 'female':
+                this.formRef.current.setFieldsValue({
+                    note: 'Hi, lady!',
+                });
+                return;
+            case 'other':
+                this.formRef.current.setFieldsValue({
+                    note: 'Hi there!',
+                });
+                break;
+            default:
+        }
+    };
     return (
         <>
             <Layout>
@@ -230,6 +257,72 @@ function CreateTour() {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div className="create-tour__block">
+                                <div className="travel-title-group">
+                                    <h3>Liên hệ</h3>
+                                </div>
+                                <Form
+                                    name="basic"
+                                    onFinish={onFinish}
+                                    onFinishFailed={onFinishFailed}
+                                    autoComplete="off"
+                                >
+                                    <div className="form-contact-group">
+                                        <Form.Item
+                                            label="Họ tên"
+                                            name="username"
+                                            rules={[
+                                                {
+                                                    required: true,
+                                                    message: 'Họ tên không được để trống',
+                                                },
+                                            ]}
+                                        >
+                                            <Input />
+                                        </Form.Item>
+                                        <Form.Item
+                                            name="email"
+                                            label="E-mail"
+                                            rules={[
+                                                {
+                                                    type: 'email',
+                                                    message: 'The input is not valid E-mail!',
+                                                },
+                                                {
+                                                    required: true,
+                                                    message: 'Please input your E-mail!',
+                                                },
+                                            ]}
+                                        >
+                                            <Input />
+                                        </Form.Item>
+
+                                        <Form.Item name="gender" label="Giới tính" rules={[{ required: false }]}>
+                                            <Select
+                                                onChange={onGenderChange}
+                                                allowClear
+                                            >
+                                                <Option value="#" se>Chọn giới tính</Option>
+                                                <Option value="male">Nam</Option>
+                                                <Option value="female">Nữ</Option>
+                                                <Option value="other">Khác</Option>
+                                            </Select>
+                                        </Form.Item>
+                                    </div>
+
+
+                                    <Form.Item
+                                        wrapperCol={{
+                                            offset: 8,
+                                            span: 16,
+                                        }}
+                                    >
+                                        <Button type="primary" htmlType="submit">
+                                            Liên hệ
+                                        </Button>
+                                    </Form.Item>
+                                </Form>
                             </div>
                         </main>
                     </div>

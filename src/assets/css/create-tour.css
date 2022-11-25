@@ -90,6 +90,10 @@
     justify-content: space-between;
 }
 
-.create-tour__block-group .create-tour__block {
-    width: 30%;
+.create-tour__block-group .create-tour__block:first-child {
+    width: 40%;
+}
+
+.create-tour__block-group .create-tour__block:last-child {
+    width: 55%;
 }
