@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Layout from "../components/layout/layout";
 import "../assets/css/tour.css";
 export default function Tours() {
@@ -34,24 +35,24 @@ export default function Tours() {
                                             <div className="lp-travel__map-bg"></div>
                                         </div>
                                     </div>
-                                    <a className="lp-travel__location lc-hanoi" href="rootPath+'/hanoi'"></a>
-                                    <a className="lp-travel__location lc-quangninh" href="rootPath+'/quangninh'"></a>
-                                    <a className="lp-travel__location lc-hagiang" href="rootPath+'/hagiang'"></a>
-                                    <a className="lp-travel__location lc-sapa" href="rootPath+'/sapa'"></a>
-                                    <a className="lp-travel__location lc-nghean" href="rootPath+'/nghean'"></a>
-                                    <a className="lp-travel__location lc-mocchau" href="rootPath+'/mocchau'"></a>
-                                    <a className="lp-travel__location lc-ninhbinh" href="rootPath+'/ninhbinh'"></a>
-                                    <a className="lp-travel__location lc-quangbinh" href="rootPath+'/quangbinh'"></a>
-                                    <a className="lp-travel__location lc-hue" href="rootPath+'/hue'"></a>
-                                    <a className="lp-travel__location lc-danang" href="rootPath+'/danang'"></a>
-                                    <a className="lp-travel__location lc-binhdinh" href="rootPath+'/binhdinh'"></a>
-                                    <a className="lp-travel__location lc-daklak" href="rootPath+'/daklak'"></a>
-                                    <a className="lp-travel__location lc-nhatrang" href="rootPath+'/nhatrang'"></a>
-                                    <a className="lp-travel__location lc-dalat" href="rootPath+'/dalat'"></a>
-                                    <a className="lp-travel__location lc-hcm" href="rootPath+'/tphochiminh'"></a>
-                                    <a className="lp-travel__location lc-bentre" href="rootPath+'/bentre'"></a>
-                                    <a className="lp-travel__location lc-cantho" href="rootPath+'/cantho'"></a>
-                                    <a className="lp-travel__location lc-phuquoc" href="rootPath+'/phuquoc'"></a>
+                                    <a className="lp-travel__location lc-hanoi" href="/du-lich/hanoi"></a>
+                                    <a className="lp-travel__location lc-quangninh" href="/du-lich/quangninh"></a>
+                                    <a className="lp-travel__location lc-hagiang" href="/du-lich/hagiang"></a>
+                                    <a className="lp-travel__location lc-sapa" href="/du-lich/sapa"></a>
+                                    <a className="lp-travel__location lc-nghean" href="/du-lich/nghean"></a>
+                                    <a className="lp-travel__location lc-mocchau" href="/du-lich/mocchau"></a>
+                                    <a className="lp-travel__location lc-ninhbinh" href="/du-lich/ninhbinh"></a>
+                                    <a className="lp-travel__location lc-quangbinh" href="/du-lich/quangbinh"></a>
+                                    <a className="lp-travel__location lc-hue" href="/du-lich/hue"></a>
+                                    <a className="lp-travel__location lc-danang" href="/du-lich/danang"></a>
+                                    <a className="lp-travel__location lc-binhdinh" href="/du-lich/binhdinh"></a>
+                                    <a className="lp-travel__location lc-daklak" href="/du-lich/daklak"></a>
+                                    <a className="lp-travel__location lc-nhatrang" href="/du-lich/nhatrang"></a>
+                                    <a className="lp-travel__location lc-dalat" href="/du-lich/dalat"></a>
+                                    <a className="lp-travel__location lc-hcm" href="/du-lich/tphochiminh"></a>
+                                    <a className="lp-travel__location lc-bentre" href="/du-lich/bentre"></a>
+                                    <a className="lp-travel__location lc-cantho" href="/du-lich/cantho"></a>
+                                    <a className="lp-travel__location lc-phuquoc" href="/du-lich/phuquoc"></a>
                                 </div>
                             </div>
                         </div>
@@ -185,9 +186,29 @@ export default function Tours() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="travel-question">
-                                <h3 className="travel-title">CÂU HỎI THƯỜNG GẶP</h3>
-                                <hr className="line" />
+                            <div class="travel-question">
+                                <h3 class="travel-title">CÂU HỎI THƯỜNG GẶP</h3>
+                                <hr class="line" />
+                                <ul class="custom-collapse">
+                                    <li class="custom-collapse__item">
+                                        <div class="custom-collapse__header">
+                                            <h6 class="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
+                                            <i class="fa-solid fa-circle-plus custom-collapse__icon"></i>
+                                        </div>
+                                        <div class="custom-collapse__content">
+                                            <span>Cau tra loi</span>
+                                        </div>
+                                    </li>
+                                    <li class="custom-collapse__item">
+                                        <div class="custom-collapse__header">
+                                            <h6 class="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
+                                            <i class="fa-solid fa-circle-plus custom-collapse__icon"></i>
+                                        </div>
+                                        <div class="custom-collapse__content">
+                                            <span>Cau tra loi</span>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </main>

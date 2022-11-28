@@ -17,13 +17,16 @@ function HeaderLayout() {
                                     <a href="/diem-den">Điểm đến</a>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="#">#</a>
+                                    <a href="/tour">Tour HOT</a>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="/lien-he">Liên hệ HDV</a>
+                                    <a href="/hdv">Hướng dẫn viên</a>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="/diem-den">Giới thiệu</a>
+                                    <a href="/tin-tuc">Tin tức</a>
+                                </li>
+                                <li className="menu-item">
+                                    <a href="/gioi-thieu">Giới thiệu</a>
                                 </li>
                             </ul>
                         </div>
@@ -33,7 +36,7 @@ function HeaderLayout() {
                             </div>
                             <div className="language"><i className="fa-solid fa-globe"></i></div>
                             <div className="support"><i className="fa-solid fa-circle-question"></i></div>
-                            <div className="user-info"><p className="button">Đăng nhập</p></div>
+                            <div className="user-info"><a className="button button--primary" href="/trang-ca-nhan">Đăng nhập</a></div>
                         </div>
                     </nav>
                 </div>

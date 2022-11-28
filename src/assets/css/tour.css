@@ -631,3 +631,109 @@
 .travel-question {
     margin-top: 4rem;
 }
+
+/* cau hoi thuong gap */
+.custom-collapse {
+    margin-top: 3rem;
+}
+
+.custom-collapse__header {
+    padding: 20px 25px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+@media (max-width: 991px) {
+    .custom-collapse__header {
+        padding: 20px 15px;
+    }
+}
+
+.custom-collapse__item {
+    margin: 0 0 30px;
+    border: 1px solid #E7E7E7;
+    border-radius: 4px;
+}
+
+@media (max-width: 991px) {
+    .custom-collapse__item {
+        margin: 0 0 25px;
+    }
+}
+
+.custom-collapse__icon {
+    color: var(--color-primary-hover);
+    font-size: 24px;
+}
+
+.custom-collapse__header-name {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: var(--color-text-title);
+}
+
+@media (max-width: 991px) {
+    .custom-collapse__header-name {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
+
+.custom-collapse__content {
+    padding: 20px 25px;
+    border-top: 1px solid #E7E7E7;
+    display: none;
+}
+
+@media (max-width: 991px) {
+    .custom-collapse__content {
+        padding: 20px 15px;
+    }
+}
+
+.custom-collapse__item.active .custom-collapse__content {
+    display: block;
+}
+
+.custom-collapse__item.active .custom-collapse__icon:before {
+    color: var(--color-primary-hover);
+}
+
+.custom-collapse__details {
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--color-text);
+}
+
+/* thanh toan */
+
+.payment-online {
+    padding: 0 0 40px;
+    word-break: break-word;
+}
+
+.payment-online__title {
+    color: var(--color-text);
+    font-family: 'FS PFBeauSansPro', sans-serif;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 0.15px;
+    line-height: 36px;
+    margin: 0 0 30px;
+    text-align: center;
+    text-transform: uppercase;
+}

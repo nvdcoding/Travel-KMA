@@ -1,0 +1,13 @@
+.tours-all__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.tours-all__left {
+    width: 37%;
+}
+
+.tours-all__right {
+    width: 62%;
+}
