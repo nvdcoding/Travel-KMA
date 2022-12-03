@@ -12,6 +12,8 @@ const Personal = lazy(() => import("../page/PersonalPage/Personal"));
 const News = lazy(() => import("../page/Tin-Tuc/News"));
 const NewsDetail = lazy(() => import("../page/Tin-Tuc/NewsDetail"));
 const TourDetail = lazy(() => import("../page/Tour/TourDetail"));
+const Introduce = lazy(() => import("../page/introduce"));
+const MyTrip = lazy(() => import("../page/PersonalPage/MyTrip"));
 
 /**
  * define main pages routes
@@ -21,6 +23,11 @@ const RoutePage = [
         path: ROUTES.HOME,
         exact: true,
         component: Home,
+    },
+    {
+        path: ROUTES.INTRODUCE,
+        exact: true,
+        component: Introduce,
     },
     {
         path: ROUTES.TOUR,
@@ -71,6 +78,11 @@ const RoutePage = [
         path: ROUTES.NEWSDETAIL,
         exact: true,
         component: NewsDetail,
+    },
+    {
+        path: ROUTES.MYTRIP,
+        exact: true,
+        component: MyTrip,
     },
 ];
 export default RoutePage;

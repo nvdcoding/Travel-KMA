@@ -33,7 +33,7 @@ function HeaderLayout() {
                         </div>
                         <div className="menu-right">
                             <div className="your-trip">
-                                Chuyến đi của bạn
+                                <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
                             </div>
                             <div className="language"><i className="fa-solid fa-globe"></i></div>
                             <div className="support"><i className="fa-solid fa-circle-question"></i></div>

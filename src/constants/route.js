@@ -8,6 +8,8 @@ export const ROUTES = {
     DULICH: "/du-lich/:id",
     PERSONAL: "/trang-ca-nhan",
     NEWS: "/tin-tuc",
+    INTRODUCE: "/gioi-thieu",
     TOURDETAIL: "/tour/:id",
-    NEWSDETAIL: "/tin-tuc/:id"
+    NEWSDETAIL: "/tin-tuc/:id",
+    MyTRIP: "/chuyen-di"
 };

@@ -38,7 +38,7 @@ html {
     --transition: var(--speed) var(--easing);
     --color-primary: #9EB60A;
     --color-sub: #007C80;
-    --color-text-title: #343A40;
+    --color-text-title: #3a4249;
     --color-text: #717171;
 }
 
@@ -180,12 +180,12 @@ img {
 }
 
 img:hover {
-    -webkit-transform: scale(1.05, 1.05);
+    /* -webkit-transform: scale(1.05, 1.05);
     -ms-transform: scale(1.05, 1.05);
     transform: scale(1.05, 1.05);
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
-    opacity: 0.75;
+    opacity: 0.75; */
 }
 
 
@@ -415,7 +415,7 @@ img:hover {
 
 .content {
     width: 100%;
-    max-width: 1600px;
+    max-width: 1340px;
     padding: 0 15px;
     margin: auto;
 }
