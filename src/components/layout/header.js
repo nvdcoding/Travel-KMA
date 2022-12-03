@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { logo } from '../../constants/images';
 function HeaderLayout() {
@@ -14,19 +15,19 @@ function HeaderLayout() {
                             <img alt="img" src={logo} />
                             <ul className="menu-list">
                                 <li className="menu-item">
-                                    <a href="/diem-den">Điểm đến</a>
+                                    <Link to="/diem-den">Điểm đến</Link>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="/tour">Tour HOT</a>
+                                    <Link to="/tour">Tour HOT</Link>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="/hdv">Hướng dẫn viên</a>
+                                    <Link to="/hdv">Hướng dẫn viên</Link>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="/tin-tuc">Tin tức</a>
+                                    <Link to="/tin-tuc">Tin tức</Link>
                                 </li>
                                 <li className="menu-item">
-                                    <a href="/gioi-thieu">Giới thiệu</a>
+                                    <Link to="/gioi-thieu">Giới thiệu</Link>
                                 </li>
                             </ul>
                         </div>

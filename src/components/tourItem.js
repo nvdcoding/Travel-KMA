@@ -2,6 +2,7 @@
 
 import Item from "antd/lib/list/Item";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { address, avt, } from "../constants/images";
 
 function TourItem(props) {
@@ -33,7 +34,7 @@ function TourItem(props) {
                             <i className="fa-solid fa-plane-arrival"></i>
                             <span className="tour-view__place-name">Bắc Ninh</span>
                         </div>
-                        <a className="travel-link">Xem chi tiết</a>
+                        <Link to={`/tour/${props.item.id}`} className="travel-link" >Xem chi tiết</Link>
                     </div>
                     <div className="tour-view-footer">
                         <p className="tour-view__price">khoảng<span>200.000đ</span>một người</p>

@@ -1,8 +1,8 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Layout from "../components/layout/layout";
-import "../assets/css/tour.css";
+import Layout from "../../components/layout/layout";
+import "../../assets/css/tour.css";
 export default function Tours() {
     useEffect(() => {
     }, []);
@@ -186,25 +186,25 @@ export default function Tours() {
                                     </div>
                                 </div>
                             </div>
-                            <div class="travel-question">
-                                <h3 class="travel-title">CÂU HỎI THƯỜNG GẶP</h3>
-                                <hr class="line" />
-                                <ul class="custom-collapse">
-                                    <li class="custom-collapse__item">
-                                        <div class="custom-collapse__header">
-                                            <h6 class="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
-                                            <i class="fa-solid fa-circle-plus custom-collapse__icon"></i>
+                            <div className="travel-question">
+                                <h3 className="travel-title">CÂU HỎI THƯỜNG GẶP</h3>
+                                <hr className="line" />
+                                <ul className="custom-collapse">
+                                    <li className="custom-collapse__item">
+                                        <div className="custom-collapse__header">
+                                            <h6 className="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
+                                            <i className="fa-solid fa-circle-plus custom-collapse__icon"></i>
                                         </div>
-                                        <div class="custom-collapse__content">
+                                        <div className="custom-collapse__content">
                                             <span>Cau tra loi</span>
                                         </div>
                                     </li>
-                                    <li class="custom-collapse__item">
-                                        <div class="custom-collapse__header">
-                                            <h6 class="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
-                                            <i class="fa-solid fa-circle-plus custom-collapse__icon"></i>
+                                    <li className="custom-collapse__item">
+                                        <div className="custom-collapse__header">
+                                            <h6 className="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
+                                            <i className="fa-solid fa-circle-plus custom-collapse__icon"></i>
                                         </div>
-                                        <div class="custom-collapse__content">
+                                        <div className="custom-collapse__content">
                                             <span>Cau tra loi</span>
                                         </div>
                                     </li>

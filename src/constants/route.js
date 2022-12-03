@@ -6,5 +6,8 @@ export const ROUTES = {
     TOURALL: "/tour",
     HDVALL: "/hdv",
     DULICH: "/du-lich/:id",
-    PERSONAL: "/trang-ca-nhan"
+    PERSONAL: "/trang-ca-nhan",
+    NEWS: "/tin-tuc",
+    TOURDETAIL: "/tour/:id",
+    NEWSDETAIL: "/tin-tuc/:id"
 };

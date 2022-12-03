@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import Layout from "../components/layout/layout";
-import { banner, home } from "../constants/images";
+import Layout from "../../components/layout/layout";
+import { banner, home } from "../../constants/images";
 import { DatePicker, Button, Form, Input, Select } from "antd";
-import "../assets/css/create-tour.css";
+import "../../assets/css/create-tour.css";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
@@ -38,18 +38,18 @@ function CreateTour() {
         <>
             <Layout>
                 <div className="create-tour__wrapper">
-                    <div class="content">
+                    <div className="content">
                         <main className="create-tour">
                             <div className="banner-bg">
                                 <img alt="" src={banner} />
                             </div>
-                            <div class="pathway breadcrumbs">
+                            <div className="pathway breadcrumbs">
                                 <ul>
                                     <li>
                                         <a href="/">Trang chủ</a>
                                     </li>
                                     <li>
-                                        <i class="fa-solid fa-chevron-right"></i>
+                                        <i className="fa-solid fa-chevron-right"></i>
                                     </li>
                                     <li>
                                         <strong>Du lịch</strong>
@@ -69,15 +69,15 @@ function CreateTour() {
                                         <option value="#">Chọn vị trí</option>
                                     </select>
                                 </div>
-                                <ul class="place-form__choose">
-                                    <li class="checkbox-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                <ul className="place-form__choose">
+                                    <li className="checkbox-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input
                                                 type="checkbox"
                                                 checked="checked"
                                                 name="choose-object"
                                             />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img
                                                 alt=" "
                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIybgZ8r8Is8-S0pQi9YyM1ya5i5jsGQc_g&usqp=CAU"
@@ -85,10 +85,10 @@ function CreateTour() {
                                             <p className="checkbox-name">Yên Phong</p>
                                         </label>
                                     </li>
-                                    <li class="checkbox-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                    <li className="checkbox-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="checkbox" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img
                                                 alt=" "
                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIybgZ8r8Is8-S0pQi9YyM1ya5i5jsGQc_g&usqp=CAU"
@@ -96,10 +96,10 @@ function CreateTour() {
                                             <p className="checkbox-name">Yên Phong</p>
                                         </label>
                                     </li>
-                                    <li class="checkbox-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                    <li className="checkbox-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="checkbox" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img
                                                 alt=" "
                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIybgZ8r8Is8-S0pQi9YyM1ya5i5jsGQc_g&usqp=CAU"
@@ -119,15 +119,15 @@ function CreateTour() {
                                         <option value="#">Chọn vị trí</option>
                                     </select>
                                 </div>
-                                <ul class="place-form__choose">
-                                    <li class="checkbox-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                <ul className="place-form__choose">
+                                    <li className="checkbox-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input
                                                 type="checkbox"
                                                 checked="checked"
                                                 name="choose-object"
                                             />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img
                                                 alt=" "
                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIybgZ8r8Is8-S0pQi9YyM1ya5i5jsGQc_g&usqp=CAU"
@@ -135,10 +135,10 @@ function CreateTour() {
                                             <p className="checkbox-name">Ẩm thực</p>
                                         </label>
                                     </li>
-                                    <li class="checkbox-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                    <li className="checkbox-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="checkbox" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img
                                                 alt=" "
                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIybgZ8r8Is8-S0pQi9YyM1ya5i5jsGQc_g&usqp=CAU"
@@ -146,10 +146,10 @@ function CreateTour() {
                                             <p className="checkbox-name">Khám phá</p>
                                         </label>
                                     </li>
-                                    <li class="checkbox-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                    <li className="checkbox-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="checkbox" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img
                                                 alt=" "
                                                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDIybgZ8r8Is8-S0pQi9YyM1ya5i5jsGQc_g&usqp=CAU"
@@ -166,35 +166,35 @@ function CreateTour() {
                                         <p>Chọn phong cách mong muốn</p>
                                     </div>
                                 </div>
-                                <ul class="place-form__choose place-form__choose_radio">
-                                    <li class="radio-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                <ul className="place-form__choose place-form__choose_radio">
+                                    <li className="radio-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="radio" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img alt=" " src={home} />
                                             <p className="radio-name">Nhà dân</p>
                                         </label>
                                     </li>
-                                    <li class="radio-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                    <li className="radio-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="radio" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img alt=" " src={home} />
                                             <p className="radio-name">Nhà nghỉ</p>
                                         </label>
                                     </li>
-                                    <li class="radio-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                    <li className="radio-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="radio" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img alt=" " src={home} />
                                             <p className="radio-name">Khách sạn</p>
                                         </label>
                                     </li>
-                                    <li class="radio-customize active">
-                                        <label class="checkbox-custom1 nowrap">
+                                    <li className="radio-customize active">
+                                        <label className="checkbox-custom1 nowrap">
                                             <input type="radio" name="choose-object" />
-                                            <span class="checkmark"></span>
+                                            <span className="checkmark"></span>
                                             <img alt=" " src={home} />
                                             <p className="radio-name">Cắm trại</p>
                                         </label>
@@ -213,30 +213,30 @@ function CreateTour() {
                                             <p className="create-tour__people-des">
                                                 Người lớn-Trên 12
                                             </p>
-                                            <div class="people_unit">
-                                                <div class="minus">-</div>
-                                                <div class="unit">0</div>
-                                                <div class="plus">+</div>
+                                            <div className="people_unit">
+                                                <div className="minus">-</div>
+                                                <div className="unit">0</div>
+                                                <div className="plus">+</div>
                                             </div>
                                         </div>
                                         <div className="create-tour__people-item">
                                             <p className="create-tour__people-des">
                                                 Trẻ em Lứa tuổi 2 - 12
                                             </p>
-                                            <div class="people_unit">
-                                                <div class="minus">-</div>
-                                                <div class="unit">0</div>
-                                                <div class="plus">+</div>
+                                            <div className="people_unit">
+                                                <div className="minus">-</div>
+                                                <div className="unit">0</div>
+                                                <div className="plus">+</div>
                                             </div>
                                         </div>
                                         <div className="create-tour__people-item">
                                             <p className="create-tour__people-des">
                                                 Trẻ sơ sinh Dưới 2
                                             </p>
-                                            <div class="people_unit">
-                                                <div class="minus">-</div>
-                                                <div class="unit">0</div>
-                                                <div class="plus">+</div>
+                                            <div className="people_unit">
+                                                <div className="minus">-</div>
+                                                <div className="unit">0</div>
+                                                <div className="plus">+</div>
                                             </div>
                                         </div>
                                     </div>

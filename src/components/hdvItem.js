@@ -1,14 +1,15 @@
 /* eslint-disable */
 
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
-function HdvItem() {
+function HdvItem(props) {
     useEffect(() => { }, []);
     return (
         <>
             <div className="tour-guides__item" >
                 <div className="tour-guides__card-img tour-view__card-img">
-                    <img alt="" className="tour-guides__img tour-view__img" src={item.img} />
+                    <img alt="" className="tour-guides__img tour-view__img" src={props.item.img} />
                     <div className="tour-guides__tag tour-view__tag">
                         <p className="tour-guides__tag-name tour-view__tag-name">Nature</p>
                         <p className="tour-guides__tag-name tour-view__tag-name">Private Tour</p>
@@ -46,7 +47,7 @@ function HdvItem() {
                                     234 chuyến đi</p>
                             </li>
                         </ul>
-                        <a className="travel-link">Chi tiết</a>
+                        <Link to={`/trang-ca-nhan/${props.item.id}`} className="travel-link">Chi tiết</Link>
                     </div>
 
                     <div className="button button--primary button-contact">

@@ -1,4 +1,8 @@
 /* header */
+.layout__wrapper {
+    background-color: #fbfbfb;
+}
+
 .header-wrapper .main-menu {
     display: flex;
     align-items: center;
@@ -121,4 +125,39 @@
     line-height: 26px;
     text-align: center;
     color: var(--color-text);
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 10px;
+    background-color: #fff;
+}
+
+.footer .footer-left {
+    display: flex;
+}
+
+.footer .footer-item {
+    margin: 0 5px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 2.6rem;
+    color: var(--color-text);
+}
+
+.footer .footer-item:hover {
+    color: var(--color-primary-hover);
+}
+
+.footer .footer-license {
+    font-style: normal;
+    font-weight: 400;
+    font-family: 'Roboto';
+    font-size: 1.5rem;
+    line-height: 2.6rem;
+    color: var(--color-text-title);
 }

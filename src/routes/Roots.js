@@ -2,13 +2,16 @@ import { lazy } from "react";
 import { ROUTES } from "../constants/route";
 // pages
 const Home = lazy(() => import("../page/HomePage"));
-const Tours = lazy(() => import("../page/Tours"));
-const CreateTour = lazy(() => import("../page/CreateTour"));
-const TourAll = lazy(() => import("../page/tourAll"));
-const Pay = lazy(() => import("../page/pay"));
-const HdvAll = lazy(() => import("../page/hdvAll"));
-const Dulich = lazy(() => import("../page/provinceDetails"));
-const Personal = lazy(() => import("../page/Personal"));
+const Tours = lazy(() => import("../page/Diem-den/Tours"));
+const CreateTour = lazy(() => import("../page/Tour/CreateTour"));
+const TourAll = lazy(() => import("../page/Tour/tourAll"));
+const Pay = lazy(() => import("../page/Thanh-toan/pay"));
+const HdvAll = lazy(() => import("../page/HDV/hdvAll"));
+const Dulich = lazy(() => import("../page/Diem-den/provinceDetails"));
+const Personal = lazy(() => import("../page/PersonalPage/Personal"));
+const News = lazy(() => import("../page/Tin-Tuc/News"));
+const NewsDetail = lazy(() => import("../page/Tin-Tuc/NewsDetail"));
+const TourDetail = lazy(() => import("../page/Tour/TourDetail"));
 
 /**
  * define main pages routes
@@ -53,6 +56,21 @@ const RoutePage = [
         path: ROUTES.PERSONAL,
         exact: true,
         component: Personal,
+    },
+    {
+        path: ROUTES.NEWS,
+        exact: true,
+        component: News,
+    },
+    {
+        path: ROUTES.TOURDETAIL,
+        exact: true,
+        component: TourDetail,
+    },
+    {
+        path: ROUTES.NEWSDETAIL,
+        exact: true,
+        component: NewsDetail,
     },
 ];
 export default RoutePage;
