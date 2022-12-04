@@ -14,6 +14,8 @@ const NewsDetail = lazy(() => import("../page/Tin-Tuc/NewsDetail"));
 const TourDetail = lazy(() => import("../page/Tour/TourDetail"));
 const Introduce = lazy(() => import("../page/introduce"));
 const MyTrip = lazy(() => import("../page/PersonalPage/MyTrip"));
+const Signin = lazy(() => import("../page/Auth/SignIn"));
+const Signup = lazy(() => import("../page/Auth/SignUp"));
 
 /**
  * define main pages routes
@@ -28,6 +30,16 @@ const RoutePage = [
         path: ROUTES.INTRODUCE,
         exact: true,
         component: Introduce,
+    },
+    {
+        path: ROUTES.SIGNIN,
+        exact: true,
+        component: Signin,
+    },
+    {
+        path: ROUTES.SIGNUP,
+        exact: true,
+        component: Signup,
     },
     {
         path: ROUTES.TOUR,

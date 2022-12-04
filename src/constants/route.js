@@ -11,5 +11,7 @@ export const ROUTES = {
     INTRODUCE: "/gioi-thieu",
     TOURDETAIL: "/tour/:id",
     NEWSDETAIL: "/tin-tuc/:id",
-    MyTRIP: "/chuyen-di"
+    MyTRIP: "/chuyen-di",
+    SIGNIN: "/dang-nhap",
+    SIGNUP: "/dang-ky"
 };

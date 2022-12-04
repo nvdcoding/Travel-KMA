@@ -13,3 +13,4 @@ export { default as intro1 } from "../assets/images/intro1.jpg";
 export { default as intro2 } from "../assets/images/intro2.jpg";
 export { default as intro3 } from "../assets/images/intro3.jpg";
 export { default as intro5 } from "../assets/images/intro5.jpg";
+export { default as voucher } from "../assets/images/voucher.png";

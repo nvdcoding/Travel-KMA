@@ -1,9 +1,12 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Collapse } from 'antd';
+
 import Layout from "../../components/layout/layout";
 import "../../assets/css/tour.css";
 export default function Tours() {
+    const { Panel } = Collapse;
+
     useEffect(() => {
     }, []);
     return (
@@ -189,26 +192,17 @@ export default function Tours() {
                             <div className="travel-question">
                                 <h3 className="travel-title">CÂU HỎI THƯỜNG GẶP</h3>
                                 <hr className="line" />
-                                <ul className="custom-collapse">
-                                    <li className="custom-collapse__item">
-                                        <div className="custom-collapse__header">
-                                            <h6 className="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
-                                            <i className="fa-solid fa-circle-plus custom-collapse__icon"></i>
-                                        </div>
-                                        <div className="custom-collapse__content">
-                                            <span>Cau tra loi</span>
-                                        </div>
-                                    </li>
-                                    <li className="custom-collapse__item">
-                                        <div className="custom-collapse__header">
-                                            <h6 className="custom-collapse__header-name">1. Du lịch Việt Nam nên đi đâu?</h6>
-                                            <i className="fa-solid fa-circle-plus custom-collapse__icon"></i>
-                                        </div>
-                                        <div className="custom-collapse__content">
-                                            <span>Cau tra loi</span>
-                                        </div>
-                                    </li>
-                                </ul>
+                                <Collapse defaultActiveKey={['1']} expandIconPosition="right" >
+                                    <Panel header="1. Du lịch Việt Nam nên đi đâu?" className="custom-collapse__header-name" key="1">
+                                        <p className="custom-collapse__content">Câu trả lời 1</p>
+                                    </Panel>
+                                    <Panel header="This is panel header 2" className="custom-collapse__header-name" key="2">
+                                        <p className="custom-collapse__content">Câu trả lời 1</p>
+                                    </Panel>
+                                    <Panel header="This is panel header 3" className="custom-collapse__header-name" key="3">
+                                        <p className="custom-collapse__content">Câu trả lời 1</p>
+                                    </Panel>
+                                </Collapse>
                             </div>
                         </div>
                     </main>

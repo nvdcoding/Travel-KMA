@@ -1,0 +1,218 @@
+.My-trip__wrapper {
+    background-color: #fbfbfb;
+}
+
+.mytrip-menu {}
+
+.mytrip-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.mytrip-menu-name {
+    margin-left: 10px;
+}
+
+.mytrip-sub-menu {}
+
+.mytrip-sub-menu-name {}
+
+.mytrip-order {}
+
+.mytrip-order-item {
+    margin-bottom: 30px;
+    border-bottom: 1.5px solid #ccc;
+    padding: 10px 0;
+}
+
+.mytrip-order__header,
+.mytrip-order__main,
+.mytrip-order__rate {
+    width: 95%;
+    margin: auto;
+}
+
+.mytrip-order__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+}
+
+.mytrip-order__header-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.mytrip-order__name {
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    font-weight: 500;
+}
+
+.mytrip-order__chat {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background: var(--color-primary-hover);
+    border-radius: 2px;
+    padding: 2px 5px;
+    margin-left: 10px;
+}
+
+.mytrip-order__contact {
+    margin-left: 5px;
+}
+
+.mytrip-order__header-right {
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.8rem;
+    color: var(--color-primary);
+}
+
+.mytrip-order__main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mytrip-order__rate,
+.mytrip-order__main-right,
+.mytrip-order__main-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mytrip-order__main-left {
+    justify-content: flex-start;
+}
+
+.mytrip-order-img {
+    width: 100px;
+    height: 100px;
+}
+
+.mytrip-order-name {
+    font-size: 1.8rem;
+    line-height: 2rem;
+    width: 70%;
+    margin-left: 20px;
+    color: var(--color-text-title);
+}
+
+.mytrip-order__main-price {
+    text-decoration: line-through;
+}
+
+.mytrip-order__main-price-km {}
+
+.mytrip-order__rate .button {
+    width: auto;
+    padding: 6px 15px;
+    border-radius: 5px;
+}
+
+.mytrip-order__rate-note {}
+
+.mytrip-sub-menu-name {}
+
+.mytrip-sub-menu-name {}
+
+.mytrip-sub-menu-name {}
+
+.mytrip-menu-item {}
+
+
+.mytrip-voucher__search {}
+
+.mytrip-voucher-box-search {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 0px;
+    padding: 25px 12rem;
+}
+
+.mytrip-voucher-box-search input {
+    margin: 0 10px;
+}
+
+.mytrip-voucher__title {
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.mytrip-sub-menu {}
+
+.mytrip-sub-menu-name {}
+
+.mytrip-voucher {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.mytrip-voucher-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.mytrip-voucher-left {
+    position: relative;
+}
+
+.mytrip-voucher-img {}
+
+.mytrip-voucher-name {
+    position: absolute;
+    top: 40%;
+    width: 100%;
+    text-align: center;
+}
+
+.mytrip-voucher-right {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+}
+
+.mytrip-voucher-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mytrip-voucher-title {}
+
+.mytrip-voucher-use {
+    white-space: nowrap;
+}
+
+.mytrip-voucher-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mytrip-voucher-time {}
+
+.mytrip-voucher-condition {
+    white-space: nowrap;
+
+}
+
+.mytrip-sub-menu-name {}

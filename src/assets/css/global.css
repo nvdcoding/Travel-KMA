@@ -31,14 +31,14 @@ html {
 }
 
 :root {
-    --color-seconds: #35393d;
-    --color-primary-hover: #91a50b;
+    --color-seconds: #3a3e43;
+    --color-primary-hover: #91a417;
     --easing: cubic-bezier(0.65, 0.05, 0.36, 1);
     --speed: 160ms;
     --transition: var(--speed) var(--easing);
     --color-primary: #9EB60A;
     --color-sub: #007C80;
-    --color-text-title: #3a4249;
+    --color-text-title: #3a434b;
     --color-text: #717171;
 }
 
@@ -709,4 +709,31 @@ img:hover {
     html {
         font-size: 5px;
     }
+}
+
+/* antd  custom*/
+.ant-tabs-nav .ant-tabs-tab:hover,
+.ant-tabs-nav .ant-tabs-tab-active {
+    color: var(--color-primary);
+}
+
+.ant-tabs-ink-bar {
+    background-color: var(--color-primary);
+}
+
+.ant-collapse {
+    border-width: 0px;
+    margin: 4rem auto;
+    width: 85%;
+
+}
+
+.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+    color: var(--color-text-title);
+    margin: 15px 0;
+}
+
+.ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-arrow {
+    font-size: 16px;
+    color: var(--color-primary-hover);
 }
