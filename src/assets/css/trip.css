@@ -216,3 +216,49 @@
 }
 
 .mytrip-sub-menu-name {}
+
+.md-1 {
+    justify-content: flex-end;
+}
+
+.mytrip-order__rate-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mytrip-order__rate-note {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.mytrip-order__rate-note-name {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 18px;
+    text-align: center;
+    color: #333333;
+}
+
+.mytrip-order__rate-note-value {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #2F80ED;
+}
+
+.mytrip-order__rate-star {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.mytrip-order__rate-star i {
+    font-size: 50px;
+    color: rgb(236, 223, 32);
+}

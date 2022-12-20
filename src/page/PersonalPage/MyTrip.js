@@ -4,11 +4,57 @@ import Layout from "../../components/layout/layout";
 import { Tabs } from 'antd';
 
 import "../../assets/css/trip.css";
-import { avt, voucher } from "../../constants/images"
-import { Link } from "react-router-dom";
+import { avt, voucher } from "../../constants/images";
+import Rate from "../../components/Rate";
 export default function MyTrip() {
     const { TabPane } = Tabs;
-
+    const trip = [
+        {
+            hdv: "Mai Lam 1",
+            status: 1,
+            title: "Bắc Ninh ngày và đêm",
+            rate: 0,
+            price: "1200323",
+            pricekm: "120000",
+            id: "5738911173"
+        },
+        {
+            hdv: "Mai Lam",
+            status: 1,
+            title: "Bắc Ninh ngày và đêm",
+            rate: 0,
+            price: "1200323",
+            pricekm: "120000",
+            id: "5738229173"
+        },
+        {
+            hdv: "Mai Lam 155",
+            status: 1,
+            title: "Bắc Ninh ngày và đêm",
+            rate: 0,
+            price: "1200323",
+            pricekm: "120000",
+            id: "5738912173"
+        },
+        {
+            hdv: "Mai Lam 1ử",
+            status: 1,
+            title: "Bắc Ninh ngày và đêm",
+            rate: 0,
+            price: "1200323",
+            pricekm: "120000",
+            id: "5738914373"
+        },
+        {
+            hdv: "Mai Lam 1ưư",
+            status: 1,
+            title: "Bắc Ninh ngày và đêm",
+            rate: 0,
+            price: "1200323",
+            pricekm: "120000",
+            id: "57389432173"
+        }
+    ]
     useEffect(() => {
     }, []);
     return (
@@ -31,107 +77,42 @@ export default function MyTrip() {
                                     <TabPane
                                         tab={
                                             <p className="mytrip-sub-menu-name">
-                                                Tất cả
+                                                Chờ xác nhận
                                             </p>
                                         }
                                         key="1"
                                     >
                                         <div className="mytrip-order">
-                                            <div className="mytrip-order-item">
-                                                <div className="mytrip-order__header">
-                                                    <div className="mytrip-order__header-left">
-                                                        <p className="mytrip-order__name">Mai Lam HDV</p>
-                                                        <div className="mytrip-order__chat">
-                                                            <i className="fa-regular fa-comments"></i>
-                                                            <p className="mytrip-order__contact">Chat</p>
-                                                        </div>
+                                            {trip.map((value, index) =>
+                                                <div className="mytrip-order-item" key={index}>
+                                                    <div className="mytrip-order__header">
+                                                        <div className="mytrip-order__header-left">
+                                                            <p className="mytrip-order__name">{value.hdv}</p>
+                                                            <div className="mytrip-order__chat">
+                                                                <i className="fa-regular fa-comments"></i>
+                                                                <p className="mytrip-order__contact">Chat</p>
+                                                            </div>
 
-                                                    </div> <div className="mytrip-order__header-right">
-                                                        Đã đi
-                                                    </div>
-                                                </div>
-                                                <div className="mytrip-order__main">
-                                                    <div className="mytrip-order__main-left">
-                                                        <img className="mytrip-order-img" alt="" src={avt} />
-                                                        <h4 className="mytrip-order-name">Bắc Ninh ngày và đêm</h4>
-                                                    </div>
-                                                    <div className="mytrip-order__main-right">
-                                                        <p className="mytrip-order__main-price">12.0000đ</p>
-                                                        <p className="mytrip-order__main-price-km">11.0000đ</p>
-                                                    </div>
-                                                </div>
-                                                <div className="mytrip-order__rate">
-                                                    <p className="mytrip-order__rate-note">Không nhận được đánh giá</p>
-                                                    <div className="button button--primary">Đánh giá</div>
-                                                </div>
-                                            </div>
-                                            <div className="mytrip-order-item">
-                                                <div className="mytrip-order__header">
-                                                    <div className="mytrip-order__header-left">
-                                                        <p className="mytrip-order__name">Mai Lam HDV</p>
-                                                        <div className="mytrip-order__chat">
-                                                            <i className="fa-regular fa-comments"></i>
-                                                            <p className="mytrip-order__contact">Chat</p>
+                                                        </div> <div className="mytrip-order__header-right">
+                                                            Chờ xác nhận
                                                         </div>
-
-                                                    </div> <div className="mytrip-order__header-right">
-                                                        Đã đi
                                                     </div>
-                                                </div>
-                                                <div className="mytrip-order__main">
-                                                    <div className="mytrip-order__main-left">
-                                                        <img className="mytrip-order-img" alt="" src={avt} />
-                                                        <h4 className="mytrip-order-name">Bắc Ninh ngày và đêm</h4>
-                                                    </div>
-                                                    <div className="mytrip-order__main-right">
-                                                        <p className="mytrip-order__main-price">12.0000đ</p>
-                                                        <p className="mytrip-order__main-price-km">11.0000đ</p>
-                                                    </div>
-                                                </div>
-                                                <div className="mytrip-order__rate">
-                                                    <p className="mytrip-order__rate-note">Không nhận được đánh giá</p>
-                                                    <div className="button button--primary">Đánh giá</div>
-                                                </div>
-                                            </div>
-                                            <div className="mytrip-order-item">
-                                                <div className="mytrip-order__header">
-                                                    <div className="mytrip-order__header-left">
-                                                        <p className="mytrip-order__name">Mai Lam HDV</p>
-                                                        <div className="mytrip-order__chat">
-                                                            <i className="fa-regular fa-comments"></i>
-                                                            <p className="mytrip-order__contact">Chat</p>
+                                                    <div className="mytrip-order__main">
+                                                        <div className="mytrip-order__main-left">
+                                                            <img className="mytrip-order-img" alt="" src={avt} />
+                                                            <h4 className="mytrip-order-name">{value.title}</h4>
                                                         </div>
-
-                                                    </div> <div className="mytrip-order__header-right">
-                                                        Đã đi
+                                                        <div className="mytrip-order__main-right">
+                                                            <p className="mytrip-order__main-price">{value.price}</p>
+                                                            <p className="mytrip-order__main-price-km">{value.pricekm}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="mytrip-order__rate md-1">
+                                                        <div className="button button--primary">Xác nhận</div>
                                                     </div>
                                                 </div>
-                                                <div className="mytrip-order__main">
-                                                    <div className="mytrip-order__main-left">
-                                                        <img className="mytrip-order-img" alt="" src={avt} />
-                                                        <h4 className="mytrip-order-name">Bắc Ninh ngày và đêm</h4>
-                                                    </div>
-                                                    <div className="mytrip-order__main-right">
-                                                        <p className="mytrip-order__main-price">12.0000đ</p>
-                                                        <p className="mytrip-order__main-price-km">11.0000đ</p>
-                                                    </div>
-                                                </div>
-                                                <div className="mytrip-order__rate">
-                                                    <p className="mytrip-order__rate-note">Không nhận được đánh giá</p>
-                                                    <div className="button button--primary">Đánh giá</div>
-                                                </div>
-                                            </div>
+                                            )}
                                         </div>
-                                    </TabPane>
-                                    <TabPane
-                                        tab={
-                                            <p className="mytrip-sub-menu-name">
-                                                Chờ xác nhận
-                                            </p>
-                                        }
-                                        key="2"
-                                    >
-                                        Tất cả
                                     </TabPane>
                                     <TabPane
                                         tab={
@@ -139,9 +120,38 @@ export default function MyTrip() {
                                                 Đã đi
                                             </p>
                                         }
-                                        key="3"
+                                        key="2"
                                     >
-                                        Tất cả
+                                        {trip.map((value, index) =>
+                                            <div className="mytrip-order-item" key={index}>
+                                                <div className="mytrip-order__header">
+                                                    <div className="mytrip-order__header-left">
+                                                        <p className="mytrip-order__name">{value.hdv}</p>
+                                                        <div className="mytrip-order__chat">
+                                                            <i className="fa-regular fa-comments"></i>
+                                                            <p className="mytrip-order__contact">Chat</p>
+                                                        </div>
+
+                                                    </div> <div className="mytrip-order__header-right">
+                                                        Đã đi
+                                                    </div>
+                                                </div>
+                                                <div className="mytrip-order__main">
+                                                    <div className="mytrip-order__main-left">
+                                                        <img className="mytrip-order-img" alt="" src={avt} />
+                                                        <h4 className="mytrip-order-name">{value.title}</h4>
+                                                    </div>
+                                                    <div className="mytrip-order__main-right">
+                                                        <p className="mytrip-order__main-price">{value.price}</p>
+                                                        <p className="mytrip-order__main-price-km">{value.pricekm}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="mytrip-order__rate">
+                                                    <p className="mytrip-order__rate-note">Không nhận được đánh giá</p>
+                                                    <Rate data={value} />
+                                                </div>
+                                            </div>
+                                        )}
                                     </TabPane>
                                     <TabPane
                                         tab={
@@ -149,7 +159,7 @@ export default function MyTrip() {
                                                 Đã hủy
                                             </p>
                                         }
-                                        key="4"
+                                        key="3"
                                     >
                                         Tất cả
                                     </TabPane>

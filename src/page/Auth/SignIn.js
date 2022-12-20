@@ -5,6 +5,7 @@ import {
     Input, Button
 } from 'antd';
 import "../../assets/css/auth.css";
+import { Link } from "react-router-dom";
 export default function SignIn() {
     const [form] = Form.useForm();
     const onFinish = async (values) => {
@@ -38,24 +39,12 @@ export default function SignIn() {
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
                     form={form}
+                    className="auth-form"
                 >
-                    <Form.Item
-                        label="Họ tên"
-                        name="name"
-                        hasFeedback
-                        rules={[
-                            {
-                                validateStatus: "error",
-                                required: true,
-                                message: "Họ tên không được để trống!",
-                            },
-                        ]}
-                    >
-                        <Input placeholder="Họ tên của bạn" />
-                    </Form.Item>
-                    <Form.Item
+                    <h3 className="auth-title">Đăng nhập</h3>
+
+                    <Form.Item className="auth-form-item"
                         name="email"
-                        label="E-mail"
                         hasFeedback
                         rules={[
                             {
@@ -72,9 +61,7 @@ export default function SignIn() {
                     >
                         <Input placeholder="Email của bạn" />
                     </Form.Item>
-
                     <Form.Item
-                        label="Password"
                         name="password"
                         hasFeedback
                         rules={[
@@ -87,29 +74,12 @@ export default function SignIn() {
                     >
                         <Input.Password placeholder="Mật khẩu của bạn" />
                     </Form.Item>
-                    <Form.Item
-                        name="passwordConfirmation"
-                        label="Confirm Password"
-                        dependencies={["password"]}
-                        hasFeedback
-                        rules={[
-                            {
-                                required: true,
-                                message: "Mật khẩu không để trống!",
-                            },
-                            ({ getFieldValue }) => ({
-                                validator(_, value) {
-                                    if (!value || getFieldValue("password") === value) {
-                                        return Promise.resolve();
-                                    }
-                                    return Promise.reject(new Error("Password không khớp!"));
-                                },
-                            }),
-                        ]}
-                    >
-                        <Input.Password placeholder="Nhập lại mật khẩu" />
-                    </Form.Item>
-                    <Button htmlType="submit">Đăng Ký</Button>
+
+                    <Button className="button button--primary" >Đăng nhập</Button>
+                    <div className="auth-des">
+                        <Link to="/dang-ky" className="travel-link auth-des-link">Đăng ký?</Link>
+                        <a className="travel-link auth-des-link">Quên mật khẩu?</a>
+                    </div>
                 </Form>
 
             </div>
