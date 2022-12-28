@@ -135,7 +135,7 @@ function Home() {
     return (
         <>
             <div className="home__wrapper">
-                <div className="banner__wrapper">
+                <div className="banner__wrapper banner">
                     <OwlCarousel className="owl-theme" loop
                         margin={10}
                         nav
@@ -148,31 +148,39 @@ function Home() {
                             </div>
                         ))}
                     </OwlCarousel>
+                    <div className="popup-place">
+                        <p className="banner-title">Lên kế hoạch cho chuyến đi của riêng mình cùng với HDV địa phương ngay!</p>
+                        <select name="select-place" id="" className="">
+                            <option defaultChecked value="">Bạn muốn đi đâu?</option>
+                        </select>
+                        <div className="button button--primary"><a href="#">Khám phá ngay</a></div>
+                    </div>
+
+                </div>
+                <div className="content">
                     <div className="row-banner">
                         <div className="introduce-item">
                             <img src={global} alt="" className="introduce-img" />
                             <div className="introduce-des">
-                                <h3>Hành trình rực rỡ</h3>
-                                <p>Đại lý du lịch địa phương của chúng tôi đang ở đây để giúp bạn lên kế hoạch cho các tour du lịch độc đáo, nổi bật nhất.</p>
+                                <h3>Hành trình thú vị</h3>
+                                <p>Hướng dẫn viên địa phương đang ở đây để giúp bạn lên kế hoạch cho các tour du lịch độc đáo, nổi bật nhất.</p>
                             </div>
                         </div>
                         <div className="introduce-item">
                             <img src={adjust} alt="" className="introduce-img" />
                             <div className="introduce-des">
-                                <h3>Hành trình rực rỡ</h3>
-                                <p>Đại lý du lịch địa phương của chúng tôi đang ở đây để giúp bạn lên kế hoạch cho các tour du lịch độc đáo, nổi bật nhất.</p>
+                                <h3>100% có thể tùy chỉnh</h3>
+                                <p>Tùy chỉnh chuyến đi của bạn đến từng chi tiết.</p>
                             </div>
                         </div>
                         <div className="introduce-item">
                             <img src={vocher} alt="" className="introduce-img" />
                             <div className="introduce-des">
-                                <h3>Hành trình rực rỡ</h3>
-                                <p>Đại lý du lịch địa phương của chúng tôi đang ở đây để giúp bạn lên kế hoạch cho các tour du lịch độc đáo, nổi bật nhất.</p>
+                                <h3>Giá thành rẻ</h3>
+                                <p>Bỏ qua các tour du lịch đắt đỏ bằng cách trao đổi trực tiếp với các HDV địa phương. Nhìn nhận điểm đến rõ ràng và chân thực nhất</p>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="content">
                     <div className="tour-guide">
                         <div className="tour-guide-left">
                             <h2 className="tour-guide-title">100% tour du lịch được thiết kế riêng từ các HDV địa phương được công nhận
@@ -229,9 +237,9 @@ function Home() {
                         </div>
                     </div>
                     <div className="tour-address">
-                        <h2 className="travel-title">Cảm hứng du lịch
+                        <h2 className="travel-title">Điểm đến
                         </h2>
-                        <p className="travel-des">Khám phá, tùy chỉnh và đặt chuyến đi mơ ước của bạn!
+                        <p className="travel-des">Khám phá, tạo và đặt chuyến đi của bạn!
                         </p>
                         <div className="tour-address__main">
                             <OwlCarousel className="tour-address__list  owl-theme" {...optionsTouraddress}>
@@ -240,6 +248,7 @@ function Home() {
                                         <a href={item.link}>
                                             <img alt="" className="tour-address__img" src={item.img.address} />
                                             <div className="tour-address__info">
+                                                <i class="fa-solid fa-map-location-dot"></i>
                                                 <p className="tour-address__name">{item.name}</p>
                                             </div>
                                         </a>
@@ -251,13 +260,13 @@ function Home() {
                 </div>
                 <div className="tour-banner">
                     <img className="tour-banner-img" alt=""
-                        src="https://thegioidohoacom.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2019/01/09101004/dich-vu-thiet-ke-banner-du-lich-chuyen-nghiep-tai-ha-noi1-768x304.jpg" />
+                        src="https://images.vietnamtourism.gov.vn/vn/images/2020/Thang_9/trang_an1.jpg" />
                     <div className="tour-banner__text">
                         <h3 className="tour-banner-title">
-                            Tùy chỉnh và đặt chuyến đi mơ ước của bạn đến Châu Phi.
+                            Tra cứu thông tin HDV du lịch dễ dàng
                         </h3>
                         <p className="tour-banner-des">
-                            Liên hệ với HDV địa phương để tạo safari của bạn
+                            Tùy chỉnh và lên kế hoạch chuyến đi ngay
                         </p>
                         <div className="button button--primary"><a href="#">Khám phá ngay</a></div>
                     </div>
@@ -265,11 +274,14 @@ function Home() {
                 </div>
                 <div className="content">
                     <div className="tour-view">
-                        <h2 className="travel-title">Tour du lịch sang trọng | Tùy chỉnh kỳ nghỉ sang trọng của bạn
+                        <div className="travel-title-all">
+                            <div> <h2 className="travel-title">Tour du lịch
+                            </h2>
+                                <p className="travel-des">Chọn một chuyến đi bạn thích hoặc liên hệ trực tiếp với HDV
+                                </p></div>
+                            <a href="#" class="travel-link">Xem tất cả</a>
+                        </div>
 
-                        </h2>
-                        <p className="travel-des">Chọn một chuyến đi bạn thích hoặc liên hệ trực tiếp với chuyên gia địa phương
-                        </p>
                         <div className="tour-view__main">
                             <OwlCarousel className="tour-view__list owl-theme " {...optionsTourview}>
                                 {tourview.map((item, index) => (
