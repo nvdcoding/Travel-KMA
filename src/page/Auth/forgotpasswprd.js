@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Form, Input, Button } from "antd";
 import "../../assets/css/auth.css";
 import { Link } from "react-router-dom";
-export default function SignIn() {
+export default function ForgotPassword() {
   const [form] = Form.useForm();
   const onFinish = async (values) => {
     const res = await sendPost("/api/auth/sign-up", values);

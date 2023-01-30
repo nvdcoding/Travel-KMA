@@ -1,163 +1,163 @@
 /* header */
 .layout__wrapper {
-    background-color: #fbfbfb;
+  background-color: #fbfbfb;
 }
 
 .header-wrapper .main-menu {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-
+.menu-list .menu-item a.active {
+  color: var(--color-primary);
+}
 .menu-right,
 .menu-left {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .menu-left img {
-    width: 100px;
-    height: auto;
+  width: 100px;
+  height: auto;
 }
 
 .menu-left .menu-list {
-
-    display: flex;
+  display: flex;
 }
 
 .menu-list .menu-item {
-    font-size: 2.8rem;
-    margin: 0 2rem;
+  font-size: 2.8rem;
+  margin: 0 2rem;
 }
 
 .menu-list .menu-item:hover a {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .your-trip {
-    color: var(--color-sub);
-    font-size: 2.3rem;
-    padding: 0.5rem 1rem;
-    border-radius: 5rem;
-    border: 1px solid var(--color-sub);
-    margin-right: 2rem;
+  color: var(--color-sub);
+  font-size: 2.3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5rem;
+  border: 1px solid var(--color-sub);
+  margin-right: 2rem;
 }
 
 .language,
 .support {
-    margin: 0 1rem;
+  margin: 0 1rem;
 }
 
 .language i {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .language i:hover {
-    color: var(--color-sub);
+  color: var(--color-sub);
 }
 
 .language i,
 .support i {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 /* footer */
 
-
 /* tour-footer */
 .tour-footer-sub {
-    background: #FAF9F8;
-    border: 1px solid #EDEDED;
-    /* margin-top: 5rem; */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 2.5rem;
+  background: #faf9f8;
+  border: 1px solid #ededed;
+  /* margin-top: 5rem; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2.5rem;
 }
 
 .tour-footer-sub .tour-footer-logo {
-    width: 35%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .tour-footer-sub .tour-footer-img {
-    width: 6rem;
-    height: 6rem;
+  width: 6rem;
+  height: 6rem;
 }
 
 .tour-footer-sub .tour-footer-logo__text {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 36px;
-    text-align: center;
-    color: var(--color-text-title);
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+  text-align: center;
+  color: var(--color-text-title);
 }
 
 .tour-footer-sub .tour-footer-list {
-    width: 60%;
+  width: 60%;
 }
 
 .tour-footer-sub .tour-footer-content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2rem;
 }
 
 .tour-footer-sub .tour-footer__item {
-    text-align: center;
+  text-align: center;
 }
 
 .tour-footer-sub .tour-footer__item i {
-    font-size: 25px;
-    color: var(--color-primary-hover);
+  font-size: 25px;
+  color: var(--color-primary-hover);
 }
 
 .tour-footer-sub .tour-footer__text {
-    font-family: 'Roboto', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 26px;
-    text-align: center;
-    color: var(--color-text);
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  color: var(--color-text);
 }
 
 .footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 30px 10px;
-    background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 10px;
+  background-color: #fff;
 }
 
 .footer .footer-left {
-    display: flex;
+  display: flex;
 }
 
 .footer .footer-item {
-    margin: 0 5px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.5rem;
-    line-height: 2.6rem;
-    color: var(--color-text);
+  margin: 0 5px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 2.6rem;
+  color: var(--color-text);
 }
 
 .footer .footer-item:hover {
-    color: var(--color-primary-hover);
+  color: var(--color-primary-hover);
 }
 
 .footer .footer-license {
-    font-style: normal;
-    font-weight: 400;
-    font-family: 'Roboto';
-    font-size: 1.5rem;
-    line-height: 2.6rem;
-    color: var(--color-text-title);
+  font-style: normal;
+  font-weight: 400;
+  font-family: "Roboto";
+  font-size: 1.5rem;
+  line-height: 2.6rem;
+  color: var(--color-text-title);
 }
