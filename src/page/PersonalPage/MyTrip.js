@@ -5,7 +5,7 @@ import { Tabs } from "antd";
 
 import "../../assets/css/trip.css";
 import { avt, voucher } from "../../constants/images";
-import Rate from "../../components/rate";
+import Rate from "../../components/";
 import { Link } from "react-router-dom";
 export default function MyTrip() {
   const { TabPane } = Tabs;
