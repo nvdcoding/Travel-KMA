@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   background: #fff;
-  z-index: 9999;
+  z-index: 99;
 }
 
 .layout__wrapper {
@@ -27,7 +27,7 @@
 }
 
 .menu-left img {
-  width: 100px;
+  width: 75px;
   height: auto;
 }
 
@@ -36,8 +36,8 @@
 }
 
 .menu-list .menu-item {
-  font-size: 2.8rem;
-  margin: 0 2rem;
+  font-size: 2rem;
+  margin: 0 1rem;
 }
 
 .menu-list .menu-item:hover a {
@@ -133,9 +133,8 @@
 
 .tour-footer-sub .tour-footer__item i {
   font-size: 25px;
-  color: var(--color-primary-hover);
+  color: var(--color-text);
 }
-
 .tour-footer-sub .tour-footer__text {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -145,7 +144,10 @@
   text-align: center;
   color: var(--color-text);
 }
-
+.tour-footer-content .tour-footer__item:hover i,
+.tour-footer-content .tour-footer__item:hover .tour-footer__text {
+  color: var(--colour-link);
+}
 .footer {
   display: flex;
   align-items: center;

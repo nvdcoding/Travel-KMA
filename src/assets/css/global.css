@@ -40,10 +40,12 @@ html {
   --color-sub: #007c80;
   --color-text-title: #3c464e;
   --color-text: #717171;
+  --colour-navy: #13294b;
+  --colour-link: #007c80;
 }
 
 body {
-  color: var(--color-text-title);
+  color: var(--colour-navy);
 }
 
 * {
@@ -186,11 +188,11 @@ img {
 
 img:hover {
   /* -webkit-transform: scale(1.05, 1.05);
-    -ms-transform: scale(1.05, 1.05);
-    transform: scale(1.05, 1.05);
-    -webkit-transition: all 0.5s;
-    transition: all 0.5s;
-    opacity: 0.75; */
+-ms-transform: scale(1.05, 1.05);
+transform: scale(1.05, 1.05);
+-webkit-transition: all 0.5s;
+transition: all 0.5s;
+opacity: 0.75; */
 }
 
 .button {
@@ -353,7 +355,7 @@ img:hover {
   display: -ms-flexbox;
   display: flex;
   font-size: 1.8rem;
-  height: 4.6rem;
+  height: 3.6rem;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -366,7 +368,7 @@ img:hover {
   transform: translateY(-50%);
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  width: 4.6rem;
+  width: 3.6rem;
   z-index: 1;
   padding: 0;
 }
@@ -433,7 +435,7 @@ img:hover {
 }
 
 .banner img {
-  height: 400px;
+  height: 400px !important;
   object-fit: cover;
 }
 
@@ -710,20 +712,27 @@ img:hover {
 }
 
 .travel-link {
-  color: var(--color-primary);
+  color: var(--colour-link);
   font-size: 1.5rem;
-  font-weight: 400;
+  font-weight: 600;
   margin-top: 1rem;
   display: inline-block;
+  transition: 0.3s ease;
+}
+.travel-link:hover {
+  text-decoration: underline;
+  color: #02a0a5;
+}
+.travel-link i {
+  transition: 0.3s ease;
+  margin-left: 3px;
+}
+.travel-link:hover i {
+  transform: translateX(4px);
+  transition: 0.3s ease;
 }
 
-@media (max-width: 768px) {
-  html {
-    font-size: 5px;
-  }
-}
-
-/* antd  custom*/
+/* antd custom*/
 .ant-tabs-nav .ant-tabs-tab:hover,
 .ant-tabs-nav .ant-tabs-tab-active {
   color: var(--color-primary);
@@ -801,4 +810,33 @@ iframe {
 
 .ant-input-affix-wrapper {
   padding: 6px 11px;
+}
+.mb {
+  display: none;
+}
+@media (max-width: 1120px) {
+  html {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 1024px) {
+  html {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 991px) {
+  .mb {
+    display: block;
+  }
+  .pc {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 7px;
+  }
 }
