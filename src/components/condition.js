@@ -26,7 +26,10 @@ function Condition(props) {
         onCancel={handleCancel}
         footer={null}
       >
-        <h4 className="voucher-popup-title">{props.data?.name}</h4>
+        <h4 className="voucher-popup-title">
+          {props.data?.name ? props.data?.name : " Tên Voucher"}
+        </h4>
+        <p className="voucher-popup-dk">Điều kiện sử dụng</p>
         <p className="voucher-popup-des">{props.data?.condition}</p>
       </Modal>
     </>

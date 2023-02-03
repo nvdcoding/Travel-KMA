@@ -4,9 +4,9 @@ import Layout from "../../components/layout/layout";
 import { Tabs } from "antd";
 
 import "../../assets/css/trip.css";
-import { avt, voucher } from "../../constants/images";
+import { avt } from "../../constants/images";
 import Rate from "../../components/Rate";
-import { Link } from "react-router-dom";
+import Condition from "../../components/condition";
 export default function MyTrip() {
   const { TabPane } = Tabs;
   const trip = [
@@ -204,9 +204,9 @@ export default function MyTrip() {
                           <img
                             className="mytrip-voucher-img"
                             alt=""
-                            src={voucher}
+                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
                           />
-                          <h4 className="mytrip-voucher-name">Tên Voucher</h4>
+                          <h4 className="mytrip-voucher-name"> Voucher</h4>
                         </div>
                         <div className="mytrip-voucher-right">
                           <div className="mytrip-voucher-top">
@@ -219,9 +219,7 @@ export default function MyTrip() {
                             <h3 className="mytrip-voucher-time">
                               Sắp hết hạn: Còn 4 giờ
                             </h3>
-                            <p className="mytrip-voucher-condition">
-                              Điều kiện
-                            </p>
+                            <Condition />
                           </div>
                         </div>
                       </div>
@@ -230,9 +228,9 @@ export default function MyTrip() {
                           <img
                             className="mytrip-voucher-img"
                             alt=""
-                            src={voucher}
+                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
                           />
-                          <h4 className="mytrip-voucher-name">Tên Voucher</h4>
+                          <h4 className="mytrip-voucher-name"> Voucher</h4>
                         </div>
                         <div className="mytrip-voucher-right">
                           <div className="mytrip-voucher-top">
@@ -245,9 +243,7 @@ export default function MyTrip() {
                             <h3 className="mytrip-voucher-time">
                               Sắp hết hạn: Còn 4 giờ
                             </h3>
-                            <p className="mytrip-voucher-condition">
-                              Điều kiện
-                            </p>
+                            <Condition />
                           </div>
                         </div>
                       </div>
@@ -256,9 +252,9 @@ export default function MyTrip() {
                           <img
                             className="mytrip-voucher-img"
                             alt=""
-                            src={voucher}
+                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
                           />
-                          <h4 className="mytrip-voucher-name">Tên Voucher</h4>
+                          <h4 className="mytrip-voucher-name">Voucher</h4>
                         </div>
                         <div className="mytrip-voucher-right">
                           <div className="mytrip-voucher-top">
@@ -271,9 +267,7 @@ export default function MyTrip() {
                             <h3 className="mytrip-voucher-time">
                               Sắp hết hạn: Còn 4 giờ
                             </h3>
-                            <p className="mytrip-voucher-condition">
-                              Điều kiện
-                            </p>
+                            <Condition />
                           </div>
                         </div>
                       </div>

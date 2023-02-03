@@ -172,6 +172,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
+  padding: 20px;
 }
 
 .mytrip-voucher-item {
@@ -182,47 +183,41 @@
 
 .mytrip-voucher-left {
   position: relative;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 180px;
+  -ms-flex: 0 0 180px;
+  flex: 0 0 180px;
+  width: 180px;
 }
 
 .mytrip-voucher-img {
 }
 
 .mytrip-voucher-name {
+  color: #fff;
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 35px;
   position: absolute;
-  top: 40%;
-  width: 100%;
-  text-align: center;
-}
-
-.mytrip-voucher-right {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  border: 1px solid #ccc;
-  padding: 10px 15px;
-}
-
-.mytrip-voucher-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.mytrip-voucher-title {
+  right: 14px;
+  top: 95px;
 }
 
 .mytrip-voucher-use {
   white-space: nowrap;
+  font-size: 13px;
+  color: rgb(233, 55, 55);
+  cursor: pointer;
+  font-weight: 500;
 }
-
+.mytrip-voucher-use:hover {
+  color: rgb(228, 10, 10);
+}
 .mytrip-voucher-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.mytrip-voucher-time {
+  margin-top: 12px;
 }
 
 .mytrip-voucher-condition {
@@ -235,17 +230,20 @@
 .md-1 {
   justify-content: flex-end;
 }
+
 .mytrip-order__rate-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .mytrip-order__rate-note {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
 }
+
 .mytrip-order__rate-note-name {
   font-family: "Roboto";
   font-style: normal;
@@ -255,6 +253,7 @@
   text-align: center;
   color: #333333;
 }
+
 .mytrip-order__rate-note-value {
   font-family: "Roboto";
   font-style: normal;
@@ -263,10 +262,12 @@
   line-height: 18px;
   color: #2f80ed;
 }
+
 .mytrip-order__rate-star {
   text-align: center;
   margin: 20px 0;
 }
+
 .mytrip-order__rate-star i {
   font-size: 50px;
   color: rgb(236, 223, 32);
@@ -451,47 +452,52 @@
 
 .mytrip-voucher-left {
   position: relative;
-}
-
-.mytrip-voucher-img {
-}
-
-.mytrip-voucher-name {
-  position: absolute;
-  top: 40%;
-  width: 100%;
-  text-align: center;
+  z-index: 2;
 }
 
 .mytrip-voucher-right {
-  height: 100%;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: stretch;
+  background-color: #fff;
+  border-radius: 0 6px 6px 0;
+  box-shadow: 3px 3px 15px rgb(0 0 0 / 25%);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   flex-direction: column;
   justify-content: space-around;
-  border: 1px solid #ccc;
-  padding: 10px 15px;
+  margin: 20px 0 0 -15px;
+  padding: 22px 14px;
+  padding-bottom: 10px;
+  position: relative;
+  width: calc(100% - 200px);
 }
 
 .mytrip-voucher-top {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 .mytrip-voucher-title {
-}
-
-.mytrip-voucher-use {
-  white-space: nowrap;
-}
-
-.mytrip-voucher-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--color-text-title);
 }
 
 .mytrip-voucher-time {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 14px;
+  color: rgb(233, 55, 55);
 }
 
 .mytrip-voucher-condition {
@@ -506,17 +512,20 @@
 .md-1 {
   justify-content: flex-end;
 }
+
 .mytrip-order__rate-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .mytrip-order__rate-note {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 10px;
 }
+
 .mytrip-order__rate-note-name {
   font-family: "Roboto";
   font-style: normal;
@@ -526,6 +535,7 @@
   text-align: center;
   color: #333333;
 }
+
 .mytrip-order__rate-note-value {
   font-family: "Roboto";
   font-style: normal;
@@ -534,23 +544,51 @@
   line-height: 18px;
   color: #2f80ed;
 }
+
 .mytrip-order__rate-star {
   text-align: center;
   margin: 20px 0;
 }
+
 .mytrip-order__rate-star i {
   font-size: 50px;
   color: rgb(236, 223, 32);
 }
+
 .mytrip-menu-item i {
   font-size: 24px;
 }
+
 .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
   color: var(--color-primary);
 }
+
 .voucher-popup-title {
   font-size: 20px;
 }
+
 .voucher-popup-des {
   font-size: 17px;
+}
+.voucher-popup-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21px;
+  color: var(--colour-navy);
+  margin: 10px 0;
+}
+.voucher-popup-dk {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-text-title);
+}
+.ant-modal-content {
+  border-radius: 10px;
+}
+.voucher-popup-des {
 }
