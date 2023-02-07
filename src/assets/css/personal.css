@@ -238,3 +238,7 @@
 .trip-suggest {
   margin: 20px 0;
 }
+
+.tour-feedback__main .owl-carousel .owl-stage-outer {
+  padding: 15px 0;
+}

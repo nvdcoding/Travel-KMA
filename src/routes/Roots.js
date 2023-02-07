@@ -16,85 +16,90 @@ const Introduce = lazy(() => import("../page/introduce"));
 const MyTrip = lazy(() => import("../page/PersonalPage/MyTrip"));
 const Signin = lazy(() => import("../page/Auth/SignIn"));
 const Signup = lazy(() => import("../page/Auth/SignUp"));
-
+const Onboarding = lazy(() => import("../page/Onboarding"));
 /**
  * define main pages routes
  */
 const RoutePage = [
-    {
-        path: ROUTES.HOME,
-        exact: true,
-        component: Home,
-    },
-    {
-        path: ROUTES.INTRODUCE,
-        exact: true,
-        component: Introduce,
-    },
-    {
-        path: ROUTES.SIGNIN,
-        exact: true,
-        component: Signin,
-    },
-    {
-        path: ROUTES.SIGNUP,
-        exact: true,
-        component: Signup,
-    },
-    {
-        path: ROUTES.TOUR,
-        exact: true,
-        component: Tours,
-    },
-    {
-        path: ROUTES.CREATETOUR,
-        exact: true,
-        component: CreateTour,
-    },
-    {
-        path: ROUTES.PAY,
-        exact: true,
-        component: Pay,
-    },
-    {
-        path: ROUTES.TOURALL,
-        exact: true,
-        component: TourAll,
-    },
-    {
-        path: ROUTES.HDVALL,
-        exact: true,
-        component: HdvAll,
-    },
-    {
-        path: ROUTES.DULICH,
-        exact: true,
-        component: Dulich,
-    },
-    {
-        path: ROUTES.PERSONAL,
-        exact: true,
-        component: Personal,
-    },
-    {
-        path: ROUTES.NEWS,
-        exact: true,
-        component: News,
-    },
-    {
-        path: ROUTES.TOURDETAIL,
-        exact: true,
-        component: TourDetail,
-    },
-    {
-        path: ROUTES.NEWSDETAIL,
-        exact: true,
-        component: NewsDetail,
-    },
-    {
-        path: ROUTES.MYTRIP,
-        exact: true,
-        component: MyTrip,
-    },
+  {
+    path: ROUTES.HOME,
+    exact: true,
+    component: Home,
+  },
+  {
+    path: ROUTES.INTRODUCE,
+    exact: true,
+    component: Introduce,
+  },
+  {
+    path: ROUTES.SIGNIN,
+    exact: true,
+    component: Signin,
+  },
+  {
+    path: ROUTES.SIGNUP,
+    exact: true,
+    component: Signup,
+  },
+  {
+    path: ROUTES.TOUR,
+    exact: true,
+    component: Tours,
+  },
+  {
+    path: ROUTES.CREATETOUR,
+    exact: true,
+    component: CreateTour,
+  },
+  {
+    path: ROUTES.PAY,
+    exact: true,
+    component: Pay,
+  },
+  {
+    path: ROUTES.TOURALL,
+    exact: true,
+    component: TourAll,
+  },
+  {
+    path: ROUTES.HDVALL,
+    exact: true,
+    component: HdvAll,
+  },
+  {
+    path: ROUTES.DULICH,
+    exact: true,
+    component: Dulich,
+  },
+  {
+    path: ROUTES.PERSONAL,
+    exact: true,
+    component: Personal,
+  },
+  {
+    path: ROUTES.NEWS,
+    exact: true,
+    component: News,
+  },
+  {
+    path: ROUTES.TOURDETAIL,
+    exact: true,
+    component: TourDetail,
+  },
+  {
+    path: ROUTES.NEWSDETAIL,
+    exact: true,
+    component: NewsDetail,
+  },
+  {
+    path: ROUTES.MYTRIP,
+    exact: true,
+    component: MyTrip,
+  },
+  {
+    path: ROUTES.ONBOARDING,
+    exact: true,
+    component: Onboarding,
+  },
 ];
 export default RoutePage;

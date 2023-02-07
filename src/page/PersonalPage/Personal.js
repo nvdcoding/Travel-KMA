@@ -77,6 +77,37 @@ export default function Personal() {
       },
     },
   };
+  const optionsFeedback = {
+    loop: true,
+    autoplay: false,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: false,
+    nav: true,
+    dots: true,
+    items: 5,
+    margin: 30,
+    navText: [
+      "<i class='fa-solid fa-angle-left'></i>",
+      "<i class='fa-solid fa-angle-right'></i>",
+    ],
+    responsive: {
+      0: {
+        items: 2,
+      },
+      500: {
+        items: 3,
+      },
+      768: {
+        items: 3,
+      },
+      991: {
+        items: 4,
+      },
+      1200: {
+        items: 5,
+      },
+    },
+  };
   const tourview = [
     {
       img: "https://phuonganhbeau.weebly.com/uploads/1/3/0/0/130045835/chua-mot-cot_orig.jpg",
@@ -284,6 +315,36 @@ export default function Personal() {
                   >
                     {tourview.map((item, index) => (
                       <TourItem key={index} item={item} />
+                    ))}
+                  </OwlCarousel>
+                </div>
+                <p className="trip-suggest-title">Đánh giá từ du khách</p>
+                <div className="tour-feedback__main">
+                  <OwlCarousel
+                    className="tour-feedback__list owl-theme"
+                    {...optionsFeedback}
+                  >
+                    {tourview.map((item, index) => (
+                      <div className="tour-feedback__item" key={index}>
+                        <div className="tour-feedback__star">
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star"></i>
+                          <i className="fa-solid fa-star-half-stroke"></i>
+                        </div>
+                        <div className="tour-feedback__content">{item.des}</div>
+                        <div className="tour-feedback__people">
+                          <img
+                            alt=""
+                            className="tour-feedback__avt"
+                            src={item.avt}
+                          />
+                          <div className="tour-feedback__info">
+                            <p className="tour-feedback__name">{item.hdv}</p>
+                            <p className="tour-feedback__time">{item.time}</p>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                   </OwlCarousel>
                 </div>

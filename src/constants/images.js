@@ -15,3 +15,4 @@ export { default as intro3 } from "../assets/images/intro3.jpg";
 export { default as intro5 } from "../assets/images/intro5.jpg";
 export { default as voucher } from "../assets/images/voucher.png";
 export { default as hoguom } from "../assets/images/hoguom.jpg";
+export { default as imgwelcome } from "../assets/images/travelform.png";
