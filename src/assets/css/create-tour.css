@@ -97,6 +97,7 @@
 .create-tour__block-group .create-tour__block:last-child {
   width: 55%;
 }
+
 .select-place {
   margin-top: 30px;
   width: 30%;
@@ -104,24 +105,251 @@
 
 .travel-title-group h3 {
   font-weight: 600;
-  font-size: 24px;
-  line-height: 38px;
-  color: #343a40;
+  font-size: 22px;
+  line-height: 35px;
+  color: #334a61;
 }
 
-.travel-title-group p {
+.travel-title-group .travel-title-price {
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
   color: #717171;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  white-space: nowrap;
+  background-color: #ececec;
+  padding: 20px 10px;
+  margin-top: 7px;
+}
+
+.travel-title-group p span {
+  padding: 0 10px;
+}
+
+.ant-picker-focused,
+.ant-picker:hover,
+.ant-picker-focused {
+  border-color: var(--color-sub);
+  box-shadow: 0 0 0 2px #007c8038;
+}
+.ant-picker-range .ant-picker-active-bar {
+  background-color: var(--color-sub);
+}
+.ant-picker-range {
+  width: 100%;
+}
+.ant-picker {
+  padding: 6px 11px 6px;
 }
 .create-tour__people-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 10px 0;
 }
 .people_unit {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.travel-title-group {
+  width: 100%;
+}
+.travel-title-group input {
+  padding: 9px 5px;
+  border-radius: 2px;
+}
+.create-tour__datepicker {
+  margin-bottom: 15px;
+  margin-top: 10px;
+}
+.travel-title-all p input::placeholder {
+  font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+}
+.create-tour__people-des {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  color: #343a40;
+}
+.people_unit .minus {
+  color: #fff;
+  background: #afca0b;
+  border: 1px solid #afca0b;
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+.people_unit .unit {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 26px;
+  color: #343a40;
+  font-size: var(--system-ui);
+  margin: 0 10px;
+}
+.people_unit .plus {
+  color: #fff;
+  background: #ee0033;
+  border: 1px solid #ee0033;
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+.ant-form-item-control-input-content .button {
+  margin: auto;
+  text-align: center;
+}
+.ant-input {
+  padding: 3px 15px;
+}
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+  height: 40px;
+}
+.ant-form-item-control-input {
+  border-radius: 2px;
+}
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: var(--color-primary);
+}
+
+.tour-detail__plan {
+  background: #f4f6ef;
+}
+
+.tour-detail__plan-header {
+  background: #13294b;
+  border-radius: 8px 8px 0px 0px;
+  display: flex;
+  padding: 4rem 2rem;
+}
+
+.tour-detail__plan-header img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
+
+.tour-detail__plan-info {
+}
+
+.tour-plan__review {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  color: #ffffff;
+}
+
+.tour-plan__name {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  color: #ffffff;
+}
+
+.tour-plan__rate {
+}
+
+.tour-detail__plan-body {
+  padding: 2rem 3rem;
+  border: 1px solid #dddddd;
+}
+
+.tour-detail__plan-body label {
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.1rem;
+  margin: 7px 0;
+  display: inline-block;
+}
+
+.tour-detail__plan-body .button {
+  width: 100%;
+  margin-top: 15px;
+}
+.main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.main-left {
+  width: 60%;
+  flex: 0 0 60%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.main-right {
+  position: sticky;
+  top: 80px;
+  right: 0;
+  width: 35%;
+  flex: 0 0 35%;
+}
+.title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #44494d;
+  margin: 20px 0;
+}
+.form-group {
+  display: grid;
+  grid-gap: 20px;
+}
+.form-group.group-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.form-group.group-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.form-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  color: #44494d;
+  margin: 10px 0;
+  margin-top: 15px;
+}
+.form-item input {
+  padding: 10px 16px;
+}
+.form-group-calender {
+  background-color: #fff;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px 8px 8px 0;
+  padding: 10px;
+}
+.form-group-calender-box-sub {
+  color: #44494d;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0 0 5px;
+  font-family: "Roboto";
+}
+.group-calender input {
+  border: none;
+}
+.form-item {
+  margin: 15px 0;
+}
+.button.button-step2 {
+  margin: 30px auto;
+  width: 30%;
 }

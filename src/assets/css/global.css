@@ -232,7 +232,15 @@ opacity: 0.75; */
   color: #fff;
   border-color: var(--color-primary);
 }
+.button--sub {
+  background-color: #fff;
+  border-color: var(--color-sub);
+}
 
+.button--sub:hover {
+  background-color: var(--color-sub);
+  color: #fff;
+}
 .button:before {
   border-radius: 8px 8px 8px 0;
   bottom: 0;
