@@ -223,16 +223,19 @@
   background: #13294b;
   border-radius: 8px 8px 0px 0px;
   display: flex;
-  padding: 4rem 2rem;
+  align-items: center;
+  padding: 2rem 2rem;
 }
 
 .tour-detail__plan-header img {
-  width: 90px;
-  height: 90px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
+  overflow: hidden;
 }
 
 .tour-detail__plan-info {
+  margin-left: 10px;
 }
 
 .tour-plan__review {
@@ -243,13 +246,12 @@
   line-height: 2.1rem;
   color: #ffffff;
 }
-
 .tour-plan__name {
   font-family: "Roboto";
   font-style: normal;
-  font-weight: 400;
-  font-size: 2.4rem;
-  line-height: 3.6rem;
+  font-weight: 600;
+  font-size: 2.1rem;
+  line-height: 2.9rem;
   color: #ffffff;
 }
 
@@ -308,6 +310,7 @@
 .form-group {
   display: grid;
   grid-gap: 20px;
+  width: 100%;
 }
 .form-group.group-2 {
   grid-template-columns: repeat(2, 1fr);
@@ -315,6 +318,9 @@
 
 .form-group.group-3 {
   grid-template-columns: repeat(3, 1fr);
+}
+.form-group.group-5 {
+  grid-template-columns: repeat(5, 1fr);
 }
 .form-title {
   font-family: "Roboto";
@@ -325,6 +331,7 @@
   color: #44494d;
   margin: 10px 0;
   margin-top: 15px;
+  white-space: nowrap;
 }
 .form-item input {
   padding: 10px 16px;
@@ -352,4 +359,77 @@
 .button.button-step2 {
   margin: 30px auto;
   width: 30%;
+}
+.tour-info-item {
+  margin: 10px 0;
+  margin-bottom: 15px;
+}
+.tour-info-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 20px;
+  color: #44494d;
+  margin-bottom: 10px;
+}
+.tour-info-value {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #727272;
+  background: #e4e4e4;
+  border: 1px solid #d1d1d1;
+  border-radius: 8px 8px 8px 0px;
+  padding: 10px 12px;
+}
+.tour-detail__plan-body .button {
+  margin-top: 30px;
+}
+.main-form-step3 {
+  width: 100%;
+  max-width: 862px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px auto;
+  transition: all linear 0.5s;
+}
+.title-ht {
+  font-family: "Roboto";
+  color: #44494d;
+  font-size: 24px;
+  letter-spacing: 0.15px;
+  line-height: 36px;
+  font-weight: 700;
+}
+.form-item-step3 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.form-item-step3 .form-title {
+  width: 20%;
+}
+.main-form-title-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main-step3 {
+  display: block;
+}
+.layout__wrapper {
+  background-color: #fbfbfb;
+}
+.main-form-item {
+  transition: all linear 0.5s;
+  animation: FadeIn 0.5s;
+  -webkit-animation: FadeIn 0.5s;
+  -moz-animation: FadeIn 0.5s;
+  -o-animation: FadeIn 0.5s;
+  -ms-animation: FadeIn 0.5s;
+}
+.main-form-step3 .main-form-item {
+  display: block;
 }

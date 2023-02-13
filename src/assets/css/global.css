@@ -232,15 +232,7 @@ opacity: 0.75; */
   color: #fff;
   border-color: var(--color-primary);
 }
-.button--sub {
-  background-color: #fff;
-  border-color: var(--color-sub);
-}
 
-.button--sub:hover {
-  background-color: var(--color-sub);
-  color: #fff;
-}
 .button:before {
   border-radius: 8px 8px 8px 0;
   bottom: 0;
@@ -253,7 +245,15 @@ opacity: 0.75; */
   width: 0;
   z-index: -1;
 }
+.button--sub {
+  background-color: #fff;
+  border-color: var(--color-sub);
+}
 
+.button--sub:hover {
+  background-color: var(--color-sub);
+  color: #fff;
+}
 .button--primary:before {
   background-color: var(--color-primary-hover);
 }
@@ -813,7 +813,6 @@ opacity: 0.75; */
     transform: translateY(0);
   }
 }
-
 .ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
   font-size: 16px;
   color: var(--color-primary-hover);
@@ -922,7 +921,81 @@ iframe {
   font-size: 1rem;
   line-height: 1.5;
 }
+/* checkbox */
+.check-box {
+  cursor: pointer;
+  display: block;
+  padding: 2px 0 0 30px;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.check-box__input {
+  cursor: pointer;
+  height: 0;
+  opacity: 0;
+  position: absolute;
+  width: 0;
+}
+.check-box__checkmark {
+  background: #fff;
+  border: 2px solid #ee0033;
+  border-radius: 4px 4px 4px 0;
+  height: 18px !important;
+  left: 2px;
+  position: absolute;
+  top: 2px;
+  width: 18px !important;
+}
+.check-box__input:checked ~ .check-box__checkmark {
+  background: -webkit-linear-gradient(
+      bottom,
+      rgba(209, 19, 19, 0.2),
+      rgba(209, 19, 19, 0.2)
+    ),
+    #fff;
+  background: linear-gradient(
+      0deg,
+      rgba(209, 19, 19, 0.2),
+      rgba(209, 19, 19, 0.2)
+    ),
+    #fff;
+  border-color: #ee0033;
+}
 
+.check-box__checkmark:after {
+  border: solid #ee0033;
+  border-width: 0 2px 2px 0;
+  content: "";
+  display: none;
+  height: 8px;
+  left: 5px;
+  position: absolute;
+  top: 2px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 4px;
+}
+.check-box__input:checked ~ .check-box__checkmark:after {
+  display: block;
+}
+
+.cloudca-checkbox .check-box__txt {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  color: #000000 !important;
+}
+.hidden {
+  display: none;
+}
 /* responsive */
 @media (max-width: 1120px) {
   html {

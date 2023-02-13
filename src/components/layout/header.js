@@ -40,39 +40,92 @@ function HeaderLayout() {
                     <NavLink to="/gioi-thieu">Giới thiệu</NavLink>
                   </li>
                 </ul>
+                <div className="mb">
+                  <div className="your-trip">
+                    <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
+                  </div>
+                  <div className="language">
+                    <i className="fa-solid fa-globe"></i>
+                  </div>
+                  <div className="support">
+                    <i className="fa-solid fa-circle-question"></i>
+                  </div>
+                </div>
               </div>
               <div className="menu-right">
-                <div className="your-trip">
-                  <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
-                </div>
-                <div className="language">
-                  <i className="fa-solid fa-globe"></i>
-                </div>
-                <div className="support">
-                  <i className="fa-solid fa-circle-question"></i>
-                </div>
-                <div className="user-info">
-                  <a
-                    className="button button--primary pc"
-                    href="/trang-ca-nhan"
-                  >
-                    Đăng nhập
-                  </a>
-                  <a className=" mb" href="/trang-ca-nhan">
-                    <i class="fa-regular fa-user"></i>
-                  </a>
+                <div className="pc">
+                  <div className="your-trip">
+                    <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
+                  </div>
+                  <div className="language">
+                    <i className="fa-solid fa-globe"></i>
+                  </div>
+                  <div className="support">
+                    <i className="fa-solid fa-circle-question"></i>
+                  </div>
+                  <div className="user-info">
+                    <a
+                      className="button button--primary pc"
+                      href="/trang-ca-nhan"
+                    >
+                      Đăng nhập
+                    </a>
+                    <a className=" mb" href="/trang-ca-nhan">
+                      <i class="fa-regular fa-user"></i>
+                    </a>
+                  </div>
                 </div>
                 <div className="menu-mb mb">
                   <i className="fa-solid fa-bars" onClick={showDrawer}></i>
                   <Drawer
-                    title="Basic Drawer"
+                    title=""
                     placement="right"
                     onClose={onClose}
                     visible={open}
                   >
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
-                    <p>Some contents...</p>
+                    <ul className="menu-list-mb">
+                      <li className="menu-item-mb">
+                        <NavLink to="/">
+                          <i class="fa-solid fa-house"></i> Home
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/diem-den">
+                          <i class="fa-solid fa-user"></i>Trang cá nhân
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/diem-den">
+                          <i class="fa-solid fa-map-location-dot"></i>Điểm đến
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/tour">
+                          <i class="fa-solid fa-mountain-city"></i>Tour HOT
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/hdv">
+                          <i class="fa-solid fa-truck-plane"></i>Hướng dẫn viên
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/tin-tuc">
+                          <i class="fa-solid fa-newspaper"></i>Tin tức
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/gioi-thieu">
+                          <i class="fa-solid fa-layer-group"></i>Giới thiệu
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/signin">
+                          <i class="fa-solid fa-right-from-bracket"></i>Đăng
+                          xuẩt
+                        </NavLink>
+                      </li>
+                    </ul>
                   </Drawer>
                 </div>
               </div>

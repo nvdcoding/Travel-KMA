@@ -1,504 +1,505 @@
 .tour-detail__content {
-    margin-top: 4rem;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+  margin-top: 4rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 40px;
 }
 
 .tour-detail__left {
-    width: 61%;
+  width: 61%;
 }
 
 .tour-detail__img-introduce {
-    width: 100%;
-    height: 100%;
-    max-height: 200px;
+  width: 100%;
+  height: 100%;
+  max-height: 200px;
+  object-fit: contain;
 }
-
 .tour-detail__left .travel-title {
-    text-align: left;
-    font-weight: 500;
-    font-size: 2.3rem;
-    line-height: 2.6rem;
+  text-align: left;
+  font-weight: 500;
+  font-size: 2.3rem;
+  line-height: 2.6rem;
 }
 
 .tour-detail__left .travel-des {
-    width: 100%;
-    font-weight: 400;
-    font-size: 1.7rem;
-    line-height: 2.2rem;
-    text-align: justify;
-    margin: auto;
-    color: var(--color-text);
+  width: 100%;
+  font-weight: 400;
+  font-size: 1.7rem;
+  line-height: 2.2rem;
+  text-align: justify;
+  margin: auto;
+  color: var(--color-text);
 }
 
 .tour-detail__main {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .tour-detail__name {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
-    line-height: 36px;
-    color: var(--color-text-title);
-    margin-top: 2rem;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 36px;
+  color: var(--color-text-title);
+  margin-top: 2rem;
 }
 
 .tour-detail__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 3rem;
-    color: var(--color-text-title);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 3rem;
+  color: var(--color-text-title);
 }
 
 .tour-detail__item-title {
-    flex: 1;
+  flex: 1;
 }
 
 .tour-detail__item-title p {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
 .tour-detail__item-des {
-    flex: 3;
+  flex: 3;
 }
 
 .tour-detail__item-des ul {
-    list-style: inherit;
+  list-style: inherit;
 }
 
 .tour-detail__item-des ul li {
-    list-style: inherit;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+  list-style: inherit;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
 .tour-detail__sub-name {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    color: var(--color-text-title);
-    margin: 1rem 0;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: var(--color-text-title);
+  margin: 1rem 0;
 }
 
 .tour-detail__sub-des {
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.3rem;
-    line-height: 2.3rem;
-    color: var(--color-text);
-    margin: 5px 0;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 2.3rem;
+  color: var(--color-text);
+  margin: 5px 0;
 }
 
 .tour-detail__journeys {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 table.table-journeys,
 table.table-journeys tr,
 table.table-journeys td {
-    border-width: 0px;
+  border-width: 0px;
 }
 
-.tour-detail__basic {}
+.tour-detail__basic {
+}
 
 td {
-
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    color: var(--color-text-title);
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  color: var(--color-text-title);
 }
 
 table.table-journeys tr td:first-child {
-    width: 15%;
+  width: 15%;
 }
 
 .tour-detail__time {
-    text-align: left;
+  text-align: left;
 }
 
 .tour-detail_location {
-    text-align: left;
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 21px;
-    color: #475D76;
+  text-align: left;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 21px;
+  color: #475d76;
 }
 
 .tour-detail_location-des {
-    text-align: left;
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    color: #13294B;
+  text-align: left;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #13294b;
 }
 
 .banner-create__tour {
-    border: 1px solid #EBEBEB;
-    border-radius: 8px;
-    background: #F4F6EF;
-    padding: 10px 20px;
+  border: 1px solid #ebebeb;
+  border-radius: 8px;
+  background: #f4f6ef;
+  padding: 10px 20px;
 }
 
 .banner-create__tour-title {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2.4rem;
-    line-height: 3rem;
-    text-align: center;
-    margin: 10px auto;
-    color: var(--color-text-title);
-    width: 90%;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3rem;
+  text-align: center;
+  margin: 10px auto;
+  color: var(--color-text-title);
+  width: 90%;
 }
 
 .banner-create__tour a {
-    margin: auto;
-    width: 220px;
+  margin: auto;
+  width: 220px;
 }
 
 .tour-detail__detail {
-    margin-top: 40px;
+  margin-top: 40px;
 }
 
 .tour-detail__card {
-    margin-top: 20px;
-    background: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 8px;
-    overflow: hidden;
+  margin-top: 20px;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .tour-detail__card img {
-    max-height: 300px;
-    width: 100%;
-    object-fit: cover;
+  max-height: 300px;
+  width: 100%;
+  object-fit: cover;
 }
 
 .tour-detail-body {
-    padding: 15px 30px;
+  padding: 15px 30px;
 }
 
 .tour-detail__district {
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    color: var(--color-text-title);
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: var(--color-text-title);
 }
 
 .tour-detail__overview {
-    margin-top: 10px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2.4rem;
-    line-height: 3.6rem;
+  margin-top: 10px;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
 }
 
 .tour-detail__introduce {
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.6rem;
-    color: var(--color-seconds);
-    margin-top: 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.6rem;
+  color: var(--color-seconds);
+  margin-top: 10px;
 }
 
 .tour-detail__icon {
-    margin-top: 40px;
-    display: flex;
+  margin-top: 40px;
+  display: flex;
 }
 
 .tour-detail__icon p {
-    margin-left: 10px;
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+  margin-left: 10px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
 .tour-detail__icon p i {
-    font-size: 15px;
-    margin-right: 4px;
+  font-size: 15px;
+  margin-right: 4px;
 }
 
 .tour-detail__map {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .tour-detail__map .map {
-    margin-top: 15px;
+  margin-top: 15px;
 }
 
 .map iframe {
-    width: 100%;
-    height: 450px;
+  width: 100%;
+  height: 450px;
 }
 
 .tour-detail__comment {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 .tour-detail__comment .tour-detail__review-list__item {
-    display: inline-block;
-    background: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
-    border-radius: 0px 8px 8px 8px;
-    position: relative;
-    margin-top: 15px;
+  display: inline-block;
+  background: #ffffff;
+  border: 1px solid #dddddd;
+  box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.12);
+  border-radius: 0px 8px 8px 8px;
+  position: relative;
+  margin-top: 15px;
 }
 
 .tour-detail__comment .tour-detail__review-list__item::after,
 .tour-detail__comment .tour-detail__review-list__item::before {
-    content: '';
-    display: inline-block;
-    border-style: solid;
-    position: absolute;
+  content: "";
+  display: inline-block;
+  border-style: solid;
+  position: absolute;
 }
 
 .tour-detail__comment .tour-detail__review-list__item::after {
-    border-color: transparent #fff transparent transparent;
-    top: 0;
-    left: -23px;
-    border-width: 0 25px 25px 0;
+  border-color: transparent #fff transparent transparent;
+  top: 0;
+  left: -23px;
+  border-width: 0 25px 25px 0;
 }
 
 .tour-detail__comment .tour-detail__review-list__item::before {
-    top: -1px;
-    left: -25px;
-    border-width: 0 25px 25px 0;
-    border-color: transparent #ddd transparent transparent;
+  top: -1px;
+  left: -25px;
+  border-width: 0 25px 25px 0;
+  border-color: transparent #ddd transparent transparent;
 }
 
-
-
 .tour-detail__right {
-    width: 35%;
-    position: sticky;
-    top: 30px;
-    right: 0;
+  width: 35%;
+  position: sticky;
+  top: 30px;
+  right: 0;
 }
 
 .tour-detail__plan {
-    background: #F4F6EF;
+  background: #f4f6ef;
 }
 
 .tour-detail__plan-header {
-    background: #13294B;
-    border-radius: 8px 8px 0px 0px;
-    display: flex;
-    padding: 4rem 2rem;
+  background: #13294b;
+  border-radius: 8px 8px 0px 0px;
+  display: flex;
+  padding: 4rem 2rem;
 }
 
 .tour-detail__plan-header img {
-    width: 90px;
-    height: 90px;
+  width: 90px;
+  height: 90px;
 }
 
-.tour-detail__plan-info {}
+.tour-detail__plan-info {
+}
 
 .tour-plan__review {
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 2.1rem;
-    color: #FFFFFF;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
+  color: #ffffff;
 }
 
 .tour-plan__name {
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 2.4rem;
-    line-height: 3.6rem;
-    color: #FFFFFF;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2.4rem;
+  line-height: 3.6rem;
+  color: #ffffff;
 }
 
-.tour-plan__rate {}
+.tour-plan__rate {
+}
 
 .tour-detail__plan-body {
-    padding: 2rem 3rem;
-    border: 1px solid #DDDDDD;
+  padding: 2rem 3rem;
+  border: 1px solid #dddddd;
 }
 
 .tour-detail__plan-body label {
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.1rem;
-    margin: 7px 0;
-    display: inline-block;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.1rem;
+  margin: 7px 0;
+  display: inline-block;
 }
 
 .tour-detail__plan-body .button {
-    width: 100%;
-    margin-top: 15px;
+  width: 100%;
+  margin-top: 15px;
 }
 
 .review-list {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 .review-list__item {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 1fr 2fr;
-    grid-template-columns: 1fr 2fr;
-    padding: 16px;
-    border-bottom: 1px solid #d1d1d1;
-    gap: 30px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr;
+  padding: 16px;
+  border-bottom: 1px solid #d1d1d1;
+  gap: 30px;
 }
 
 @media (max-width: 575px) {
-    .review-list__item {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-    }
+  .review-list__item {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
 }
 
 .review-list__item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .review-list__customer-item {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .review-list__customer-item img {
-    margin-right: 7px;
-    width: 20px;
+  margin-right: 7px;
+  width: 20px;
 }
 
 .review-list__customer-item span {
-    font-size: 14px;
-    line-height: 24px;
-    color: #727272;
+  font-size: 14px;
+  line-height: 24px;
+  color: #727272;
 }
 
 .review-list__customer-name {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 28px;
-    color: #44494d;
-    font-family: 'FS PFBeauSansPro', sans-serif;
-    margin-bottom: 16px;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  color: #44494d;
+  font-family: "FS PFBeauSansPro", sans-serif;
+  margin-bottom: 16px;
 }
 
 .review-list__review-header {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: baseline;
-    -webkit-align-items: baseline;
-    -ms-flex-align: baseline;
-    align-items: baseline;
-    margin-bottom: 12px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+  -ms-flex-align: baseline;
+  align-items: baseline;
+  margin-bottom: 12px;
 }
 
 .review-list .rating-custom i {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .review-list .rating-custom__star.voted {
-    color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .review-list .rating-custom__star {
-    color: var(--color-text);
+  color: var(--color-text);
 }
 
 .review-list__time-review {
-    font-size: 12px;
-    line-height: 18px;
-    font-style: italic;
-    color: #B5B4B4;
+  font-size: 12px;
+  line-height: 18px;
+  font-style: italic;
+  color: #b5b4b4;
 }
 
 .review-list__rate {
-    margin: 0 15px 0 4px;
-    font-size: 14px;
-    line-height: 24px;
-    color: var(--color-primary);
+  margin: 0 15px 0 4px;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--color-primary);
 }
 
 .review-list__review-content {
-    font-size: 14px;
-    line-height: 24px;
-    color: #44494d;
+  font-size: 14px;
+  line-height: 24px;
+  color: #44494d;
 }
 
 .review-list__review-header {
-    align-items: center;
+  align-items: center;
 }
 
 .review-list__review-content {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .review-list__avt {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .review-list__avt img {
-    width: 50px;
-    height: 50px;
+  width: 50px;
+  height: 50px;
 }
 
 .review-list__info {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .review-list__name {
-    font-family: 'Mulish';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 2.1rem;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.1rem;
 }

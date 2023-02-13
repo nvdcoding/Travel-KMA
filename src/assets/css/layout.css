@@ -182,3 +182,50 @@
   line-height: 2.6rem;
   color: var(--color-text-title);
 }
+.menu-left .mb {
+  display: none;
+}
+.menu-right .pc {
+  display: flex;
+}
+
+@media (max-width: 991px) {
+  .menu-left .mb {
+    display: flex;
+    align-items: center;
+  }
+  .menu-right .pc {
+    display: none;
+  }
+}
+.menu-mb.mb i {
+  font-size: 28px;
+}
+.menu-list-mb {
+  margin-top: 30px;
+}
+.menu-item-mb {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+  color: #443e3e;
+  cursor: pointer;
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 20px 0 20px 20px;
+  transition: 0.3s;
+}
+.menu-item-mb:last-child {
+  bottom: 20px;
+  position: absolute;
+  width: 100%;
+}
+.menu-item-mb:hover {
+  background-color: #ededed;
+}
+.ant-drawer-body {
+  padding: 0;
+}
+.menu-item-mb i {
+  margin-right: 10px;
+}
