@@ -380,42 +380,77 @@ function Home() {
               ))}
             </OwlCarousel>
           </div>
-          <div className="tour-feedback">
-            <h2 className="travel-title">Trải nghiệm đặc biệt</h2>
-            <p className="travel-des">
-              Đánh giá từ du khách về trải nghiệm của họ với TravelLocal
-            </p>
-            <div className="tour-feedback__main">
+          <div className="tour-guides tour-view">
+            <div className="travel-title-all">
+              <h2 className="travel-title">Hướng dẫn viên</h2>
+              <a href="#" className="travel-link">
+                Xem tất cả <i class="fa-solid fa-angle-right"></i>
+              </a>
+            </div>
+
+            <div className="tour-guides__main">
               <OwlCarousel
-                className="tour-feedback__list owl-theme"
-                {...optionsFeedback}
+                className="tour-guides__list owl-theme "
+                {...optionsTourview}
               >
-                {feedback.map((item, index) => (
-                  <div className="tour-feedback__item" key={index}>
-                    <div className="tour-feedback__star">
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <div
-                      className={
-                        more
-                          ? "tour-feedback__content more"
-                          : "tour-feedback__content"
-                      }
-                    >
-                      {item.des}
-                    </div>
-                    <div className="tour-feedback__people">
+                {tourview.map((item, index) => (
+                  <div className="tour-guides__item" key={index}>
+                    <div className="tour-guides__card-img tour-view__card-img">
                       <img
                         alt=""
-                        className="tour-feedback__avt"
-                        src={item.img.avt}
+                        className="tour-guides__img tour-view__img"
+                        src={item.img}
                       />
-                      <div className="tour-feedback__info">
-                        <p className="tour-feedback__name">{item.name}</p>
-                        <p className="tour-feedback__time">{item.time}</p>
+                      <div className="tour-guides__tag tour-view__tag">
+                        <p className="tour-guides__tag-name tour-view__tag-name">
+                          Nature
+                        </p>
+                        <p className="tour-guides__tag-name tour-view__tag-name">
+                          Private Tour
+                        </p>
+                      </div>
+                    </div>
+                    <div className="tour-guides__card-content">
+                      <div className="tour-guides__head">
+                        <p className="tour-guides__name">Nguyễn Văn Duy</p>
+                        <p className="tour-guides__time">Nam</p>
+                      </div>
+                      <div className="tour-guides-body">
+                        <ul className="tour-guides-list">
+                          <li className="tour-guides--item">
+                            <i className="fa-solid fa-calendar-days"></i>
+                            <p className="tour-guides__text">Tuổi: 41</p>
+                          </li>
+                          <li className="tour-guides--item">
+                            <i className="fa-solid fa-location-dot"></i>
+                            <p className="tour-guides__text">
+                              Địa chỉ: Yên Phong
+                            </p>
+                          </li>
+                          <li className="tour-guides--item">
+                            <i className="fa-solid fa-heart"></i>
+                            <p className="tour-guides__text">Đánh giá:</p>
+                          </li>
+                          <li className="tour-guides--item">
+                            <i className="fa-solid fa-hand-holding-heart"></i>
+                            <p className="tour-guides__text">
+                              Tham gia: 5 năm trước
+                            </p>
+                          </li>
+                          <li className="tour-guides--item">
+                            <i className="fa-solid fa-plane-arrival"></i>
+                            <p className="tour-guides__text">
+                              Chuyến đi: 234 chuyến đi
+                            </p>
+                          </li>
+                        </ul>
+                        <a href="#" className="travel-link">
+                          Chi tiết <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                      </div>
+
+                      <div className="button button--primary button-contact">
+                        Liên hệ
                       </div>
                     </div>
                   </div>
@@ -423,8 +458,24 @@ function Home() {
               </OwlCarousel>
             </div>
           </div>
+          <div className="tour-banner tour-banner2">
+            <img className="tour-banner-img" alt="" src={hoguom} />
+            <div className="content">
+              <div className="tour-banner__text">
+                <h3 className="tour-banner-title">Du lịch theo cá tính</h3>
+                <p className="tour-banner-des">
+                  Trải nghiệm trọn vẹn - Giá cả phải chăng
+                </p>
+                <div className="button">
+                  <a href="#">Thiết kế chuyến đi</a>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="tour-address">
-            <h2 className="travel-title">Điểm đến</h2>
+            <h2 className="travel-title">
+              <Link to="diem-den">Điểm đến</Link>
+            </h2>
             <p className="travel-des">
               Khám phá, tạo và đặt chuyến đi của bạn!
             </p>
@@ -452,28 +503,113 @@ function Home() {
               </OwlCarousel>
             </div>
           </div>
-        </div>
-        <div className="tour-banner">
-          <img
-            className="tour-banner-img"
-            alt=""
-            src="https://images.vietnamtourism.gov.vn/vn/images/2020/Thang_9/trang_an1.jpg"
-          />
-          <div className="content">
-            <div className="tour-banner__text">
-              <h3 className="tour-banner-title">
-                Tra cứu thông tin HDV du lịch dễ dàng
-              </h3>
-              <p className="tour-banner-des">
-                Tùy chỉnh và lên kế hoạch chuyến đi ngay
-              </p>
-              <div className="button button--primary">
-                <a href="#">Khám phá ngay</a>
-              </div>
+          {/* bai viet */}
+          <div className="news">
+            <div className="travel-title-all">
+              <h2 className="travel-title">Bài viết</h2>
+              <a href="#" className="travel-link">
+                Xem tất cả <i class="fa-solid fa-angle-right"></i>
+              </a>
+            </div>
+            <div className="news-main">
+              <ul className="news-left">
+                <li className="news-left-item">
+                  <Link to={`/tin-tuc/thflsnmx`}>
+                    <div className="news-left-thumb">
+                      <img
+                        alt=""
+                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
+                      />
+                    </div>{" "}
+                  </Link>
+                  <div className="news-left__intro">
+                    <Link to={`/tin-tuc/thflsnmx`}>
+                      <h3 className="news-left__name">bài viết số 1</h3>
+                    </Link>
+                    <p className="news-left-des">
+                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
+                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
+                      khí hậu và sự bất cẩn của con người.
+                    </p>
+                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
+                      Xem chi tiết
+                    </Link>
+                  </div>
+                </li>
+              </ul>
+              <ul className="news-right">
+                <li className="news-right-item">
+                  <div className="news-right-thumb">
+                    <Link to={`/tin-tuc/thflsnmx`}>
+                      <img
+                        alt=""
+                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="news-right__intro">
+                    <Link to={`/tin-tuc/thflsnmx`}>
+                      <h3 className="news-right__name">bài viết số 1</h3>
+                    </Link>
+                    <p className="news-right-des">
+                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
+                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
+                      khí hậu và sự bất cẩn của con người.
+                    </p>
+                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
+                      Xem chi tiết
+                    </Link>
+                  </div>
+                </li>
+                <li className="news-right-item">
+                  <div className="news-right-thumb">
+                    <Link to={`/tin-tuc/thflsnmx`}>
+                      <img
+                        alt=""
+                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="news-right__intro">
+                    <Link to={`/tin-tuc/thflsnmx`}>
+                      <h3 className="news-right__name">bài viết số 1</h3>
+                    </Link>
+                    <p className="news-right-des">
+                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
+                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
+                      khí hậu và sự bất cẩn của con người.
+                    </p>
+                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
+                      Xem chi tiết
+                    </Link>
+                  </div>
+                </li>
+                <li className="news-right-item">
+                  <div className="news-right-thumb">
+                    <Link to={`/tin-tuc/thflsnmx`}>
+                      <img
+                        alt=""
+                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
+                      />
+                    </Link>
+                  </div>
+                  <div className="news-right__intro">
+                    <Link to={`/tin-tuc/thflsnmx`}>
+                      <h3 className="news-right__name">bài viết số 1</h3>
+                    </Link>
+                    <p className="news-right-des">
+                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
+                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
+                      khí hậu và sự bất cẩn của con người.
+                    </p>
+                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
+                      Xem chi tiết
+                    </Link>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-        <div className="content">
           <div className="tour-view">
             <div className="travel-title-all">
               <div>
@@ -557,91 +693,64 @@ function Home() {
               </OwlCarousel>
             </div>
           </div>
-          <div className="tour-banner tour-banner2">
-            <img className="tour-banner-img" alt="" src={hoguom} />
-            <div className="content">
-              <div className="tour-banner__text">
-                <h3 className="tour-banner-title">Du lịch theo cá tính</h3>
-                <p className="tour-banner-des">
-                  Trải nghiệm trọn vẹn - Giá cả phải chăng
-                </p>
-                <div className="button">
-                  <a href="#">Thiết kế chuyến đi</a>
-                </div>
+        </div>
+        <div className="tour-banner">
+          <img
+            className="tour-banner-img"
+            alt=""
+            src="https://images.vietnamtourism.gov.vn/vn/images/2020/Thang_9/trang_an1.jpg"
+          />
+          <div className="content">
+            <div className="tour-banner__text">
+              <h3 className="tour-banner-title">
+                Tra cứu thông tin HDV du lịch dễ dàng
+              </h3>
+              <p className="tour-banner-des">
+                Tùy chỉnh và lên kế hoạch chuyến đi ngay
+              </p>
+              <div className="button button--primary">
+                <a href="#">Khám phá ngay</a>
               </div>
             </div>
           </div>
-          <div className="tour-guides tour-view">
-            <div className="travel-title-all">
-              <h2 className="travel-title">Hướng dẫn viên</h2>
-              <a href="#" className="travel-link">
-                Xem tất cả <i class="fa-solid fa-angle-right"></i>
-              </a>
-            </div>
-
-            <div className="tour-guides__main">
+        </div>
+        <div className="content">
+          <div className="tour-feedback">
+            <h2 className="travel-title">Trải nghiệm đặc biệt</h2>
+            <p className="travel-des">
+              Đánh giá từ du khách về trải nghiệm của họ với TravelLocal
+            </p>
+            <div className="tour-feedback__main">
               <OwlCarousel
-                className="tour-guides__list owl-theme "
-                {...optionsTourview}
+                className="tour-feedback__list owl-theme"
+                {...optionsFeedback}
               >
-                {tourview.map((item, index) => (
-                  <div className="tour-guides__item" key={index}>
-                    <div className="tour-guides__card-img tour-view__card-img">
+                {feedback.map((item, index) => (
+                  <div className="tour-feedback__item" key={index}>
+                    <div className="tour-feedback__star">
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <div
+                      className={
+                        more
+                          ? "tour-feedback__content more"
+                          : "tour-feedback__content"
+                      }
+                    >
+                      {item.des}
+                    </div>
+                    <div className="tour-feedback__people">
                       <img
                         alt=""
-                        className="tour-guides__img tour-view__img"
-                        src={item.img}
+                        className="tour-feedback__avt"
+                        src={item.img.avt}
                       />
-                      <div className="tour-guides__tag tour-view__tag">
-                        <p className="tour-guides__tag-name tour-view__tag-name">
-                          Nature
-                        </p>
-                        <p className="tour-guides__tag-name tour-view__tag-name">
-                          Private Tour
-                        </p>
-                      </div>
-                    </div>
-                    <div className="tour-guides__card-content">
-                      <div className="tour-guides__head">
-                        <p className="tour-guides__name">Nguyễn Văn Duy</p>
-                        <p className="tour-guides__time">Nam</p>
-                      </div>
-                      <div className="tour-guides-body">
-                        <ul className="tour-guides-list">
-                          <li className="tour-guides--item">
-                            <i className="fa-solid fa-calendar-days"></i>
-                            <p className="tour-guides__text">Tuổi: 41</p>
-                          </li>
-                          <li className="tour-guides--item">
-                            <i className="fa-solid fa-location-dot"></i>
-                            <p className="tour-guides__text">
-                              Địa chỉ: Yên Phong
-                            </p>
-                          </li>
-                          <li className="tour-guides--item">
-                            <i className="fa-solid fa-heart"></i>
-                            <p className="tour-guides__text">Đánh giá:</p>
-                          </li>
-                          <li className="tour-guides--item">
-                            <i className="fa-solid fa-hand-holding-heart"></i>
-                            <p className="tour-guides__text">
-                              Tham gia: 5 năm trước
-                            </p>
-                          </li>
-                          <li className="tour-guides--item">
-                            <i className="fa-solid fa-plane-arrival"></i>
-                            <p className="tour-guides__text">
-                              Chuyến đi: 234 chuyến đi
-                            </p>
-                          </li>
-                        </ul>
-                        <a href="#" className="travel-link">
-                          Chi tiết <i class="fa-solid fa-angles-right"></i>
-                        </a>
-                      </div>
-
-                      <div className="button button--primary button-contact">
-                        Liên hệ
+                      <div className="tour-feedback__info">
+                        <p className="tour-feedback__name">{item.name}</p>
+                        <p className="tour-feedback__time">{item.time}</p>
                       </div>
                     </div>
                   </div>
