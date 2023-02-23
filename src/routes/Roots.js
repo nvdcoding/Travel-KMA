@@ -17,6 +17,7 @@ const MyTrip = lazy(() => import("../page/PersonalPage/MyTrip"));
 const Signin = lazy(() => import("../page/Auth/SignIn"));
 const Signup = lazy(() => import("../page/Auth/SignUp"));
 const Onboarding = lazy(() => import("../page/Onboarding"));
+const Chat = lazy(() => import("../page/Chat/index.js"));
 /**
  * define main pages routes
  */
@@ -45,6 +46,11 @@ const RoutePage = [
     path: ROUTES.TOUR,
     exact: true,
     component: Tours,
+  },
+  {
+    path: ROUTES.CHAT,
+    exact: true,
+    component: Chat,
   },
   {
     path: ROUTES.CREATETOUR,
