@@ -29,8 +29,13 @@ function Condition(props) {
         <h4 className="voucher-popup-title">
           {props.data?.name ? props.data?.name : " Tên Voucher"}
         </h4>
-        <p className="voucher-popup-dk">Điều kiện sử dụng</p>
-        <p className="voucher-popup-des">{props.data?.condition}</p>
+        <p className="voucher-popup-time">Thời gian: Áp dụng đến 28/02/2023</p>
+        <p className="voucher-popup-dk">Điều kiện sử dụng:</p>
+        <p className="voucher-popup-des">
+          {" "}
+          Nhập mã METAF20 để được giảm phí vận chuyển tối đa 20.000đ. Áp dụng
+          đến khi hết mã. Số lượng có hạn.{props.data?.condition}
+        </p>
       </Modal>
     </>
   );

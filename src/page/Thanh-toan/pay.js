@@ -1,8 +1,11 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import Layout from "../../components/layout/layout";
+import Condition from "../../components/condition";
 import "../../assets/css/pay.css";
+import { Modal } from "antd";
+
 export default function Pay() {
   let history = useHistory();
   useEffect(() => {}, []);
@@ -30,9 +33,7 @@ export default function Pay() {
             </div>
             <div className="payment-online">
               <div className="content">
-                <h3 className="payment-online__title">
-                  Chọn phương thức thanh toán
-                </h3>
+                <h3 className="payment-online__title">Thông tin chuyến đi</h3>
                 <div className="payment-online__inner">
                   <div className="payment-online__left">
                     <div className="payment-online__row">
@@ -77,24 +78,41 @@ export default function Pay() {
                   <div className="payment-online__right">
                     <div className="order-payment">
                       <h4 className="order-payment__title">
-                        Thông tin đơn hàng
+                        Thông tin chuyến đi
                       </h4>
                       <ul className="order-payment__list">
+                        <li className="order-payment__item">
+                          <span className="order-payment__name">
+                            Tên chuyến đi
+                          </span>
+                          <span className="order-payment__value">
+                            BN 3 ngày 2 đêm
+                          </span>
+                        </li>
+                        <li className="order-payment__item">
+                          <span className="order-payment__name">
+                            Mã chuyến đi
+                          </span>
+                          <span className="order-payment__value">BN32145</span>
+                        </li>
                         <li className="order-payment__item">
                           <span className="order-payment__name">Tổng tiền</span>
                           <span className="order-payment__value">10.000đ</span>
                         </li>
                         <li className="order-payment__item">
-                          <span className="order-payment__name">9.00d</span>
+                          <span className="order-payment__name">Giảm giá</span>
                           <span className="order-payment__value">-2.000đ</span>
                         </li>
                         <li className="order-payment__item">
                           <span className="order-payment__name">
-                            max giam gia
+                            Đặt cọc
+                            <span className="order-payment__note">(30%)</span>
                           </span>
-                          <span className="order-payment__value">
-                            -ma gia gia đ
-                          </span>
+                          <span className="order-payment__value">150.000đ</span>
+                        </li>
+                        <li className="order-payment__item">
+                          <span className="order-payment__name"></span>
+                          <ModalVoucher />
                         </li>
                         <li className="order-payment__item last">
                           <span className="order-payment__name">
@@ -178,3 +196,91 @@ export default function Pay() {
     </>
   );
 }
+const ModalVoucher = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleVoucher = () => {
+    setIsModalOpen(false);
+    setVoucher("TM12");
+  };
+  const [voucher, setVoucher] = useState();
+  return (
+    <>
+      <span className="order-payment_voucher" onClick={showModal}>
+        <span className="coupon-label success">{voucher}</span>
+        {/* <i className="fa-solid fa-percent"></i> */}
+        Mã Voucher
+      </span>
+      <Modal
+        footer={null}
+        width="90%"
+        title="Mã giảm giá "
+        visible={isModalOpen}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        centered
+      >
+        <div className="mytrip-voucher">
+          <div className="mytrip-voucher-item">
+            <div className="mytrip-voucher-left">
+              <img
+                className="mytrip-voucher-img"
+                alt=""
+                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+              />
+              <h4 className="mytrip-voucher-name">Voucher</h4>
+            </div>
+            <div className="mytrip-voucher-right">
+              <div className="mytrip-voucher-top">
+                <h3 className="mytrip-voucher-title">
+                  Giảm 10% đơn 20k giảm 210k
+                </h3>
+                <p
+                  className="mytrip-voucher-use"
+                  onClick={() => handleVoucher()}
+                >
+                  Dùng ngay
+                </p>
+              </div>
+              <div className="mytrip-voucher-bottom">
+                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
+                <Condition />
+              </div>
+            </div>
+          </div>
+          <div className="mytrip-voucher-item">
+            <div className="mytrip-voucher-left">
+              <img
+                className="mytrip-voucher-img"
+                alt=""
+                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+              />
+              <h4 className="mytrip-voucher-name">Voucher</h4>
+            </div>
+            <div className="mytrip-voucher-right">
+              <div className="mytrip-voucher-top">
+                <h3 className="mytrip-voucher-title">
+                  Giảm 10% đơn 20k giảm 210k
+                </h3>
+                <p className="mytrip-voucher-use">Dùng ngay</p>
+              </div>
+              <div className="mytrip-voucher-bottom">
+                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
+                <Condition />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+};
