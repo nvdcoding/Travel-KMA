@@ -16,4 +16,5 @@ export const ROUTES = {
   SIGNUP: "/dang-ky",
   ONBOARDING: "/onboarding",
   CHAT: "/chat",
+  NEWPOST: "viet-bai",
 };

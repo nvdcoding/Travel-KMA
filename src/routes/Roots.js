@@ -18,6 +18,7 @@ const Signin = lazy(() => import("../page/Auth/SignIn"));
 const Signup = lazy(() => import("../page/Auth/SignUp"));
 const Onboarding = lazy(() => import("../page/Onboarding"));
 const Chat = lazy(() => import("../page/Chat/index.js"));
+const newPost = lazy(() => import("../page/blog/NewPost.js"));
 /**
  * define main pages routes
  */
@@ -51,6 +52,11 @@ const RoutePage = [
     path: ROUTES.CHAT,
     exact: true,
     component: Chat,
+  },
+  {
+    path: ROUTES.NEWPOST,
+    exact: true,
+    component: newPost,
   },
   {
     path: ROUTES.CREATETOUR,
