@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import MarkdownIt from "markdown-it";
-import { message, Select, Tag, Modal } from "antd";
+import { message } from "antd";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import { useHistory } from "react-router-dom";
@@ -9,43 +9,13 @@ import "./NewPost.scss";
 import { sendPost } from "../../utils/api";
 import Layout from "../../components/layout/layout";
 const mdParser = new MarkdownIt();
-const options = [
-  // thay doi
-  { label: "Frontend", value: "lime" },
-  { label: "Backend", value: "green" },
-  { label: "FullStack", value: "gold" },
-  { label: "UI/UX", value: "cyan" },
-  { label: "Other", value: "red" },
-];
 function Blogging() {
   document.title = "Viết Blog";
-  const [visible, setVisible] = useState(false);
   const history = useHistory();
-  const [imageUrl, setImageUrl] = useState();
+  const [imageUrl, setImageUrl] = useState("11");
   const [content, setContent] = useState("");
-  const [select, setSelect] = useState("red");
   const [title, setTitle] = useState("");
-  const handleCancel = () => {
-    setVisible(false);
-  };
-  function tagRender(props) {
-    const { label, value, closable, onClose } = props;
-    const onPreventMouseDown = (event) => {
-      event.preventDefault();
-      event.stopPropagation();
-    };
-    return (
-      <Tag
-        color={value}
-        onMouseDown={onPreventMouseDown}
-        closable={closable}
-        onClose={onClose}
-        style={{ marginRight: 3 }}
-      >
-        {label}
-      </Tag>
-    );
-  }
+
   const handleChangeImage = (e) => {
     const { files } = document.querySelector(".img-input");
     const formData = new FormData();
@@ -73,17 +43,10 @@ function Blogging() {
       reader.readAsDataURL(file);
     });
   }
-  function handleChangeSelect(_, data) {
-    const res = data.map((e) => e.label);
-    setSelect(res.join("-"));
-    // console.log(res);
-  }
-
   const handleChangeSubmit = async (values) => {
     const data = {
       img: imageUrl,
       title: title,
-      topic: select,
       content: content,
     };
     // eslint-disable-next-line no-unused-vars
@@ -102,69 +65,10 @@ function Blogging() {
       <Layout>
         <div className="Blogging-wrapper ">
           <div style={{ display: " flex", justifyContent: "flex-end" }}>
-            <button className="Xuat-ban" onClick={() => setVisible(true)}>
+            <button className="Xuat-ban" onClick={handleChangeSubmit}>
               Xuất bản
             </button>
           </div>
-          <Modal
-            className="Modal-publish"
-            visible={visible}
-            footer={null}
-            onCancel={handleCancel}
-            destroyOnClose={true}
-          >
-            <div className="Publish-wrapper">
-              <section>
-                <strong>Xem trước</strong>
-                <label for="img">
-                  <div
-                    className="img"
-                    style={{ backgroundImage: `url(${imageUrl})` }}
-                  >
-                    <p style={{ padding: "38px 20px 0" }}>
-                      Thêm một ảnh đại diện hấp dẫn sẽ giúp bài viết của bạn
-                      cuốn hút hơn với độc giả.
-                    </p>
-                    <p style={{ color: "red" }}>
-                      Kéo thả ảnh vào đây, hoặc bấm để chọn ảnh.
-                    </p>
-                    <input
-                      className="img-input"
-                      hidden
-                      type="file"
-                      id="img"
-                      name="img"
-                      accept="image/*"
-                      onChange={handleChangeImage}
-                    />
-                  </div>
-                </label>
-              </section>
-              <section>
-                <p>Thêm thẻ để độc giả biết bài viết của bạn nói về điều gì.</p>
-                {/* topic */}
-                <Select
-                  onChange={handleChangeSelect}
-                  mode="multiple"
-                  showArrow
-                  tagRender={tagRender}
-                  defaultValue={["red"]}
-                  style={{ width: "100%" }}
-                  options={options}
-                />
-                <br></br>
-                <div className="button-group">
-                  <button
-                    className="btn-now"
-                    type="submit"
-                    onClick={handleChangeSubmit}
-                  >
-                    Xuất bản ngay
-                  </button>
-                </div>
-              </section>
-            </div>
-          </Modal>
           <input
             placeholder="Tiêu đề"
             value={title}
@@ -178,6 +82,31 @@ function Blogging() {
             onImageUpload={onImageUpload}
             onChange={handleEditorChange}
           />
+          <section className="block-img_thumb">
+            <label htmlFor="img">
+              <div
+                className="img"
+                style={{ backgroundImage: `url(${imageUrl})` }}
+              >
+                <p style={{ padding: "38px 20px 0" }}>
+                  Thêm một ảnh đại diện hấp dẫn sẽ giúp bài viết của bạn cuốn
+                  hút hơn với độc giả.
+                </p>
+                <p style={{ color: "red" }}>
+                  Kéo thả ảnh vào đây, hoặc bấm để chọn ảnh.
+                </p>
+                <input
+                  className="img-input"
+                  hidden
+                  type="file"
+                  id="img"
+                  name="img"
+                  accept="image/*"
+                  onChange={handleChangeImage}
+                />
+              </div>
+            </label>
+          </section>
         </div>
       </Layout>
     </>

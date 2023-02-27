@@ -1,17 +1,13 @@
-import React, { Component } from "react";
-import "./chatBody.css";
+import React, { useEffect } from "react";
 import ChatList from "../chatList/ChatList";
 import ChatContent from "../chatContent/ChatContent";
-// import UserProfile from "../userProfile/UserProfile";
 
-export default class ChatBody extends Component {
-  render() {
-    return (
-      <div className="main__chatbody">
-        <ChatList />
-        <ChatContent />
-        {/* <UserProfile /> */}
-      </div>
-    );
-  }
+export default function ChatBody() {
+  useEffect(() => {}, []);
+  return (
+    <div className="main__chatbody">
+      <ChatList />
+      <ChatContent />
+    </div>
+  );
 }
