@@ -36,9 +36,9 @@ function HeaderLayout() {
                   <li className="menu-item">
                     <NavLink to="/tin-tuc">Tin tức</NavLink>
                   </li>
-                  <li className="menu-item">
+                  {/* <li className="menu-item">
                     <NavLink to="/gioi-thieu">Giới thiệu</NavLink>
-                  </li>
+                  </li> */}
                 </ul>
                 <div className="mb">
                   <div className="your-trip">
@@ -114,11 +114,11 @@ function HeaderLayout() {
                           <i class="fa-solid fa-newspaper"></i>Tin tức
                         </NavLink>
                       </li>
-                      <li className="menu-item-mb">
+                      {/* <li className="menu-item-mb">
                         <NavLink to="/gioi-thieu">
                           <i class="fa-solid fa-layer-group"></i>Giới thiệu
                         </NavLink>
-                      </li>
+                      </li> */}
                       <li className="menu-item-mb">
                         <NavLink to="/signin">
                           <i class="fa-solid fa-right-from-bracket"></i>Đăng

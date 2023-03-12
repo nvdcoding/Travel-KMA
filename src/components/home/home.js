@@ -12,6 +12,7 @@ import {
 } from "../../constants/images";
 import OwlCarousel from "react-owl-carousel";
 import { Link } from "react-router-dom";
+import { phuquoc } from "../../constants/images";
 const images = [
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
@@ -33,31 +34,31 @@ const images = [
 const person = [
   {
     img: { people },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "hdvLamlamla",
     title: "Lam Mai",
     address: "HDV Bắc Ninh",
   },
   {
     img: { people },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "hdvLamlamla",
     title: "Lam Mai 1",
     address: "HDV Bắc Ninh 1",
   },
   {
     img: { people },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "hdvLamlamla",
     title: "Lam Mai 2",
     address: "HDV Bắc Ninh 2",
   },
   {
     img: { people },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "hdvLamlamla",
     title: "Lam Mai 3",
     address: "HDV Bắc Ninh 3",
   },
   {
     img: { people },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "hdvLamlamla",
     title: "Lam Mai 4",
     address: "HDV Bắc Ninh 4",
   },
@@ -261,6 +262,7 @@ const optionsTourview = {
 };
 function Home() {
   const [more, setMore] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
   useEffect(() => {}, []);
   return (
     <>
@@ -302,13 +304,20 @@ function Home() {
                 Lên kế hoạch cho chuyến đi của riêng mình cùng với HDV địa
                 phương ngay!
               </p>
-              <select name="select-place" id="" className="">
+              <select
+                name="select-place"
+                id=""
+                className=""
+                onChange={(e) => setSelectedOption(e.target.value)}
+              >
                 <option defaultChecked value="">
                   Bạn muốn đi đâu?
                 </option>
+                <option value="hanoi">Hà Nội</option>
+                <option value="quangninh">Quảng Ninh</option>
               </select>
               <div className="button button--primary">
-                <a href="#">Khám phá ngay</a>
+                <Link to={`/du-lich/${selectedOption}`}>Khám phá ngay</Link>
               </div>
             </div>
           </div>
@@ -368,14 +377,16 @@ function Home() {
             >
               {person.map((item, index) => (
                 <div className="tour-guide-item" key={index}>
-                  <a href={item.link}>
+                  <div href={item.link}>
                     <img src={item.img.people} alt="" />
                     <div className="tour-guide-des">
                       <h3 className="tour-guide-name">{item.title}</h3>
                       <p className="tour-guide-place">{item.address}</p>
                     </div>
-                  </a>
-                  <button class="button_xem">Xem HDV</button>
+                  </div>
+                  <Link to={`/trang-ca-nhan/${item.link}`} class="button_xem">
+                    Xem HDV
+                  </Link>
                 </div>
               ))}
             </OwlCarousel>
@@ -472,6 +483,208 @@ function Home() {
               </div>
             </div>
           </div>
+          <div class="hide-1199">
+            <div class="specialLocationBox">
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-phu-quoc" title="Tour Phú Quốc">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Phú Quốc</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a
+                    href="/tour-du-lich-vinh-ha-long"
+                    title="Tour Vịnh Hạ Long"
+                  >
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Vịnh Hạ Long</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-con-dao" title="Tour Côn Đảo">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Côn Đảo</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-vung-tau" title="Tour Vũng Tàu">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Vũng Tàu</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-sapa" title="Tour SaPa">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Sa Pa</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-phan-thiet" title="Tour Phan Thiết">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Phan Thiết</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-da-nang" title="Tour Đà Nẵng">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Đà Nẵng</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-hoi-an" title="Tour Hội An">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Hội An</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-nha-trang" title="Tour Nha Trang">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Nha Trang</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-da-lat" title="Tour Đà Lạt">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Đà Lạt</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-ha-noi" title="Tour Hà Nội">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Hà Nội</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-hai-phong" title="Tour Hải Phòng">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Hải Phòng</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="specialLocationBox_item">
+                <div class="specialLocationBox_item_box">
+                  <div
+                    class="specialLocationBox_item_box_image"
+                    style={{
+                      backgroundImage: `url(${phuquoc})`,
+                    }}
+                  ></div>
+                  <a href="/tour-du-lich-ho-chi-minh" title="Tour Hồ Chí Minh">
+                    <div class="specialLocationBox_item_box_title">
+                      <h3 class="maxLine_1">Hồ Chí Minh</h3>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="tour-address">
             <h2 className="travel-title">
               <Link to="diem-den">Điểm đến</Link>
@@ -479,6 +692,211 @@ function Home() {
             <p className="travel-des">
               Khám phá, tạo và đặt chuyến đi của bạn!
             </p>
+            <div class="hide-1199">
+              <div class="specialLocationBox">
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-phu-quoc" title="Tour Phú Quốc">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Phú Quốc</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a
+                      href="/tour-du-lich-vinh-ha-long"
+                      title="Tour Vịnh Hạ Long"
+                    >
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Vịnh Hạ Long</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-con-dao" title="Tour Côn Đảo">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Côn Đảo</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-vung-tau" title="Tour Vũng Tàu">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Vũng Tàu</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-sapa" title="Tour SaPa">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Sa Pa</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-phan-thiet" title="Tour Phan Thiết">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Phan Thiết</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-da-nang" title="Tour Đà Nẵng">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Đà Nẵng</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-hoi-an" title="Tour Hội An">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Hội An</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-nha-trang" title="Tour Nha Trang">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Nha Trang</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-da-lat" title="Tour Đà Lạt">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Đà Lạt</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-ha-noi" title="Tour Hà Nội">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Hà Nội</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a href="/tour-du-lich-hai-phong" title="Tour Hải Phòng">
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Hải Phòng</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="specialLocationBox_item">
+                  <div class="specialLocationBox_item_box">
+                    <div
+                      class="specialLocationBox_item_box_image"
+                      style={{
+                        backgroundImage: `url(${phuquoc})`,
+                      }}
+                    ></div>
+                    <a
+                      href="/tour-du-lich-ho-chi-minh"
+                      title="Tour Hồ Chí Minh"
+                    >
+                      <div class="specialLocationBox_item_box_title">
+                        <h3 class="maxLine_1">Hồ Chí Minh</h3>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className="tour-address__main">
               <OwlCarousel
                 className="tour-address__list owl-theme"

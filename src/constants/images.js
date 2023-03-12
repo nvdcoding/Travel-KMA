@@ -17,3 +17,4 @@ export { default as voucher } from "../assets/images/voucher.png";
 export { default as hoguom } from "../assets/images/hoguom.jpg";
 export { default as imgwelcome } from "../assets/images/travelform.png";
 export { default as data } from "./data.json";
+export { default as phuquoc } from "../assets/images/tour-du-lich-phu-quoc-750.webp";
