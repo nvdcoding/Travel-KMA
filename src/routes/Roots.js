@@ -2,23 +2,26 @@ import { lazy } from "react";
 import { ROUTES } from "../constants/route";
 // pages
 const Home = lazy(() => import("../page/HomePage"));
-const Tours = lazy(() => import("../page/Diem-den/Tours"));
-const CreateTour = lazy(() => import("../page/Tour/CreateTour"));
-const TourAll = lazy(() => import("../page/Tour/tourAll"));
-const Pay = lazy(() => import("../page/Thanh-toan/pay"));
-const HdvAll = lazy(() => import("../page/HDV/hdvAll"));
-const Dulich = lazy(() => import("../page/Diem-den/provinceDetails"));
-const Personal = lazy(() => import("../page/PersonalPage/Personal"));
-const News = lazy(() => import("../page/Tin-Tuc/News"));
-const NewsDetail = lazy(() => import("../page/Tin-Tuc/NewsDetail"));
-const TourDetail = lazy(() => import("../page/Tour/TourDetail"));
+const Tours = lazy(() => import("../page/User/Diem-den/Tours"));
+const CreateTour = lazy(() => import("../page/User/Tour/CreateTour"));
+const TourAll = lazy(() => import("../page/User/Tour/tourAll"));
+const Pay = lazy(() => import("../page/User/Thanh-toan/pay"));
+const HdvAll = lazy(() => import("../page/User/HDV/hdvAll"));
+const Dulich = lazy(() => import("../page/User/Diem-den/provinceDetails"));
+const Personal = lazy(() => import("../page/User/PersonalPage/Personal"));
+const News = lazy(() => import("../page/User/Tin-Tuc/News"));
+const NewsDetail = lazy(() => import("../page/User/Tin-Tuc/NewsDetail"));
+const TourDetail = lazy(() => import("../page/User/Tour/TourDetail"));
 const Introduce = lazy(() => import("../page/introduce"));
-const MyTrip = lazy(() => import("../page/PersonalPage/MyTrip"));
+const MyTrip = lazy(() => import("../page/User/PersonalPage/MyTrip"));
 const Signin = lazy(() => import("../page/Auth/SignIn"));
 const Signup = lazy(() => import("../page/Auth/SignUp"));
 const Onboarding = lazy(() => import("../page/Onboarding"));
 const Chat = lazy(() => import("../page/Chat/index.js"));
-const newPost = lazy(() => import("../page/blog/NewPost.js"));
+const newPost = lazy(() => import("../page/User/blog/NewPost.js"));
+const setting = lazy(() => import("../page/User/PersonalPage/setting"));
+const myPage = lazy(() => import("../page/User/PersonalPage/MyPage"));
+
 /**
  * define main pages routes
  */
@@ -112,6 +115,16 @@ const RoutePage = [
     path: ROUTES.ONBOARDING,
     exact: true,
     component: Onboarding,
+  },
+  {
+    path: ROUTES.SETTING,
+    exact: true,
+    component: setting,
+  },
+  {
+    path: ROUTES.MYPAGE,
+    exact: true,
+    component: myPage,
   },
 ];
 export default RoutePage;

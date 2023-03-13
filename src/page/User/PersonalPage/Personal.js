@@ -1,12 +1,12 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import Layout from "../../components/layout/layout";
-import { avt, banner } from "../../constants/images";
-import "../../assets/css/personal.css";
+import Layout from "../../../components/layout/layout";
+import { avt, banner } from "../../../constants/images";
+import "../../../assets/css/personal.css";
 import { Tag } from "antd";
-import TourItem from "../../components/tourItem";
+import TourItem from "../../../components/tourItem";
 import OwlCarousel from "react-owl-carousel";
-
+import { Link } from "react-router-dom";
 export default function Personal() {
   const options = {
     loop: true,
@@ -210,7 +210,9 @@ export default function Personal() {
                     Hướng dẫn viên của Bắc Ninh
                   </h3>
                   <div className="personal-page__contact">
-                    <button className="button button--primary">Liên hệ</button>
+                    <Link to="/chat" className="button button--primary">
+                      Liên hệ
+                    </Link>
                   </div>
 
                   <div className="evaluate">

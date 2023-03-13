@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../../assets/css/create-tour.css";
-import Image from "../../components/image";
+import "../../../assets/css/create-tour.css";
+import Image from "../../../components/image";
 import Step3 from "./Step3";
 function Step2({ step }) {
   const [next, setNext] = useState(1);

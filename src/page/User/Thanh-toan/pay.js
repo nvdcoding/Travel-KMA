@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Layout from "../../components/layout/layout";
-import Condition from "../../components/condition";
-import "../../assets/css/pay.css";
+import Layout from "../../../components/layout/layout";
+import Condition from "../../../components/condition";
+import "../../../assets/css/pay.css";
 import { Modal } from "antd";
 
 export default function Pay() {

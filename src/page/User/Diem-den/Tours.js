@@ -2,9 +2,9 @@
 import React, { useEffect } from "react";
 import { Collapse } from "antd";
 
-import Layout from "../../components/layout/layout";
-import "../../assets/css/tour.css";
-import { banner } from "../../constants/images";
+import Layout from "../../../components/layout/layout";
+import "../../../assets/css/tour.css";
+import { banner } from "../../../constants/images";
 export default function Tours() {
   const { Panel } = Collapse;
 

@@ -12,6 +12,7 @@ function HeaderLayout() {
   const onClose = () => {
     setOpen(false);
   };
+  const SignOut = () => {};
   useEffect(() => {}, []);
   return (
     <>
@@ -35,6 +36,14 @@ function HeaderLayout() {
                   </li>
                   <li className="menu-item">
                     <NavLink to="/tin-tuc">Tin tức</NavLink>
+                    <ul className="menu-sub">
+                      <li className="menu-sub_item">
+                        <NavLink to="/viet-bai">Viết bài</NavLink>
+                      </li>
+                      <li className="menu-sub_item">
+                        <NavLink to="/tin-tuc">Danh sách bài viết</NavLink>
+                      </li>
+                    </ul>
                   </li>
                   {/* <li className="menu-item">
                     <NavLink to="/gioi-thieu">Giới thiệu</NavLink>
@@ -43,6 +52,38 @@ function HeaderLayout() {
                 <div className="mb">
                   <div className="your-trip">
                     <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
+                  </div>
+                  <div className="header-user">
+                    <img
+                      src="https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
+                      alt="avt"
+                    />
+                    <ul className="list-info">
+                      <li>
+                        <div class="box-list-info">
+                          <i class="fas fa-user"></i>
+                          <Link to="/account">Cài đặt</Link>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="box-list-info">
+                          <i class="fas fa-user"></i>
+                          <Link to="/ho-so-hdv">Hồ sơ HDV</Link>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="box-list-info">
+                          <i class="fas fa-newspaper"></i>
+                          <Link to="/me/bookmark/posts">Bài viết của tôi</Link>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="box-list-info" onClick={SignOut}>
+                          <i class="fas fa-sign-out-alt"></i>
+                          <Link to="#">Đăng xuất</Link>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                   <div className="language">
                     <i className="fa-solid fa-globe"></i>
@@ -64,15 +105,44 @@ function HeaderLayout() {
                     <i className="fa-solid fa-circle-question"></i>
                   </div>
                   <div className="user-info">
-                    <a
-                      className="button button--primary pc"
-                      href="/trang-ca-nhan"
-                    >
+                    <Link to="/dang-nhap" className="button button--primary pc">
                       Đăng nhập
-                    </a>
-                    <a className=" mb" href="/trang-ca-nhan">
+                    </Link>
+                    <Link to="/dang-nhap" className=" mb">
                       <i class="fa-regular fa-user"></i>
-                    </a>
+                    </Link>
+                  </div>
+                  <div className="header-user">
+                    <img
+                      src="https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
+                      alt="avt"
+                    />
+                    <ul className="list-info">
+                      <li>
+                        <div class="box-list-info">
+                          <i class="fas fa-user"></i>
+                          <Link to="/account">Cài đặt</Link>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="box-list-info">
+                          <i class="fas fa-user"></i>
+                          <Link to="/ho-so-hdv">Kênh HDV</Link>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="box-list-info">
+                          <i class="fas fa-newspaper"></i>
+                          <Link to="/me/bookmark/posts">Bài viết của tôi</Link>
+                        </div>
+                      </li>
+                      <li>
+                        <div class="box-list-info" onClick={SignOut}>
+                          <i class="fas fa-sign-out-alt"></i>
+                          <Link to="#">Đăng xuất</Link>
+                        </div>
+                      </li>
+                    </ul>
                   </div>
                 </div>
                 <div className="menu-mb mb">

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "../../assets/css/create-tour.css";
-import Image from "../../components/image";
+import "../../../assets/css/create-tour.css";
+import Image from "../../../components/image";
 import { Link } from "react-router-dom";
 function Step3({ step }) {
   useEffect(() => {}, []);

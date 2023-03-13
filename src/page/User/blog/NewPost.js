@@ -6,8 +6,8 @@ import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import { useHistory } from "react-router-dom";
 import "./NewPost.scss";
-import { sendPost } from "../../utils/api";
-import Layout from "../../components/layout/layout";
+import { sendPost } from "../../../utils/api";
+import Layout from "../../../components/layout/layout";
 const mdParser = new MarkdownIt();
 function Blogging() {
   document.title = "Viết Blog";

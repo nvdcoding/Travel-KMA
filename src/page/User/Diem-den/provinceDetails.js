@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Layout from "../../components/layout/layout";
-import "../../assets/css/province-details.css";
-import { data } from "../../constants/images";
+import Layout from "../../../components/layout/layout";
+import "../../../assets/css/province-details.css";
+import { data } from "../../../constants/images";
 export default function ProvinceDetails() {
   let params = useParams();
   const [province, setProvince] = useState([]);

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/layout/layout";
-import "../../assets/css/news.css";
+import Layout from "../../../components/layout/layout";
+import "../../../assets/css/news.css";
 import { Link } from "react-router-dom";
 export default function NewsDetail() {
   const [show, setShow] = useState(false);
@@ -161,7 +161,7 @@ export default function NewsDetail() {
                 </div>
                 <div class="news-content__hot-main">
                   <div class="news-content__hot-item">
-                    <Link to="" class="news-content__hot-link">
+                    <Link to={`/tin-tuc/1233`} class="news-content__hot-link">
                       <div className="news-content__hot-img">
                         <img
                           src="https://icdn.dantri.com.vn/thumb_w/640/2020/04/24/machu-picchu-1587703892882.jpeg"
@@ -180,7 +180,7 @@ export default function NewsDetail() {
                     </Link>
                   </div>
                   <div class="news-content__hot-item">
-                    <Link to="" class="news-content__hot-link">
+                    <Link to={`/tin-tuc/1233`} class="news-content__hot-link">
                       <div className="news-content__hot-img">
                         <img
                           src="https://icdn.dantri.com.vn/thumb_w/640/2020/04/24/machu-picchu-1587703892882.jpeg"
@@ -199,7 +199,7 @@ export default function NewsDetail() {
                     </Link>
                   </div>
                   <div class="news-content__hot-item">
-                    <Link to="" class="news-content__hot-link">
+                    <Link to={`/tin-tuc/1233`} class="news-content__hot-link">
                       <div className="news-content__hot-img">
                         <img
                           src="https://icdn.dantri.com.vn/thumb_w/640/2020/04/24/machu-picchu-1587703892882.jpeg"

@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import Layout from "../../components/layout/layout";
-import { address } from "../../constants/images";
+import Layout from "../../../components/layout/layout";
+import { address } from "../../../constants/images";
 import { Link } from "react-router-dom";
-import "../../assets/css/tour-detail.css";
+import "../../../assets/css/tour-detail.css";
 
 export default function TourDetail() {
   useEffect(() => {}, []);

@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import Layout from "../../components/layout/layout";
+import Layout from "../../../components/layout/layout";
 import { Tabs } from "antd";
 
-import "../../assets/css/trip.css";
-import { avt } from "../../constants/images";
-import Rate from "../../components/Rate";
-import Condition from "../../components/condition";
+import "../../../assets/css/trip.css";
+import { avt } from "../../../constants/images";
+import RateScreen from "../../../components/Rate";
+import { Link } from "react-router-dom";
+import Condition from "../../../components/condition";
 export default function MyTrip() {
   const { TabPane } = Tabs;
   const trip = [
@@ -104,7 +105,9 @@ export default function MyTrip() {
                                 src={avt}
                               />
                               <h4 className="mytrip-order-name">
-                                {value.title}
+                                <Link to={`/tour/${value.id}`}>
+                                  {value.title}
+                                </Link>
                               </h4>
                             </div>
                             <div className="mytrip-order__main-right">
@@ -118,7 +121,7 @@ export default function MyTrip() {
                           </div>
                           <div className="mytrip-order__rate md-1">
                             <div className="button button--primary">
-                              Xác nhận
+                              <Link to={`/pay/${value.id}`}>Xác nhận</Link>
                             </div>
                           </div>
                         </div>
@@ -150,7 +153,11 @@ export default function MyTrip() {
                               alt=""
                               src={avt}
                             />
-                            <h4 className="mytrip-order-name">{value.title}</h4>
+                            <h4 className="mytrip-order-name">
+                              <Link to={`/tour/${value.id}`}>
+                                {value.title}
+                              </Link>
+                            </h4>
                           </div>
                           <div className="mytrip-order__main-right">
                             <p className="mytrip-order__main-price">
@@ -165,7 +172,7 @@ export default function MyTrip() {
                           <p className="mytrip-order__rate-note">
                             Không nhận được đánh giá
                           </p>
-                          <Rate data={value} />
+                          <RateScreen data={value} />
                         </div>
                       </div>
                     ))}
@@ -174,7 +181,45 @@ export default function MyTrip() {
                     tab={<p className="mytrip-sub-menu-name">Đã hủy</p>}
                     key="3"
                   >
-                    Tất cả
+                    {trip.map((value, index) => (
+                      <div className="mytrip-order-item" key={index}>
+                        <div className="mytrip-order__header">
+                          <div className="mytrip-order__header-left">
+                            <p className="mytrip-order__name">{value.hdv}</p>
+                            <div className="mytrip-order__chat">
+                              <i className="fa-regular fa-comments"></i>
+                              <p className="mytrip-order__contact">Chat</p>
+                            </div>
+                          </div>{" "}
+                          <div className="mytrip-order__header-right">
+                            Đã hủy
+                          </div>
+                        </div>
+                        <div className="mytrip-order__main">
+                          <div className="mytrip-order__main-left">
+                            <img
+                              className="mytrip-order-img"
+                              alt=""
+                              src={avt}
+                            />
+                            <h4 className="mytrip-order-name">
+                              <Link to={`/tour/${value.id}`}>
+                                {value.title}
+                              </Link>
+                            </h4>
+                          </div>
+                          <div className="mytrip-order__main-right">
+                            <p className="mytrip-order__main-price">
+                              {value.price}
+                            </p>
+                            <p className="mytrip-order__main-price-km">
+                              {value.pricekm}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mytrip-order__rate"></div>
+                      </div>
+                    ))}
                   </TabPane>
                 </Tabs>
               </TabPane>
@@ -277,7 +322,56 @@ export default function MyTrip() {
                     tab={<p className="mytrip-sub-menu-name">Hết hiệu lực</p>}
                     key="2"
                   >
-                    Tất cả
+                    <div className="mytrip-voucher">
+                      <div className="mytrip-voucher-item">
+                        <div className="mytrip-voucher-left">
+                          <img
+                            className="mytrip-voucher-img"
+                            alt=""
+                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+                          />
+                          <h4 className="mytrip-voucher-name"> Voucher</h4>
+                        </div>
+                        <div className="mytrip-voucher-right">
+                          <div className="mytrip-voucher-top">
+                            <h3 className="mytrip-voucher-title">
+                              Giảm 10% đơn 20k giảm 210k
+                            </h3>
+                            <p className="mytrip-voucher-use">Dùng ngay</p>
+                          </div>
+                          <div className="mytrip-voucher-bottom">
+                            <h3 className="mytrip-voucher-time">
+                              Sắp hết hạn: Còn 4 giờ
+                            </h3>
+                            <Condition />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mytrip-voucher-item">
+                        <div className="mytrip-voucher-left">
+                          <img
+                            className="mytrip-voucher-img"
+                            alt=""
+                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+                          />
+                          <h4 className="mytrip-voucher-name"> Voucher</h4>
+                        </div>
+                        <div className="mytrip-voucher-right">
+                          <div className="mytrip-voucher-top">
+                            <h3 className="mytrip-voucher-title">
+                              Giảm 10% đơn 20k giảm 210k
+                            </h3>
+                            <p className="mytrip-voucher-use">Dùng ngay</p>
+                          </div>
+                          <div className="mytrip-voucher-bottom">
+                            <h3 className="mytrip-voucher-time">
+                              Sắp hết hạn: Còn 4 giờ
+                            </h3>
+                            <Condition />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </TabPane>
                 </Tabs>
               </TabPane>

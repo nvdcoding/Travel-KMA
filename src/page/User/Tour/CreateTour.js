@@ -1,10 +1,10 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import Layout from "../../components/layout/layout";
-import { banner, home } from "../../constants/images";
+import Layout from "../../../components/layout/layout";
+import { banner, home } from "../../../constants/images";
 import { DatePicker, Form, Input, Select } from "antd";
 import Step2 from "./Step2";
-import "../../assets/css/create-tour.css";
+import "../../../assets/css/create-tour.css";
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
