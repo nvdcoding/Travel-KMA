@@ -20,7 +20,7 @@ const Onboarding = lazy(() => import("../page/Onboarding"));
 const Chat = lazy(() => import("../page/Chat/index.js"));
 const newPost = lazy(() => import("../page/User/blog/NewPost.js"));
 const setting = lazy(() => import("../page/User/PersonalPage/setting"));
-const myPage = lazy(() => import("../page/User/PersonalPage/MyPage"));
+const myPage = lazy(() => import("../page/Kenh_HDV/index"));
 
 /**
  * define main pages routes

@@ -1,0 +1,97 @@
+.logo img {
+  width: 70px;
+  height: 70px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo .title {
+  color: #1d1d1d;
+  font-size: 18px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ant-layout.ant-layout-has-sider {
+  height: 91vh;
+}
+.account-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  height: 40px;
+  padding: 4px 16px 4px 4px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #333;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.account-info .arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  margin-top: -8px;
+}
+
+.account-info .arrow.up {
+  -webkit-transform: rotate(0);
+  transform: rotate(0);
+}
+
+.account-info .arrow.down {
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+.account-info .arrow svg {
+  width: 16px;
+  height: 16px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.account-info .account-info-dot-pos {
+  position: absolute;
+  top: 9px;
+  right: 5px;
+}
+
+.account-avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+.account-name {
+  min-width: 64px;
+  font-size: 14px;
+  color: #333;
+}
+.account-info:hover {
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.more {
+  margin: 0 10px;
+}
+.ant-badge {
+  font-size: 20px;
+}
+.ant-badge-count {
+  width: 17px;
+  height: 17px;
+  padding: 0 2px;
+  font-size: 11px;
+  line-height: 15px;
+  background: #ff4d4f;
+}
