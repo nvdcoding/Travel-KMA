@@ -42,6 +42,7 @@ html {
   --color-text: #717171;
   --colour-navy: #13294b;
   --colour-link: #007c80;
+  --font-weight: 600 !important;
   --system-ui: system-ui, "Segoe UI", "Roboto", Helvetica, Arial, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }

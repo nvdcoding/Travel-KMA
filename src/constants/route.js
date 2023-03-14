@@ -19,4 +19,8 @@ export const ROUTES = {
   NEWPOST: "/viet-bai",
   SETTING: "/account",
   MYPAGE: "/ho-so-hdv",
+  ADDTOUR: "/ho-so-hdv/them-tour",
+  DOANHTHU: "/ho-so-hdv/doanh-thu",
+  BANKACC: "/ho-so-hdv/tai-khoan",
+  ADDVOUCHER: "/ho-so-hdv/create-voucher",
 };

@@ -1,0 +1,33 @@
+.card-style {
+  background: #fff;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
+}
+.card-content {
+  color: #373737;
+}
+.title-voucher {
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  color: #333;
+}
+.button-add {
+  color: #ee4d2d;
+  background-color: transparent;
+  border-color: #ee4d2d;
+}
+.button-add:before {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+  border-radius: inherit;
+  content: "";
+}
+.button-add:hover:before {
+  background-color: rgba(238, 77, 45, 0.04);
+}

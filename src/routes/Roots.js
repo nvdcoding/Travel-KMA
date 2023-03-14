@@ -21,7 +21,12 @@ const Chat = lazy(() => import("../page/Chat/index.js"));
 const newPost = lazy(() => import("../page/User/blog/NewPost.js"));
 const setting = lazy(() => import("../page/User/PersonalPage/setting"));
 const myPage = lazy(() => import("../page/Kenh_HDV/index"));
-
+const addTour = lazy(() => import("../page/Kenh_HDV/QL_Tour/AddTour.js"));
+const doanhthu = lazy(() => import("../page/Kenh_HDV/DoanhThu/index"));
+const taikhoannganhang = lazy(() =>
+  import("../page/Kenh_HDV/DoanhThu/BankAcc")
+);
+const addVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/AddVoucher"));
 /**
  * define main pages routes
  */
@@ -125,6 +130,26 @@ const RoutePage = [
     path: ROUTES.MYPAGE,
     exact: true,
     component: myPage,
+  },
+  {
+    path: ROUTES.ADDTOUR,
+    exact: true,
+    component: addTour,
+  },
+  {
+    path: ROUTES.DOANHTHU,
+    exact: true,
+    component: doanhthu,
+  },
+  {
+    path: ROUTES.BANKACC,
+    exact: true,
+    component: taikhoannganhang,
+  },
+  {
+    path: ROUTES.ADDVOUCHER,
+    exact: true,
+    component: addVoucher,
   },
 ];
 export default RoutePage;
