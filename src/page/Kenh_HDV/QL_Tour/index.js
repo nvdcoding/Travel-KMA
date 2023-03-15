@@ -74,19 +74,24 @@ export default function MyPage() {
                 <li className="tab-item">Tất cả</li>
                 <li className="tab-item">Chờ xác nhận</li>
                 <li className="tab-item">Đơn hủy</li>
-                <li className="tab-item">Hoàn thanhgf</li>
+                <li className="tab-item">Hoàn thành</li>
               </ul>
             </div>
             <div className="main-content">
-              <Search
-                addonBefore="https://"
-                placeholder="input search text"
-                allowClear
-                onSearch={onSearch}
-                style={{
-                  width: 304,
-                }}
-              />
+              <div className="search_body">
+                <RangePicker />
+                <Search
+                  addonBefore="Mã đơn hàng"
+                  placeholder="Nhập mã đơn hàng"
+                  allowClear
+                  onSearch={onSearch}
+                  style={{
+                    width: 304,
+                  }}
+                />
+                <div className="button button--primary">Tìm kiếm</div>
+              </div>
+
               <h3 className="title">0 đơn hàng</h3>
               <Table columns={columns} dataSource={data} />
             </div>

@@ -27,7 +27,10 @@ const taikhoannganhang = lazy(() =>
   import("../page/Kenh_HDV/DoanhThu/BankAcc")
 );
 const addVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/AddVoucher"));
-const DsTour = lazy(() => import("../page/Kenh_HDV/QLy_tour/index"));
+const DsTour = lazy(() => import("../page/Kenh_HDV/QL_Tour/index"));
+const QlVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/index"));
+const Danhgia = lazy(() => import("../page/Kenh_HDV/QL_Tour/danhgia"));
+const CaidatHdv = lazy(() => import("../page/Kenh_HDV/General/setting"));
 
 /**
  * define main pages routes
@@ -157,6 +160,21 @@ const RoutePage = [
     path: ROUTES.DSTOUR,
     exact: true,
     component: DsTour,
+  },
+  {
+    path: ROUTES.QLVOUCHER,
+    exact: true,
+    component: QlVoucher,
+  },
+  {
+    path: ROUTES.THIETLAP,
+    exact: true,
+    component: CaidatHdv,
+  },
+  {
+    path: ROUTES.DANHGIA,
+    exact: true,
+    component: Danhgia,
   },
 ];
 export default RoutePage;

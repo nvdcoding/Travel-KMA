@@ -23,5 +23,8 @@ export const ROUTES = {
   DOANHTHU: "/ho-so-hdv/doanh-thu",
   BANKACC: "/ho-so-hdv/tai-khoan",
   ADDVOUCHER: "/ho-so-hdv/create-voucher",
+  QLVOUCHER: "/ho-so-hdv/voucher",
   DSTOUR: "/ho-so-hdv/ds-tour",
+  THIETLAP: "/ho-so-hdv/setting",
+  DANHGIA: "/ho-so-hdv/danh-gia-tour",
 };

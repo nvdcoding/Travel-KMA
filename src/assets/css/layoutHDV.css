@@ -95,3 +95,8 @@
   line-height: 15px;
   background: #ff4d4f;
 }
+table,
+td,
+th {
+  border: inherit !important;
+}
