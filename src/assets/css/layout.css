@@ -20,6 +20,10 @@
 .menu-list .menu-item a.active {
   color: var(--color-primary);
 }
+.ant-layout.ant-layout-has-sider > .ant-layout {
+  min-height: 91vh;
+  overflow: scroll;
+}
 .menu-right,
 .menu-left {
   display: flex;

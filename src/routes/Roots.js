@@ -27,6 +27,8 @@ const taikhoannganhang = lazy(() =>
   import("../page/Kenh_HDV/DoanhThu/BankAcc")
 );
 const addVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/AddVoucher"));
+const DsTour = lazy(() => import("../page/Kenh_HDV/QLy_tour/index"));
+
 /**
  * define main pages routes
  */
@@ -150,6 +152,11 @@ const RoutePage = [
     path: ROUTES.ADDVOUCHER,
     exact: true,
     component: addVoucher,
+  },
+  {
+    path: ROUTES.DSTOUR,
+    exact: true,
+    component: DsTour,
   },
 ];
 export default RoutePage;

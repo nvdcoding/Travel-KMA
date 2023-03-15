@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
-import { Form, Input, Select, Radio, DatePicker, Button } from "antd";
+import { Form, Input, Select, Radio, DatePicker, Button, Modal } from "antd";
+import ModalAddVoucher from "../../../components/modalAddVoucher";
 export default function AddVoucher() {
   useEffect(() => {}, []);
   const { Option } = Select;
@@ -13,6 +14,22 @@ export default function AddVoucher() {
     setValue(e.target.value);
   };
   const onFinish = (values) => {};
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const onFinishModal = (values) => {
+    console.log("Success:", values);
+  };
+  const onFinishModalFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   const selectBefore = (
     <Select defaultValue="1" className="select-before">
       <Option value="1">Theo số tiền</Option>
@@ -118,10 +135,7 @@ export default function AddVoucher() {
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item name="apply" label="Áp dụng cho">
-                  <button type="button" class="button-add">
-                    <i class="fa-solid fa-plus"></i>
-                    <span>Thêm tour</span>
-                  </button>
+                  <ModalAddVoucher />
                 </Form.Item>
                 <Form.Item>
                   <Button

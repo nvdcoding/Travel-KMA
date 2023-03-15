@@ -23,4 +23,5 @@ export const ROUTES = {
   DOANHTHU: "/ho-so-hdv/doanh-thu",
   BANKACC: "/ho-so-hdv/tai-khoan",
   ADDVOUCHER: "/ho-so-hdv/create-voucher",
+  DSTOUR: "/ho-so-hdv/ds-tour",
 };
