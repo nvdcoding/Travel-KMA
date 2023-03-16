@@ -1,12 +1,13 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
 import { Button, Switch, Tabs } from "antd";
 export default function Setting() {
   useEffect(() => {}, []);
+  const [active, setActive] = useState(false);
   const onChange = (checked) => {
-    console.log(`switch to ${checked}`);
+    setActive(checked);
   };
   return (
     <>
@@ -19,7 +20,7 @@ export default function Setting() {
           <Tabs>
             <Tabs.TabPane tab="Thiết lập cơ bản" key="item-1">
               <div className="content_tab">
-                <div className="tab-left">
+                <div className={active ? "tab-left active" : "tab-left"}>
                   <i class="fa-regular fa-moon"></i>
                   <div className="tab_info">
                     <p className="tab-title">Chế độ Tạm nghỉ</p>
