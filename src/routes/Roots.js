@@ -31,6 +31,7 @@ const DsTour = lazy(() => import("../page/Kenh_HDV/QL_Tour/index"));
 const QlVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/index"));
 const Danhgia = lazy(() => import("../page/Kenh_HDV/QL_Tour/danhgia"));
 const CaidatHdv = lazy(() => import("../page/Kenh_HDV/General/setting"));
+const Donhang = lazy(() => import("../page/Kenh_HDV/QL_Tour/donhang"));
 
 /**
  * define main pages routes
@@ -175,6 +176,11 @@ const RoutePage = [
     path: ROUTES.DANHGIA,
     exact: true,
     component: Danhgia,
+  },
+  {
+    path: ROUTES.DONHANG,
+    exact: true,
+    component: Donhang,
   },
 ];
 export default RoutePage;

@@ -46,6 +46,9 @@ const LayoutHDV = ({ children }) => (
               <Link to="/ho-so-hdv/ds-tour">Danh sách tour</Link>
             </Menu.Item>
             <Menu.Item>
+              <Link to="/ho-so-hdv/don-hang">Danh sách đơn</Link>
+            </Menu.Item>
+            <Menu.Item>
               <Link to="/ho-so-hdv/them-tour">Tạo tour</Link>
             </Menu.Item>
             <Menu.Item>

@@ -1,6 +1,8 @@
+.voucher_content,
 .card-style {
   background: #fff;
   border-radius: 4px;
+  padding: 15px;
   -webkit-box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
   box-shadow: 0 1px 4px 0 rgb(0 0 0 / 10%);
 }
@@ -30,4 +32,8 @@
 }
 .button-add:hover:before {
   background-color: rgba(238, 77, 45, 0.04);
+}
+.voucher_content {
+  background-color: #fff;
+  padding: 15px;
 }

@@ -109,7 +109,7 @@ export default function Voucher() {
             <div className="landing-page-content aguth_iEwtiEw1ejuP3Yg">
               <div className="header-tab">
                 <ul className="tab-nav">
-                  <li className="tab-item">Tất cả</li>
+                  <li className="tab-item active">Tất cả</li>
                   <li className="tab-item">Đang diễn ra</li>
                   <li className="tab-item">Sắp kết thúc</li>
                   <li className="tab-item">Đã kết thúc</li>

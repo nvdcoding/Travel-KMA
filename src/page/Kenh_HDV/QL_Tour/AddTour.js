@@ -17,7 +17,7 @@ export default function AddTour() {
     <>
       <LayoutHDV>
         <div className="add-tour">
-          <p class="basic-info-title"> Thông tin cơ bản </p>
+          <p class="landing-page-title"> Thông tin cơ bản </p>
           <Form
             name="normal_login"
             className="login-form"

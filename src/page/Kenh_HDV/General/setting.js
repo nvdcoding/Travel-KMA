@@ -14,7 +14,7 @@ export default function Setting() {
       <LayoutHDV>
         <div className="setting-main">
           <div class="header-setting">
-            <div class="title">Thiết Lập Shop</div>
+            <div class="landing-page-title">Thiết Lập Shop</div>
             <div class="desc">Thay đổi các cài đặt cho Shop của bạn.</div>
           </div>
           <Tabs>

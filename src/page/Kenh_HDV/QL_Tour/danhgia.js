@@ -72,8 +72,8 @@ export default function DanhGia() {
       <LayoutHDV>
         <div className="rate_main">
           <div className="rate_header">
-            <p className="rate-title">Đánh giá tour</p>
-            <p className="rate-des">Xem đánh giá tour của bạn</p>
+            <p className="landing-page-title">Đánh giá tour</p>
+            <p className="desc-content">Xem đánh giá tour của bạn</p>
           </div>
           <div className="rate-body">
             <div className="rate-search">

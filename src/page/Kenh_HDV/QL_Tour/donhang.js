@@ -12,6 +12,11 @@ const columns = [
     render: (text) => <a>{text}</a>,
   },
   {
+    title: "Thời gian",
+    dataIndex: "time",
+    key: "time",
+  },
+  {
     title: "Trạng thái",
     dataIndex: "status",
     key: "status",
@@ -68,7 +73,7 @@ export default function MyPage() {
       <LayoutHDV>
         <div className="main">
           <div className="search_body">
-            <div className="landing-page-title">Danh sách Tour</div>
+            <div className="landing-page-title">Danh sách đơn hàng</div>
             <div className="search-group">
               <Form
                 name="normal_login"
@@ -111,8 +116,16 @@ export default function MyPage() {
             </div>
           </div>
           <div className="main-body">
+            <div className="header-tab">
+              <ul className="tab-nav">
+                <li className="tab-item active">Tất cả</li>
+                <li className="tab-item">Chờ xác nhận</li>
+                <li className="tab-item">Đơn hủy</li>
+                <li className="tab-item">Hoàn thành</li>
+              </ul>
+            </div>
             <div className="main-content">
-              <h3 className="title">Danh sách tour</h3>
+              <h3 className="title">3 đơn hàng</h3>
               <Table columns={columns} dataSource={data} />
             </div>
           </div>
