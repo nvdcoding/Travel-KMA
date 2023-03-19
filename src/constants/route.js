@@ -28,4 +28,5 @@ export const ROUTES = {
   THIETLAP: "/ho-so-hdv/setting",
   DANHGIA: "/ho-so-hdv/danh-gia-tour",
   DONHANG: "/ho-so-hdv/don-hang",
+  TIMKIEMTOUR: "/chuyen-di/:id",
 };
