@@ -1222,3 +1222,14 @@
     margin-left: 1rem;
   }
 }
+.times {
+  margin-top: 20px;
+}
+.times input {
+  padding: 0px 2px;
+}
+.ant-picker-body table,
+.ant-picker-body td,
+.ant-picker-body th {
+  border: none;
+}

@@ -23,6 +23,7 @@ import {
   danang,
 } from "../../constants/images";
 import OwlCarousel from "react-owl-carousel";
+import { DatePicker } from "antd";
 import { Link } from "react-router-dom";
 import { phuquoc } from "../../constants/images";
 const images = [
@@ -280,6 +281,9 @@ const optionsTourview = {
 function Home() {
   const [more, setMore] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
   useEffect(() => {}, []);
   return (
     <>
@@ -333,8 +337,13 @@ function Home() {
                 <option value="hanoi">Hà Nội</option>
                 <option value="quangninh">Quảng Ninh</option>
               </select>
+              {selectedOption && (
+                <div className="times">
+                  <DatePicker onChange={onChange} placeholder="Chọn ngày" />
+                </div>
+              )}
               <div className="button button--primary">
-                <Link to={`/du-lich/${selectedOption}`}>Khám phá ngay</Link>
+                <Link to={`/chuyen-di/${selectedOption}`}>Khám phá ngay</Link>
               </div>
             </div>
           </div>

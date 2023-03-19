@@ -1,9 +1,12 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import { banner, address } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
+import { Pagination } from "antd";
 import TourItem from "../../../components/tourItem";
+import { Modal, Button, Result, Input } from "antd";
+
 const tourview = [
   {
     img: address,
@@ -38,6 +41,21 @@ const tourview = [
 ];
 export default function ToursAll() {
   useEffect(() => {}, []);
+  const handleRequest = () => {
+    setIsModalOpen(true);
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [place, setPlace] = useState("");
+  const [show, setShow] = useState(false);
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setShow(false);
+  };
   return (
     <>
       <Layout>
@@ -69,7 +87,7 @@ export default function ToursAll() {
             </div>
             <div className="tours-all__main">
               <div className="tours-all__left">
-                <div className="tour-all-box__search">
+                {/* <div className="tour-all-box__search">
                   <h1 className="travel-title">Bộ lọc tìm kiếm</h1>
                   <div className="form-item--group">
                     <label className="form-label">Tỉnh/thành phố</label>
@@ -198,6 +216,141 @@ export default function ToursAll() {
                   <div className="form-item--group">
                     <div className="button button--primary">Tìm kiếm</div>
                   </div>
+                </div> */}
+                <div className="request_tour">
+                  <div className="tour-detail__plan">
+                    <div className="tour-detail__plan-header">
+                      <img
+                        alt=""
+                        src="https://viettel.vn/images_content/img-solution-camera-2.png"
+                      />
+                      <div className="tour-detail__plan-info">
+                        <span className="tour-plan__review">
+                          Lên kế hoạch cho chuyến tham quan được cá nhân hóa của
+                          bạn với TravelVN
+                        </span>
+                      </div>
+                    </div>
+                    <div className="tour-detail__plan-body">
+                      <label htmlFor="start">Tên chuyến đi:</label>
+                      <Input
+                        placeholder="nhập tên chuyến đi"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                      />
+                      <label htmlFor="people">Địa điểm:</label>
+                      <select
+                        name="select-place"
+                        id=""
+                        className=""
+                        onChange={(e) => setPlace(e.target.value)}
+                      >
+                        <option defaultChecked value="">
+                          Bạn muốn đi đâu?
+                        </option>
+                        <option value="hanoi">Hà Nội</option>
+                        <option value="quangninh">Quảng Ninh</option>
+                      </select>
+                      <label htmlFor="people">Thời gian bắt đầu:</label>
+                      <input
+                        type="date"
+                        id="start"
+                        name="trip-start"
+                        value="2022-11-30"
+                        min="2022-01-01"
+                        max="2024-12-31"
+                      />
+                      <label htmlFor="times">Thời gian kết thúc:</label>
+                      <input
+                        type="date"
+                        id="start"
+                        name="trip-start"
+                        value="2022-11-30"
+                        min="2022-01-01"
+                        max="2024-12-31"
+                      />
+                      <label>Số lượng</label>
+                      <div className="create-tour__people-item">
+                        <p className="create-tour__people-des">
+                          Trẻ em
+                          <br /> Lứa tuổi 2 - 12
+                        </p>
+                        <div className="people_unit">
+                          <div className="minus">
+                            <i class="fa-solid fa-minus"></i>
+                          </div>
+                          <div className="unit">0</div>
+                          <div className="plus">
+                            <i class="fa-solid fa-plus"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="create-tour__people-item">
+                        <p className="create-tour__people-des">Người lớn</p>
+                        <div className="people_unit">
+                          <div className="minus">
+                            <i class="fa-solid fa-minus"></i>
+                          </div>
+                          <div className="unit">0</div>
+                          <div className="plus">
+                            <i class="fa-solid fa-plus"></i>
+                          </div>
+                        </div>
+                      </div>
+                      <label htmlFor="start">Yêu cầu chi tiết:</label>
+                      <input placeholder="Nhập mô tả" value="" />
+                      <div
+                        className="button button--primary"
+                        onClick={handleRequest}
+                      >
+                        Yêu cầu
+                      </div>
+                      <Modal
+                        title=""
+                        open={isModalOpen}
+                        visible={isModalOpen}
+                        footer={null}
+                        onCancel={handleCancel}
+                      >
+                        <div className="modal-content">
+                          {show && (
+                            <div className="modal-body">
+                              <p className="modal-name">
+                                Tên chuyến đi: {name}
+                              </p>
+                              <p className="modal-place">Địa điểm: {place}</p>
+                              <p className="modal-place">
+                                Thời gian: 20/11/2022 =24/11/2022
+                              </p>
+                              <p>Yêu cầu: </p>
+                              <p>
+                                Khách sạn 2 sao, có 2 giường đơn dành cho 2
+                                người.{" "}
+                              </p>
+                            </div>
+                          )}
+                          {!show && (
+                            <div className="modal-noti">
+                              <Result
+                                status="success"
+                                title="Gửi yêu cầu thành công"
+                                subTitle="HDV sẽ gửi tour đề xuất đến cho bạn trong vòng 2 giờ tới."
+                                extra={[
+                                  <Button
+                                    type="primary"
+                                    onClick={() => setShow(true)}
+                                  >
+                                    Xem
+                                  </Button>,
+                                  <Button onClick={handleOk}>Đóng</Button>,
+                                ]}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </Modal>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div className="tours-all__right ">
@@ -209,6 +362,7 @@ export default function ToursAll() {
                     <TourItem item={item} key={index} />
                   ))}
                 </div>
+                <Pagination defaultCurrent={1} total={50} />
               </div>
             </div>
           </div>

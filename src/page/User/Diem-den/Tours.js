@@ -23,7 +23,7 @@ export default function Tours() {
                 <div className="lp-travel__detail-inner">
                   <div className="lp-travel__info">
                     <p className="lp-travel__des">
-                      Cùng viettel khám phá vẻ đẹp của cảnh và người, để hiểu
+                      Cùng TravelVN khám phá vẻ đẹp của cảnh và người, để hiểu
                       sâu về văn hóa các vùng miền, để dâng trào cảm xúc tự hào
                       dân tộc, và thêm yêu tổ quốc.
                     </p>
