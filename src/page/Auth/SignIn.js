@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Tabs } from "antd";
 import "../../assets/css/auth.css";
 import { Link, useHistory } from "react-router-dom";
 export default function SignIn() {
@@ -37,58 +37,123 @@ export default function SignIn() {
   return (
     <>
       <div className="signin__wrapper">
-        <Form
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-          form={form}
-          className="auth-form"
-        >
+        <div className="auth-form">
           <h3 className="auth-title">Đăng nhập</h3>
+          <Tabs defaultActiveKey="1">
+            <Tabs.TabPane tab="Người dùng" key="1">
+              <Form
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                form={form}
+              >
+                <Form.Item
+                  className="auth-form-item"
+                  name="email"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      type: "email",
+                      message: "Email không hợp lệ!",
+                    },
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Email không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Email của bạn" />
+                </Form.Item>
+                <Form.Item
+                  name="password"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Mật khẩu không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input.Password placeholder="Mật khẩu của bạn" />
+                </Form.Item>
 
-          <Form.Item
-            className="auth-form-item"
-            name="email"
-            hasFeedback
-            rules={[
-              {
-                validateStatus: "error",
-                type: "email",
-                message: "Email không hợp lệ!",
-              },
-              {
-                validateStatus: "error",
-                required: true,
-                message: "Email không được để trống!",
-              },
-            ]}
-          >
-            <Input placeholder="Email của bạn" />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            hasFeedback
-            rules={[
-              {
-                validateStatus: "error",
-                required: true,
-                message: "Mật khẩu không được để trống!",
-              },
-            ]}
-          >
-            <Input.Password placeholder="Mật khẩu của bạn" />
-          </Form.Item>
+                <Button className="button button--primary" onClick={onFinish}>
+                  Đăng nhập
+                </Button>
+                <div className="auth-des">
+                  <Link to="/dang-ky" className="travel-link auth-des-link">
+                    Đăng ký?
+                  </Link>
+                  <Link
+                    to="/quen-mat-khau"
+                    className="travel-link auth-des-link"
+                  >
+                    Quên mật khẩu?
+                  </Link>
+                </div>
+              </Form>
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Hướng dẫn viên" key="2">
+              <Form
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                form={form}
+              >
+                <Form.Item
+                  className="auth-form-item"
+                  name="email"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      type: "email",
+                      message: "Email không hợp lệ!",
+                    },
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Email không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Email của bạn" />
+                </Form.Item>
+                <Form.Item
+                  name="password"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Mật khẩu không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input.Password placeholder="Mật khẩu của bạn" />
+                </Form.Item>
 
-          <Button className="button button--primary" onClick={onFinish}>
-            Đăng nhập
-          </Button>
-          <div className="auth-des">
-            <Link to="/dang-ky" className="travel-link auth-des-link">
-              Đăng ký?
-            </Link>
-            <a className="travel-link auth-des-link">Quên mật khẩu?</a>
-          </div>
-        </Form>
+                <Button className="button button--primary" onClick={onFinish}>
+                  Đăng nhập
+                </Button>
+                <div className="auth-des">
+                  <Link to="/dang-ky" className="travel-link auth-des-link">
+                    Đăng ký?
+                  </Link>
+                  <Link
+                    to="/quen-mat-khau"
+                    className="travel-link auth-des-link"
+                  >
+                    Quên mật khẩu?
+                  </Link>
+                </div>
+              </Form>
+            </Tabs.TabPane>
+          </Tabs>
+        </div>
       </div>
     </>
   );

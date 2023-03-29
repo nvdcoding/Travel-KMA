@@ -29,4 +29,5 @@ export const ROUTES = {
   DANHGIA: "/ho-so-hdv/danh-gia-tour",
   DONHANG: "/ho-so-hdv/don-hang",
   TIMKIEMTOUR: "/chuyen-di/:id",
+  QUENMATKHAU: "/quen-mat-khau",
 };

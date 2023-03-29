@@ -115,3 +115,14 @@ iframe {
   text-align: right;
   color: #e84410;
 }
+.ant-tabs-tab {
+  width: 100%;
+  justify-content: space-around;
+}
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list,
+.ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+  width: 100%;
+}
+.auth-form {
+  max-width: 500px;
+}

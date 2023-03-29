@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Tabs } from "antd";
 import "../../assets/css/auth.css";
 export default function SignUp() {
   const [form] = Form.useForm();
@@ -30,92 +30,193 @@ export default function SignUp() {
   return (
     <>
       <div className="signin__wrapper">
-        <Form
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-          form={form}
-          className="auth-form"
-        >
+        <div className="auth-form">
           <h3 className="auth-title">Đăng ký</h3>
-          <Form.Item
-            name="name"
-            hasFeedback
-            rules={[
-              {
-                validateStatus: "error",
-                required: true,
-                message: "Họ tên không được để trống!",
-              },
-            ]}
-          >
-            <Input placeholder="Họ tên của bạn" />
-          </Form.Item>
-          <Form.Item
-            name="email"
-            hasFeedback
-            rules={[
-              {
-                validateStatus: "error",
-                type: "email",
-                message: "Email không hợp lệ!",
-              },
-              {
-                validateStatus: "error",
-                required: true,
-                message: "Email không được để trống!",
-              },
-            ]}
-          >
-            <Input placeholder="Email của bạn" />
-          </Form.Item>
+          <Tabs defaultActiveKey="1">
+            <Tabs.TabPane tab="Người dùng" key="1">
+              <Form
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                form={form}
+              >
+                <Form.Item
+                  name="name"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Họ tên không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Họ tên của bạn" />
+                </Form.Item>
+                <Form.Item
+                  name="email"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      type: "email",
+                      message: "Email không hợp lệ!",
+                    },
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Email không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Email của bạn" />
+                </Form.Item>
 
-          <Form.Item
-            name="password"
-            hasFeedback
-            rules={[
-              {
-                validateStatus: "error",
-                required: true,
-                message: "Mật khẩu không được để trống!",
-              },
-            ]}
-          >
-            <Input.Password placeholder="Mật khẩu của bạn" />
-          </Form.Item>
-          <Form.Item
-            name="passwordConfirmation"
-            dependencies={["password"]}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: "Mật khẩu không để trống!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(new Error("Password không khớp!"));
-                },
-              }),
-            ]}
-          >
-            <Input.Password placeholder="Nhập lại mật khẩu" />
-          </Form.Item>
-          <Button htmlType="submit" className="button button--primary">
-            Đăng Ký
-          </Button>
-          <div className="auth-des">
-            <p className="auth-des-note">
-              Đã có tài khoản? Bạn muốn{" "}
-              <Link to="/dang-nhap" className="travel-link auth-des-link-note">
-                Đăng nhập?
-              </Link>
-            </p>
-          </div>
-        </Form>
+                <Form.Item
+                  name="password"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Mật khẩu không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input.Password placeholder="Mật khẩu của bạn" />
+                </Form.Item>
+                <Form.Item
+                  name="passwordConfirmation"
+                  dependencies={["password"]}
+                  hasFeedback
+                  rules={[
+                    {
+                      required: true,
+                      message: "Mật khẩu không để trống!",
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error("Password không khớp!")
+                        );
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password placeholder="Nhập lại mật khẩu" />
+                </Form.Item>
+                <Button htmlType="submit" className="button button--primary">
+                  Đăng Ký
+                </Button>
+                <div className="auth-des">
+                  <p className="auth-des-note">
+                    Đã có tài khoản? Bạn muốn{" "}
+                    <Link
+                      to="/dang-nhap"
+                      className="travel-link auth-des-link-note"
+                    >
+                      Đăng nhập?
+                    </Link>
+                  </p>
+                </div>
+              </Form>
+            </Tabs.TabPane>
+            <Tabs.TabPane tab="Hướng dẫn viên" key="2">
+              <Form
+                onFinish={onFinish}
+                onFinishFailed={onFinishFailed}
+                autoComplete="off"
+                form={form}
+              >
+                <Form.Item
+                  name="name"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Họ tên không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Họ tên của bạn" />
+                </Form.Item>
+                <Form.Item
+                  name="email"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      type: "email",
+                      message: "Email không hợp lệ!",
+                    },
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Email không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Email của bạn" />
+                </Form.Item>
+
+                <Form.Item
+                  name="password"
+                  hasFeedback
+                  rules={[
+                    {
+                      validateStatus: "error",
+                      required: true,
+                      message: "Mật khẩu không được để trống!",
+                    },
+                  ]}
+                >
+                  <Input.Password placeholder="Mật khẩu của bạn" />
+                </Form.Item>
+                <Form.Item
+                  name="passwordConfirmation"
+                  dependencies={["password"]}
+                  hasFeedback
+                  rules={[
+                    {
+                      required: true,
+                      message: "Mật khẩu không để trống!",
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(_, value) {
+                        if (!value || getFieldValue("password") === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject(
+                          new Error("Password không khớp!")
+                        );
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password placeholder="Nhập lại mật khẩu" />
+                </Form.Item>
+                <Button htmlType="submit" className="button button--primary">
+                  Đăng Ký
+                </Button>
+                <div className="auth-des">
+                  <p className="auth-des-note">
+                    Đã có tài khoản? Bạn muốn{" "}
+                    <Link
+                      to="/dang-nhap"
+                      className="travel-link auth-des-link-note"
+                    >
+                      Đăng nhập?
+                    </Link>
+                  </p>
+                </div>
+              </Form>
+            </Tabs.TabPane>
+          </Tabs>
+        </div>
       </div>
     </>
   );
