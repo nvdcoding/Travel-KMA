@@ -123,7 +123,9 @@ export default function AddVoucher() {
                   ]}
                 >
                   <Input placeholder="Số mã giảm giá" />
-                  <span>Tổng số Mã giảm giá có thể sử dụng</span>
+                  <span className="form-desc">
+                    Tổng số Mã giảm giá có thể sử dụng
+                  </span>
                 </Form.Item>
                 <h3 className="title-voucher">
                   Hiển thị mã giảm giá và các sản phẩm áp dụng

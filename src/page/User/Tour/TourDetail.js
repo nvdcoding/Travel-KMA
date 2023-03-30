@@ -1,11 +1,13 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import { address } from "../../../constants/images";
 import { Link } from "react-router-dom";
 import "../../../assets/css/tour-detail.css";
+import { Input } from "antd";
 
 export default function TourDetail() {
+  const [desc, setDesc] = useState("");
   useEffect(() => {}, []);
   return (
     <>
@@ -403,8 +405,7 @@ export default function TourDetail() {
                     />
                     <div className="tour-detail__plan-info">
                       <span className="tour-plan__review">
-                        Lên kế hoạch cho chuyến tham quan được cá nhân hóa của
-                        bạn với Destination Expert
+                        Lên kế hoạch cho chuyến tham quan của bạn với HDV
                       </span>
                       <p className="tour-plan__name">Mai Lam</p>
                       <div className="tour-plan__rate">
@@ -426,6 +427,15 @@ export default function TourDetail() {
                       min="2022-01-01"
                       max="2024-12-31"
                     />
+                    <label htmlFor="start">Ngày kết thúc:</label>
+                    <input
+                      type="date"
+                      id="start"
+                      name="trip-end"
+                      value="2022-11-30"
+                      min="2022-01-01"
+                      max="2024-12-31"
+                    />
                     <label htmlFor="people">Số lượng:</label>
                     <input
                       type="number"
@@ -441,10 +451,16 @@ export default function TourDetail() {
                         Hotel
                       </option>
                     </select>
+                    <label htmlFor="people">Mô tả:</label>
+                    <Input
+                      placeholder="Nhập yêu cầu"
+                      value={desc}
+                      onChange={(e) => setDesc(e.target.value)}
+                    />
                     <div className="button button--primary">
                       <Link to="/pay/456">Yêu cầu</Link>
                     </div>
-                    <div className="button button--nomal">
+                    <div className="button button--normal">
                       <a href="#">Tùy chỉnh</a>
                     </div>
                   </div>

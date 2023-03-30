@@ -322,7 +322,7 @@ export default function MyTrip() {
                     tab={<p className="mytrip-sub-menu-name">Hết hiệu lực</p>}
                     key="2"
                   >
-                    <div className="mytrip-voucher">
+                    <div className="mytrip-voucher voucher-expires">
                       <div className="mytrip-voucher-item">
                         <div className="mytrip-voucher-left">
                           <img
@@ -343,7 +343,6 @@ export default function MyTrip() {
                             <h3 className="mytrip-voucher-time">
                               Sắp hết hạn: Còn 4 giờ
                             </h3>
-                            <Condition />
                           </div>
                         </div>
                       </div>
@@ -367,7 +366,6 @@ export default function MyTrip() {
                             <h3 className="mytrip-voucher-time">
                               Sắp hết hạn: Còn 4 giờ
                             </h3>
-                            <Condition />
                           </div>
                         </div>
                       </div>

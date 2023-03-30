@@ -1,6 +1,7 @@
 // /* eslint-disable */
 import React, { useEffect } from "react";
 import "../../../assets/css/homehdv.css";
+import "./style.css";
 import { PlusOutlined } from "@ant-design/icons";
 import { Form, Input, Select, Upload, Button } from "antd";
 import { useHistory } from "react-router-dom";

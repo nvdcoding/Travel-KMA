@@ -20,20 +20,26 @@
   color: #ee4d2d;
   background-color: transparent;
   border-color: #ee4d2d;
+  border: 1px solid;
+  width: 150px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  text-align: center;
 }
-.button-add:before {
-  position: absolute;
-  top: -1px;
-  right: -1px;
-  bottom: -1px;
-  left: -1px;
-  border-radius: inherit;
-  content: "";
-}
-.button-add:hover:before {
+.button-add:hover {
   background-color: rgba(238, 77, 45, 0.04);
+}
+.button-add i {
+  margin-right: 5px;
 }
 .voucher_content {
   background-color: #fff;
   padding: 15px;
+}
+.form-desc {
+  font-size: 13px;
+  color: #888;
+}
+.button-modal {
+  text-align: center;
 }

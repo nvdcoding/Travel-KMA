@@ -31,8 +31,8 @@ const columns = [
     key: "action",
     render: (_, record) => (
       <Space size="middle">
-        <a>Sửa</a>
-        <a>Xóa</a>
+        <a className="action-edit">Sửa</a>
+        <a className="action-del">Xóa</a>
       </Space>
     ),
   },

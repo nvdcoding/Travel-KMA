@@ -114,7 +114,7 @@ export default function DanhGia() {
             <div className="rate-body">
               <div className="header-tab">
                 <ul className="tab-nav">
-                  <li className="tab-item">Tất cả</li>
+                  <li className="tab-item active">Tất cả</li>
                   <li className="tab-item">Chưa trả lời</li>
                   <li className="tab-item">Đã trả lời</li>
                 </ul>

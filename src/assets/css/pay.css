@@ -1180,7 +1180,7 @@ background-color: #ccc; */
 }
 
 .md-1 {
-  justify-content: flex-end;
+  justify-content: flex-end !important;
 }
 
 .mytrip-order__rate-header {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
 import { avt } from "../constants/images";
 import { Rate } from "antd";
 
@@ -19,9 +19,9 @@ function RateScreen(props) {
   };
   return (
     <>
-      <Button className="button button--primary" onClick={showModal}>
+      <div className="button button--primary" onClick={showModal}>
         Đánh giá
-      </Button>
+      </div>
       <Modal
         title="Đánh giá "
         centered

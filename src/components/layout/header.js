@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Drawer } from "antd";
+
 import { logo } from "../../constants/images";
 function HeaderLayout() {
+  const Token = localStorage.getItem("accessToken");
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -49,49 +51,6 @@ function HeaderLayout() {
                     <NavLink to="/gioi-thieu">Giới thiệu</NavLink>
                   </li> */}
                 </ul>
-                <div className="mb">
-                  <div className="your-trip">
-                    <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
-                  </div>
-                  <div className="header-user">
-                    <img
-                      src="https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
-                      alt="avt"
-                    />
-                    <ul className="list-info">
-                      <li>
-                        <div class="box-list-info">
-                          <i class="fas fa-user"></i>
-                          <Link to="/account">Cài đặt</Link>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="box-list-info">
-                          <i class="fas fa-user"></i>
-                          <Link to="/ho-so-hdv">Hồ sơ HDV</Link>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="box-list-info">
-                          <i class="fas fa-newspaper"></i>
-                          <Link to="/me/bookmark/posts">Bài viết của tôi</Link>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="box-list-info" onClick={SignOut}>
-                          <i class="fas fa-sign-out-alt"></i>
-                          <Link to="#">Đăng xuất</Link>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="language">
-                    <i className="fa-solid fa-globe"></i>
-                  </div>
-                  <div className="support">
-                    <i className="fa-solid fa-circle-question"></i>
-                  </div>
-                </div>
               </div>
               <div className="menu-right">
                 <div className="pc">
@@ -104,46 +63,55 @@ function HeaderLayout() {
                   <div className="support">
                     <i className="fa-solid fa-circle-question"></i>
                   </div>
-                  <div className="user-info">
-                    <Link to="/dang-nhap" className="button button--primary pc">
-                      Đăng nhập
-                    </Link>
-                    <Link to="/dang-nhap" className=" mb">
-                      <i class="fa-regular fa-user"></i>
-                    </Link>
-                  </div>
-                  <div className="header-user">
-                    <img
-                      src="https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
-                      alt="avt"
-                    />
-                    <ul className="list-info">
-                      <li>
-                        <div class="box-list-info">
-                          <i class="fas fa-user"></i>
-                          <Link to="/account">Cài đặt</Link>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="box-list-info">
-                          <i class="fas fa-user"></i>
-                          <Link to="/ho-so-hdv">Kênh HDV</Link>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="box-list-info">
-                          <i class="fas fa-newspaper"></i>
-                          <Link to="/me/bookmark/posts">Bài viết của tôi</Link>
-                        </div>
-                      </li>
-                      <li>
-                        <div class="box-list-info" onClick={SignOut}>
-                          <i class="fas fa-sign-out-alt"></i>
-                          <Link to="#">Đăng xuất</Link>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+
+                  {Token ? (
+                    <div className="header-user">
+                      <img
+                        src="https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="
+                        alt="avt"
+                      />
+                      <ul className="list-info">
+                        <li>
+                          <div class="box-list-info">
+                            <i class="fas fa-user"></i>
+                            <Link to="/account">Cài đặt</Link>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="box-list-info">
+                            <i class="fas fa-user"></i>
+                            <Link to="/ho-so-hdv">Kênh HDV</Link>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="box-list-info">
+                            <i class="fas fa-newspaper"></i>
+                            <Link to="/me/bookmark/posts">
+                              Bài viết của tôi
+                            </Link>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="box-list-info" onClick={SignOut}>
+                            <i class="fas fa-sign-out-alt"></i>
+                            <Link to="#">Đăng xuất</Link>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  ) : (
+                    <div className="user-info">
+                      <Link
+                        to="/dang-nhap"
+                        className="button button--primary pc"
+                      >
+                        Đăng nhập
+                      </Link>
+                      <Link to="/dang-nhap" className=" mb">
+                        <i class="fa-regular fa-user"></i>
+                      </Link>
+                    </div>
+                  )}
                 </div>
                 <div className="menu-mb mb">
                   <i className="fa-solid fa-bars" onClick={showDrawer}></i>
@@ -159,11 +127,18 @@ function HeaderLayout() {
                           <i class="fa-solid fa-house"></i> Home
                         </NavLink>
                       </li>
-                      <li className="menu-item-mb">
+                      {Token && (
+                        <li className="menu-item-mb">
+                          <NavLink to="/chuyen-di">
+                            <i class="fa-solid fa-user"></i>Chuyến đi của bạn
+                          </NavLink>
+                        </li>
+                      )}
+                      {/* <li className="menu-item-mb">
                         <NavLink to="/diem-den">
                           <i class="fa-solid fa-user"></i>Trang cá nhân
                         </NavLink>
-                      </li>
+                      </li> */}
                       <li className="menu-item-mb">
                         <NavLink to="/diem-den">
                           <i class="fa-solid fa-map-location-dot"></i>Điểm đến
@@ -189,12 +164,20 @@ function HeaderLayout() {
                           <i class="fa-solid fa-layer-group"></i>Giới thiệu
                         </NavLink>
                       </li> */}
-                      <li className="menu-item-mb">
-                        <NavLink to="/signin">
-                          <i class="fa-solid fa-right-from-bracket"></i>Đăng
-                          xuẩt
-                        </NavLink>
-                      </li>
+                      {Token ? (
+                        <li className="menu-item-mb">
+                          <NavLink to="/signout">
+                            <i class="fa-solid fa-right-from-bracket"></i>Đăng
+                            xuẩt
+                          </NavLink>
+                        </li>
+                      ) : (
+                        <li className="menu-item-mb">
+                          <NavLink to="/dang-nhap">
+                            <i class="fa-solid fa-user"></i>Đăng nhập
+                          </NavLink>
+                        </li>
+                      )}
                     </ul>
                   </Drawer>
                 </div>

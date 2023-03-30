@@ -129,7 +129,7 @@ export default function ForgotPassword() {
 
               <Form.Item
                 className="auth-form-item"
-                name="email"
+                name="code"
                 hasFeedback
                 rules={[
                   {
@@ -175,7 +175,7 @@ export default function ForgotPassword() {
                   },
                 ]}
               >
-                <Input placeholder="Mã xác nhận" />
+                <Input placeholder="Mật khẩu mới" />
               </Form.Item>
               <Button className="button button--primary" htmlType="submit">
                 Đổi mật khẩu

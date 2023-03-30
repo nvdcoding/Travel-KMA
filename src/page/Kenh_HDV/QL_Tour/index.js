@@ -4,6 +4,7 @@ import { Space, Table, Form, DatePicker, Input, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
+import { Link } from "react-router-dom";
 const columns = [
   {
     title: "Tên tour",
@@ -26,8 +27,8 @@ const columns = [
     key: "action",
     render: (_, record) => (
       <Space size="middle">
-        <a>Sửa</a>
-        <a>Xóa</a>
+        <a className="action-edit">Sửa</a>
+        <a className="action-del">Xóa</a>
       </Space>
     ),
   },
@@ -68,7 +69,7 @@ export default function MyPage() {
       <LayoutHDV>
         <div className="main">
           <div className="search_body">
-            <div className="landing-page-title">Danh sách Tour</div>
+            <div className="landing-page-title">Tìm kiếm Tour</div>
             <div className="search-group">
               <Form
                 name="normal_login"
@@ -105,14 +106,14 @@ export default function MyPage() {
               </Form>
               <div className="form">
                 <Button type="primary" icon={<PlusOutlined />}>
-                  Tạo mới
+                  <Link to="/ho-so-hdv/them-tour">Tạo mới</Link>
                 </Button>
               </div>
             </div>
           </div>
           <div className="main-body">
             <div className="main-content">
-              <h3 className="title">Danh sách tour</h3>
+              <h3 className="landing-page-title">Danh sách tour</h3>
               <Table columns={columns} dataSource={data} />
             </div>
           </div>

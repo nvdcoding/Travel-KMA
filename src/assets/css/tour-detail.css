@@ -322,6 +322,7 @@ table.table-journeys tr td:first-child {
 }
 
 .tour-detail__plan-info {
+  margin-left: 10px;
 }
 
 .tour-plan__review {
@@ -341,8 +342,8 @@ table.table-journeys tr td:first-child {
   line-height: 3.6rem;
   color: #ffffff;
 }
-
 .tour-plan__rate {
+  color: #f2ea47;
 }
 
 .tour-detail__plan-body {

@@ -160,3 +160,60 @@ th {
 .ant-form-item-control-input {
   border-radius: 0;
 }
+.ant-layout-header {
+  padding: 0 22px;
+}
+.navbar-left {
+  padding-top: 20px;
+}
+
+.ant-btn:focus,
+.ant-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.ant-btn-primary:focus,
+.ant-btn-primary:hover,
+.ant-btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+.ant-picker-focused,
+.ant-picker:hover {
+  border-color: var(--color-primary);
+}
+.ant-input-affix-wrapper {
+  line-height: 1.6715;
+}
+.action-edit {
+  color: #1583d8;
+}
+.action-del {
+  color: #ea3030;
+}
+.action-edit:hover {
+  color: #106fb7;
+}
+.action-del:hover {
+  color: #a01818;
+}
+.ant-pagination-item-active:focus-visible,
+.ant-pagination-item-active:hover,
+.ant-pagination-item-active:focus-visible a,
+.ant-pagination-item-active:hover a,
+.ant-pagination-item-active a,
+.ant-pagination-item-active {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.ant-form-horizontal .ant-form-item-label {
+  float: left;
+  min-width: 18%;
+  flex-grow: 0;
+  text-align: left;
+}
+.ant-picker-range {
+  width: 100%;
+}

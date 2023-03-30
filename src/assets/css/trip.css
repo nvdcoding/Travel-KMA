@@ -3,6 +3,7 @@
 }
 
 .mytrip-menu {
+  margin-top: 50px;
 }
 
 .mytrip-menu-item {
@@ -142,6 +143,12 @@
 }
 
 .mytrip-voucher__search {
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: capitalize;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 20px;
+  margin-bottom: 20;
 }
 
 .mytrip-voucher-box-search {
@@ -184,10 +191,10 @@
 .mytrip-voucher-left {
   position: relative;
   -webkit-box-flex: 0;
-  -webkit-flex: 0 0 180px;
-  -ms-flex: 0 0 180px;
-  flex: 0 0 180px;
-  width: 180px;
+  -webkit-flex: 0 0 160px;
+  -ms-flex: 0 0 160px;
+  flex: 0 0 160px;
+  width: 160px;
 }
 
 .mytrip-voucher-img {
@@ -195,12 +202,12 @@
 
 .mytrip-voucher-name {
   color: #fff;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 600;
-  line-height: 35px;
+  line-height: 31px;
   position: absolute;
-  right: 14px;
-  top: 95px;
+  right: 11px;
+  top: 77px;
 }
 
 .mytrip-voucher-use {
@@ -591,4 +598,26 @@
   border-radius: 10px;
 }
 .voucher-popup-des {
+}
+.mytrip-voucher.voucher-expires .mytrip-voucher-item {
+  opacity: 0.5;
+}
+.mytrip-voucher.voucher-expires .mytrip-voucher-title {
+  color: #8b8b8b;
+}
+.mytrip-voucher.voucher-expires .mytrip-voucher-time,
+.mytrip-voucher.voucher-expires .mytrip-voucher-use {
+  color: rgb(179 179 179);
+}
+.ant-btn:focus,
+.ant-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.ant-btn-primary:focus,
+.ant-btn-primary:hover,
+.ant-btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
 }

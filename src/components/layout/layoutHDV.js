@@ -1,8 +1,8 @@
 import { SettingOutlined, BellOutlined } from "@ant-design/icons";
 import { Layout, Menu, Badge } from "antd";
 import React from "react";
-import { Link } from "react-router-dom";
-import { logo } from "../../constants/images";
+import { NavLink } from "react-router-dom";
+import { logo, menudot } from "../../constants/images";
 import "../../assets/css/layoutHDV.css";
 const { Header, Content, Sider } = Layout;
 
@@ -23,7 +23,7 @@ const LayoutHDV = ({ children }) => (
           <span className="account-name">mailam141</span>
         </div>
         <div className="more">
-          <i className="fa-solid fa-grip-vertical"></i>
+          <img alt="" src={menudot} />
         </div>
         <Badge count={1}>
           <BellOutlined />
@@ -34,25 +34,26 @@ const LayoutHDV = ({ children }) => (
       <Sider width={200} className="site-layout-background">
         <Menu
           mode="inline"
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
+          // defaultSelectedKeys={["1"]}
+          defaultOpenKeys={["1"]}
           style={{
             height: "100%",
             borderRight: 0,
           }}
+          className="navbar-left"
         >
           <Menu.SubMenu title="Tour" icon={<SettingOutlined />} key="1">
             <Menu.Item>
-              <Link to="/ho-so-hdv/ds-tour">Danh sách tour</Link>
+              <NavLink to="/ho-so-hdv/ds-tour">Danh sách tour</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/ho-so-hdv/don-hang">Danh sách đơn</Link>
+              <NavLink to="/ho-so-hdv/don-hang">Danh sách đơn</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/ho-so-hdv/them-tour">Tạo tour</Link>
+              <NavLink to="/ho-so-hdv/them-tour">Tạo tour</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/ho-so-hdv/danh-gia-tour">Đánh giá tour</Link>
+              <NavLink to="/ho-so-hdv/danh-gia-tour">Đánh giá tour</NavLink>
             </Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu
@@ -61,23 +62,23 @@ const LayoutHDV = ({ children }) => (
             key="3"
           >
             <Menu.Item>
-              <Link to="/ho-so-hdv/voucher">Voucher</Link>
+              <NavLink to="/ho-so-hdv/voucher">Voucher</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/ho-so-hdv/create-voucher">Thêm voucher</Link>
+              <NavLink to="/ho-so-hdv/create-voucher">Thêm voucher</NavLink>
             </Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="Tài chính" icon={<SettingOutlined />} key="4">
             <Menu.Item>
-              <Link to="/ho-so-hdv/doanh-thu">Doanh thu</Link>
+              <NavLink to="/ho-so-hdv/doanh-thu">Doanh thu</NavLink>
             </Menu.Item>
             <Menu.Item>
-              <Link to="/ho-so-hdv/tai-khoan">Cài đặt tài khoản</Link>
+              <NavLink to="/ho-so-hdv/tai-khoan">Cài đặt tài khoản</NavLink>
             </Menu.Item>
           </Menu.SubMenu>
           <Menu.SubMenu title="Phát triển" icon={<SettingOutlined />} key="5">
             <Menu.Item>
-              <Link to="/ho-so-hdv/setting">Thiết lập</Link>
+              <NavLink to="/ho-so-hdv/setting">Thiết lập</NavLink>
             </Menu.Item>
           </Menu.SubMenu>
         </Menu>

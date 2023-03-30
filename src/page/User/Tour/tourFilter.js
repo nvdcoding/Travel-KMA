@@ -6,6 +6,7 @@ import "../../../assets/css/hdv-tour-all.css";
 import { Pagination } from "antd";
 import TourItem from "../../../components/tourItem";
 import { Modal, Button, Result, Input } from "antd";
+import { useParams } from "react-router-dom";
 
 const tourview = [
   {
@@ -46,6 +47,7 @@ export default function ToursFilter() {
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
   const [place, setPlace] = useState("");
   const [show, setShow] = useState(false);
 
@@ -56,6 +58,7 @@ export default function ToursFilter() {
     setIsModalOpen(false);
     setShow(false);
   };
+  let params = useParams();
   return (
     <>
       <Layout>
@@ -81,7 +84,7 @@ export default function ToursFilter() {
                   </span>
                 </li>
                 <li>
-                  <strong>Xem tất cả</strong>
+                  <strong>{params.id}</strong>
                 </li>
               </ul>
             </div>
@@ -96,8 +99,8 @@ export default function ToursFilter() {
                       />
                       <div className="tour-detail__plan-info">
                         <span className="tour-plan__review">
-                          Lên kế hoạch cho chuyến tham quan được cá nhân hóa của
-                          bạn với TravelVN
+                          Lên kế hoạch cho chuyến tham quan {params.id} với
+                          TravelVN
                         </span>
                       </div>
                     </div>
@@ -108,20 +111,9 @@ export default function ToursFilter() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                       />
-                      <label htmlFor="people">Địa điểm:</label>
-                      <select
-                        name="select-place"
-                        id=""
-                        className=""
-                        onChange={(e) => setPlace(e.target.value)}
-                      >
-                        <option defaultChecked value="">
-                          Bạn muốn đi đâu?
-                        </option>
-                        <option value="hanoi">Hà Nội</option>
-                        <option value="quangninh">Quảng Ninh</option>
-                      </select>
-                      <label htmlFor="people">Thời gian bắt đầu:</label>
+                      <label htmlFor="place">Địa điểm:</label>
+                      <p className="ant-input">Hà Nội</p>
+                      <label htmlFor="times">Thời gian bắt đầu:</label>
                       <input
                         type="date"
                         id="start"
@@ -168,7 +160,11 @@ export default function ToursFilter() {
                         </div>
                       </div>
                       <label htmlFor="start">Yêu cầu chi tiết:</label>
-                      <input placeholder="Nhập mô tả" value="" />
+                      <Input
+                        placeholder="Nhập mô tả"
+                        value={desc}
+                        onChange={(e) => setDesc(e.target.value)}
+                      />
                       <div
                         className="button button--primary"
                         onClick={handleRequest}
@@ -180,6 +176,7 @@ export default function ToursFilter() {
                         open={isModalOpen}
                         visible={isModalOpen}
                         footer={null}
+                        centered
                         onCancel={handleCancel}
                       >
                         <div className="modal-content">
@@ -193,10 +190,7 @@ export default function ToursFilter() {
                                 Thời gian: 20/11/2022 =24/11/2022
                               </p>
                               <p>Yêu cầu: </p>
-                              <p>
-                                Khách sạn 2 sao, có 2 giường đơn dành cho 2
-                                người.{" "}
-                              </p>
+                              <p>{desc}</p>
                             </div>
                           )}
                           {!show && (

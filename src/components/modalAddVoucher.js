@@ -72,10 +72,10 @@ export default function ModalAddVoucher() {
   };
   return (
     <>
-      <button type="button" class="button-add" onClick={showModal}>
+      <div class="button-add" onClick={showModal}>
         <i class="fa-solid fa-plus"></i>
         <span>Thêm tour</span>
-      </button>
+      </div>
       <Modal
         title="Chọn tour"
         visible={isModalOpen}
@@ -103,15 +103,12 @@ export default function ModalAddVoucher() {
               <Input placeholder="Tên sản phẩm" />
             </Form.Item>
 
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Button type="primary" htmlType="submit">
-                Tìm
-              </Button>
+            <Form.Item>
+              <div className="button-modal">
+                <Button type="primary" htmlType="submit">
+                  Tìm
+                </Button>
+              </div>
             </Form.Item>
           </Form>
           <Table
