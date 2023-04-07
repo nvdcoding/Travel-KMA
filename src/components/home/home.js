@@ -9,130 +9,131 @@ import {
   people,
   address,
   hoguom,
-  condao,
-  halong,
-  vungtau,
-  sapa,
-  phanthiet,
-  hoian,
-  nhatrang,
-  dalat,
-  hanoi,
-  haiphong,
-  hochiminh,
-  danang,
 } from "../../constants/images";
+import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
-import { DatePicker } from "antd";
+import { DatePicker, Skeleton } from "antd";
 import { Link } from "react-router-dom";
-import { phuquoc } from "../../constants/images";
 const images = [
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/f5eb7be92c10a7cd.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/24183ef65af1849b.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/68fe37a1fec76684.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
 ];
 const person = [
   {
     img: { people },
-    link: "hdvLamlamla",
-    title: "Lam Mai",
+    link: "linkid",
+    title: "Nguyễn Văn A",
     address: "HDV Bắc Ninh",
   },
   {
     img: { people },
-    link: "hdvLamlamla",
-    title: "Lam Mai 1",
+    link: "linkid",
+    title: "Nguyễn Văn A 1",
     address: "HDV Bắc Ninh 1",
   },
   {
     img: { people },
-    link: "hdvLamlamla",
-    title: "Lam Mai 2",
+    link: "linkid",
+    title: "Nguyễn Văn A 2",
     address: "HDV Bắc Ninh 2",
   },
   {
     img: { people },
-    link: "hdvLamlamla",
-    title: "Lam Mai 3",
+    link: "linkid",
+    title: "Nguyễn Văn A 3",
     address: "HDV Bắc Ninh 3",
   },
   {
     img: { people },
-    link: "hdvLamlamla",
-    title: "Lam Mai 4",
+    link: "linkid",
+    title: "Nguyễn Văn A 4",
     address: "HDV Bắc Ninh 4",
   },
 ];
 const feedback = [
   {
-    name: "Lam Mai",
+    name: "Nguyễn Văn A",
     time: "Thứ 2, 20/11/2022",
-    des: "Tour giá tốt, dịch vụ xe cộ khách sạn ổn, hướng dẫn viên thân thiện, nhưng đồ ăn khá ít, nên cải thiện thêm khẩu phần ăn",
+    des:
+      "Tour giá tốt, dịch vụ xe cộ khách sạn ổn, hướng dẫn viên thân thiện, nhưng đồ ăn khá ít, nên cải thiện thêm khẩu phần ăn",
     img: { avt },
   },
   {
-    name: "Lam Mai 1",
+    name: "Nguyễn Văn A 1",
     time: "Thứ 2, 20/11/2022",
-    des: "Dịch vụ ổn, khách sạn hơi cũ,nói chung phù hợp với giá tiền, sẽ tiếp tục trãi nghiệm các chương trình khác",
+    des:
+      "Dịch vụ ổn, khách sạn hơi cũ,nói chung phù hợp với giá tiền, sẽ tiếp tục trãi nghiệm các chương trình khác",
     img: { avt },
   },
   {
-    name: "Lam Mai 2",
+    name: "Nguyễn Văn A 2",
     time: "Thứ 2, 20/11/2022",
     des: "Tôi hài lòng, tour đi hướng dẫn viên vui, nhiệt tình, giá tốt",
     img: { avt },
   },
   {
-    name: "Lam Mai 3",
+    name: "Nguyễn Văn A 3",
     time: "Thứ 2, 20/11/2022",
-    des: "Tour đi ổn, khách sạn hơi cũ, đồ ăn còn ít, nhưng bạn hướng dẫn viên rất nhiệt tình!",
+    des:
+      "Tour đi ổn, khách sạn hơi cũ, đồ ăn còn ít, nhưng bạn hướng dẫn viên rất nhiệt tình!",
     img: { avt },
   },
   {
-    name: "Lam Mai 4",
+    name: "Nguyễn Văn A 4",
     time: "Thứ 2, 20/11/2022",
-    des: "HDV thân thiện, Phòng khách sạn 3* đúng tiêu chuẩn tuy nhiên hơi cũ. Bữa ăn đặc sản miền Tây ngon miệng. Giá cả hợp lý",
+    des:
+      "HDV thân thiện, Phòng khách sạn 3* đúng tiêu chuẩn tuy nhiên hơi cũ. Bữa ăn đặc sản miền Tây ngon miệng. Giá cả hợp lý",
     img: { avt },
   },
 ];
 const touraddress = [
   {
-    name: "Lam Mai",
+    name: "Nguyễn Văn A",
     img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
-    name: "Lam Mai 1",
+    name: "Nguyễn Văn A 1",
     img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
-    name: "Lam Mai 2",
+    name: "Nguyễn Văn A 2",
     img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
-    name: "Lam Mai 3",
+    name: "Nguyễn Văn A 3",
     img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
-    name: "Lam Mai 4",
+    name: "Nguyễn Văn A 4",
     img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link:
+      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
 ];
 const tourview = [
@@ -281,10 +282,35 @@ const optionsTourview = {
 function Home() {
   const [more, setMore] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
+  const [provice, setProvice] = useState("");
+
+  const onChangeTime = (date, dateString) => {
+    console.log("date", date);
+    console.log("date2", dateString);
+    localStorage.setItem("Timeprovice", date);
   };
-  useEffect(() => {}, []);
+  const handelProvice = (e) => {
+    setSelectedOption(e.target.value);
+    localStorage.setItem(
+      "provice",
+      e.target.options[e.target.selectedIndex].text
+    );
+  };
+  const getProvice = () => {
+    axios
+      .get(`https://provinces.open-api.vn/api/?depth=2`)
+      .then((res) => {
+        if (res.data.length > 0) {
+          setProvice(res.data);
+        } else message.error("Thử lại sau.");
+      })
+      .catch((error) => console.log(error));
+  };
+  const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
+  useEffect(() => {
+    getProvice();
+  }, []);
+  if (!Object.keys(provice).length) return <Skeleton />;
   return (
     <>
       <div className="home__wrapper">
@@ -329,17 +355,24 @@ function Home() {
                 name="select-place"
                 id=""
                 className=""
-                onChange={(e) => setSelectedOption(e.target.value)}
+                onChange={(e) => handelProvice(e)}
               >
                 <option defaultChecked value="">
                   Bạn muốn đi đâu?
                 </option>
-                <option value="hanoi">Hà Nội</option>
-                <option value="quangninh">Quảng Ninh</option>
+                {provice.map((item, index) => (
+                  <option value={item?.codename} key={index}>
+                    {item?.name}
+                  </option>
+                ))}
               </select>
               {selectedOption && (
                 <div className="times">
-                  <DatePicker onChange={onChange} placeholder="Chọn ngày" />
+                  <DatePicker
+                    onChange={onChangeTime}
+                    placeholder="Chọn ngày"
+                    format={dateFormatList}
+                  />
                 </div>
               )}
               <div className="button button--primary">
@@ -519,7 +552,7 @@ function Home() {
             <p className="travel-des">
               Khám phá, tạo và đặt chuyến đi của bạn!
             </p>
-            <div class="hide-1199">
+            {/* <div class="hide-1199">
               <div class="specialLocationBox">
                 <div class="specialLocationBox_item">
                   <div class="specialLocationBox_item_box">
@@ -723,7 +756,7 @@ function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="tour-address__main">
               <OwlCarousel
                 className="tour-address__list owl-theme"

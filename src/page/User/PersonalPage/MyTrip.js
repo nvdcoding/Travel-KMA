@@ -12,7 +12,7 @@ export default function MyTrip() {
   const { TabPane } = Tabs;
   const trip = [
     {
-      hdv: "Mai Lam 1",
+      hdv: "Nguyễn Văn B 1",
       status: 1,
       title: "Bắc Ninh ngày và đêm",
       rate: 0,
@@ -21,7 +21,7 @@ export default function MyTrip() {
       id: "5738911173",
     },
     {
-      hdv: "Mai Lam",
+      hdv: "Nguyễn Văn B",
       status: 1,
       title: "Bắc Ninh ngày và đêm",
       rate: 0,
@@ -30,7 +30,7 @@ export default function MyTrip() {
       id: "5738229173",
     },
     {
-      hdv: "Mai Lam 155",
+      hdv: "Nguyễn Văn B 155",
       status: 1,
       title: "Bắc Ninh ngày và đêm",
       rate: 0,
@@ -39,7 +39,7 @@ export default function MyTrip() {
       id: "5738912173",
     },
     {
-      hdv: "Mai Lam 1ử",
+      hdv: "Nguyễn Văn B 1ử",
       status: 1,
       title: "Bắc Ninh ngày và đêm",
       rate: 0,
@@ -48,7 +48,7 @@ export default function MyTrip() {
       id: "5738914373",
     },
     {
-      hdv: "Mai Lam 1ưư",
+      hdv: "Nguyễn Văn B 1ưư",
       status: 1,
       title: "Bắc Ninh ngày và đêm",
       rate: 0,

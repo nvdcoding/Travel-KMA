@@ -20,7 +20,7 @@ const LayoutHDV = ({ children }) => (
             src="https://cf.shopee.vn/file/aad179adcc00c6fab9531e71b94977fa"
             className="account-avatar"
           />
-          <span className="account-name">mailam141</span>
+          <span className="account-name">abc142</span>
         </div>
         <div className="more">
           <img alt="" src={menudot} />

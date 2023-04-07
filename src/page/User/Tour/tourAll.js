@@ -128,10 +128,10 @@ export default function ToursAll() {
                         Chọn HDV
                       </option>
                       <option data-name="An Giang" value="A076">
-                        Mai Lam 1
+                        Nguyễn Văn A 1
                       </option>
                       <option data-name="Bà Rịa Vũng Tàu" value="V064">
-                        Mai Lam 1
+                        Nguyễn Văn B
                       </option>
                     </select>
                   </div>

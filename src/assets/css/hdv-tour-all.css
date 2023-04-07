@@ -213,3 +213,6 @@
   border-radius: 999px;
   padding: 0px 5px;
 }
+.tours-filter__wrapper .ant-picker {
+  width: 100%;
+}

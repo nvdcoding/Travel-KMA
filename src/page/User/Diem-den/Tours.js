@@ -4,7 +4,7 @@ import { Collapse } from "antd";
 
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/tour.css";
-import { banner } from "../../../constants/images";
+import { banner, trangan } from "../../../constants/images";
 export default function Tours() {
   const { Panel } = Collapse;
 
@@ -113,14 +113,30 @@ export default function Tours() {
                 </div>
               </div>
             </div>
+            <div className="tour-banner">
+              <img className="tour-banner-img" alt="" src={trangan} />
+              <div className="content">
+                <div className="tour-banner__text">
+                  <h3 className="tour-banner-title">
+                    Tra cứu thông tin HDV du lịch dễ dàng
+                  </h3>
+                  <p className="tour-banner-des">
+                    Tùy chỉnh và lên kế hoạch chuyến đi ngay
+                  </p>
+                  <div className="button button--primary">
+                    <a href="#">Khám phá ngay</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr className="line" />
             <div className="content">
-              <div className="banner-bg">
+              {/* <div className="banner-bg">
                 <img
                   src="https://dulich3mien.vn/wp-content/uploads/2022/07/Dulich3mien-Banner-Du-lich-viet-nam-1-1024x171.jpg"
                   alt=""
                 />
-                <hr className="line" />
-              </div>
+              </div> */}
               <div className="travel-tips">
                 <div className="travel-title-all">
                   <h3 className="travel-title">Cẩm nang du lịch</h3>

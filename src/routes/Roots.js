@@ -42,7 +42,7 @@ const RoutePage = [
   {
     path: ROUTES.HOME,
     exact: true,
-    component: Home,
+    component: Tours,
   },
   {
     path: ROUTES.INTRODUCE,
@@ -62,7 +62,7 @@ const RoutePage = [
   {
     path: ROUTES.TOUR,
     exact: true,
-    component: Tours,
+    component: Home,
   },
   {
     path: ROUTES.CHAT,

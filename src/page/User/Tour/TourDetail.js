@@ -344,7 +344,7 @@ export default function TourDetail() {
                             src="https://viettel.vn/images_content/img-solution-camera-2.png"
                           />
                           <div className="review-list__info">
-                            <p className="review-list__name">Mai Lam</p>
+                            <p className="review-list__name">Nguyễn Văn C</p>
                             <span className="review-list__time-review">
                               Nhận xét vào 12/09/2021
                             </span>
@@ -385,7 +385,7 @@ export default function TourDetail() {
                             src="https://viettel.vn/images_content/img-solution-camera-2.png"
                           />
                           <div className="review-list__info">
-                            <p className="review-list__name">Mai Lam</p>
+                            <p className="review-list__name">Nguyễn Văn C</p>
                             <span className="review-list__time-review">
                               Nhận xét vào 12/09/2021
                             </span>
@@ -407,7 +407,7 @@ export default function TourDetail() {
                       <span className="tour-plan__review">
                         Lên kế hoạch cho chuyến tham quan của bạn với HDV
                       </span>
-                      <p className="tour-plan__name">Mai Lam</p>
+                      <p className="tour-plan__name">Nguyễn Văn C</p>
                       <div className="tour-plan__rate">
                         <i className="fa-solid fa-star"></i>
                         <i className="fa-solid fa-star"></i>

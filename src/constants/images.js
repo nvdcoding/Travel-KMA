@@ -31,3 +31,4 @@ export { default as hanoi } from "../assets/images/tour-du-lich-ha-noi-750.webp"
 export { default as haiphong } from "../assets/images/tour-du-lich-hai-phong-750.webp";
 export { default as hochiminh } from "../assets/images/tour-du-lich-ho-chi-minh-750.webp";
 export { default as menudot } from "../assets/images/dots-menu.png";
+export { default as trangan } from "../assets/images/trang_an1.jpg";

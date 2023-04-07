@@ -5,8 +5,9 @@ import { banner, address } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
 import { Pagination } from "antd";
 import TourItem from "../../../components/tourItem";
-import { Modal, Button, Result, Input } from "antd";
+import { Modal, Button, Result, Input, DatePicker } from "antd";
 import { useParams } from "react-router-dom";
+import moment from "moment";
 
 const tourview = [
   {
@@ -45,6 +46,9 @@ export default function ToursFilter() {
   const handleRequest = () => {
     setIsModalOpen(true);
   };
+  const nameProvice = localStorage.getItem("provice");
+  const timeStart = localStorage.getItem("Timeprovice");
+  const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [desc, setDesc] = useState("");
@@ -58,11 +62,13 @@ export default function ToursFilter() {
     setIsModalOpen(false);
     setShow(false);
   };
+  const onChangeTimeStart = (date, dateString) => {};
+  const onChangeTimeEnd = (date, dateString) => {};
   let params = useParams();
   return (
     <>
       <Layout>
-        <div className="tours-all__wrapper">
+        <div className="tours-all__wrapper tours-filter__wrapper">
           <div className="banner">
             <img alt="" src={banner} />
           </div>
@@ -84,7 +90,7 @@ export default function ToursFilter() {
                   </span>
                 </li>
                 <li>
-                  <strong>{params.id}</strong>
+                  <strong>{nameProvice}</strong>
                 </li>
               </ul>
             </div>
@@ -112,25 +118,26 @@ export default function ToursFilter() {
                         onChange={(e) => setName(e.target.value)}
                       />
                       <label htmlFor="place">Địa điểm:</label>
-                      <p className="ant-input">Hà Nội</p>
+                      <p className="ant-input">{nameProvice}</p>
                       <label htmlFor="times">Thời gian bắt đầu:</label>
-                      <input
-                        type="date"
-                        id="start"
-                        name="trip-start"
-                        value="2022-11-30"
-                        min="2022-01-01"
-                        max="2024-12-31"
-                      />
+                      <div>
+                        {" "}
+                        <DatePicker
+                          onChange={onChangeTimeStart}
+                          placeholder="Chọn ngày"
+                          format={dateFormatList}
+                          defaultValue={moment(timeStart)}
+                        />
+                      </div>
                       <label htmlFor="times">Thời gian kết thúc:</label>
-                      <input
-                        type="date"
-                        id="start"
-                        name="trip-start"
-                        value="2022-11-30"
-                        min="2022-01-01"
-                        max="2024-12-31"
-                      />
+                      <div>
+                        <DatePicker
+                          onChange={onChangeTimeStart}
+                          placeholder="Chọn ngày"
+                          format={dateFormatList}
+                          defaultValue={moment(timeStart)}
+                        />
+                      </div>
                       <label>Số lượng</label>
                       <div className="create-tour__people-item">
                         <p className="create-tour__people-des">

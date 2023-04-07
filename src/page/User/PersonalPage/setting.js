@@ -113,7 +113,7 @@ function Account() {
                 <Form.Item initialValue={profile?.avatar}>
                   <div class="avtUpload">
                     <div class="avtUploadImg">
-                      <img src={profile?.avatar} alt="Mai Lam" />
+                      <img src={profile?.avatar} alt="Avatar" />
                     </div>
                     <label for="img">
                       <div class="photoupload" onChange={handleChangeImage}>

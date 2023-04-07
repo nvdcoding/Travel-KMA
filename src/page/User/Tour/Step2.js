@@ -90,7 +90,7 @@ function Step2({ step }) {
                   />
                   <div className="tour-detail__plan-info">
                     <span className="tour-plan__review">Mã tour: 23456</span>
-                    <p className="tour-plan__name">Mai Lam</p>
+                    <p className="tour-plan__name">Nguyễn Văn A</p>
                     <span className="tour-plan__review">32 tuổi - Nữ</span>
                   </div>
                 </div>

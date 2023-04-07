@@ -146,7 +146,7 @@ export default function NewsDetail() {
                         src="https://secure.gravatar.com/avatar/282ba02901887131304e2367ca8ef221?s=100&d=mm&r=g"
                       />
                       <div className="news-detail__item-main">
-                        <p className="news-detail__name">Lam Mai</p>
+                        <p className="news-detail__name">Nguyễn A</p>
                         <p className="news-detail__des ">
                           đây là nội dung bình luận
                         </p>

@@ -670,3 +670,81 @@
   text-align: center;
   text-transform: uppercase;
 }
+
+/* tour-banner */
+.tour-banner {
+  margin-top: 6rem;
+  position: relative;
+}
+
+.tour-banner2 {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.tour-banner .tour-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+.tour-banner2 .tour-banner-img {
+  max-height: 200px;
+}
+
+.tour-banner2 .tour-banner__text {
+  top: 10%;
+  left: 5rem;
+}
+
+.tour-banner2 .tour-banner-title {
+  font-weight: 500;
+  font-size: 2rem;
+  line-height: 2.2rem;
+}
+
+.tour-banner2 .tour-banner-des {
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+}
+
+.tour-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.tour-banner2 .button {
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  padding: 5px 9px;
+}
+
+.tour-banner .tour-banner__text {
+  position: absolute;
+  top: 22%;
+  color: #fff;
+  width: 60%;
+}
+
+.tour-banner .tour-banner-title {
+  font-weight: 600;
+  font-size: 3rem;
+  line-height: 4rem;
+  color: #ffffffde;
+}
+
+.tour-banner .tour-banner-des {
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.6rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  color: #ffffffde;
+}

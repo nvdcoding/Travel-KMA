@@ -1233,3 +1233,9 @@
 .ant-picker-body th {
   border: none;
 }
+.times .ant-picker {
+  width: 100%;
+}
+.ant-picker-input > input {
+  line-height: 1.9715;
+}
