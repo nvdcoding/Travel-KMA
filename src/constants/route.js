@@ -30,4 +30,5 @@ export const ROUTES = {
   DONHANG: "/ho-so-hdv/don-hang",
   TIMKIEMTOUR: "/chuyen-di/:id",
   QUENMATKHAU: "/quen-mat-khau",
+  CHITIETTOUR: "/ho-so-hdv/chi-tiet-tour/:id",
 };

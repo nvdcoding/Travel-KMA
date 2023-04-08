@@ -34,6 +34,7 @@ const CaidatHdv = lazy(() => import("../page/Kenh_HDV/General/setting"));
 const Donhang = lazy(() => import("../page/Kenh_HDV/QL_Tour/donhang"));
 const tourfilter = lazy(() => import("../page/User/Tour/tourFilter"));
 const Quenmk = lazy(() => import("../page/Auth/forgotpasswprd"));
+const chitiet = lazy(() => import("../page/Kenh_HDV/QL_Tour/detailTour"));
 
 /**
  * define main pages routes
@@ -193,6 +194,11 @@ const RoutePage = [
     path: ROUTES.QUENMATKHAU,
     exact: true,
     component: Quenmk,
+  },
+  {
+    path: ROUTES.CHITIETTOUR,
+    exact: true,
+    component: chitiet,
   },
 ];
 export default RoutePage;

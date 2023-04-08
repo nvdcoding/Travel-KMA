@@ -14,22 +14,6 @@ export default function AddVoucher() {
     setValue(e.target.value);
   };
   const onFinish = (values) => {};
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const onFinishModal = (values) => {
-    console.log("Success:", values);
-  };
-  const onFinishModalFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   const selectBefore = (
     <Select defaultValue="1" className="select-before">
       <Option value="1">Theo số tiền</Option>

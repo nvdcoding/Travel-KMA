@@ -2,7 +2,16 @@
 import React, { useEffect } from "react";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
-import { Form, Input, DatePicker, Button, Table, Space } from "antd";
+import { Link } from "react-router-dom";
+import {
+  Form,
+  Input,
+  DatePicker,
+  Button,
+  Table,
+  Space,
+  Popconfirm,
+} from "antd";
 
 export default function DanhGia() {
   const columns = [
@@ -32,8 +41,16 @@ export default function DanhGia() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <a>Sửa</a>
-          <a>Xóa</a>
+          <div className="action" style={{ backgroundColor: "#1890ff" }}>
+            {data.length >= 1 ? (
+              <Popconfirm
+                title="Xóa Tour?"
+                onConfirm={() => handleDelete(record.id)}
+              >
+                Xóa
+              </Popconfirm>
+            ) : null}
+          </div>
         </Space>
       ),
     },
@@ -61,7 +78,26 @@ export default function DanhGia() {
       reply: "rep ly",
     },
   ];
-  useEffect(() => {}, []);
+  const handleDelete = async (key) => {
+    // eslint-disable-next-line no-unused-vars
+    const del = await sendDelete(`api/course/${key}`);
+    if (del.status === 200) {
+      await listCourse();
+    } else {
+      message.error("Không thể xóa khóa học");
+    }
+  };
+  const listCourse = async (key) => {
+    const res = await sendGet("/api/course", {});
+    if (res.status === 200) {
+      setData(res.data);
+    } else {
+      message.error("Cập nhật khóa học thất bại");
+    }
+  };
+  useEffect(() => {
+    listCourse();
+  }, []);
   const onFinish = (values) => {
     console.log("Success:", values);
   };

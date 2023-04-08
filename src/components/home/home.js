@@ -17,23 +17,19 @@ import { Link } from "react-router-dom";
 const images = [
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/f5eb7be92c10a7cd.jpeg",
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/24183ef65af1849b.jpeg",
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/68fe37a1fec76684.jpeg",
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
 ];
 const person = [
@@ -72,15 +68,13 @@ const feedback = [
   {
     name: "Nguyễn Văn A",
     time: "Thứ 2, 20/11/2022",
-    des:
-      "Tour giá tốt, dịch vụ xe cộ khách sạn ổn, hướng dẫn viên thân thiện, nhưng đồ ăn khá ít, nên cải thiện thêm khẩu phần ăn",
+    des: "Tour giá tốt, dịch vụ xe cộ khách sạn ổn, hướng dẫn viên thân thiện, nhưng đồ ăn khá ít, nên cải thiện thêm khẩu phần ăn",
     img: { avt },
   },
   {
     name: "Nguyễn Văn A 1",
     time: "Thứ 2, 20/11/2022",
-    des:
-      "Dịch vụ ổn, khách sạn hơi cũ,nói chung phù hợp với giá tiền, sẽ tiếp tục trãi nghiệm các chương trình khác",
+    des: "Dịch vụ ổn, khách sạn hơi cũ,nói chung phù hợp với giá tiền, sẽ tiếp tục trãi nghiệm các chương trình khác",
     img: { avt },
   },
   {
@@ -92,15 +86,13 @@ const feedback = [
   {
     name: "Nguyễn Văn A 3",
     time: "Thứ 2, 20/11/2022",
-    des:
-      "Tour đi ổn, khách sạn hơi cũ, đồ ăn còn ít, nhưng bạn hướng dẫn viên rất nhiệt tình!",
+    des: "Tour đi ổn, khách sạn hơi cũ, đồ ăn còn ít, nhưng bạn hướng dẫn viên rất nhiệt tình!",
     img: { avt },
   },
   {
     name: "Nguyễn Văn A 4",
     time: "Thứ 2, 20/11/2022",
-    des:
-      "HDV thân thiện, Phòng khách sạn 3* đúng tiêu chuẩn tuy nhiên hơi cũ. Bữa ăn đặc sản miền Tây ngon miệng. Giá cả hợp lý",
+    des: "HDV thân thiện, Phòng khách sạn 3* đúng tiêu chuẩn tuy nhiên hơi cũ. Bữa ăn đặc sản miền Tây ngon miệng. Giá cả hợp lý",
     img: { avt },
   },
 ];
@@ -108,32 +100,27 @@ const touraddress = [
   {
     name: "Nguyễn Văn A",
     img: { address },
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     name: "Nguyễn Văn A 1",
     img: { address },
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     name: "Nguyễn Văn A 2",
     img: { address },
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     name: "Nguyễn Văn A 3",
     img: { address },
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
   {
     name: "Nguyễn Văn A 4",
     img: { address },
-    link:
-      "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
 ];
 const tourview = [
@@ -515,7 +502,7 @@ function Home() {
                           </li>
                         </ul>
                         <Link
-                          to={`trang-ca-nhanh/${item.id}`}
+                          to={`trang-ca-nhan/${item.id}`}
                           className="travel-link"
                         >
                           Chi tiết <i class="fa-solid fa-angles-right"></i>

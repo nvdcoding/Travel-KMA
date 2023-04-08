@@ -1,66 +1,111 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import { Space, Table, Form, DatePicker, Input, Button } from "antd";
+import {
+  Space,
+  Table,
+  Form,
+  DatePicker,
+  Input,
+  Button,
+  Popconfirm,
+} from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
 import { Link } from "react-router-dom";
-const columns = [
-  {
-    title: "Tên tour",
-    dataIndex: "name",
-    key: "name",
-    render: (text) => <a>{text}</a>,
-  },
-  {
-    title: "Trạng thái",
-    dataIndex: "status",
-    key: "status",
-  },
-  {
-    title: "Địa điểm",
-    dataIndex: "place",
-    key: "place",
-  },
-  {
-    title: "Thao tác",
-    key: "action",
-    render: (_, record) => (
-      <Space size="middle">
-        <a className="action-edit">Sửa</a>
-        <a className="action-del">Xóa</a>
-      </Space>
-    ),
-  },
-];
-const data = [
-  {
-    key: "1",
-    name: "Du lịch Cẩn thơ 2 ngày",
-    time: "20/10/2023-22/10/2023",
-    place: "Cần thơ",
-    status: 1,
-  },
-  {
-    key: "1",
-    name: "Du lịch Cẩn thơ 2 ngày",
-    time: "20/10/2023-22/10/2023",
-    place: "Cần thơ",
-    status: 1,
-  },
-  {
-    key: "1",
-    name: "Du lịch Cẩn thơ 2 ngày",
-    time: "20/10/2023-22/10/2023",
-    place: "Cần thơ",
-    status: 1,
-  },
-];
+import { sendDelete, sendGet } from "../../../utils/api/index";
+
 export default function MyPage() {
+  const columns = [
+    {
+      title: "Tên tour",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <a>{text}</a>,
+    },
+    {
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Địa điểm",
+      dataIndex: "place",
+      key: "place",
+    },
+    {
+      title: "Thao tác",
+      key: "action",
+      render: (_, record) => (
+        <Space size="middle">
+          <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
+            <Link
+              to={`/ho-so-hdv/chi-tiet-tour/${record.id}`}
+              style={{ color: "#fff" }}
+            >
+              Sửa
+            </Link>
+          </div>
+          <div className="action" style={{ backgroundColor: "#1890ff" }}>
+            {data.length >= 1 ? (
+              <Popconfirm
+                title="Xóa Tour?"
+                onConfirm={() => handleDelete(record.id)}
+              >
+                Xóa
+              </Popconfirm>
+            ) : null}
+          </div>
+        </Space>
+      ),
+    },
+  ];
+  const data = [
+    {
+      key: "1",
+      name: "Du lịch Cẩn thơ 2 ngày",
+      time: "20/10/2023-22/10/2023",
+      place: "Cần thơ",
+      status: 1,
+    },
+    {
+      key: "1",
+      name: "Du lịch Cẩn thơ 2 ngày",
+      time: "20/10/2023-22/10/2023",
+      place: "Cần thơ",
+      status: 1,
+    },
+    {
+      key: "1",
+      name: "Du lịch Cẩn thơ 2 ngày",
+      time: "20/10/2023-22/10/2023",
+      place: "Cần thơ",
+      status: 1,
+    },
+  ];
   const { RangePicker } = DatePicker;
   const { Search } = Input;
   const onSearch = (value) => console.log(value);
-  useEffect(() => {}, []);
+  const handleDelete = async (key) => {
+    // eslint-disable-next-line no-unused-vars
+    const del = await sendDelete(`api/course/${key}`);
+    if (del.status === 200) {
+      await listCourse();
+    } else {
+      message.error("Không thể xóa khóa học");
+    }
+  };
+  const listCourse = async (key) => {
+    const res = await sendGet("/api/course", {});
+    if (res.status === 200) {
+      setData(res.data);
+    } else {
+      message.error("Cập nhật khóa học thất bại");
+    }
+  };
+  useEffect(() => {
+    listCourse();
+  }, []);
   const onFinish = (values) => {
     console.log("Success:", values);
   };
