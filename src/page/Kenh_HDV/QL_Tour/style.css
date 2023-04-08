@@ -95,3 +95,34 @@
   align-items: flex-start;
   justify-content: space-between;
 }
+.service-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service-group textarea {
+  margin-right: 10px;
+}
+.main-form-title-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.add-tour-title,
+.lt-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.button-add {
+  width: 110px;
+  padding: 5px;
+  border-radius: 3px;
+}
+.main-form-step3 {
+  padding: 10px;
+  background-color: #cccccc4d;
+  margin-bottom: 15px;
+}

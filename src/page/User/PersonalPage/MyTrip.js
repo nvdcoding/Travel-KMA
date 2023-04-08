@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
 import Layout from "../../../components/layout/layout";
-import { Tabs } from "antd";
+import { Tabs, Popconfirm, message } from "antd";
 
 import "../../../assets/css/trip.css";
 import { avt } from "../../../constants/images";
@@ -57,6 +57,9 @@ export default function MyTrip() {
       id: "57389432173",
     },
   ];
+  const confirm = () => {
+    message.success("Hủy chuyến đi thành công");
+  };
   useEffect(() => {}, []);
   return (
     <>
@@ -88,11 +91,13 @@ export default function MyTrip() {
                           <div className="mytrip-order__header">
                             <div className="mytrip-order__header-left">
                               <p className="mytrip-order__name">{value.hdv}</p>
-                              <div className="mytrip-order__chat">
-                                <i className="fa-regular fa-comments"></i>
-                                <p className="mytrip-order__contact">Chat</p>
-                              </div>
-                            </div>{" "}
+                              <Link to="/chat">
+                                <div className="mytrip-order__chat">
+                                  <i className="fa-regular fa-comments"></i>
+                                  <p className="mytrip-order__contact">Chat</p>
+                                </div>
+                              </Link>
+                            </div>
                             <div className="mytrip-order__header-right">
                               Chờ xác nhận
                             </div>
@@ -121,7 +126,15 @@ export default function MyTrip() {
                           </div>
                           <div className="mytrip-order__rate md-1">
                             <div className="button button--primary">
-                              <Link to={`/pay/${value.id}`}>Xác nhận</Link>
+                              <Popconfirm
+                                title="Hủy yêu cầu?"
+                                description="Xác nhận hủy chuyến đi"
+                                onConfirm={confirm}
+                                okText="Đồng ý"
+                                cancelText="Hủy"
+                              >
+                                Hủy
+                              </Popconfirm>
                             </div>
                           </div>
                         </div>

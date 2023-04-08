@@ -40,7 +40,7 @@ export default function MyPage() {
         <Space size="middle">
           <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
             <Link
-              to={`/ho-so-hdv/chi-tiet-tour/${record.id}`}
+              to={`/ho-so-hdv/chi-tiet-tour/${record.key}`}
               style={{ color: "#fff" }}
             >
               Sửa
@@ -50,7 +50,7 @@ export default function MyPage() {
             {data.length >= 1 ? (
               <Popconfirm
                 title="Xóa Tour?"
-                onConfirm={() => handleDelete(record.id)}
+                onConfirm={() => handleDelete(record.key)}
               >
                 Xóa
               </Popconfirm>

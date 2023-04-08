@@ -166,7 +166,7 @@ export default function ToursFilter() {
                           </div>
                         </div>
                       </div>
-                      <label htmlFor="start">Yêu cầu chi tiết:</label>
+                      <label htmlFor="start">Mô tả chi tiết:</label>
                       <Input
                         placeholder="Nhập mô tả"
                         value={desc}
@@ -190,13 +190,18 @@ export default function ToursFilter() {
                           {show && (
                             <div className="modal-body">
                               <p className="modal-name">
-                                Tên chuyến đi: {name}
+                                <strong>Tên chuyến đi:</strong> {name}
                               </p>
-                              <p className="modal-place">Địa điểm: {place}</p>
                               <p className="modal-place">
-                                Thời gian: 20/11/2022 =24/11/2022
+                                <strong>Địa điểm:</strong> {place}
                               </p>
-                              <p>Yêu cầu: </p>
+                              <p className="modal-place">
+                                <strong>Thời gian:</strong> 20/11/2022
+                                =24/11/2022
+                              </p>
+                              <p>
+                                <strong>Mô tả:</strong>{" "}
+                              </p>
                               <p>{desc}</p>
                             </div>
                           )}

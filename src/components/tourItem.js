@@ -52,9 +52,11 @@ function TourItem(props) {
                 <i className="fa-regular fa-star"></i>
                 <span>Đã đi {props?.item?.rate}</span>
               </div>
-              <div className="button button--primary button-contact">
-                Tùy chỉnh và liên hệ
-              </div>
+              <Link to={`/tour/${props?.item?.id}`}>
+                <div className="button button--primary button-contact">
+                  Tùy chỉnh và liên hệ
+                </div>
+              </Link>
             </div>
           </div>
         </div>

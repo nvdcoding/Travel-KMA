@@ -2,12 +2,31 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import { address } from "../../../constants/images";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "../../../assets/css/tour-detail.css";
-import { Input } from "antd";
+import {
+  Input,
+  InputNumber,
+  message,
+  Form,
+  DatePicker,
+  Modal,
+  Button,
+} from "antd";
+import Condition from "../../../components/condition";
 
 export default function TourDetail() {
   const [desc, setDesc] = useState("");
+  const history = useHistory();
+
+  const onFinish = (values) => {
+    message.success("gửi yêu cầu thành công");
+  };
+  const sendYc = () => {
+    //gửi yêu cầu, gọi api yêu cầu chuyến đi,
+    history.push("/chuyen-di");
+    message.success("gửi yêu cầu thành công!");
+  };
   useEffect(() => {}, []);
   return (
     <>
@@ -142,16 +161,12 @@ export default function TourDetail() {
                     <table>
                       <tbody>
                         <tr>
-                          <td></td>
-                          <td>1-2 người</td>
-                          <td>Dưới 5 người</td>
-                          <td>Trên 5 người</td>
+                          <td>Số lượng 1</td>
+                          <td>Giá tour</td>
                         </tr>
                         <tr>
-                          <td>10.000đ</td>
-                          <td>5.000đ</td>
-                          <td>5.000đ</td>
-                          <td>5.000đ</td>
+                          <td>20.000đ</td>
+                          <td>255.000đ</td>
                         </tr>
                       </tbody>
                     </table>
@@ -418,51 +433,96 @@ export default function TourDetail() {
                     </div>
                   </div>
                   <div className="tour-detail__plan-body">
-                    <label htmlFor="start">Ngày bắt đầu:</label>
-                    <input
-                      type="date"
-                      id="start"
-                      name="trip-start"
-                      value="2022-11-30"
-                      min="2022-01-01"
-                      max="2024-12-31"
-                    />
-                    <label htmlFor="start">Ngày kết thúc:</label>
-                    <input
-                      type="date"
-                      id="start"
-                      name="trip-end"
-                      value="2022-11-30"
-                      min="2022-01-01"
-                      max="2024-12-31"
-                    />
-                    <label htmlFor="people">Số lượng:</label>
-                    <input
-                      type="number"
-                      id="people"
-                      name="trip-people"
-                      value="2"
-                      min="0"
-                      max="50"
-                    />
-                    <label htmlFor="people">Nơi ở:</label>
-                    <select>
-                      <option checked value="Hotel">
-                        Hotel
-                      </option>
-                    </select>
-                    <label htmlFor="people">Mô tả:</label>
-                    <Input
-                      placeholder="Nhập yêu cầu"
-                      value={desc}
-                      onChange={(e) => setDesc(e.target.value)}
-                    />
-                    <div className="button button--primary">
-                      <Link to="/pay/456">Yêu cầu</Link>
-                    </div>
-                    <div className="button button--normal">
-                      <a href="#">Tùy chỉnh</a>
-                    </div>
+                    <Form
+                      name="normal_senyc"
+                      className="sendyc-form"
+                      initialValues={{
+                        remember: true,
+                      }}
+                      onFinish={onFinish}
+                    >
+                      <Form.Item
+                        name="time"
+                        label="Ngày bắt đầu:"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Ngày bắt đầu ko để trống!",
+                          },
+                        ]}
+                      >
+                        <DatePicker />
+                      </Form.Item>
+                      <Form.Item
+                        name="time"
+                        label="Ngày kết thúc:"
+                        rules={[
+                          {
+                            required: true,
+                            message: "Ngày kết thúc ko để trống!",
+                          },
+                        ]}
+                      >
+                        <DatePicker />
+                      </Form.Item>
+                      <Form.Item
+                        name="number"
+                        label="Số lượng:"
+                        rules={[
+                          {
+                            required: true,
+                            message: "số lượng ko để trống!",
+                          },
+                        ]}
+                      >
+                        <InputNumber placeholder="Số lượng" defaultValue={2} />
+                      </Form.Item>
+                      <Form.Item name="desc" label="Mô tả:">
+                        <Input
+                          placeholder="Nhập yêu cầu"
+                          value={desc}
+                          onChange={(e) => setDesc(e.target.value)}
+                        />
+                      </Form.Item>
+
+                      <div className="price">
+                        <Form.Item
+                          name="priceNumber"
+                          label="Chi phí về số lượng"
+                          initialValues={20000}
+                        >
+                          <InputNumber placeholder="Chi phí về số lượng" />
+                        </Form.Item>
+                        <Form.Item
+                          name="priceTour"
+                          label="Chi phí về tour"
+                          initialValues={20000}
+                        >
+                          <InputNumber placeholder="Chi phí về tour" />
+                        </Form.Item>
+
+                        <Form.Item
+                          name="voucher"
+                          label="Mã giảm giá"
+                          initialValues="KM2"
+                        >
+                          <ModalVoucher />
+                        </Form.Item>
+                        <Form.Item
+                          name="price"
+                          label="Tổng chi phí"
+                          initialValues={20000}
+                        >
+                          <InputNumber placeholder="Tổng chi phí" />
+                        </Form.Item>
+                      </div>
+                      <Button
+                        htmlType="submit"
+                        className="button button--primary"
+                      >
+                        Yêu cầu
+                      </Button>
+                    </Form>
                   </div>
                 </div>
               </div>
@@ -473,3 +533,92 @@ export default function TourDetail() {
     </>
   );
 }
+
+const ModalVoucher = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleVoucher = () => {
+    setIsModalOpen(false);
+    setVoucher("TM12");
+  };
+  const [voucher, setVoucher] = useState();
+  return (
+    <>
+      <span className="order-payment_voucher" onClick={showModal}>
+        <span className="coupon-label success">{voucher}</span>
+        {/* <i className="fa-solid fa-percent"></i> */}
+        Mã Voucher
+      </span>
+      <Modal
+        footer={null}
+        width="90%"
+        title="Mã giảm giá "
+        visible={isModalOpen}
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        centered
+      >
+        <div className="mytrip-voucher">
+          <div className="mytrip-voucher-item">
+            <div className="mytrip-voucher-left">
+              <img
+                className="mytrip-voucher-img"
+                alt=""
+                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+              />
+              <h4 className="mytrip-voucher-name">Voucher</h4>
+            </div>
+            <div className="mytrip-voucher-right">
+              <div className="mytrip-voucher-top">
+                <h3 className="mytrip-voucher-title">
+                  Giảm 10% đơn 20k giảm 210k
+                </h3>
+                <p
+                  className="mytrip-voucher-use"
+                  onClick={() => handleVoucher()}
+                >
+                  Dùng ngay
+                </p>
+              </div>
+              <div className="mytrip-voucher-bottom">
+                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
+                <Condition />
+              </div>
+            </div>
+          </div>
+          <div className="mytrip-voucher-item">
+            <div className="mytrip-voucher-left">
+              <img
+                className="mytrip-voucher-img"
+                alt=""
+                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+              />
+              <h4 className="mytrip-voucher-name">Voucher</h4>
+            </div>
+            <div className="mytrip-voucher-right">
+              <div className="mytrip-voucher-top">
+                <h3 className="mytrip-voucher-title">
+                  Giảm 10% đơn 20k giảm 210k
+                </h3>
+                <p className="mytrip-voucher-use">Dùng ngay</p>
+              </div>
+              <div className="mytrip-voucher-bottom">
+                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
+                <Condition />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+};

@@ -216,3 +216,8 @@
 .tours-filter__wrapper .ant-picker {
   width: 100%;
 }
+.modal-name,
+.modal-place {
+  margin: 5px 0;
+  font-size: 17px;
+}

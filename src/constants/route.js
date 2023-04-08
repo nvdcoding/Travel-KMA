@@ -31,4 +31,5 @@ export const ROUTES = {
   TIMKIEMTOUR: "/chuyen-di/:id",
   QUENMATKHAU: "/quen-mat-khau",
   CHITIETTOUR: "/ho-so-hdv/chi-tiet-tour/:id",
+  CHITIETORDER: "/ho-so-hdv/chi-tiet-don/:id",
 };

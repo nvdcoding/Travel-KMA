@@ -621,3 +621,6 @@
   border-color: var(--color-primary);
   color: #fff;
 }
+.ant-popover-buttons {
+  display: flex;
+}

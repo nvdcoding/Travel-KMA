@@ -312,7 +312,7 @@ table.table-journeys tr td:first-child {
   background: #13294b;
   border-radius: 8px 8px 0px 0px;
   display: flex;
-  padding: 4rem 2rem;
+  padding: 2rem 2rem;
   align-items: center;
 }
 
@@ -504,4 +504,449 @@ table.table-journeys tr td:first-child {
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 2.1rem;
+}
+
+.order-payment_voucher {
+  color: #0071c4;
+  font-size: 15px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.order-payment_voucher i {
+  padding: 5px;
+  /* border-radius: 9999px;
+border: 1px solid #ccc;
+background-color: #ccc; */
+}
+.order-payment__note {
+  font-style: italic;
+  font-size: 12px;
+  color: #020202;
+}
+.coupon-label {
+  border: 1px solid #080;
+  color: #080;
+  padding: 3px 15px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-right: 5px;
+  text-decoration: none;
+}
+.ant-modal-title {
+  text-align: center;
+  color: rgb(29 29 29 / 84%);
+  font-weight: 600;
+  font-size: 19px;
+  line-height: 22px;
+}
+
+.mytrip-voucher {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  max-height: 450px;
+  overflow: scroll;
+}
+
+.mytrip-voucher-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mytrip-voucher-left {
+  position: relative;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 140px;
+  -ms-flex: 0 0 140px;
+  flex: 0 0 140px;
+  width: 140px;
+}
+
+.mytrip-voucher-name {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 35px;
+  position: absolute;
+  text-transform: uppercase;
+  right: 8px;
+  top: 58px;
+}
+
+.mytrip-voucher-use {
+  white-space: nowrap;
+  font-size: 13px;
+  color: rgb(233, 55, 55);
+  cursor: pointer;
+  font-weight: 600;
+}
+.mytrip-voucher-use:hover {
+  color: rgb(228, 10, 10);
+}
+.mytrip-voucher-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.mytrip-voucher-condition {
+  white-space: nowrap;
+}
+
+.mytrip-sub-menu-name {
+}
+
+.md-1 {
+  justify-content: flex-end !important;
+}
+
+.mytrip-order__rate-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mytrip-order__rate-note {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.mytrip-order__rate-note-name {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: #333333;
+}
+
+.mytrip-order__rate-note-value {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: #2f80ed;
+}
+
+.mytrip-order__rate-star {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.mytrip-order__rate-star i {
+  font-size: 50px;
+  color: rgb(236, 223, 32);
+}
+
+.My-trip__wrapper {
+  background-color: #fbfbfb;
+}
+
+.mytrip-menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mytrip-menu-name {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
+.mytrip-sub-menu {
+}
+
+.mytrip-sub-menu-name {
+}
+
+.mytrip-order {
+}
+
+.mytrip-order-item {
+  margin-bottom: 30px;
+  border-bottom: 1.5px solid #ccc;
+  padding: 10px 0;
+}
+
+.mytrip-order__header,
+.mytrip-order__main,
+.mytrip-order__rate {
+  width: 95%;
+  margin: auto;
+}
+
+.mytrip-order__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+}
+
+.mytrip-order__header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mytrip-order__name {
+  font-size: 1.6rem;
+  line-height: 1.8rem;
+  font-weight: 500;
+}
+
+.mytrip-order__chat {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  background: var(--color-primary-hover);
+  border-radius: 2px;
+  padding: 2px 5px;
+  margin-left: 10px;
+}
+
+.mytrip-order__contact {
+  margin-left: 5px;
+}
+
+.mytrip-order__header-right {
+  text-transform: uppercase;
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.8rem;
+  color: var(--color-primary);
+}
+
+.mytrip-order__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mytrip-order__rate,
+.mytrip-order__main-right,
+.mytrip-order__main-left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mytrip-order__main-left {
+  justify-content: flex-start;
+}
+
+.mytrip-order-img {
+  width: 100px;
+  height: 100px;
+}
+
+.mytrip-order-name {
+  font-size: 1.8rem;
+  line-height: 2rem;
+  width: 70%;
+  margin-left: 20px;
+  color: var(--color-text-title);
+}
+
+.mytrip-order__main-price {
+  text-decoration: line-through;
+}
+
+.mytrip-order__main-price-km {
+}
+
+.mytrip-order__rate .button {
+  width: auto;
+  padding: 6px 15px;
+  border-radius: 5px;
+}
+
+.mytrip-order__rate-note {
+}
+
+.mytrip-sub-menu-name {
+}
+
+.mytrip-sub-menu-name {
+}
+
+.mytrip-sub-menu-name {
+}
+
+.mytrip-voucher__search {
+}
+
+.mytrip-voucher-box-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 0px;
+  padding: 25px 12rem;
+}
+
+.mytrip-voucher-box-search input {
+  margin: 0 10px;
+}
+
+.mytrip-voucher__title {
+  white-space: nowrap;
+  margin-right: 10px;
+}
+
+.mytrip-sub-menu {
+}
+
+.mytrip-sub-menu-name {
+}
+
+.mytrip-voucher {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+}
+
+.mytrip-voucher-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mytrip-voucher-left {
+  position: relative;
+  z-index: 2;
+}
+
+.mytrip-voucher-right {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: stretch;
+  background-color: #fff;
+  border-radius: 0 6px 6px 0;
+  box-shadow: 3px 3px 15px rgb(0 0 0 / 25%);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px 0 0 -15px;
+  padding: 11px 15px;
+  padding-bottom: 10px;
+  position: relative;
+  width: calc(100% - 200px);
+}
+
+.mytrip-voucher-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.mytrip-voucher-title {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 17px;
+  color: var(--color-text-title);
+}
+
+.mytrip-voucher-time {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 14px;
+  color: rgb(233, 55, 55);
+}
+
+.mytrip-voucher-condition {
+  white-space: nowrap;
+  color: rgb(233, 55, 55);
+  cursor: pointer;
+}
+.ant-modal {
+  width: 90%;
+  max-width: 1000px;
+}
+
+.voucher-popup-title {
+  font-size: 20px;
+}
+
+.voucher-popup-des {
+  font-size: 15px;
+  margin-top: 5px;
+}
+.voucher-popup-title {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 21px;
+  color: var(--colour-navy);
+  margin: 10px 0;
+}
+.voucher-popup-time {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #c42424eb;
+}
+.voucher-popup-dk {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #222121eb;
+  margin-top: 10px;
+}
+.sendyc-form .ant-form-item {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sendyc-form.ant-form-horizontal .ant-form-item-control {
+  width: 100%;
+}
+.sendyc-form .ant-input-number,
+.sendyc-form .ant-picker {
+  width: 100%;
+}
+.tour-detail__plan-body .sendyc-form label {
+  margin: 0;
+}
+.sendyc-form .ant-picker {
+  padding: 9px;
+}
+.sendyc-form .ant-input-number-input {
+  height: 38px;
+}
+.sendyc-form .ant-form-item-label > label {
+  height: 23px;
+}
+.sendyc-form .ant-form-item {
+  margin: 0 0 9px;
+}
+.sendyc-form .ant-input {
+  padding: 4px 10px;
+}
+.tour-detail__plan-body .sendyc-form .button {
+  height: 40px;
+}
+.sendyc-form .button:after {
+  background-color: var(--color-primary-hover);
 }
