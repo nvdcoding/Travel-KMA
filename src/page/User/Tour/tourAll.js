@@ -1,67 +1,61 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { banner, address } from "../../../constants/images";
+import { banner, address, halong } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
 import { Pagination } from "antd";
 import TourItem from "../../../components/tourItem";
-import { Modal, Button, Result, Input } from "antd";
+import { Modal, Button, Result, Input, Form, InputNumber, Select } from "antd";
+import { sendGet } from "../../../utils/api";
 
-const tourview = [
-  {
-    img: address,
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289o0-2",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289o0-4",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "4567893672r-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289jko0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289o0kd1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-];
 export default function ToursAll() {
-  useEffect(() => {}, []);
-  const handleRequest = () => {
-    setIsModalOpen(true);
+  const { Option } = Select;
+  const [data, setData] = useState([]);
+  const [provice, setProvice] = useState([]);
+  const [hdv, setHdv] = useState([]);
+  const listTour = async () => {
+    const res = await sendGet("/tours", {});
+    if (res.data.length >= 0) {
+      setData(
+        res.data.map((e) => {
+          return { ...e, place: e.province?.name ? e.province?.name : "" };
+        })
+      );
+    } else {
+      message.error("Cập nhật khóa học thất bại");
+    }
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [place, setPlace] = useState("");
-  const [show, setShow] = useState(false);
+  const getProvice = async () => {
+    let respon = await sendGet("/provinces");
+    if (respon.data.length >= 0) {
+      setProvice(respon.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const tourFiltter = async (values) => {
+    const result = await sendGet("/tours", values);
+    if (result.data.length >= 0) {
+      setData(
+        result.data.map((e) => {
+          return { ...e, place: e.province?.name ? e.province?.name : "" };
+        })
+      );
+    } else {
+      message.error("thất bại");
+    }
+  };
+  useEffect(() => {
+    listTour();
+    getProvice();
+  }, []);
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-    setShow(false);
-  };
   return (
     <>
       <Layout>
         <div className="tours-all__wrapper">
           <div className="banner">
-            <img alt="" src={banner} />
+            <img alt="" src={halong} />
           </div>
           <div className="content">
             <div className="pathway">
@@ -89,141 +83,61 @@ export default function ToursAll() {
               <div className="tours-all__left">
                 <div className="tour-all-box__search">
                   <h1 className="travel-title">Bộ lọc tìm kiếm</h1>
-                  <div className="form-item--group">
-                    <label className="form-label">Tỉnh/thành phố</label>
-                    <select id="country" name="country" className="">
-                      <option
-                        value=""
-                        hidden="hidden"
-                        defaultValue
-                        disabled="disabled"
-                        className="option_disable"
-                      >
-                        Chọn Tỉnh/thành phố
-                      </option>
-                      <option data-name="An Giang" value="A076">
-                        An Giang
-                      </option>
-                      <option data-name="Bà Rịa Vũng Tàu" value="V064">
-                        Bà Rịa Vũng Tàu
-                      </option>
-                      <option data-name="Bắc Giang" value="B240">
-                        Bắc Giang
-                      </option>
-                      <option data-name="Bắc Kạn" value="B281">
-                        Bắc Kạn
-                      </option>
-                    </select>
-                  </div>
-                  <div className="form-item--group">
-                    <label className="form-label">HDV</label>
-                    <select id="hdv" name="hdv" className="">
-                      <option
-                        value=""
-                        hidden="hidden"
-                        defaultValue
-                        disabled="disabled"
-                        className="option_disable"
-                      >
-                        Chọn HDV
-                      </option>
-                      <option data-name="An Giang" value="A076">
-                        Nguyễn Văn A 1
-                      </option>
-                      <option data-name="Bà Rịa Vũng Tàu" value="V064">
-                        Nguyễn Văn B
-                      </option>
-                    </select>
-                  </div>
-                  <div className="form-item--group">
-                    <label className="form-label">Số ngày</label>
-                    <input
-                      type="number"
-                      id="tentacles"
-                      name=""
-                      min="1"
-                      max="30"
-                    />
-                  </div>
-                  <div className="form-item--group">
-                    <label htmlFor="">Ngày bắt đầu</label>
-                    <input
-                      type="date"
-                      id="start"
-                      name="trip-start"
-                      value="2022-11-28"
-                      min="2018-01-01"
-                      max="2024-12-31"
-                    />
-                  </div>
-                  <div className="form-item--group">
-                    <label htmlFor="">Số nguời</label>
-                    <ul className="number-people">
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          1 người
-                        </a>
-                      </li>
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          2 người
-                        </a>
-                      </li>
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          3-5 người
-                        </a>
-                      </li>
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          5+ người
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="form-item--group">
-                    <label htmlFor="">Dòng tour</label>
-                    <ul className="evaluate-tour number-people">
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          Cao cấp
-                        </a>
-                      </li>
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          Tiêu chuẩn
-                        </a>
-                      </li>
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          Tiết kiệm
-                        </a>
-                      </li>
-                      <li className="number-people__item">
-                        <a href="#" className="number-people__value">
-                          Giá tốt
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="form-item--group">
-                    <label htmlFor="">Khoảng giá</label>
-                    <div className="price-range">
-                      <input placeholder="đTừ" /> <span>-</span>{" "}
-                      <input placeholder="đĐến" />
+                  <Form
+                    name="normal_login"
+                    className="login-form"
+                    initialValues={{
+                      remember: true,
+                    }}
+                    onFinish={tourFiltter}
+                  >
+                    <Form.Item name="provinceId" label="Tỉnh thành">
+                      <Select placeholder="Tỉnh thành">
+                        <Option>Chọn tỉnh/Thành phố</Option>
+                        {provice.map((item, index) => (
+                          <Option value={item?.id} key={index}>
+                            {item?.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                    <Form.Item name="tourGuideId" label="Hướng dẫn viên">
+                      <Select placeholder="Hướng dẫn viên">
+                        <Option>Chọn HDV</Option>
+                        {hdv.map((item, index) => (
+                          <Option value={item?.id} key={index}>
+                            {item?.name}
+                          </Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                    <div className="price-group price-range">
+                      <Form.Item name="minPrice" label="đ Từ">
+                        <InputNumber placeholder="" />
+                      </Form.Item>
+                      <span>-</span>
+                      <Form.Item name="maxPrice" label="đ Đến">
+                        <InputNumber placeholder="" />
+                      </Form.Item>
                     </div>
-                  </div>
-                  <div className="form-item--group">
-                    <div className="button button--primary">Tìm kiếm</div>
-                  </div>
+                    <Form.Item>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="form-button"
+                      >
+                        Tìm kiếm
+                      </Button>
+                    </Form.Item>
+                  </Form>
                 </div>
               </div>
               <div className="tours-all__right ">
                 <h3 className="tour-all-result">
-                  Chúng tôi tìm thấy 258 tours cho Quý khách.
+                  Chúng tôi tìm thấy {data.length} tours cho Quý khách.
                 </h3>
                 <div className="tours-all__list">
-                  {tourview.map((item, index) => (
+                  {data.map((item, index) => (
                     <TourItem item={item} key={index} />
                   ))}
                 </div>

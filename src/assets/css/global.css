@@ -1018,6 +1018,19 @@ iframe {
   border-radius: 6px;
   cursor: pointer;
 }
+
+.ant-btn:focus,
+.ant-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.ant-btn-primary:focus,
+.ant-btn-primary:hover,
+.ant-btn-primary {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
 /* responsive */
 @media (max-width: 1120px) {
   html {

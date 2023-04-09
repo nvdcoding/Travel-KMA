@@ -221,3 +221,30 @@
   margin: 5px 0;
   font-size: 17px;
 }
+.tours-all__wrapper .tour-view__card-img {
+  min-height: 150px;
+}
+.tours-all__wrapper .tour-view__img {
+  min-height: 150px;
+}
+.tours-all__wrapper .ant-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.tours-all__wrapper .ant-form-horizontal .ant-form-item-control {
+  width: 100%;
+}
+.tours-all__wrapper .ant-form-item-control-input {
+  border-radius: 0;
+}
+.tours-all__wrapper .ant-input-number {
+  width: 100%;
+}
+.price-group .ant-row {
+  width: 45%;
+}
+.tours-all__wrapper .form-button {
+  width: 100%;
+  height: 40px;
+}

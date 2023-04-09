@@ -126,3 +126,7 @@
   background-color: #cccccc4d;
   margin-bottom: 15px;
 }
+.price-group {
+  display: flex;
+  align-items: center;
+}

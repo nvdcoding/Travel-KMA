@@ -16,16 +16,18 @@ import {
 import Condition from "../../../components/condition";
 
 export default function TourDetail() {
-  const [desc, setDesc] = useState("");
+  const [number, setNumber] = useState(1);
+  const [priceNumber, setPriceNumber] = useState(20000);
   const history = useHistory();
-
   const onFinish = (values) => {
+    console.log("values", values);
+    history.push("/chuyen-di");
     message.success("gửi yêu cầu thành công");
   };
-  const sendYc = () => {
-    //gửi yêu cầu, gọi api yêu cầu chuyến đi,
-    history.push("/chuyen-di");
-    message.success("gửi yêu cầu thành công!");
+  const handleNumber = (value) => {
+    setNumber(value);
+    setPriceNumber(priceNumber * number);
+    return priceNumber * number;
   };
   useEffect(() => {}, []);
   return (
@@ -320,7 +322,7 @@ export default function TourDetail() {
                       ></iframe>
                     </div>
                   </div>
-                  <div className="tour-detail__comment">
+                  {/* <div className="tour-detail__comment">
                     <h3 className="travel-title">Đánh giá</h3>
                     <ul className="review-list">
                       <li className="tour-detail__review-list__item review-list__item">
@@ -408,7 +410,7 @@ export default function TourDetail() {
                         </div>
                       </li>
                     </ul>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="tour-detail__right">
@@ -474,29 +476,35 @@ export default function TourDetail() {
                             message: "số lượng ko để trống!",
                           },
                         ]}
+                        initialValue={1}
                       >
-                        <InputNumber placeholder="Số lượng" defaultValue={2} />
-                      </Form.Item>
-                      <Form.Item name="desc" label="Mô tả:">
-                        <Input
-                          placeholder="Nhập yêu cầu"
-                          value={desc}
-                          onChange={(e) => setDesc(e.target.value)}
+                        <InputNumber
+                          placeholder="Số lượng"
+                          defaultValue={1}
+                          onChange={handleNumber}
                         />
                       </Form.Item>
-
+                      <Form.Item name="desc" label="Mô tả:">
+                        <Input placeholder="Nhập yêu cầu" />
+                      </Form.Item>
                       <div className="price">
                         <Form.Item
                           name="priceNumber"
                           label="Chi phí về số lượng"
-                          initialValues={20000}
+                          getValueFromEvent={handleNumber}
+                          initialValue={priceNumber}
                         >
-                          <InputNumber placeholder="Chi phí về số lượng" />
+                          <InputNumber
+                            disabled
+                            placeholder="Chi phí về số lượng"
+                            value={priceNumber}
+                            defaultValue={priceNumber}
+                          />
                         </Form.Item>
                         <Form.Item
                           name="priceTour"
                           label="Chi phí về tour"
-                          initialValues={20000}
+                          initialValue={20000}
                         >
                           <InputNumber placeholder="Chi phí về tour" />
                         </Form.Item>
@@ -504,16 +512,23 @@ export default function TourDetail() {
                         <Form.Item
                           name="voucher"
                           label="Mã giảm giá"
-                          initialValues="KM2"
+                          initialValue="KM2"
                         >
                           <ModalVoucher />
                         </Form.Item>
                         <Form.Item
                           name="price"
                           label="Tổng chi phí"
-                          initialValues={20000}
+                          initialValue={20000}
                         >
                           <InputNumber placeholder="Tổng chi phí" />
+                        </Form.Item>
+                        <Form.Item
+                          name="price_km"
+                          label="Trả giá"
+                          initialValue={20000}
+                        >
+                          <InputNumber placeholder="Trả giá" />
                         </Form.Item>
                       </div>
                       <Button

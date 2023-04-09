@@ -950,3 +950,13 @@ background-color: #ccc; */
 .sendyc-form .button:after {
   background-color: var(--color-primary-hover);
 }
+.sendyc-form
+  .ant-form-item-label
+  > label.ant-form-item-required:not(
+    .ant-form-item-required-mark-optional
+  ):before {
+  content: "";
+}
+.sendyc-form .ant-form-item-control-input {
+  border-radius: 0;
+}

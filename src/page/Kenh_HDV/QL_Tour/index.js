@@ -8,14 +8,20 @@ import {
   Input,
   Button,
   Popconfirm,
+  Select,
+  InputNumber,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
 import { Link } from "react-router-dom";
 import { sendDelete, sendGet } from "../../../utils/api/index";
+import { useState } from "react";
 
 export default function MyPage() {
+  const { Option } = Select;
+  const [data, setData] = useState([]);
+  const [provice, setProvice] = useState([]);
   const columns = [
     {
       title: "Tên tour",
@@ -40,7 +46,7 @@ export default function MyPage() {
         <Space size="middle">
           <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
             <Link
-              to={`/ho-so-hdv/chi-tiet-tour/${record.key}`}
+              to={`/ho-so-hdv/chi-tiet-tour/${record.id}`}
               style={{ color: "#fff" }}
             >
               Sửa
@@ -50,7 +56,7 @@ export default function MyPage() {
             {data.length >= 1 ? (
               <Popconfirm
                 title="Xóa Tour?"
-                onConfirm={() => handleDelete(record.key)}
+                onConfirm={() => handleDelete(record.id)}
               >
                 Xóa
               </Popconfirm>
@@ -60,55 +66,52 @@ export default function MyPage() {
       ),
     },
   ];
-  const data = [
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-  ];
   const { RangePicker } = DatePicker;
-  const { Search } = Input;
-  const onSearch = (value) => console.log(value);
   const handleDelete = async (key) => {
     // eslint-disable-next-line no-unused-vars
-    const del = await sendDelete(`api/course/${key}`);
+    const del = await sendDelete(`/tours/${key}`);
     if (del.status === 200) {
-      await listCourse();
+      await listTour();
     } else {
       message.error("Không thể xóa khóa học");
     }
   };
-  const listCourse = async (key) => {
-    const res = await sendGet("/api/course", {});
-    if (res.status === 200) {
-      setData(res.data);
+  const listTour = async () => {
+    const res = await sendGet("/tours", {});
+    if (res.data.length >= 0) {
+      setData(
+        res.data.map((e) => {
+          return { ...e, place: e.province?.name ? e.province?.name : "" };
+        })
+      );
     } else {
       message.error("Cập nhật khóa học thất bại");
     }
   };
-  useEffect(() => {
-    listCourse();
-  }, []);
-  const onFinish = (values) => {
-    console.log("Success:", values);
+  const getProvice = async () => {
+    let respon = await sendGet("/provinces");
+    if (respon.data.length >= 0) {
+      setProvice(respon.data);
+    } else {
+      message.error("thất bại");
+    }
   };
+  const tourFiltter = async (values) => {
+    const result = await sendGet("/tours", values);
+    if (result.data.length >= 0) {
+      setData(
+        result.data.map((e) => {
+          return { ...e, place: e.province?.name ? e.province?.name : "" };
+        })
+      );
+    } else {
+      message.error("thất bại");
+    }
+  };
+  useEffect(() => {
+    listTour();
+    getProvice();
+  }, []);
   return (
     <>
       <LayoutHDV>
@@ -122,23 +125,27 @@ export default function MyPage() {
                 initialValues={{
                   remember: true,
                 }}
-                onFinish={onFinish}
+                onFinish={tourFiltter}
               >
-                <Form.Item name="name" label="Khoảng thời gian">
-                  <RangePicker />
+                <div className="price-group">
+                  <Form.Item name="minPrice" label="đ Từ">
+                    <InputNumber placeholder="" />
+                  </Form.Item>
+                  -
+                  <Form.Item name="maxPrice" label="đ Đến">
+                    <InputNumber placeholder="" />
+                  </Form.Item>
+                </div>
+                <Form.Item name="provinceId" label="Tỉnh thành">
+                  <Select placeholder="Tỉnh thành">
+                    <Option>Chọn tỉnh/Thành phố</Option>
+                    {provice.map((item, index) => (
+                      <Option value={item?.id} key={index}>
+                        {item?.name}
+                      </Option>
+                    ))}
+                  </Select>
                 </Form.Item>
-                <Form.Item name="code">
-                  <Search
-                    addonBefore="Mã đơn hàng"
-                    placeholder="Nhập mã đơn hàng"
-                    allowClear
-                    onSearch={onSearch}
-                    style={{
-                      width: 304,
-                    }}
-                  />
-                </Form.Item>
-
                 <Form.Item>
                   <Button
                     type="primary"

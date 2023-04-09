@@ -5,44 +5,25 @@ import { banner, address } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
 import { Pagination } from "antd";
 import TourItem from "../../../components/tourItem";
-import { Modal, Button, Result, Input, DatePicker } from "antd";
+import {
+  Modal,
+  Button,
+  Result,
+  Input,
+  DatePicker,
+  Form,
+  InputNumber,
+  Select,
+} from "antd";
 import { useParams } from "react-router-dom";
 import moment from "moment";
+import { sendGet } from "../../../utils/api";
 
-const tourview = [
-  {
-    img: address,
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289o0-2",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289o0-4",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "4567893672r-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289jko0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: address,
-    id: "456789367289o0kd1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-];
 export default function ToursFilter() {
-  useEffect(() => {}, []);
+  const { Option } = Select;
+  const [data, setData] = useState([]);
+  const [provice, setProvice] = useState([]);
+  const [hdv, setHdv] = useState([]);
   const handleRequest = () => {
     setIsModalOpen(true);
   };
@@ -65,6 +46,21 @@ export default function ToursFilter() {
   const onChangeTimeStart = (date, dateString) => {};
   const onChangeTimeEnd = (date, dateString) => {};
   let params = useParams();
+  const tourFiltter = async () => {
+    const result = await sendGet(`/tours?provinceId=${params.id}`);
+    if (result.data.length >= 0) {
+      setData(
+        result.data.map((e) => {
+          return { ...e, place: e.province?.name ? e.province?.name : "" };
+        })
+      );
+    } else {
+      message.error("thất bại");
+    }
+  };
+  useEffect(() => {
+    tourFiltter();
+  }, []);
   return (
     <>
       <Layout>
@@ -231,10 +227,10 @@ export default function ToursFilter() {
               </div>
               <div className="tours-all__right ">
                 <h3 className="tour-all-result">
-                  Chúng tôi tìm thấy 258 tours cho Quý khách.
+                  Chúng tôi tìm thấy {data.length} tours cho Quý khách.
                 </h3>
                 <div className="tours-all__list">
-                  {tourview.map((item, index) => (
+                  {data.map((item, index) => (
                     <TourItem item={item} key={index} />
                   ))}
                 </div>

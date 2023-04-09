@@ -14,6 +14,7 @@ import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import { DatePicker, Skeleton } from "antd";
 import { Link } from "react-router-dom";
+import { sendGet } from "../../utils/api";
 const images = [
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
@@ -282,16 +283,15 @@ function Home() {
       "provice",
       e.target.options[e.target.selectedIndex].text
     );
+    localStorage.setItem("proviceId", e.target.value);
   };
-  const getProvice = () => {
-    axios
-      .get(`https://provinces.open-api.vn/api/?depth=2`)
-      .then((res) => {
-        if (res.data.length > 0) {
-          setProvice(res.data);
-        } else message.error("Thử lại sau.");
-      })
-      .catch((error) => console.log(error));
+  const getProvice = async () => {
+    let respon = await sendGet("/provinces");
+    if (respon.data.length >= 0) {
+      setProvice(respon.data);
+    } else {
+      message.error("thất bại");
+    }
   };
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
   useEffect(() => {
@@ -348,7 +348,7 @@ function Home() {
                   Bạn muốn đi đâu?
                 </option>
                 {provice.map((item, index) => (
-                  <option value={item?.codename} key={index}>
+                  <option value={item?.id} key={index}>
                     {item?.name}
                   </option>
                 ))}

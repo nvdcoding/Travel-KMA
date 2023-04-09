@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import "../../../assets/css/homehdv.css";
 import "./style.css";
-import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
 import {
   Form,
@@ -17,6 +16,7 @@ import Image from "../../../components/image";
 
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import { useState } from "react";
+import { sendGet, sendPost } from "../../../utils/api";
 export default function AddTour() {
   const { TextArea } = Input;
   const [provice, setProvice] = useState([]);
@@ -24,18 +24,34 @@ export default function AddTour() {
   const [showtt, setShowtt] = useState(true);
   const [day, setDay] = useState(1);
 
-  const getProvice = () => {
-    axios
-      .get(`https://provinces.open-api.vn/api/?depth=2`)
-      .then((res) => {
-        if (res.data.length > 0) {
-          setProvice(res.data);
-        } else message.error("Thử lại sau.");
-      })
-      .catch((error) => console.log(error));
+  const getProvice = async () => {
+    let respon = await sendGet("/provinces");
+    if (respon.data.length >= 0) {
+      setProvice(respon.data);
+    } else {
+      message.error("thất bại");
+    }
   };
-  const onFinish = (values) => {
-    message.success("tạo mới tour thành công");
+  const onFinish = async (values) => {
+    values.tourSchedules = [
+      {
+        content: "Lịch trình 1",
+      },
+      {
+        content: "Lịch trình 2",
+      },
+    ];
+    values.tourImages = [
+      {
+        url: "https://media.baoquangninh.vn/dataimages/201809/original/images1098138_vinh_ha_long.jpg",
+      },
+    ];
+    const res = await sendPost("/tours", values);
+    if (res.statusCode === 400) {
+      message.error("Thất bại");
+    } else {
+      message.success("tạo mới tour thành công, vùi lòng đợi Admin phê duyệt");
+    }
   };
   const { Option } = Select;
   const handleLT = () => {
@@ -107,7 +123,7 @@ export default function AddTour() {
                   <Input placeholder="Mô tả" />
                 </Form.Item>
                 <Form.Item
-                  name="provice"
+                  name="provinceId"
                   label="Tỉnh thành"
                   rules={[
                     {
@@ -118,14 +134,14 @@ export default function AddTour() {
                 >
                   <Select placeholder="Tỉnh thành">
                     {provice.map((item, index) => (
-                      <Option value={item?.codename} key={index}>
+                      <Option value={item?.id} key={index}>
                         {item?.name}
                       </Option>
                     ))}
                   </Select>
                 </Form.Item>
                 <Form.Item
-                  name="numberPeople"
+                  name="maxMember"
                   label="Số lượng người tối đa"
                   rules={[
                     {
@@ -134,10 +150,10 @@ export default function AddTour() {
                     },
                   ]}
                 >
-                  <InputNumber min={1} defaultValue={2} />
+                  <InputNumber min={1} defaultValue={1} />
                 </Form.Item>
                 <Form.Item
-                  name="price"
+                  name="basePrice"
                   label="Chi phí dự kiến một người"
                   rules={[
                     {
@@ -149,7 +165,7 @@ export default function AddTour() {
                   <InputNumber min={1} />
                 </Form.Item>
                 <Form.Item
-                  name="priceTour"
+                  name="maxPrice"
                   label="Giá tour"
                   rules={[
                     {
@@ -158,6 +174,9 @@ export default function AddTour() {
                     },
                   ]}
                 >
+                  <InputNumber min={1} />
+                </Form.Item>
+                <Form.Item name="feePerMember" label="Phụ thu quá số người">
                   <InputNumber min={1} />
                 </Form.Item>
                 <Form.Item
@@ -176,7 +195,7 @@ export default function AddTour() {
                     <TextArea rows={4} placeholder="Tùy chỉnh" />
                   </div>
                 </Form.Item>
-                <Form.Item label="Ảnh mô tả" valuePropName="fileList">
+                <Form.Item name="tourImages" label="Ảnh mô tả">
                   <Upload action="/upload.do" listType="picture-card">
                     <div>
                       <PlusOutlined />
