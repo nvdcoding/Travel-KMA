@@ -60,6 +60,10 @@ export default function MyTrip() {
   const confirm = () => {
     message.success("Hủy chuyến đi thành công");
   };
+  const accesss = () => {
+    message.success("Xác nhận chuyến đi thành công");
+  };
+
   useEffect(() => {}, []);
   return (
     <>
@@ -80,7 +84,67 @@ export default function MyTrip() {
                 }
                 key="1"
               >
-                <Tabs defaultActiveKey="1" className="mytrip-sub-menu">
+                <Tabs defaultActiveKey="0" className="mytrip-sub-menu">
+                  <TabPane
+                    tab={<p className="mytrip-sub-menu-name">Tour gợi ý</p>}
+                    key="0"
+                  >
+                    <div className="mytrip-order">
+                      {trip.map((value, index) => (
+                        <div className="mytrip-order-item" key={index}>
+                          <div className="mytrip-order__header">
+                            <div className="mytrip-order__header-left">
+                              <p className="mytrip-order__name">{value.hdv}</p>
+                              <Link to="/chat">
+                                <div className="mytrip-order__chat">
+                                  <i className="fa-regular fa-comments"></i>
+                                  <p className="mytrip-order__contact">Chat</p>
+                                </div>
+                              </Link>
+                            </div>
+                            <div className="mytrip-order__header-right">
+                              Gợi ý
+                            </div>
+                          </div>
+                          <div className="mytrip-order__main">
+                            <div className="mytrip-order__main-left">
+                              <img
+                                className="mytrip-order-img"
+                                alt=""
+                                src={avt}
+                              />
+                              <h4 className="mytrip-order-name">
+                                <Link to={`/tour/${value.id}`}>
+                                  {value.title}
+                                </Link>
+                              </h4>
+                            </div>
+                            <div className="mytrip-order__main-right">
+                              <p className="mytrip-order__main-price">
+                                {value.price}
+                              </p>
+                              <p className="mytrip-order__main-price-km">
+                                {value.pricekm}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="mytrip-order__rate md-1">
+                            <div className="button button--primary">
+                              <Popconfirm
+                                title="Đồng ý chuyến đi"
+                                description=""
+                                onConfirm={accesss}
+                                okText="Đồng ý"
+                                cancelText="Hủy"
+                              >
+                                Đồng ý
+                              </Popconfirm>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabPane>
                   <TabPane
                     tab={<p className="mytrip-sub-menu-name">Chờ xác nhận</p>}
                     key="1"
@@ -136,6 +200,60 @@ export default function MyTrip() {
                                 Hủy
                               </Popconfirm>
                             </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </TabPane>
+                  <TabPane
+                    tab={<p className="mytrip-sub-menu-name">Chờ thanh toán</p>}
+                    key="4"
+                  >
+                    <div className="mytrip-order">
+                      {trip.map((value, index) => (
+                        <div className="mytrip-order-item" key={index}>
+                          <div className="mytrip-order__header">
+                            <div className="mytrip-order__header-left">
+                              <p className="mytrip-order__name">{value.hdv}</p>
+                              <Link to="/chat">
+                                <div className="mytrip-order__chat">
+                                  <i className="fa-regular fa-comments"></i>
+                                  <p className="mytrip-order__contact">Chat</p>
+                                </div>
+                              </Link>
+                            </div>
+                            <div className="mytrip-order__header-right">
+                              Chờ thanh toán
+                            </div>
+                          </div>
+                          <div className="mytrip-order__main">
+                            <div className="mytrip-order__main-left">
+                              <img
+                                className="mytrip-order-img"
+                                alt=""
+                                src={avt}
+                              />
+                              <h4 className="mytrip-order-name">
+                                <Link to={`/tour/${value.id}`}>
+                                  {value.title}
+                                </Link>
+                              </h4>
+                            </div>
+                            <div className="mytrip-order__main-right">
+                              <p className="mytrip-order__main-price">
+                                {value.price}
+                              </p>
+                              <p className="mytrip-order__main-price-km">
+                                {value.pricekm}
+                              </p>
+                            </div>
+                          </div>
+                          <div className="mytrip-order__rate md-1">
+                            <Link to={`/pay/${value.id}`}>
+                              <div className="button button--primary">
+                                Thanh toán
+                              </div>
+                            </Link>
                           </div>
                         </div>
                       ))}
