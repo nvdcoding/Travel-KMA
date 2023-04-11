@@ -3,14 +3,15 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button, Tabs } from "antd";
 import "../../assets/css/auth.css";
+import { sendPost } from "../../utils/api";
 export default function SignUp() {
   const [form] = Form.useForm();
   const onFinish = async (values) => {
-    const res = await sendPost("/api/auth/sign-up", values);
+    const res = await sendPost("/auth/register", values);
     if (res.status === 201) {
       notification.open({
         message: "Đăng kí thành công",
-        description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
+        description: "Bạn vui lòng kiểm tra Email ",
         icon: <SmileOutlined style={{ color: "#e52525" }} />,
       });
       form.resetFields();
@@ -41,7 +42,7 @@ export default function SignUp() {
                 form={form}
               >
                 <Form.Item
-                  name="name"
+                  name="username"
                   hasFeedback
                   rules={[
                     {
@@ -86,7 +87,7 @@ export default function SignUp() {
                   <Input.Password placeholder="Mật khẩu của bạn" />
                 </Form.Item>
                 <Form.Item
-                  name="passwordConfirmation"
+                  name="confirmPassword"
                   dependencies={["password"]}
                   hasFeedback
                   rules={[

@@ -14,15 +14,30 @@ import {
   Button,
 } from "antd";
 import Condition from "../../../components/condition";
+import { sendPost } from "../../../utils/api";
 
 export default function TourDetail() {
   const [number, setNumber] = useState(1);
   const [priceNumber, setPriceNumber] = useState(20000);
+  const [date, setdate] = useState("");
+
   const history = useHistory();
-  const onFinish = (values) => {
-    console.log("values", values);
-    history.push("/chuyen-di");
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+    setdate(dateString);
+  };
+
+  const onFinish = async (values) => {
+    values.tourId = 1;
+    values.startDate = date;
     message.success("gửi yêu cầu thành công");
+    history.push("/chuyen-di");
+    let respon = await sendPost("/orders", values);
+    // if (respon.data.length >= 0) {
+
+    // } else {
+    //   message.error("thất bại");
+    // }
   };
   const handleNumber = (value) => {
     setNumber(value);
@@ -444,7 +459,7 @@ export default function TourDetail() {
                       onFinish={onFinish}
                     >
                       <Form.Item
-                        name="time"
+                        name="startDate"
                         label="Ngày bắt đầu:"
                         rules={[
                           {
@@ -453,22 +468,10 @@ export default function TourDetail() {
                           },
                         ]}
                       >
-                        <DatePicker />
+                        <DatePicker onChange={onChange} />
                       </Form.Item>
                       <Form.Item
-                        name="time"
-                        label="Ngày kết thúc:"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Ngày kết thúc ko để trống!",
-                          },
-                        ]}
-                      >
-                        <DatePicker />
-                      </Form.Item>
-                      <Form.Item
-                        name="number"
+                        name="numberOfMember"
                         label="Số lượng:"
                         rules={[
                           {

@@ -3,26 +3,31 @@ import React, { useEffect } from "react";
 import { Form, Input, Button, Tabs } from "antd";
 import "../../assets/css/auth.css";
 import { Link, useHistory } from "react-router-dom";
+import { sendPost } from "../../utils/api";
 export default function SignIn() {
   const [form] = Form.useForm();
   const history = useHistory();
   const isSetting = 0;
   const onFinish = async (values) => {
-    // const res = await sendPost("/api/auth/sign-up", values);
-    // if (res.status === 201) {
-    // notification.open({
-    // message: "Đăng kí thành công",
-    // description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
-    // icon: <SmileOutlined style={{ color: "#e52525" }} />,
-    // });
-    // form.resetFields();
-    // }
-    // if (res.status === 400) {
-    // if (values.password < 6) {
-    // return message.error("Password cần trên 6 kí tự!");
-    // }
-    // return message.error("Email đã tồn tại");
-    // }
+    const res = await sendPost("/auth/login", values);
+    if (res.status === 201) {
+      notification.open({
+        message: "Đăng nhập thành công",
+        // description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
+        icon: <SmileOutlined style={{ color: "#e52525" }} />,
+      });
+      form.resetFields();
+      setToken(res.accessToken);
+      setRefreshToken(res.refreshToken);
+      setItem("user", JSON.stringify(res.userData));
+      history.push("/");
+    }
+    if (res.status === 400) {
+      if (values.password < 6) {
+        return message.error("Password cần trên 6 kí tự!");
+      }
+      return message.error("Email đã tồn tại");
+    }
     if (isSetting == 1) {
       history.push("/");
     } else {
