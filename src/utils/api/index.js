@@ -11,7 +11,7 @@ import {
 
 const axiosInstance = Axios.create({
   timeout: 3 * 60 * 1000,
-  baseURL: "https://20d3-2a09-bac5-d458-16c8-00-245-76.ngrok-free.app/",
+  baseURL: "https://3f16-58-187-45-252.ngrok-free.app/",
 });
 
 axiosInstance.interceptors.request.use(
@@ -45,7 +45,7 @@ axiosInstance.interceptors.response.use(
         return Promise.reject(error);
       }
       return Axios.get(
-        `https://20d3-2a09-bac5-d458-16c8-00-245-76.ngrok-free.app/api/auth/refresh-token`,
+        `https://3f16-58-187-45-252.ngrok-free.app/api/auth/refresh-token`,
         {
           params: {
             refreshToken,
