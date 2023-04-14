@@ -85,7 +85,7 @@ export default function SignIn() {
                 </Button>
                 <div className="auth-des">
                   <Link to="/dang-ky" className="travel-link auth-des-link">
-                    Đăng ký?
+                    Đăng ký
                   </Link>
                   <Link
                     to="/quen-mat-khau"
@@ -141,7 +141,7 @@ export default function SignIn() {
                 </Button>
                 <div className="auth-des">
                   <Link to="/dang-ky" className="travel-link auth-des-link">
-                    Đăng ký?
+                    Đăng ký
                   </Link>
                   <Link
                     to="/quen-mat-khau"
