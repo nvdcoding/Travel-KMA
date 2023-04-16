@@ -7,7 +7,7 @@ import "../../assets/css/layoutHDV.css";
 const { Header, Content, Sider } = Layout;
 
 const LayoutHDV = ({ children }) => (
-  <Layout>
+  <Layout className="hdv_wrapper">
     <Header className="header">
       <Link to="/ho-so-hdv">
         <div className="logo">

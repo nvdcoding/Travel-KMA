@@ -1,37 +1,32 @@
 /* eslint-disable */
 import React, { useEffect } from "react";
-import { Form, Input, Button, Tabs } from "antd";
+import { Form, Input, Button, Tabs, notification, message } from "antd";
 import "../../assets/css/auth.css";
+import { SmileOutlined } from "@ant-design/icons";
+
 import { Link, useHistory } from "react-router-dom";
 import { sendPost } from "../../utils/api";
+import { setRefreshToken, setToken } from "../../utils/storage";
 export default function SignIn() {
   const [form] = Form.useForm();
   const history = useHistory();
-  const isSetting = 0;
+  const isSetting = 1;
   const onFinish = async (values) => {
     const res = await sendPost("/auth/login", values);
-    if (res.status === 201) {
+    if (res.statusCode == 200) {
       notification.open({
         message: "Đăng nhập thành công",
         // description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
         icon: <SmileOutlined style={{ color: "#e52525" }} />,
       });
+      setToken(res.data.accessToken);
+      setRefreshToken(res.data.refreshToken);
+      // setItem("user", JSON.stringify(res?.userData));
+      history.push("/");
+      console.log("o day");
       form.resetFields();
-      setToken(res.accessToken);
-      setRefreshToken(res.refreshToken);
-      setItem("user", JSON.stringify(res.userData));
-      history.push("/");
-    }
-    if (res.status === 400) {
-      if (values.password < 6) {
-        return message.error("Password cần trên 6 kí tự!");
-      }
-      return message.error("Email đã tồn tại");
-    }
-    if (isSetting == 1) {
-      history.push("/");
     } else {
-      history.push("/onboarding");
+      return message.error("Không khớp");
     }
   };
 
@@ -85,7 +80,7 @@ export default function SignIn() {
                   <Input.Password placeholder="Mật khẩu của bạn" />
                 </Form.Item>
 
-                <Button className="button button--primary" onClick={onFinish}>
+                <Button htmlType="submit" className="button button--primary">
                   Đăng nhập
                 </Button>
                 <div className="auth-des">

@@ -11,7 +11,7 @@ import {
 
 const axiosInstance = Axios.create({
   timeout: 3 * 60 * 1000,
-  baseURL: "https://3f16-58-187-45-252.ngrok-free.app/",
+  baseURL: "http://35.186.150.214:3000/",
 });
 
 axiosInstance.interceptors.request.use(
@@ -44,14 +44,11 @@ axiosInstance.interceptors.response.use(
 
         return Promise.reject(error);
       }
-      return Axios.get(
-        `https://3f16-58-187-45-252.ngrok-free.app/api/auth/refresh-token`,
-        {
-          params: {
-            refreshToken,
-          },
-        }
-      )
+      return Axios.get(`http://35.186.150.214:3000/auth/refresh-token`, {
+        params: {
+          refreshToken,
+        },
+      })
         .then((res) => {
           if (res.status === 200) {
             const token = res.data?.data;

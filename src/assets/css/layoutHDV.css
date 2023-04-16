@@ -238,3 +238,9 @@ th {
 .ant-menu-light .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open {
   color: var(--color-primary);
 }
+.hdv_wrapper .ant-row.ant-form-item,
+.hdv_wrapper .ant-row.ant-form-item-row {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

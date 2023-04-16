@@ -8,7 +8,7 @@ export default function SignUp() {
   const [form] = Form.useForm();
   const onFinish = async (values) => {
     const res = await sendPost("/auth/register", values);
-    if (res.status === 201) {
+    if (res.statusCode === 201) {
       notification.open({
         message: "Đăng kí thành công",
         description: "Bạn vui lòng kiểm tra Email ",
@@ -16,7 +16,7 @@ export default function SignUp() {
       });
       form.resetFields();
     }
-    if (res.status === 400) {
+    if (res.statusCode === 400) {
       if (values.password < 6) {
         return message.error("Password cần trên 6 kí tự!");
       }
@@ -48,11 +48,11 @@ export default function SignUp() {
                     {
                       validateStatus: "error",
                       required: true,
-                      message: "Họ tên không được để trống!",
+                      message: "Username không được để trống!",
                     },
                   ]}
                 >
-                  <Input placeholder="Họ tên của bạn" />
+                  <Input placeholder="Username của bạn" />
                 </Form.Item>
                 <Form.Item
                   name="email"

@@ -153,11 +153,6 @@ export default function MyPage() {
                   </Button>
                 </Form.Item>
               </Form>
-              <div className="form">
-                <Button type="primary" icon={<PlusOutlined />}>
-                  Tạo mới
-                </Button>
-              </div>
             </div>
           </div>
           <div className="main-body">
