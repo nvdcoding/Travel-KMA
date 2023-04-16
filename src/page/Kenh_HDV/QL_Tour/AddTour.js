@@ -20,9 +20,7 @@ import { sendGet, sendPost } from "../../../utils/api";
 export default function AddTour() {
   const { TextArea } = Input;
   const [provice, setProvice] = useState([]);
-  const [schedule, setSchedule] = useState([]);
   const [showtt, setShowtt] = useState(true);
-  const [day, setDay] = useState(1);
 
   const getProvice = async () => {
     let respon = await sendGet("/provinces");
@@ -54,10 +52,11 @@ export default function AddTour() {
     }
   };
   const { Option } = Select;
-  const handleLT = () => {
-    setDay(day + 1);
-    setSchedule((schedule) => [...schedule, <StepItem props={day} />]);
-  };
+  // const handleLT = () => {
+  // setDay(day + 1);
+  // setSchedule((schedule) => [...schedule, <StepItem props={day} />]);
+  // setValueSchedule()
+  // };
   const openTT = () => {
     setShowtt(!showtt);
   };
@@ -176,9 +175,6 @@ export default function AddTour() {
                 >
                   <InputNumber min={1} />
                 </Form.Item>
-                <Form.Item name="feePerMember" label="Phụ thu quá số người">
-                  <InputNumber min={1} />
-                </Form.Item>
                 <Form.Item
                   name="service"
                   label="Dịch vụ"
@@ -195,7 +191,7 @@ export default function AddTour() {
                     <TextArea rows={4} placeholder="Tùy chỉnh" />
                   </div>
                 </Form.Item>
-                <Form.Item name="tourImages" label="Ảnh mô tả">
+                <Form.Item label="Ảnh mô tả" valuePropName="fileList">
                   <Upload action="/upload.do" listType="picture-card">
                     <div>
                       <PlusOutlined />
@@ -212,20 +208,39 @@ export default function AddTour() {
               </div>
             )}
 
-            <div className="lt-group">
-              <p class="landing-page-title"> Lịch trình </p>
-              <div
-                className="button button--primary button-add"
-                onClick={() => handleLT()}
-              >
-                Thêm mới
-              </div>
-            </div>
             <div className="main-ht">
-              {/* <StepItem props={day} /> */}
-              {schedule.map((item, index) => (
-                <div key={index}>{item}</div>
-              ))}
+              <Form.List name="info">
+                {(fields, { add, remove }) => {
+                  return (
+                    <div>
+                      <div className="lt-group">
+                        <p className="landing-page-title"> Lịch trình </p>
+                        <div
+                          className="button button--primary button-add"
+                          onClick={() => {
+                            add();
+                          }}
+                        >
+                          Thêm mới
+                        </div>
+                      </div>
+                      {fields.map((field, index) => (
+                        <div key={field.key}>
+                          <StepItem field={field} index={index} />
+                          {fields.length > 1 ? (
+                            <Button
+                              className="dynamic-delete-button"
+                              onClick={() => remove(field.name)}
+                            >
+                              Remove Above Field
+                            </Button>
+                          ) : null}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                }}
+              </Form.List>
             </div>
             <Form.Item>
               <Button type="primary" htmlType="submit" className="form-button">
@@ -238,7 +253,7 @@ export default function AddTour() {
     </>
   );
 }
-function StepItem({ props }) {
+function StepItem({ field, index }) {
   const { TextArea } = Input;
   const [active, setActive] = useState(true);
   const openServices = () => {
@@ -248,30 +263,34 @@ function StepItem({ props }) {
     <>
       <div className="main-form-step3">
         <div className="main-form-title-box" onClick={() => openServices()}>
-          <h3 className="title-ht">Ngày {props}</h3>
+          <h3 className="title-ht">Ngày {index + 1}</h3>
           <i class={active ? "fas fa-chevron-up" : "fas fa-chevron-down"}></i>
         </div>
         <div className={active ? "main-form-item" : "hidden"}>
-          <Form.Item
-            name="title"
-            label="Tiêu đề"
-            rules={[
-              {
-                required: true,
-                message: "Tiêu đề ko để trống!",
-              },
-            ]}
-          >
-            <Input placeholder="Tiêu đề" />
-          </Form.Item>
-          <Form.Item name="desc" label="Mô tả">
-            <div className="service-group">
-              <TextArea rows={4} placeholder="Mô tả ngắn" />
-              <TextArea rows={4} placeholder="Mô tả dài" />
-            </div>
-          </Form.Item>
-          <Form.Item name="image" label="Ảnh mô tả">
-            <Image lengthImg={1} />
+          <Form.Item>
+            <Input.Group>
+              <Form.Item
+                name={[index, "title"]}
+                label="Tiêu đề"
+                rules={[
+                  {
+                    required: true,
+                    message: "Tiêu đề ko để trống!",
+                  },
+                ]}
+              >
+                <Input placeholder="Tiêu đề" />
+              </Form.Item>
+              <Form.Item name={[index, "desc"]} label="Mô tả">
+                <div className="service-group">
+                  <TextArea rows={4} placeholder="Mô tả ngắn" />
+                  <TextArea rows={4} placeholder="Mô tả dài" />
+                </div>
+              </Form.Item>
+              <Form.Item name={[index, "image"]} label="Ảnh mô tả">
+                <Image lengthImg={1} />
+              </Form.Item>
+            </Input.Group>
           </Form.Item>
         </div>
       </div>

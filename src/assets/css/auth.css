@@ -91,7 +91,7 @@ iframe {
 
 .ant-input-affix-wrapper,
 .ant-input:placeholder-shown {
-  border: 1px solid var(--color-primary-hover);
+  /* border: 1px solid var(--color-primary-hover); */
   background: rgba(206, 206, 206, 0);
   border-radius: 17px;
 }
