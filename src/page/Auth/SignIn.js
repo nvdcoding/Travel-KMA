@@ -23,7 +23,6 @@ export default function SignIn() {
       setRefreshToken(res.data.refreshToken);
       // setItem("user", JSON.stringify(res?.userData));
       history.push("/");
-      console.log("o day");
       form.resetFields();
     } else {
       return message.error("Không khớp");

@@ -2,16 +2,7 @@
 import React, { useEffect } from "react";
 import "../../../assets/css/homehdv.css";
 import "./style.css";
-import { PlusOutlined } from "@ant-design/icons";
-import {
-  Form,
-  Input,
-  Select,
-  Upload,
-  Button,
-  message,
-  InputNumber,
-} from "antd";
+import { Form, Input, Select, Button, message, InputNumber } from "antd";
 import Image from "../../../components/image";
 
 import LayoutHDV from "../../../components/layout/layoutHDV";
@@ -192,18 +183,7 @@ export default function AddTour() {
                   </div>
                 </Form.Item>
                 <Form.Item label="Ảnh mô tả" valuePropName="fileList">
-                  <Upload action="/upload.do" listType="picture-card">
-                    <div>
-                      <PlusOutlined />
-                      <div
-                        style={{
-                          marginTop: 8,
-                        }}
-                      >
-                        Upload
-                      </div>
-                    </div>
-                  </Upload>
+                  <Image lengthImg={1} />
                 </Form.Item>
               </div>
             )}

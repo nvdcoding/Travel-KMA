@@ -126,3 +126,33 @@ iframe {
 .auth-form {
   max-width: 500px;
 }
+.signup__wrapper .auth-form {
+  padding: 3rem 3rem;
+  min-width: 600px;
+}
+.auth-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.auth-group .ant-row {
+  width: 48%;
+}
+.signup__wrapper
+  .ant-select-single:not(.ant-select-customize-input)
+  .ant-select-selector {
+  height: 42px;
+  padding: 5px 11px;
+  border-radius: 17px;
+  overflow: hidden;
+}
+.signin__wrapper .ant-input {
+  padding: 3px 16px;
+}
+.signin__wrapper .ant-result {
+  background-color: #fff;
+  border-radius: 10px;
+}
+.signin__wrapper .ant-result-extra > :last-child {
+  margin: auto;
+}

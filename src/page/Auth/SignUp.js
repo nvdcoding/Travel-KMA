@@ -1,20 +1,29 @@
-/* eslint-disable */
-import React, { useEffect } from "react";
+/* eslint-disable eqeqeq */
+// /* eslint-disable */
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Tabs } from "antd";
+import { Form, Input, Button, Tabs, Select, notification, message } from "antd";
 import "../../assets/css/auth.css";
+import { useHistory } from "react-router-dom";
 import { sendPost } from "../../utils/api";
+import { SmileOutlined } from "@ant-design/icons";
+import { AppContext } from "../../Context/AppContext";
 export default function SignUp() {
+  const { provice } = useContext(AppContext);
+  const { Option } = Select;
   const [form] = Form.useForm();
+  const [formhdv] = Form.useForm();
+  const history = useHistory();
   const onFinish = async (values) => {
     const res = await sendPost("/auth/register", values);
-    if (res.statusCode === 201) {
+    if (res.statusCode == 200) {
       notification.open({
         message: "Đăng kí thành công",
         description: "Bạn vui lòng kiểm tra Email ",
         icon: <SmileOutlined style={{ color: "#e52525" }} />,
       });
       form.resetFields();
+      history.push(`/active-user/${values.email}`);
     }
     if (res.statusCode === 400) {
       if (values.password < 6) {
@@ -27,10 +36,27 @@ export default function SignUp() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const onFinishHDV = async (values) => {
+    const res = await sendPost("/auth/register-hdv", values);
+    if (res.statusCode === 200) {
+      notification.open({
+        message: "Đăng kí thành công",
+        description: "Bạn vui lòng kiểm tra Email ",
+        icon: <SmileOutlined style={{ color: "#e52525" }} />,
+      });
+      formhdv.resetFields();
+    } else {
+      return message.error("Vui lòng kiểm tra lại, email đã tồn tại.");
+    }
+  };
+
+  const onFinishFailedHDV = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   useEffect(() => {}, []);
   return (
     <>
-      <div className="signin__wrapper">
+      <div className="signin__wrapper signup__wrapper">
         <div className="auth-form">
           <h3 className="auth-title">Đăng ký</h3>
           <Tabs defaultActiveKey="1">
@@ -127,10 +153,10 @@ export default function SignUp() {
             </Tabs.TabPane>
             <Tabs.TabPane tab="Hướng dẫn viên" key="2">
               <Form
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                onFinish={onFinishHDV}
+                onFinishFailed={onFinishFailedHDV}
                 autoComplete="off"
-                form={form}
+                form={formhdv}
               >
                 <Form.Item
                   name="name"
@@ -145,25 +171,91 @@ export default function SignUp() {
                 >
                   <Input placeholder="Họ tên của bạn" />
                 </Form.Item>
+
+                <div className="auth-group">
+                  <Form.Item
+                    name="userName"
+                    hasFeedback
+                    rules={[
+                      {
+                        validateStatus: "error",
+                        required: true,
+                        message: "Username không được để trống!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="Username của bạn" />
+                  </Form.Item>
+                  <Form.Item
+                    name="email"
+                    hasFeedback
+                    rules={[
+                      {
+                        validateStatus: "error",
+                        type: "email",
+                        message: "Email không hợp lệ!",
+                      },
+                      {
+                        validateStatus: "error",
+                        required: true,
+                        message: "Email không được để trống!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="Email của bạn" />
+                  </Form.Item>
+                </div>
+                <div className="auth-group">
+                  <Form.Item
+                    name="phoneNumber"
+                    hasFeedback
+                    rules={[
+                      {
+                        validateStatus: "error",
+                        required: true,
+                        message: "SDT không được để trống!",
+                      },
+                    ]}
+                  >
+                    <Input placeholder="SDT của bạn" />
+                  </Form.Item>
+                  <Form.Item
+                    name="sex"
+                    hasFeedback
+                    rules={[
+                      {
+                        validateStatus: "error",
+                        required: true,
+                        message: "Giới tính không được để trống!",
+                      },
+                    ]}
+                  >
+                    <Select placeholder="Giới tính" allowClear>
+                      <Option value="male">Nam</Option>
+                      <Option value="female">Nữ</Option>
+                    </Select>
+                  </Form.Item>
+                </div>
+
                 <Form.Item
-                  name="email"
+                  name="provice"
                   hasFeedback
                   rules={[
                     {
                       validateStatus: "error",
-                      type: "email",
-                      message: "Email không hợp lệ!",
-                    },
-                    {
-                      validateStatus: "error",
                       required: true,
-                      message: "Email không được để trống!",
+                      message: "Provice không được để trống!",
                     },
                   ]}
                 >
-                  <Input placeholder="Email của bạn" />
+                  <Select placeholder="Tỉnh thành phố">
+                    {provice.map((item, index) => (
+                      <Option value={item?.id} key={index}>
+                        {item?.name}
+                      </Option>
+                    ))}
+                  </Select>
                 </Form.Item>
-
                 <Form.Item
                   name="password"
                   hasFeedback

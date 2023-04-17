@@ -1,11 +1,12 @@
 /* eslint-disable */
 
 import React, { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useHistory } from "react-router-dom";
 import { Drawer } from "antd";
-
 import { logo } from "../../constants/images";
+import { setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
+  const history = useHistory();
   const Token = localStorage.getItem("accessToken");
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
@@ -14,7 +15,11 @@ function HeaderLayout() {
   const onClose = () => {
     setOpen(false);
   };
-  const SignOut = () => {};
+  const SignOut = () => {
+    setToken("");
+    setRefreshToken("");
+    history.push("/dang-nhap");
+  };
   useEffect(() => {}, []);
   return (
     <>

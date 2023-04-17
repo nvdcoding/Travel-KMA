@@ -36,6 +36,7 @@ const tourfilter = lazy(() => import("../page/User/Tour/tourFilter"));
 const Quenmk = lazy(() => import("../page/Auth/forgotpasswprd"));
 const chitiet = lazy(() => import("../page/Kenh_HDV/QL_Tour/detailTour"));
 const chitietOrder = lazy(() => import("../page/Kenh_HDV/QL_Tour/detailOrder"));
+const activeTK = lazy(() => import("../page/Auth/activeAcc"));
 
 /**
  * define main pages routes
@@ -205,6 +206,11 @@ const RoutePage = [
     path: ROUTES.CHITIETORDER,
     exact: true,
     component: chitietOrder,
+  },
+  {
+    path: ROUTES.ACTIVETK,
+    exact: true,
+    component: activeTK,
   },
 ];
 export default RoutePage;

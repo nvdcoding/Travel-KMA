@@ -1,28 +1,27 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { Form, Input, Button } from "antd";
+import { SmileOutlined } from "@ant-design/icons";
+import { Form, Input, Button, notification, message, Result } from "antd";
 import "../../assets/css/auth.css";
 import { Link } from "react-router-dom";
 import { sendPost } from "../../utils/api";
 export default function ForgotPassword() {
   const [form] = Form.useForm();
   const [step, setStep] = useState(1);
+  const [email, setEmail] = useState("");
+
   const onFinish = async (values) => {
-    setStep(2);
-    const res = await sendPost("/api/auth/quenmk", values);
-    if (res.status === 201) {
+    const res = await sendPost("/auth/send-otp-forgot-password", values);
+    if (res.statusCode === 200) {
       notification.open({
         message: "Mật khẩu mới đã gửi về Email thành công",
         description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
         icon: <SmileOutlined style={{ color: "#e52525" }} />,
       });
+      setStep(2);
       form.resetFields();
-    }
-    if (res.status === 400) {
-      if (values.password < 6) {
-        return message.error("Password cần trên 6 kí tự!");
-      }
-      return message.error("Email đã tồn tại");
+    } else {
+      return message.error("Không tìm thấy Tài khoản");
     }
   };
 
@@ -30,14 +29,15 @@ export default function ForgotPassword() {
     console.log("Failed:", errorInfo);
   };
   const onFinish2 = async (values) => {
-    setStep(3);
-    const res = await sendPost("/api/auth/quenmk", values);
-    if (res.status === 201) {
+    values.email = email;
+    const res = await sendPost("/auth/forgot-password", values);
+    if (res.statusCode === 200) {
       notification.open({
         message: "THành công",
         description: "",
         icon: <SmileOutlined style={{ color: "#e52525" }} />,
       });
+      setStep(3);
       form.resetFields();
     }
     if (res.status === 400) {
@@ -49,28 +49,6 @@ export default function ForgotPassword() {
   };
 
   const onFinishFailed2 = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-  const changePass = async (values) => {
-    // setStep(3);
-    const res = await sendPost("/api/auth/quenmk", values);
-    if (res.status === 201) {
-      notification.open({
-        message: "THành công",
-        description: "",
-        icon: <SmileOutlined style={{ color: "#e52525" }} />,
-      });
-      form.resetFields();
-    }
-    if (res.status === 400) {
-      if (values.password < 6) {
-        return message.error("Password cần trên 6 kí tự!");
-      }
-      return message.error("Email đã tồn tại");
-    }
-  };
-
-  const onFinishFailed3 = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
   useEffect(() => {}, []);
@@ -104,7 +82,10 @@ export default function ForgotPassword() {
                 },
               ]}
             >
-              <Input placeholder="Email của bạn" />
+              <Input
+                placeholder="Email của bạn"
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </Form.Item>
             <Button className="button button--primary" htmlType="submit">
               Nhận mã
@@ -129,7 +110,7 @@ export default function ForgotPassword() {
 
               <Form.Item
                 className="auth-form-item"
-                name="code"
+                name="otp"
                 hasFeedback
                 rules={[
                   {
@@ -141,28 +122,6 @@ export default function ForgotPassword() {
               >
                 <Input placeholder="Mã xác nhận" />
               </Form.Item>
-              <Button className="button button--primary" htmlType="submit">
-                Đổi mật khẩu
-              </Button>
-              <div className="auth-des">
-                <Link to="/dang-nhap" className="travel-link auth-des-link">
-                  Đăng nhập?
-                </Link>
-              </div>
-            </Form>
-          </>
-        )}
-        {step == 3 && (
-          <>
-            <Form
-              onFinish={changePass}
-              onFinishFailed={onFinishFailed3}
-              autoComplete="off"
-              form={form}
-              className="auth-form"
-            >
-              <h3 className="auth-title">Mật khẩu mới</h3>
-
               <Form.Item
                 className="auth-form-item"
                 name="password"
@@ -186,6 +145,20 @@ export default function ForgotPassword() {
                 </Link>
               </div>
             </Form>
+          </>
+        )}
+        {step == 3 && (
+          <>
+            <Result
+              status="success"
+              title="Đổi mật khẩu thành công"
+              subTitle=""
+              extra={[
+                <Link to="/dang-nhap" className=" button button--primary ">
+                  Đăng nhập?
+                </Link>,
+              ]}
+            />
           </>
         )}
       </div>

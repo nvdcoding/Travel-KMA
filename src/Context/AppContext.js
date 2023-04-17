@@ -1,6 +1,10 @@
-import { React, createContext, useState } from "react";
+import { React, createContext, useEffect, useState } from "react";
+import { sendGet } from "../utils/api";
+import { message } from "antd";
 export const AppContext = createContext({});
 export const AppProvider = ({ children }) => {
+  const [provice, setProvice] = useState([]);
+
   const allChatUsers = [
     {
       image:
@@ -113,9 +117,20 @@ export const AppProvider = ({ children }) => {
       ],
     },
   ];
+  const getProvice = async () => {
+    let respon = await sendGet("/provinces");
+    if (respon.data.length >= 0) {
+      setProvice(respon.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  useEffect(() => {
+    getProvice();
+  }, []);
   const [data, setData] = useState([]);
   return (
-    <AppContext.Provider value={{ allChatUsers, data, setData }}>
+    <AppContext.Provider value={{ allChatUsers, data, setData, provice }}>
       {children}
     </AppContext.Provider>
   );
