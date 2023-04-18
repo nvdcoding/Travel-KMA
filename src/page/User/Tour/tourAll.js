@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import { banner, address, halong } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
@@ -7,11 +7,12 @@ import { Pagination } from "antd";
 import TourItem from "../../../components/tourItem";
 import { Modal, Button, Result, Input, Form, InputNumber, Select } from "antd";
 import { sendGet } from "../../../utils/api";
+import { AppContext } from "../../../Context/AppContext";
 
 export default function ToursAll() {
   const { Option } = Select;
   const [data, setData] = useState([]);
-  const [provice, setProvice] = useState([]);
+  const { provice } = useContext(AppContext);
   const [hdv, setHdv] = useState([]);
   const listTour = async () => {
     const res = await sendGet("/tours", {});
@@ -23,14 +24,6 @@ export default function ToursAll() {
       );
     } else {
       message.error("Cập nhật khóa học thất bại");
-    }
-  };
-  const getProvice = async () => {
-    let respon = await sendGet("/provinces");
-    if (respon.data.length >= 0) {
-      setProvice(respon.data);
-    } else {
-      message.error("thất bại");
     }
   };
   const tourFiltter = async (values) => {
@@ -47,7 +40,6 @@ export default function ToursAll() {
   };
   useEffect(() => {
     listTour();
-    getProvice();
   }, []);
 
   return (

@@ -142,30 +142,45 @@ export default function AddTour() {
                 >
                   <InputNumber min={1} defaultValue={1} />
                 </Form.Item>
-                <Form.Item
-                  name="basePrice"
-                  label="Chi phí dự kiến một người"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Chi phí ko để trống!",
-                    },
-                  ]}
-                >
-                  <InputNumber min={1} />
-                </Form.Item>
-                <Form.Item
-                  name="maxPrice"
-                  label="Giá tour"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Giá tour ko để trống!",
-                    },
-                  ]}
-                >
-                  <InputNumber min={1} />
-                </Form.Item>
+                <div className="group">
+                  <Form.Item
+                    name="basePrice"
+                    label="Chi phí dự kiến một người"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Chi phí ko để trống!",
+                      },
+                    ]}
+                  >
+                    <InputNumber min={1} />
+                  </Form.Item>
+                  <Form.Item
+                    name="feePerMember"
+                    label="Phí phị thu thêm khi quá số người người"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Phí phụ thu ko để trống!",
+                      },
+                    ]}
+                  >
+                    <InputNumber min={1} />
+                  </Form.Item>
+                  <Form.Item
+                    name="maxPrice"
+                    label="Giá tour"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Giá tour ko để trống!",
+                      },
+                    ]}
+                  >
+                    <InputNumber min={1} />
+                  </Form.Item>
+                </div>
+
                 <Form.Item
                   name="service"
                   label="Dịch vụ"

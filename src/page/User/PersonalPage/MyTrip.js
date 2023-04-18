@@ -1,15 +1,19 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { Tabs, Popconfirm, message } from "antd";
+import { Tabs, Popconfirm, message, Skeleton } from "antd";
 
 import "../../../assets/css/trip.css";
 import { avt } from "../../../constants/images";
 import RateScreen from "../../../components/Rate";
 import { Link } from "react-router-dom";
 import Condition from "../../../components/condition";
+import { sendGet } from "../../../utils/api";
 export default function MyTrip() {
   const { TabPane } = Tabs;
+  const [dataProcessing, setDataProcessing] = useState([]);
+  const [dataWaiting, setDataWaiting] = useState([]);
+  const [dataEnd, setDataEnd] = useState([]);
   const trip = [
     {
       hdv: "Nguyễn Văn B 1",
@@ -63,8 +67,43 @@ export default function MyTrip() {
   const accesss = () => {
     message.success("Xác nhận chuyến đi thành công");
   };
+  const tourWaitting = async () => {
+    const result = await sendGet(`/orders`, {
+      type: "waiting",
+    });
+    if (result.statusCode == 200) {
+      setDataWaiting(result.returnValue);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const tourProcessing = async () => {
+    const result = await sendGet(`/orders`, {
+      type: "processing",
+    });
+    if (result.statusCode == 200) {
+      setDataProcessing(result.returnValue);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const tourEnd = async () => {
+    const result = await sendGet(`/orders`, {
+      type: "end",
+    });
+    if (result.statusCode == 200) {
+      setDataEnd(result.returnValue);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  useEffect(() => {
+    tourWaitting();
+    tourEnd();
+    tourProcessing();
+  }, []);
+  if (!Object.keys(dataWaiting).length) return <Skeleton />;
 
-  useEffect(() => {}, []);
   return (
     <>
       <Layout>
@@ -150,11 +189,13 @@ export default function MyTrip() {
                     key="1"
                   >
                     <div className="mytrip-order">
-                      {trip.map((value, index) => (
+                      {dataWaiting?.map((value, index) => (
                         <div className="mytrip-order-item" key={index}>
                           <div className="mytrip-order__header">
                             <div className="mytrip-order__header-left">
-                              <p className="mytrip-order__name">{value.hdv}</p>
+                              <p className="mytrip-order__name">
+                                {value?.name}
+                              </p>
                               <Link to="/chat">
                                 <div className="mytrip-order__chat">
                                   <i className="fa-regular fa-comments"></i>
@@ -174,17 +215,17 @@ export default function MyTrip() {
                                 src={avt}
                               />
                               <h4 className="mytrip-order-name">
-                                <Link to={`/tour/${value.id}`}>
-                                  {value.title}
+                                <Link to={`/tour/${value?.id}`}>
+                                  {value?.tour?.name}
                                 </Link>
                               </h4>
                             </div>
                             <div className="mytrip-order__main-right">
                               <p className="mytrip-order__main-price">
-                                {value.price}
+                                {value?.tour?.basePrice}
                               </p>
                               <p className="mytrip-order__main-price-km">
-                                {value.pricekm}
+                                {value?.tour?.pricekm}
                               </p>
                             </div>
                           </div>
@@ -206,68 +247,60 @@ export default function MyTrip() {
                     </div>
                   </TabPane>
                   <TabPane
-                    tab={<p className="mytrip-sub-menu-name">Chờ thanh toán</p>}
-                    key="4"
-                  >
-                    <div className="mytrip-order">
-                      {trip.map((value, index) => (
-                        <div className="mytrip-order-item" key={index}>
-                          <div className="mytrip-order__header">
-                            <div className="mytrip-order__header-left">
-                              <p className="mytrip-order__name">{value.hdv}</p>
-                              <Link to="/chat">
-                                <div className="mytrip-order__chat">
-                                  <i className="fa-regular fa-comments"></i>
-                                  <p className="mytrip-order__contact">Chat</p>
-                                </div>
-                              </Link>
-                            </div>
-                            <div className="mytrip-order__header-right">
-                              Chờ thanh toán
-                            </div>
-                          </div>
-                          <div className="mytrip-order__main">
-                            <div className="mytrip-order__main-left">
-                              <img
-                                className="mytrip-order-img"
-                                alt=""
-                                src={avt}
-                              />
-                              <h4 className="mytrip-order-name">
-                                <Link to={`/tour/${value.id}`}>
-                                  {value.title}
-                                </Link>
-                              </h4>
-                            </div>
-                            <div className="mytrip-order__main-right">
-                              <p className="mytrip-order__main-price">
-                                {value.price}
-                              </p>
-                              <p className="mytrip-order__main-price-km">
-                                {value.pricekm}
-                              </p>
-                            </div>
-                          </div>
-                          <div className="mytrip-order__rate md-1">
-                            <Link to={`/pay/${value.id}`}>
-                              <div className="button button--primary">
-                                Thanh toán
-                              </div>
-                            </Link>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </TabPane>
-                  <TabPane
-                    tab={<p className="mytrip-sub-menu-name">Đã đi</p>}
+                    tab={<p className="mytrip-sub-menu-name">Đang thực hiện</p>}
                     key="2"
                   >
-                    {trip.map((value, index) => (
+                    {dataProcessing?.map((value, index) => (
                       <div className="mytrip-order-item" key={index}>
                         <div className="mytrip-order__header">
                           <div className="mytrip-order__header-left">
-                            <p className="mytrip-order__name">{value.hdv}</p>
+                            <p className="mytrip-order__name">{value?.hdv}</p>
+                            <div className="mytrip-order__chat">
+                              <i className="fa-regular fa-comments"></i>
+                              <p className="mytrip-order__contact">Chat</p>
+                            </div>
+                          </div>{" "}
+                          <div className="mytrip-order__header-right">
+                            Đang thực hiện
+                          </div>
+                        </div>
+                        <div className="mytrip-order__main">
+                          <div className="mytrip-order__main-left">
+                            <img
+                              className="mytrip-order-img"
+                              alt=""
+                              src={avt}
+                            />
+                            <h4 className="mytrip-order-name">
+                              <Link to={`/tour/${value?.id}`}>
+                                {value?.name}
+                              </Link>
+                            </h4>
+                          </div>
+                          <div className="mytrip-order__main-right">
+                            <p className="mytrip-order__main-price">
+                              {value?.price}
+                            </p>
+                            <p className="mytrip-order__main-price-km">
+                              {value?.pricekm}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="mytrip-order__rate md-1">
+                          Khởi hành vào ngày {value?.startDate}
+                        </div>
+                      </div>
+                    ))}
+                  </TabPane>
+                  <TabPane
+                    tab={<p className="mytrip-sub-menu-name">Đã đi</p>}
+                    key="3"
+                  >
+                    {dataEnd?.map((value, index) => (
+                      <div className="mytrip-order-item" key={index}>
+                        <div className="mytrip-order__header">
+                          <div className="mytrip-order__header-left">
+                            <p className="mytrip-order__name">{value?.hdv}</p>
                             <div className="mytrip-order__chat">
                               <i className="fa-regular fa-comments"></i>
                               <p className="mytrip-order__contact">Chat</p>
@@ -285,17 +318,17 @@ export default function MyTrip() {
                               src={avt}
                             />
                             <h4 className="mytrip-order-name">
-                              <Link to={`/tour/${value.id}`}>
-                                {value.title}
+                              <Link to={`/tour/${value?.id}`}>
+                                {value?.name}
                               </Link>
                             </h4>
                           </div>
                           <div className="mytrip-order__main-right">
                             <p className="mytrip-order__main-price">
-                              {value.price}
+                              {value?.price}
                             </p>
                             <p className="mytrip-order__main-price-km">
-                              {value.pricekm}
+                              {value?.pricekm}
                             </p>
                           </div>
                         </div>
@@ -305,50 +338,6 @@ export default function MyTrip() {
                           </p>
                           <RateScreen data={value} />
                         </div>
-                      </div>
-                    ))}
-                  </TabPane>
-                  <TabPane
-                    tab={<p className="mytrip-sub-menu-name">Đã hủy</p>}
-                    key="3"
-                  >
-                    {trip.map((value, index) => (
-                      <div className="mytrip-order-item" key={index}>
-                        <div className="mytrip-order__header">
-                          <div className="mytrip-order__header-left">
-                            <p className="mytrip-order__name">{value.hdv}</p>
-                            <div className="mytrip-order__chat">
-                              <i className="fa-regular fa-comments"></i>
-                              <p className="mytrip-order__contact">Chat</p>
-                            </div>
-                          </div>{" "}
-                          <div className="mytrip-order__header-right">
-                            Đã hủy
-                          </div>
-                        </div>
-                        <div className="mytrip-order__main">
-                          <div className="mytrip-order__main-left">
-                            <img
-                              className="mytrip-order-img"
-                              alt=""
-                              src={avt}
-                            />
-                            <h4 className="mytrip-order-name">
-                              <Link to={`/tour/${value.id}`}>
-                                {value.title}
-                              </Link>
-                            </h4>
-                          </div>
-                          <div className="mytrip-order__main-right">
-                            <p className="mytrip-order__main-price">
-                              {value.price}
-                            </p>
-                            <p className="mytrip-order__main-price-km">
-                              {value.pricekm}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="mytrip-order__rate"></div>
                       </div>
                     ))}
                   </TabPane>
