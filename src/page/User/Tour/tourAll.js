@@ -16,19 +16,19 @@ export default function ToursAll() {
   const [hdv, setHdv] = useState([]);
   const listTour = async () => {
     const res = await sendGet("/tours", {});
-    if (res.data.length >= 0) {
+    if (res.returnValue.data.length >= 0) {
       setData(
-        res.data.map((e) => {
+        res.returnValue.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };
         })
       );
     } else {
-      message.error("Cập nhật khóa học thất bại");
+      message.error("Cập nhật tour thất bại");
     }
   };
   const tourFiltter = async (values) => {
     const result = await sendGet("/tours", values);
-    if (result.data.length >= 0) {
+    if (result.returnValue.data.length >= 0) {
       setData(
         result.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };

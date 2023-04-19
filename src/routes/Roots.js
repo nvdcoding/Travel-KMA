@@ -26,7 +26,7 @@ const doanhthu = lazy(() => import("../page/Kenh_HDV/DoanhThu/index"));
 const taikhoannganhang = lazy(() =>
   import("../page/Kenh_HDV/DoanhThu/BankAcc")
 );
-const addVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/AddVoucher"));
+// const addVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/AddVoucher"));
 const DsTour = lazy(() => import("../page/Kenh_HDV/QL_Tour/index"));
 const QlVoucher = lazy(() => import("../page/Kenh_HDV/Voucher/index"));
 const Danhgia = lazy(() => import("../page/Kenh_HDV/QL_Tour/danhgia"));
@@ -157,11 +157,11 @@ const RoutePage = [
     exact: true,
     component: taikhoannganhang,
   },
-  {
-    path: ROUTES.ADDVOUCHER,
-    exact: true,
-    component: addVoucher,
-  },
+  // {
+  //   path: ROUTES.ADDVOUCHER,
+  //   exact: true,
+  //   component: addVoucher,
+  // },
   {
     path: ROUTES.DSTOUR,
     exact: true,

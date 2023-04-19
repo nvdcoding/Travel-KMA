@@ -13,11 +13,13 @@ export default function AddVoucher() {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
-  const onFinish = (values) => {};
+  const onFinish = (values) => {
+    console.log(`values`, values);
+  };
   const selectBefore = (
-    <Select defaultValue="1" className="select-before">
-      <Option value="1">Theo số tiền</Option>
-      <Option value="0">Theo phần trăm</Option>
+    <Select defaultValue="FIX" className="select-before">
+      <Option value="FIX">Theo số tiền</Option>
+      <Option value="RATE">Theo phần trăm</Option>
     </Select>
   );
   return (
@@ -45,7 +47,7 @@ export default function AddVoucher() {
                     },
                   ]}
                 >
-                  <Input placeholder="Tên tour" />
+                  <Input placeholder="Tên voucher" />
                 </Form.Item>
                 <Form.Item
                   name="code"
@@ -58,6 +60,18 @@ export default function AddVoucher() {
                   ]}
                 >
                   <Input showCount maxLength={5} placeholder="Mã voucher" />
+                </Form.Item>
+                <Form.Item
+                  name="description"
+                  label="Mô tả"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Mô tả ko để trống!",
+                    },
+                  ]}
+                >
+                  <Input placeholder="Mô tả voucher" />
                 </Form.Item>
                 <Form.Item
                   name="times"
@@ -73,7 +87,7 @@ export default function AddVoucher() {
                 </Form.Item>
                 <h3 className="title-voucher">Thiết lập mã giảm giá</h3>
                 <Form.Item
-                  name="sale"
+                  name="discountType"
                   label="thLoại giảm giá | Mức giảm "
                   rules={[
                     {
@@ -86,31 +100,31 @@ export default function AddVoucher() {
                 </Form.Item>
                 <Form.Item
                   name="value"
-                  label="Giá trị đơn hàng tối thiểu"
+                  label="Số giảm"
                   rules={[
                     {
                       required: true,
-                      message: "Loại giảm giá | Mức giảm không để trống",
+                      message: " Mức giảm không để trống",
                     },
                   ]}
                 >
                   <Input addonBefore="đ" placeholder="" allowClear />
                 </Form.Item>
                 <Form.Item
-                  name="number"
+                  name="quantity"
                   label="Tổng lượt sử dụng tối đa"
                   rules={[
                     {
                       required: true,
-                      message: "Loại giảm giá | Mức giảm không để trống",
+                      message: "Tổng lượt sử dụng không để trống",
                     },
                   ]}
                 >
                   <Input placeholder="Số mã giảm giá" />
-                  <span className="form-desc">
-                    Tổng số Mã giảm giá có thể sử dụng
-                  </span>
                 </Form.Item>
+                <span className="form-desc">
+                  Tổng số Mã giảm giá có thể sử dụng
+                </span>
                 <h3 className="title-voucher">
                   Hiển thị mã giảm giá và các sản phẩm áp dụng
                 </h3>
@@ -120,9 +134,9 @@ export default function AddVoucher() {
                     <Radio value={1}>Hiện</Radio>
                   </Radio.Group>
                 </Form.Item>
-                <Form.Item name="apply" label="Áp dụng cho">
+                {/* <Form.Item name="apply" label="Áp dụng cho">
                   <ModalAddVoucher />
-                </Form.Item>
+                </Form.Item> */}
                 <Form.Item>
                   <Button
                     type="primary"

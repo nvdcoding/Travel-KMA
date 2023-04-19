@@ -88,7 +88,7 @@ const LayoutHDV = ({ children }) => (
                 <NavLink to="/ho-so-hdv/voucher">Voucher</NavLink>
               </Menu.Item>
             )}
-            {window.location.pathname === "/ho-so-hdv/create-voucher" ? (
+            {/* {window.location.pathname === "/ho-so-hdv/create-voucher" ? (
               <Menu.Item className="ant-menu-item-selected ">
                 <NavLink to="/ho-so-hdv/create-voucher"> Thêm Voucher</NavLink>
               </Menu.Item>
@@ -96,7 +96,7 @@ const LayoutHDV = ({ children }) => (
               <Menu.Item>
                 <NavLink to="/ho-so-hdv/create-voucher"> ThêmVoucher</NavLink>
               </Menu.Item>
-            )}
+            )} */}
           </Menu.SubMenu>
           <Menu.SubMenu title="Tài chính" icon={<SettingOutlined />} key="4">
             {window.location.pathname === "/ho-so-hdv/doanh-thu" ? (

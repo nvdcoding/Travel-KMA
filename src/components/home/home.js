@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   adjust,
   global,
@@ -15,6 +15,7 @@ import OwlCarousel from "react-owl-carousel";
 import { DatePicker, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 import { sendGet } from "../../utils/api";
+import { AppContext } from "../../Context/AppContext";
 const images = [
   {
     img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
@@ -270,11 +271,9 @@ const optionsTourview = {
 function Home() {
   const [more, setMore] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const [provice, setProvice] = useState("");
+  const { provice } = useContext(AppContext);
 
   const onChangeTime = (date, dateString) => {
-    console.log("date", date);
-    console.log("date2", dateString);
     localStorage.setItem("Timeprovice", date);
   };
   const handelProvice = (e) => {
@@ -285,18 +284,8 @@ function Home() {
     );
     localStorage.setItem("proviceId", e.target.value);
   };
-  const getProvice = async () => {
-    let respon = await sendGet("/provinces");
-    if (respon.data.length >= 0) {
-      setProvice(respon.data);
-    } else {
-      message.error("thất bại");
-    }
-  };
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
-  useEffect(() => {
-    getProvice();
-  }, []);
+  useEffect(() => {}, []);
   if (!Object.keys(provice).length) return <Skeleton />;
   return (
     <>

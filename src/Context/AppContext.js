@@ -119,8 +119,8 @@ export const AppProvider = ({ children }) => {
   ];
   const getProvice = async () => {
     let respon = await sendGet("/provinces");
-    if (respon.data.length >= 0) {
-      setProvice(respon.data);
+    if (respon.returnValue.length >= 0) {
+      setProvice(respon.returnValue);
     } else {
       message.error("thất bại");
     }

@@ -130,7 +130,7 @@ export default function Voucher() {
     }
   };
   const listVoucher = async (key) => {
-    const res = await sendGet("/api/voucher", {});
+    const res = await sendGet("/vouchers", {});
     if (res.status === 200) {
       // setData(res.data);
     } else {
