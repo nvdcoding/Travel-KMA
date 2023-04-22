@@ -44,7 +44,7 @@ export default function MyPage() {
         <Space size="middle">
           <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
             <Link
-              to={`/ho-so-hdv/chi-tiet-don/${record.key}`}
+              to={`/kenh-hdv/chi-tiet-don/${record.key}`}
               style={{ color: "#fff" }}
             >
               Sửa

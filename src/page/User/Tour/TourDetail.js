@@ -48,7 +48,7 @@ export default function TourDetail() {
   const dataTour = async () => {
     const res = await sendGet(`/tours/${param.id}`);
     if (res.statusCode == 200) {
-      setData(res.data);
+      setData(res.returnValue);
     } else {
       message.error("Lỗi hệ thống");
     }

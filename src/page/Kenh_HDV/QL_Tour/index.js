@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Space,
   Table,
@@ -17,11 +17,12 @@ import "./style.css";
 import { Link } from "react-router-dom";
 import { sendDelete, sendGet } from "../../../utils/api/index";
 import { useState } from "react";
+import { AppContext } from "../../../Context/AppContext";
 
 export default function MyPage() {
+  const { provice } = useContext(AppContext);
   const { Option } = Select;
   const [data, setData] = useState([]);
-  const [provice, setProvice] = useState([]);
   const columns = [
     {
       title: "Tên tour",
@@ -46,7 +47,7 @@ export default function MyPage() {
         <Space size="middle">
           <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
             <Link
-              to={`/ho-so-hdv/chi-tiet-tour/${record.id}`}
+              to={`/kenh-hdv/chi-tiet-tour/${record.id}`}
               style={{ color: "#fff" }}
             >
               Sửa
@@ -78,9 +79,9 @@ export default function MyPage() {
   };
   const listTour = async () => {
     const res = await sendGet("/tours", {});
-    if (res.data.length >= 0) {
+    if (res.returnValue.data.length >= 0) {
       setData(
-        res.data.map((e) => {
+        res.returnValue.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };
         })
       );
@@ -88,19 +89,12 @@ export default function MyPage() {
       message.error("Cập nhật khóa học thất bại");
     }
   };
-  const getProvice = async () => {
-    let respon = await sendGet("/provinces");
-    if (respon.data.length >= 0) {
-      setProvice(respon.data);
-    } else {
-      message.error("thất bại");
-    }
-  };
+
   const tourFiltter = async (values) => {
     const result = await sendGet("/tours", values);
-    if (result.data.length >= 0) {
+    if (result.returnValue.data.length >= 0) {
       setData(
-        result.data.map((e) => {
+        result.returnValue.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };
         })
       );
@@ -110,7 +104,6 @@ export default function MyPage() {
   };
   useEffect(() => {
     listTour();
-    getProvice();
   }, []);
   return (
     <>
@@ -158,7 +151,7 @@ export default function MyPage() {
               </Form>
               <div className="form">
                 <Button type="primary" icon={<PlusOutlined />}>
-                  <Link to="/ho-so-hdv/them-tour">Tạo mới</Link>
+                  <Link to="/kenh-hdv/them-tour">Tạo mới</Link>
                 </Button>
               </div>
             </div>

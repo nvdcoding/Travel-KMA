@@ -1,38 +1,86 @@
 // /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import "../../../assets/css/homehdv.css";
 import "./style.css";
-import { Form, Input, Select, Button, message, InputNumber } from "antd";
+import {
+  Form,
+  Input,
+  Select,
+  Button,
+  message,
+  InputNumber,
+  Upload,
+} from "antd";
+import axios from "axios";
 import Image from "../../../components/image";
-
+import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import { useState } from "react";
-import { sendGet, sendPost } from "../../../utils/api";
+import { sendPost } from "../../../utils/api";
+import { AppContext } from "../../../Context/AppContext";
 export default function AddTour() {
   const { TextArea } = Input;
-  const [provice, setProvice] = useState([]);
+  const { provice } = useContext(AppContext);
   const [showtt, setShowtt] = useState(true);
+  const defileTime = 100000;
 
-  const getProvice = async () => {
-    let respon = await sendGet("/provinces");
-    if (respon.data.length >= 0) {
-      setProvice(respon.data);
-    } else {
-      message.error("thất bại");
+  const [fileList, setFileList] = React.useState([]);
+  const [listFile, setListFile] = React.useState([]);
+
+  const handleChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+  };
+
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const upLoadFile = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "avatar");
+      let res = await axios.post(
+        "https://api.cloudinary.com/v1_1/learnit2022/image/upload",
+        formData
+      );
+
+      return res?.data;
+    } catch (error) {
+      return error;
     }
   };
+
+  const onGetImg = async () => {
+    try {
+      let files = [];
+      for await (const file of fileList) {
+        let res = await upLoadFile(file.originFileObj);
+        if (res) {
+          files = [...files, res.secure_url];
+        }
+        await wait(!res ? defileTime : 0);
+      }
+      setListFile(files);
+    } catch (err) {
+      console.log("error", err);
+    }
+    return listFile;
+  };
   const onFinish = async (values) => {
+    values.tourImages = await onGetImg();
+    console.log("ima", await onGetImg());
     values.tourSchedules = [
       {
         content: "Lịch trình 1",
       },
       {
         content: "Lịch trình 2",
-      },
-    ];
-    values.tourImages = [
-      {
-        url: "https://media.baoquangninh.vn/dataimages/201809/original/images1098138_vinh_ha_long.jpg",
       },
     ];
     const res = await sendPost("/tours", values);
@@ -43,17 +91,9 @@ export default function AddTour() {
     }
   };
   const { Option } = Select;
-  // const handleLT = () => {
-  // setDay(day + 1);
-  // setSchedule((schedule) => [...schedule, <StepItem props={day} />]);
-  // setValueSchedule()
-  // };
   const openTT = () => {
     setShowtt(!showtt);
   };
-  useEffect(() => {
-    getProvice();
-  }, []);
   return (
     <>
       <LayoutHDV>
@@ -139,8 +179,9 @@ export default function AddTour() {
                       message: "Số lượng ko để trống!",
                     },
                   ]}
+                  initialValue={1}
                 >
-                  <InputNumber min={1} defaultValue={1} />
+                  <InputNumber min={1} />
                 </Form.Item>
                 <div className="group">
                   <Form.Item
@@ -198,7 +239,16 @@ export default function AddTour() {
                   </div>
                 </Form.Item>
                 <Form.Item label="Ảnh mô tả" valuePropName="fileList">
-                  <Image lengthImg={1} />
+                  {/* <Image lengthImg={1} /> */}
+                  <Upload
+                    accept="image/png, image/jpeg"
+                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    listType="picture-card"
+                    fileList={fileList}
+                    onChange={handleChange}
+                  >
+                    {fileList.length >= 8 ? null : uploadButton}
+                  </Upload>
                 </Form.Item>
               </div>
             )}

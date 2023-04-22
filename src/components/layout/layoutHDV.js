@@ -9,7 +9,7 @@ const { Header, Content, Sider } = Layout;
 const LayoutHDV = ({ children }) => (
   <Layout className="hdv_wrapper">
     <Header className="header">
-      <Link to="/ho-so-hdv">
+      <Link to="/kenh-hdv">
         <div className="logo">
           <img alt="" src={logo} />
           <p className="title">Kênh HDV</p>
@@ -37,40 +37,40 @@ const LayoutHDV = ({ children }) => (
           className="navbar-left"
         >
           <Menu.SubMenu title="Tour" icon={<SettingOutlined />} key="1">
-            {window.location.pathname === "/ho-so-hdv/ds-tour" ? (
+            {window.location.pathname === "/kenh-hdv/ds-tour" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/ds-tour">Danh sách tour</NavLink>
+                <NavLink to="/kenh-hdv/ds-tour">Danh sách tour</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/ds-tour">Danh sách tour</NavLink>
+                <NavLink to="/kenh-hdv/ds-tour">Danh sách tour</NavLink>
               </Menu.Item>
             )}
-            {window.location.pathname === "/ho-so-hdv/don-hang" ? (
+            {window.location.pathname === "/kenh-hdv/don-hang" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/don-hang">Danh sách đơn</NavLink>
+                <NavLink to="/kenh-hdv/don-hang">Danh sách đơn</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/don-hang">Danh sách đơn</NavLink>
+                <NavLink to="/kenh-hdv/don-hang">Danh sách đơn</NavLink>
               </Menu.Item>
             )}
-            {window.location.pathname === "/ho-so-hdv/them-tour" ? (
+            {window.location.pathname === "/kenh-hdv/them-tour" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/them-tour">Tạo tour</NavLink>
+                <NavLink to="/kenh-hdv/them-tour">Tạo tour</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/them-tour">Tạo tour</NavLink>
+                <NavLink to="/kenh-hdv/them-tour">Tạo tour</NavLink>
               </Menu.Item>
             )}
-            {window.location.pathname === "/ho-so-hdv/danh-gia-tour" ? (
+            {window.location.pathname === "/kenh-hdv/danh-gia-tour" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/danh-gia-tour">Đánh giá tour</NavLink>
+                <NavLink to="/kenh-hdv/danh-gia-tour">Đánh giá tour</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/danh-gia-tour">Đánh giá tour</NavLink>
+                <NavLink to="/kenh-hdv/danh-gia-tour">Đánh giá tour</NavLink>
               </Menu.Item>
             )}
           </Menu.SubMenu>
@@ -79,53 +79,53 @@ const LayoutHDV = ({ children }) => (
             icon={<SettingOutlined />}
             key="3"
           >
-            {window.location.pathname === "/ho-so-hdv/voucher" ? (
+            {window.location.pathname === "/kenh-hdv/voucher" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/voucher">Voucher</NavLink>
+                <NavLink to="/kenh-hdv/voucher">Voucher</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/voucher">Voucher</NavLink>
+                <NavLink to="/kenh-hdv/voucher">Voucher</NavLink>
               </Menu.Item>
             )}
-            {/* {window.location.pathname === "/ho-so-hdv/create-voucher" ? (
+            {/* {window.location.pathname === "/kenh-hdv/create-voucher" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/create-voucher"> Thêm Voucher</NavLink>
+                <NavLink to="/kenh-hdv/create-voucher"> Thêm Voucher</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/create-voucher"> ThêmVoucher</NavLink>
+                <NavLink to="/kenh-hdv/create-voucher"> ThêmVoucher</NavLink>
               </Menu.Item>
             )} */}
           </Menu.SubMenu>
           <Menu.SubMenu title="Tài chính" icon={<SettingOutlined />} key="4">
-            {window.location.pathname === "/ho-so-hdv/doanh-thu" ? (
+            {window.location.pathname === "/kenh-hdv/doanh-thu" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/doanh-thu"> Doanh thu</NavLink>
+                <NavLink to="/kenh-hdv/doanh-thu"> Doanh thu</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/doanh-thu"> Doanh thu</NavLink>
+                <NavLink to="/kenh-hdv/doanh-thu"> Doanh thu</NavLink>
               </Menu.Item>
             )}
-            {window.location.pathname === "/ho-so-hdv/tai-khoan" ? (
+            {window.location.pathname === "/kenh-hdv/tai-khoan" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/tai-khoan"> Cài đặt tài khoản</NavLink>
+                <NavLink to="/kenh-hdv/tai-khoan"> Cài đặt tài khoản</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/tai-khoan"> Cài đặt tài khoản</NavLink>
+                <NavLink to="/kenh-hdv/tai-khoan"> Cài đặt tài khoản</NavLink>
               </Menu.Item>
             )}
           </Menu.SubMenu>
           <Menu.SubMenu title="Phát triển" icon={<SettingOutlined />} key="5">
-            {window.location.pathname === "/ho-so-hdv/setting" ? (
+            {window.location.pathname === "/kenh-hdv/setting" ? (
               <Menu.Item className="ant-menu-item-selected ">
-                <NavLink to="/ho-so-hdv/setting"> Thiết lập</NavLink>
+                <NavLink to="/kenh-hdv/setting"> Thiết lập</NavLink>
               </Menu.Item>
             ) : (
               <Menu.Item>
-                <NavLink to="/ho-so-hdv/setting"> Thiết lập</NavLink>
+                <NavLink to="/kenh-hdv/setting"> Thiết lập</NavLink>
               </Menu.Item>
             )}
           </Menu.SubMenu>

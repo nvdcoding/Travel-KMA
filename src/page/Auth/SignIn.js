@@ -19,8 +19,8 @@ export default function SignIn() {
         // description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
         icon: <SmileOutlined style={{ color: "#e52525" }} />,
       });
-      setToken(res.data.accessToken);
-      setRefreshToken(res.data.refreshToken);
+      setToken(res.returnValue.accessToken);
+      setRefreshToken(res.returnValue.refreshToken);
       // setItem("user", JSON.stringify(res?.userData));
       history.push("/");
       form.resetFields();

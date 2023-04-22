@@ -85,7 +85,7 @@ function HeaderLayout() {
                         <li>
                           <div class="box-list-info">
                             <i class="fas fa-user"></i>
-                            <Link to="/ho-so-hdv">Kênh HDV</Link>
+                            <Link to="/kenh-hdv">Kênh HDV</Link>
                           </div>
                         </li>
                         <li>
