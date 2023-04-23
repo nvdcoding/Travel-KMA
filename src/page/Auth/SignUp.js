@@ -2,7 +2,16 @@
 // /* eslint-disable */
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, Tabs, Select, notification, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Tabs,
+  Select,
+  notification,
+  message,
+  DatePicker,
+} from "antd";
 import "../../assets/css/auth.css";
 import { useHistory } from "react-router-dom";
 import { sendPost } from "../../utils/api";
@@ -236,26 +245,40 @@ export default function SignUp() {
                     </Select>
                   </Form.Item>
                 </div>
-
-                <Form.Item
-                  name="provice"
-                  hasFeedback
-                  rules={[
-                    {
-                      validateStatus: "error",
-                      required: true,
-                      message: "Provice không được để trống!",
-                    },
-                  ]}
-                >
-                  <Select placeholder="Tỉnh thành phố">
-                    {provice.map((item, index) => (
-                      <Option value={item?.id} key={index}>
-                        {item?.name}
-                      </Option>
-                    ))}
-                  </Select>
-                </Form.Item>
+                <div className="auth-group">
+                  <Form.Item
+                    name="provice"
+                    hasFeedback
+                    rules={[
+                      {
+                        validateStatus: "error",
+                        required: true,
+                        message: "Provice không được để trống!",
+                      },
+                    ]}
+                  >
+                    <Select placeholder="Tỉnh thành phố" mode="multiple">
+                      {provice.map((item, index) => (
+                        <Option value={item?.id} key={index}>
+                          {item?.name}
+                        </Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                  <Form.Item
+                    name="birthday"
+                    hasFeedback
+                    rules={[
+                      {
+                        validateStatus: "error",
+                        required: true,
+                        message: "Ngày sinh không được để trống!",
+                      },
+                    ]}
+                  >
+                    <DatePicker placeholder="chọn ngày sinh" />
+                  </Form.Item>
+                </div>
                 <Form.Item
                   name="password"
                   hasFeedback

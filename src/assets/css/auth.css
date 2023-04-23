@@ -156,3 +156,14 @@ iframe {
 .signin__wrapper .ant-result-extra > :last-child {
   margin: auto;
 }
+.signin__wrapper .ant-picker {
+  padding: 8px 11px;
+  width: 100%;
+  border-radius: 12px;
+}
+.signin__wrapper .ant-select-multiple .ant-select-selector {
+  padding: 5px 4px;
+  border-radius: 15px;
+}
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+}
