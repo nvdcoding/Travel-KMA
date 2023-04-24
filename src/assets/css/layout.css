@@ -313,9 +313,9 @@
   display: block;
 }
 
-personnal
-  /* setting */
-  .InfoUser-wwrapper {
+/* personnal */
+/* setting */
+.InfoUser-wwrapper {
   padding: 100px 9%;
   width: 80%;
 }
@@ -414,7 +414,7 @@ personnal
   z-index: 0;
   border-radius: 50%;
   cursor: pointer;
-  background: #000;
+  background: #00000024;
 }
 .InfoUser-wwrapper .info p .avtUpload label .photoupload img {
   width: 75%;
@@ -445,12 +445,12 @@ personnal
 .InfoUser-wwrapper .ChangPassword button {
   border: 0;
   padding: 4px 9px;
-  border-radius: 4px;
-  background-color: #f3684d;
+  border-radius: 10px;
+  background-color: var(--color-sub);
   color: #fff;
 }
 .InfoUser-wwrapper .ChangPassword button:hover {
-  background-color: #f75939;
+  background-color: var(--color-sub);
 }
 .InfoUser-wwrapper
   .ant-form-item-label

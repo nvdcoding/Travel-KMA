@@ -9,6 +9,7 @@ import { sendPost } from "../../utils/api";
 import { setRefreshToken, setToken } from "../../utils/storage";
 export default function SignIn() {
   const [form] = Form.useForm();
+  const [formHDV] = Form.useForm();
   const history = useHistory();
   const isSetting = 1;
   const onFinish = async (values) => {
@@ -25,11 +26,31 @@ export default function SignIn() {
       history.push("/");
       form.resetFields();
     } else {
-      return message.error("Không khớp");
+      message.error("Không khớp");
     }
   };
 
   const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+  const onFinishHDV = async (values) => {
+    const res = await sendPost("/auth/login-tourguide", values);
+    if (res.statusCode === 200) {
+      notification.open({
+        message: "Đăng nhập thành công",
+        icon: <SmileOutlined style={{ color: "#e52525" }} />,
+      });
+      setToken(res.returnValue.accessToken);
+      setRefreshToken(res.returnValue.refreshToken);
+      // setItem("user", JSON.stringify(res?.userData));
+      history.push("/kenh-hdv");
+      form.resetFields();
+    } else {
+      message.error("Không khớp");
+    }
+  };
+
+  const onFinishFailedHDV = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
   useEffect(() => {}, []);
@@ -97,10 +118,10 @@ export default function SignIn() {
             </Tabs.TabPane>
             <Tabs.TabPane tab="Hướng dẫn viên" key="2">
               <Form
-                onFinish={onFinish}
-                onFinishFailed={onFinishFailed}
+                onFinish={onFinishHDV}
+                onFinishFailed={onFinishFailedHDV}
                 autoComplete="off"
-                form={form}
+                form={formHDV}
               >
                 <Form.Item
                   className="auth-form-item"
@@ -135,7 +156,7 @@ export default function SignIn() {
                   <Input.Password placeholder="Mật khẩu của bạn" />
                 </Form.Item>
 
-                <Button className="button button--primary" onClick={onFinish}>
+                <Button className="button button--primary" htmlType="submit">
                   Đăng nhập
                 </Button>
                 <div className="auth-des">

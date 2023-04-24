@@ -59,9 +59,11 @@ function HeaderLayout() {
               </div>
               <div className="menu-right">
                 <div className="pc">
-                  <div className="your-trip">
-                    <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
-                  </div>
+                  {Token ? (
+                    <div className="your-trip">
+                      <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
+                    </div>
+                  ) : null}
                   <div className="language">
                     <i className="fa-solid fa-globe"></i>
                   </div>

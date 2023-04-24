@@ -4,6 +4,7 @@ import { message } from "antd";
 export const AppContext = createContext({});
 export const AppProvider = ({ children }) => {
   const [provice, setProvice] = useState([]);
+  const [infoUser, setInfo] = useState({});
 
   const allChatUsers = [
     {
@@ -125,12 +126,23 @@ export const AppProvider = ({ children }) => {
       message.error("thất bại");
     }
   };
+  const getInfoUser = async () => {
+    // let res = await sendGet("/auth/me");
+    // if (res.statusCode === 200) {
+    //   setInfo(res.returnValue);
+    // } else {
+    //   message.error("thất bại");
+    // }
+  };
   useEffect(() => {
     getProvice();
+    getInfoUser();
   }, []);
   const [data, setData] = useState([]);
   return (
-    <AppContext.Provider value={{ allChatUsers, data, setData, provice }}>
+    <AppContext.Provider
+      value={{ allChatUsers, data, setData, provice, infoUser }}
+    >
       {children}
     </AppContext.Provider>
   );
