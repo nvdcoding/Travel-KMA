@@ -5,7 +5,7 @@ import { Tabs, Popconfirm, message, Skeleton } from "antd";
 
 import "../../../assets/css/trip.css";
 import { avt } from "../../../constants/images";
-import RateScreen from "../../../components/Rate";
+import RateScreen from "../../../components/rate";
 import { Link } from "react-router-dom";
 import Condition from "../../../components/condition";
 import { sendGet } from "../../../utils/api";
