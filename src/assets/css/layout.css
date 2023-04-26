@@ -112,9 +112,6 @@
 
 /* tour-footer */
 .tour-footer-sub {
-  background: #faf9f8;
-  border: 1px solid #ededed;
-  /* margin-top: 5rem; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -175,11 +172,11 @@
 .tour-footer-content .tour-footer__item:hover .tour-footer__text {
   color: var(--colour-link);
 }
-.footer {
+.footer .content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px 10px;
+  padding: 10px 10px;
   background-color: #fff;
 }
 
@@ -463,4 +460,8 @@
   font-weight: 600;
   color: #000;
   width: 150px;
+}
+.foorwr__wrapper {
+  background: #faf9f8;
+  border: 1px solid #ededed;
 }

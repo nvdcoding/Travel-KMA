@@ -1,11 +1,18 @@
 /* eslint-disable */
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { banner, address, halong } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
 import { Pagination } from "antd";
 import TourItem from "../../../components/tourItem";
-import { Modal, Button, Result, Input, Form, InputNumber, Select } from "antd";
+import {
+  Modal,
+  Button,
+  Result,
+  Checkbox,
+  Form,
+  InputNumber,
+  Select,
+} from "antd";
 import { sendGet } from "../../../utils/api";
 import { AppContext } from "../../../Context/AppContext";
 
@@ -14,6 +21,60 @@ export default function ToursAll() {
   const [data, setData] = useState([]);
   const { provice } = useContext(AppContext);
   const [hdv, setHdv] = useState([]);
+  const options = [
+    {
+      label: "Du lịch đồng quê",
+      value: "1",
+    },
+    {
+      label: "Ẩm thực",
+      value: "2",
+    },
+    {
+      label: "Hoang dã",
+      value: "3",
+    },
+    {
+      label: "Tự túc",
+      value: "4",
+    },
+  ];
+  const optionsRate = [
+    {
+      label: "5 sa0",
+      value: "5",
+    },
+    {
+      label: "Từ 4 sao",
+      value: "4",
+    },
+    {
+      label: "Từ 3 sa0",
+      value: "3",
+    },
+    {
+      label: "Từ 1 sao",
+      value: "1",
+    },
+  ];
+  const number = [
+    {
+      label: "Dưới 10 lượt",
+      value: "<10",
+    },
+    {
+      label: "Từ 10 lượt",
+      value: ">10",
+    },
+    {
+      label: "Từ 50 lượt",
+      value: "50",
+    },
+    {
+      label: "Từ 100 lượt",
+      value: "100",
+    },
+  ];
   const listTour = async () => {
     const res = await sendGet("/tours", {});
     if (res.returnValue.data.length >= 0) {
@@ -38,6 +99,7 @@ export default function ToursAll() {
       message.error("thất bại");
     }
   };
+
   useEffect(() => {
     listTour();
   }, []);
@@ -46,31 +108,7 @@ export default function ToursAll() {
     <>
       <Layout>
         <div className="tours-all__wrapper">
-          <div className="banner">
-            <img alt="" src={halong} />
-          </div>
           <div className="content">
-            <div className="pathway">
-              <ul>
-                <li>
-                  <a href="/">Trang chủ</a>
-                </li>
-                <li>
-                  <span>
-                    <i className="fa-solid fa-chevron-right"></i>
-                  </span>
-                </li>
-                <li>Tour</li>
-                <li>
-                  <span>
-                    <i className="fa-solid fa-chevron-right"></i>
-                  </span>
-                </li>
-                <li>
-                  <strong>Xem tất cả</strong>
-                </li>
-              </ul>
-            </div>
             <div className="tours-all__main">
               <div className="tours-all__left">
                 <div className="tour-all-box__search">
@@ -103,6 +141,27 @@ export default function ToursAll() {
                         ))}
                       </Select>
                     </Form.Item>
+                    <Form.Item
+                      name="type"
+                      label="Loại hình du lịch"
+                      className="tour-select"
+                    >
+                      <Checkbox.Group options={options} />
+                    </Form.Item>
+                    <Form.Item
+                      name="rate"
+                      label="Đánh giá"
+                      className="tour-select"
+                    >
+                      <Checkbox.Group options={optionsRate} />
+                    </Form.Item>
+                    <Form.Item
+                      name="type"
+                      label="Số lượt đi"
+                      className="tour-select"
+                    >
+                      <Checkbox.Group options={number} />
+                    </Form.Item>
                     <div className="price-group price-range">
                       <Form.Item name="minPrice" label="đ Từ">
                         <InputNumber placeholder="" />
@@ -128,12 +187,33 @@ export default function ToursAll() {
                 <h3 className="tour-all-result">
                   Chúng tôi tìm thấy {data.length} tours cho Quý khách.
                 </h3>
+                <div class="travel-sort-bar">
+                  <span class="travel-sort-bar__label">Sắp xếp theo</span>
+                  <div class="travel-sort-by-options">
+                    <div class="travel-sort-by-options__option travel-sort-by-options__option--selected">
+                      Đi nhiều
+                    </div>
+                    <div class="travel-sort-by-options__option">Tour mới</div>
+                    <div>
+                      <div class="select-with-status">
+                        <div class="select-with-status__holder select-with-status__box-shadow">
+                          <span class="select-with-status__placeholder">
+                            Giá
+                          </span>
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="tours-all__list">
                   {data.map((item, index) => (
                     <TourItem item={item} key={index} />
                   ))}
                 </div>
-                <Pagination defaultCurrent={1} total={50} />
+                {data.length > 0 && (
+                  <Pagination defaultCurrent={1} total={50} />
+                )}
               </div>
             </div>
           </div>

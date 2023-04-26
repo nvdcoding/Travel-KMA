@@ -1235,6 +1235,7 @@
 }
 .times .ant-picker {
   width: 100%;
+  border-radius: 8px;
 }
 .ant-picker-input > input {
   line-height: 1.9715;

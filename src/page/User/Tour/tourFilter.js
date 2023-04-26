@@ -134,7 +134,7 @@ export default function ToursFilter() {
                           defaultValue={moment(timeStart)}
                         />
                       </div>
-                      <label>Số lượng</label>
+                      {/* <label>Số lượng</label>
                       <div className="create-tour__people-item">
                         <p className="create-tour__people-des">
                           Trẻ em
@@ -161,7 +161,7 @@ export default function ToursFilter() {
                             <i class="fa-solid fa-plus"></i>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       <label htmlFor="start">Mô tả chi tiết:</label>
                       <Input
                         placeholder="Nhập mô tả"
