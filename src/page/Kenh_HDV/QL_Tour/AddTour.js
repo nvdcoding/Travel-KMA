@@ -18,12 +18,13 @@ import LayoutHDV from "../../../components/layout/layoutHDV";
 import { useState } from "react";
 import { sendPost } from "../../../utils/api";
 import { AppContext } from "../../../Context/AppContext";
+import { useHistory } from "react-router-dom";
 export default function AddTour() {
   const { TextArea } = Input;
   const { provice } = useContext(AppContext);
   const [showtt, setShowtt] = useState(true);
   const defileTime = 100000;
-
+  const history = useHistory();
   const [fileList, setFileList] = React.useState([]);
   const [listFile, setListFile] = React.useState([]);
 
@@ -55,18 +56,18 @@ export default function AddTour() {
       return error;
     }
   };
-
   const onGetImg = async () => {
     try {
       let files = [];
       for await (const file of fileList) {
         let res = await upLoadFile(file.originFileObj);
         if (res) {
-          files = [...files, res.secure_url];
+          files = [...files, res];
         }
         await wait(!res ? defileTime : 0);
       }
       setListFile(files);
+      return files;
     } catch (err) {
       console.log("error", err);
     }
@@ -74,20 +75,12 @@ export default function AddTour() {
   };
   const onFinish = async (values) => {
     values.tourImages = await onGetImg();
-    console.log("ima", await onGetImg());
-    values.tourSchedules = [
-      {
-        content: "Lịch trình 1",
-      },
-      {
-        content: "Lịch trình 2",
-      },
-    ];
     const res = await sendPost("/tours", values);
     if (res.statusCode === 400) {
       message.error("Thất bại");
     } else {
       message.success("tạo mới tour thành công, vùi lòng đợi Admin phê duyệt");
+      history.push("/kenh-hdv/ds-tour");
     }
   };
   const { Option } = Select;
@@ -135,9 +128,12 @@ export default function AddTour() {
                   ]}
                 >
                   <Select placeholder="Phân loại tour">
-                    <Option value="male">Du lịch tự nhiên</Option>
-                    <Option value="female">Du lịch hoang dã</Option>
-                    <Option value="other">Ẩm thực</Option>
+                    <Option value="Ecotourism">Du lịch văn hóa</Option>
+                    <Option value="Cultural">Du lịch nghỉ dưỡng</Option>
+                    <Option value="Resort">Du lịch giải trí</Option>
+                    <Option value="Entertainment">Du lịch khám phá</Option>
+                    <Option value="Sports">Du lịch thể thao</Option>
+                    <Option value="Discovery">Du lịch mạo hiểm</Option>
                   </Select>
                 </Form.Item>
                 <Form.Item
@@ -179,7 +175,6 @@ export default function AddTour() {
                       message: "Số lượng ko để trống!",
                     },
                   ]}
-                  initialValue={1}
                 >
                   <InputNumber min={1} />
                 </Form.Item>
@@ -221,23 +216,6 @@ export default function AddTour() {
                     <InputNumber min={1} />
                   </Form.Item>
                 </div>
-
-                <Form.Item
-                  name="service"
-                  label="Dịch vụ"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Dịch vụ ko để trống!",
-                    },
-                  ]}
-                >
-                  <div className="service-group">
-                    <TextArea rows={4} placeholder="Bao gồm" />
-                    <TextArea rows={4} placeholder="Không bao gồm" />
-                    <TextArea rows={4} placeholder="Tùy chỉnh" />
-                  </div>
-                </Form.Item>
                 <Form.Item label="Ảnh mô tả" valuePropName="fileList">
                   {/* <Image lengthImg={1} /> */}
                   <Upload
@@ -254,7 +232,7 @@ export default function AddTour() {
             )}
 
             <div className="main-ht">
-              <Form.List name="info">
+              <Form.List name="tourSchedules">
                 {(fields, { add, remove }) => {
                   return (
                     <div>
@@ -277,7 +255,7 @@ export default function AddTour() {
                               className="dynamic-delete-button"
                               onClick={() => remove(field.name)}
                             >
-                              Remove Above Field
+                              Xóa lịch trình
                             </Button>
                           ) : null}
                         </div>
@@ -326,14 +304,11 @@ function StepItem({ field, index }) {
               >
                 <Input placeholder="Tiêu đề" />
               </Form.Item>
-              <Form.Item name={[index, "desc"]} label="Mô tả">
+              <Form.Item name={[index, "content"]} label="Mô tả">
                 <div className="service-group">
                   <TextArea rows={4} placeholder="Mô tả ngắn" />
-                  <TextArea rows={4} placeholder="Mô tả dài" />
+                  {/* <TextArea rows={4} placeholder="Mô tả dài" /> */}
                 </div>
-              </Form.Item>
-              <Form.Item name={[index, "image"]} label="Ảnh mô tả">
-                <Image lengthImg={1} />
               </Form.Item>
             </Input.Group>
           </Form.Item>

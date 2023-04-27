@@ -21,22 +21,38 @@ export default function ToursAll() {
   const [data, setData] = useState([]);
   const { provice } = useContext(AppContext);
   const [hdv, setHdv] = useState([]);
+  const numEachPage = 2;
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(1);
+
   const options = [
     {
-      label: "Du lịch đồng quê",
-      value: "1",
+      label: "Sinh thái",
+      value: "Ecotourism",
     },
     {
-      label: "Ẩm thực",
-      value: "2",
+      label: "Văn hóa",
+      value: "Cultural",
     },
     {
-      label: "Hoang dã",
-      value: "3",
+      label: "Nghỉ dưỡng",
+      value: "Resort",
     },
     {
-      label: "Tự túc",
-      value: "4",
+      label: "Giải trí",
+      value: "Entertainment",
+    },
+    {
+      label: "Thể thao",
+      value: "Sports",
+    },
+    {
+      label: "Khám phá",
+      value: "Discovery",
+    },
+    {
+      label: "Mạo hiểm",
+      value: "Adventure",
     },
   ];
   const optionsRate = [
@@ -51,10 +67,6 @@ export default function ToursAll() {
     {
       label: "Từ 3 sa0",
       value: "3",
-    },
-    {
-      label: "Từ 1 sao",
-      value: "1",
     },
   ];
   const number = [
@@ -87,6 +99,10 @@ export default function ToursAll() {
       message.error("Cập nhật tour thất bại");
     }
   };
+  const handleChange = (value) => {
+    setMinValue((value - 1) * numEachPage);
+    setMaxValue(value * numEachPage);
+  };
   const tourFiltter = async (values) => {
     const result = await sendGet("/tours", values);
     if (result.returnValue.data.length >= 0) {
@@ -103,7 +119,6 @@ export default function ToursAll() {
   useEffect(() => {
     listTour();
   }, []);
-
   return (
     <>
       <Layout>
@@ -185,7 +200,8 @@ export default function ToursAll() {
               </div>
               <div className="tours-all__right ">
                 <h3 className="tour-all-result">
-                  Chúng tôi tìm thấy {data.length} tours cho Quý khách.
+                  <i class="fa-regular fa-lightbulb"></i> Chúng tôi tìm thấy{" "}
+                  {data.length} tours cho Quý khách.
                 </h3>
                 <div class="travel-sort-bar">
                   <span class="travel-sort-bar__label">Sắp xếp theo</span>
@@ -195,24 +211,43 @@ export default function ToursAll() {
                     </div>
                     <div class="travel-sort-by-options__option">Tour mới</div>
                     <div>
-                      <div class="select-with-status">
+                      <div class=" select-with-status">
                         <div class="select-with-status__holder select-with-status__box-shadow">
-                          <span class="select-with-status__placeholder">
-                            Giá
-                          </span>
-                          <div></div>
+                          <div className="select-price">
+                            {" "}
+                            <span class="select-with-status__placeholder">
+                              Giá
+                            </span>
+                            <i class="fa-solid fa-angle-down"></i>
+                          </div>
+                          <div className="price-menu">
+                            <div className="price-menu-item">
+                              <p>Giá tăng dần</p>
+                              <i class="fa-solid fa-arrow-up-long"></i>
+                            </div>
+                            <div className="price-menu-item">
+                              <p>Giá giảm dần</p>
+                              <i class="fa-solid fa-arrow-down-long"></i>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="tours-all__list">
+                  {/* {data.slice(minValue, maxValue).map((item, index) => ( */}
                   {data.map((item, index) => (
                     <TourItem item={item} key={index} />
                   ))}
                 </div>
                 {data.length > 0 && (
-                  <Pagination defaultCurrent={1} total={50} />
+                  <Pagination
+                    defaultCurrent={1}
+                    defaultPageSize={numEachPage}
+                    total={data.length}
+                    onChange={() => handleChange()}
+                  />
                 )}
               </div>
             </div>

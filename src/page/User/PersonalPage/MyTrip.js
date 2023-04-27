@@ -65,7 +65,7 @@ export default function MyTrip() {
     tourEnd();
     tourProcessing();
   }, []);
-  if (!Object.keys(dataWaiting).length) return <Skeleton />;
+  // if (!Object.keys(dataWaiting).length) return <Skeleton />;
 
   return (
     <>
