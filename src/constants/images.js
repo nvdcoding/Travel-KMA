@@ -33,3 +33,6 @@ export { default as hochiminh } from "../assets/images/tour-du-lich-ho-chi-minh-
 export { default as menudot } from "../assets/images/dots-menu.png";
 export { default as trangan } from "../assets/images/trang_an1.jpg";
 export { default as camera } from "../assets/images/camerapng.png";
+export { default as voucher1 } from "../assets/images/img-travel-pack-3.png";
+export { default as voucher2 } from "../assets/images/img-travel-pack-4.png";
+export { default as error } from "../assets/images/error.png";

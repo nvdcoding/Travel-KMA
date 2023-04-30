@@ -172,8 +172,8 @@ function HeaderLayout() {
                         </NavLink>
                       </li> */}
                       {Token ? (
-                        <li className="menu-item-mb">
-                          <NavLink to="/signout">
+                        <li className="menu-item-mb" onClick={SignOut}>
+                          <NavLink to="#">
                             <i class="fa-solid fa-right-from-bracket"></i>Đăng
                             xuẩt
                           </NavLink>

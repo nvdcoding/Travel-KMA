@@ -116,7 +116,7 @@
 }
 
 .mytrip-order__main-price {
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
 }
 
 .mytrip-order__main-price-km {
@@ -395,7 +395,7 @@
 }
 
 .mytrip-order__main-price {
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
 }
 
 .mytrip-order__main-price-km {
@@ -1524,4 +1524,8 @@
   box-sizing: border-box;
   background-color: #fffcf5;
   border-top: 1px dotted rgba(0, 0, 0, 0.09);
+}
+.voucher-note {
+  font-size: 16px;
+  font-weight: 500;
 }

@@ -30,7 +30,7 @@ export default function TourDetail() {
   };
 
   const onFinish = async (values) => {
-    values.tourId = 1;
+    values.tourId = data.id;
     values.startDate = date;
     let respon = await sendPost("/orders", values);
     if (respon.statusCode == 0) {

@@ -1,34 +1,43 @@
-/* eslint-disable */
+/* eslint-disable eqeqeq */
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { Tabs, Popconfirm, message, Skeleton } from "antd";
+import { Tabs, Popconfirm, message, Skeleton, Modal } from "antd";
 
 import "../../../assets/css/trip.css";
-import { avt } from "../../../constants/images";
+import {
+  avt,
+  banner,
+  error,
+  voucher1,
+  voucher2,
+} from "../../../constants/images";
 import RateScreen from "../../../components/rate";
 import { Link } from "react-router-dom";
 import Condition from "../../../components/condition";
-import { sendGet } from "../../../utils/api";
-import { AppContext } from "../../../Context/AppContext";
+import { sendDelete, sendGet, sendPut } from "../../../utils/api";
 import OrderDetail from "./OrderDetail";
 export default function MyTrip() {
   const { TabPane } = Tabs;
   const [dataProcessing, setDataProcessing] = useState([]);
   const [dataWaiting, setDataWaiting] = useState([]);
   const [dataEnd, setDataEnd] = useState([]);
-  const [dataVoucher, setDataVoucher] = useState([]);
-  const { infoUser } = useContext(AppContext);
   const [step, setStep] = useState(false);
   const [dataDetail, setDataDetail] = useState();
-
-  const confirm = () => {
-    message.success("Hủy chuyến đi thành công");
+  const [isCancelTour, setIsCancelTour] = useState(false);
+  const showModal = () => {
+    setIsCancelTour(true);
+  };
+  const handleOk = () => {
+    setIsCancelTour(false);
+  };
+  const handleCancel = () => {
+    setIsCancelTour(false);
   };
   const accesss = () => {
     message.success("Xác nhận chuyến đi thành công");
   };
   const tourWaitting = async () => {
-    const result = await sendGet(`/orders`, {
+    const result = await sendGet(`/orders/user`, {
       type: "waiting",
     });
     if (result.statusCode == 200) {
@@ -38,7 +47,7 @@ export default function MyTrip() {
     }
   };
   const tourProcessing = async () => {
-    const result = await sendGet(`/orders`, {
+    const result = await sendGet(`/orders/user`, {
       type: "processing",
     });
     if (result.statusCode == 200) {
@@ -48,7 +57,7 @@ export default function MyTrip() {
     }
   };
   const tourEnd = async () => {
-    const result = await sendGet(`/orders`, {
+    const result = await sendGet(`/orders/user`, {
       type: "end",
     });
     if (result.statusCode == 200) {
@@ -57,32 +66,59 @@ export default function MyTrip() {
       message.error("thất bại");
     }
   };
+  const startUser = async (e) => {
+    if (e.status == 3) {
+      try {
+        let res = await sendPut(`/orders/start-user/${e.id}`);
+        if (res.statusCode == 200) {
+          message.success("Thanh công");
+        } else {
+          message.error("thất bại");
+        }
+      } catch (error) {
+        message.error("Chưa đến ngày bắt đầu");
+      }
+    } else message.success("Chuyến đi đang được thực hiện");
+  };
+  // huy và hoàn tiền
+  const cancelTour = async (e) => {
+    try {
+      let res = await sendDelete(`/orders/user`, { orderId: e.id });
+      if (res.statusCode == 200) {
+        // huy chuyen di
+        message.success("Hủy chuyến đi thành công");
+        tourWaitting();
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Thất bại");
+    }
+  };
+  const endTour = async (e) => {
+    try {
+      let res = await sendPut(`/orders/end-order`, {
+        orderId: e.id,
+      });
+      if (res.statusCode == 200) {
+        message.success("Xác nhận kết thúc tour thành công");
+        tourEnd();
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Chưa đến hạn kết thúc chuyến đi");
+    }
+  };
   const handleStep = async (values) => {
     setStep(!step);
     setDataDetail(values);
   };
-  const listVoucher = async () => {
-    const result = await sendGet(`/vourchers`);
-    if (result.statusCode == 200) {
-      setDataVoucher(result.returnValue);
-    } else {
-      message.error("thất bại");
-    }
-  };
-  const listVoucherAvailable = async () => {
-    const result = await sendGet(`/vourchers/available`);
-    if (result.statusCode == 200) {
-      setDataVoucherAvailable(result.returnValue);
-    } else {
-      message.error("thất bại");
-    }
-  };
+
   useEffect(() => {
     tourWaitting();
     tourEnd();
     tourProcessing();
-    listVoucher();
-    listVoucherAvailable();
   }, []);
   // if (!Object.keys(dataWaiting).length) return <Skeleton />;
 
@@ -111,7 +147,7 @@ export default function MyTrip() {
                     handleStep={handleStep}
                   />
                 ) : (
-                  <Tabs defaultActiveKey="0" className="mytrip-sub-menu">
+                  <Tabs defaultActiveKey="1" className="mytrip-sub-menu">
                     <TabPane
                       tab={<p className="mytrip-sub-menu-name">Chờ xác nhận</p>}
                       key="1"
@@ -134,7 +170,19 @@ export default function MyTrip() {
                                 </Link>
                               </div>
                               <div className="mytrip-order__header-right">
-                                Chờ xác nhận
+                                {value.status == 0
+                                  ? "Chờ xác nhận"
+                                  : value.status == 1
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -142,7 +190,11 @@ export default function MyTrip() {
                                 <img
                                   className="mytrip-order-img"
                                   alt=""
-                                  src={avt}
+                                  src={
+                                    value?.tour?.images[0].url
+                                      ? value?.tour?.images[0].url
+                                      : banner
+                                  }
                                 />
                                 <h4
                                   className="mytrip-order-name"
@@ -153,25 +205,68 @@ export default function MyTrip() {
                               </div>
                               <div className="mytrip-order__main-right">
                                 <p className="mytrip-order__main-price">
-                                  {value?.tour?.basePrice}
-                                </p>
-                                <p className="mytrip-order__main-price-km">
-                                  {value?.tour?.pricekm}
+                                  {value?.tour?.basePrice} đ
                                 </p>
                               </div>
                             </div>
                             <div className="mytrip-order__rate md-1">
-                              <div className="button button--primary">
-                                <Popconfirm
-                                  title="Hủy yêu cầu?"
-                                  description="Xác nhận hủy chuyến đi"
-                                  onConfirm={confirm}
-                                  okText="Đồng ý"
-                                  cancelText="Hủy"
-                                >
-                                  Hủy
-                                </Popconfirm>
-                              </div>
+                              {value.status < 2 ? (
+                                <div className="button button--primary">
+                                  <Popconfirm
+                                    title="Hủy yêu cầu?"
+                                    description="Xác nhận hủy chuyến đi"
+                                    onConfirm={() => cancelTour(value)}
+                                    okText="Đồng ý"
+                                    cancelText="Hủy"
+                                  >
+                                    Hủy
+                                  </Popconfirm>
+                                </div>
+                              ) : (
+                                <>
+                                  <div
+                                    className="button button--primary"
+                                    onClick={() => showModal()}
+                                  >
+                                    Hủy
+                                  </div>
+                                  <Modal
+                                    title=""
+                                    open={isCancelTour}
+                                    visible={isCancelTour}
+                                    onOk={handleOk}
+                                    onCancel={handleCancel}
+                                    footer={null}
+                                  >
+                                    <div className="modal-content">
+                                      <p className="modal-title">
+                                        Xác nhận hủy chuyến?
+                                      </p>
+                                      <div className="modal-img">
+                                        <img alt="" src={error} />
+                                      </div>
+                                      <p className="modal-desc">
+                                        Tiền cọc sẽ không được hoàn lại. Chắc
+                                        chắn hủy?
+                                      </p>
+                                      <div className="button-group">
+                                        <div
+                                          className="button button--primary"
+                                          onClick={() => cancelTour(value)}
+                                        >
+                                          Đồng ý
+                                        </div>
+                                        <div
+                                          className="button button--normal"
+                                          onClick={() => handleCancel()}
+                                        >
+                                          Hủy
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </Modal>
+                                </>
+                              )}
                             </div>
                           </div>
                         ))}
@@ -194,7 +289,19 @@ export default function MyTrip() {
                               </div>
                             </div>{" "}
                             <div className="mytrip-order__header-right">
-                              Đang thực hiện
+                              {value.status == 0
+                                ? "Chờ xác nhận"
+                                : value.status == 1
+                                ? "Chờ đặt cọc"
+                                : value.status == 2
+                                ? "Chờ thanh toán"
+                                : value.status == 3
+                                ? "Chưa thực hiện"
+                                : value.status == 4
+                                ? "Đang thực hiện"
+                                : value.status == 5
+                                ? "Đã thực hiện"
+                                : "Đã hủy"}
                             </div>
                           </div>
                           <div className="mytrip-order__main">
@@ -202,24 +309,43 @@ export default function MyTrip() {
                               <img
                                 className="mytrip-order-img"
                                 alt=""
-                                src={avt}
+                                src={
+                                  value?.tour?.images[0].url
+                                    ? value?.tour?.images[0].url
+                                    : banner
+                                }
                               />
                               <h4 className="mytrip-order-name">
-                                {value?.name}
+                                {value?.tour?.name}
                               </h4>
                             </div>
                             <div className="mytrip-order__main-right">
                               <p className="mytrip-order__main-price">
-                                {value?.price}
-                              </p>
-                              <p className="mytrip-order__main-price-km">
-                                {value?.pricekm}
+                                {value?.price} đ
                               </p>
                             </div>
                           </div>
-                          <div className="mytrip-order__rate md-1">
-                            Khởi hành vào ngày {value?.startDate}
-                          </div>
+                          {value.status == 3 ? (
+                            <div className="mytrip-order__rate">
+                              Khởi hành vào ngày {value?.startDate}
+                              <div
+                                className="button button--primary"
+                                onClick={() => startUser(value)}
+                              >
+                                Bắt đầu
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="mytrip-order__rate">
+                              Kết thúc vào ngày vào ngày {value?.endDate}
+                              <div
+                                className="button button--primary"
+                                onClick={() => endTour(value)}
+                              >
+                                Kết thúc
+                              </div>
+                            </div>
+                          )}
                         </div>
                       ))}
                     </TabPane>
@@ -238,7 +364,19 @@ export default function MyTrip() {
                               </div>
                             </div>{" "}
                             <div className="mytrip-order__header-right">
-                              Đã đi
+                              {value.status == 0
+                                ? "Chờ xác nhận"
+                                : value.status == 1
+                                ? "Chờ đặt cọc"
+                                : value.status == 2
+                                ? "Chờ thanh toán"
+                                : value.status == 3
+                                ? "Chưa thực hiện"
+                                : value.status == 4
+                                ? "Đang thực hiện"
+                                : value.status == 5
+                                ? "Đã thực hiện"
+                                : "Đã hủy"}
                             </div>
                           </div>
                           <div className="mytrip-order__main">
@@ -246,25 +384,27 @@ export default function MyTrip() {
                               <img
                                 className="mytrip-order-img"
                                 alt=""
-                                src={avt}
+                                src={
+                                  value?.tour?.images[0].url
+                                    ? value?.tour?.images[0].url
+                                    : banner
+                                }
                               />
                               <h4 className="mytrip-order-name">
-                                {value?.name}
+                                {value?.tour?.name}
                               </h4>
                             </div>
                             <div className="mytrip-order__main-right">
                               <p className="mytrip-order__main-price">
-                                {value?.price}
-                              </p>
-                              <p className="mytrip-order__main-price-km">
-                                {value?.pricekm}
+                                {value?.price} đ
                               </p>
                             </div>
                           </div>
-                          <div className="mytrip-order__rate">
+                          <div className="mytrip-order__rate ">
                             <p className="mytrip-order__rate-note">
-                              Không nhận được đánh giá
+                              Chưa nhận được đánh giá
                             </p>
+
                             <RateScreen data={value} />
                           </div>
                         </div>
@@ -288,142 +428,7 @@ export default function MyTrip() {
                   <input placeholder="nhập mã voucher..." />
                   <div className="button button--primary">Tìm</div>
                 </div>
-                <Tabs defaultActiveKey="1" className="mytrip-sub-menu">
-                  <TabPane
-                    tab={<p className="mytrip-sub-menu-name">Hiệu lực</p>}
-                    key="1"
-                  >
-                    <div className="mytrip-voucher">
-                      <div className="mytrip-voucher-item">
-                        <div className="mytrip-voucher-left">
-                          <img
-                            className="mytrip-voucher-img"
-                            alt=""
-                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-                          />
-                          <h4 className="mytrip-voucher-name"> Voucher</h4>
-                        </div>
-                        <div className="mytrip-voucher-right">
-                          <div className="mytrip-voucher-top">
-                            <h3 className="mytrip-voucher-title">
-                              Giảm 10% đơn 20k giảm 210k
-                            </h3>
-                            <p className="mytrip-voucher-use">Dùng ngay</p>
-                          </div>
-                          <div className="mytrip-voucher-bottom">
-                            <h3 className="mytrip-voucher-time">
-                              Sắp hết hạn: Còn 4 giờ
-                            </h3>
-                            <Condition />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mytrip-voucher-item">
-                        <div className="mytrip-voucher-left">
-                          <img
-                            className="mytrip-voucher-img"
-                            alt=""
-                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-                          />
-                          <h4 className="mytrip-voucher-name"> Voucher</h4>
-                        </div>
-                        <div className="mytrip-voucher-right">
-                          <div className="mytrip-voucher-top">
-                            <h3 className="mytrip-voucher-title">
-                              Giảm 10% đơn 20k giảm 210k
-                            </h3>
-                            <p className="mytrip-voucher-use">Dùng ngay</p>
-                          </div>
-                          <div className="mytrip-voucher-bottom">
-                            <h3 className="mytrip-voucher-time">
-                              Sắp hết hạn: Còn 4 giờ
-                            </h3>
-                            <Condition />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mytrip-voucher-item">
-                        <div className="mytrip-voucher-left">
-                          <img
-                            className="mytrip-voucher-img"
-                            alt=""
-                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-                          />
-                          <h4 className="mytrip-voucher-name">Voucher</h4>
-                        </div>
-                        <div className="mytrip-voucher-right">
-                          <div className="mytrip-voucher-top">
-                            <h3 className="mytrip-voucher-title">
-                              Giảm 10% đơn 20k giảm 210k
-                            </h3>
-                            <p className="mytrip-voucher-use">Dùng ngay</p>
-                          </div>
-                          <div className="mytrip-voucher-bottom">
-                            <h3 className="mytrip-voucher-time">
-                              Sắp hết hạn: Còn 4 giờ
-                            </h3>
-                            <Condition />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </TabPane>
-                  <TabPane
-                    tab={<p className="mytrip-sub-menu-name">Săn mã</p>}
-                    key="2"
-                  >
-                    <div className="mytrip-voucher ">
-                      <div className="mytrip-voucher-item">
-                        <div className="mytrip-voucher-left">
-                          <img
-                            className="mytrip-voucher-img"
-                            alt=""
-                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-                          />
-                          <h4 className="mytrip-voucher-name">Voucher</h4>
-                        </div>
-                        <div className="mytrip-voucher-right">
-                          <div className="mytrip-voucher-top">
-                            <h3 className="mytrip-voucher-title">
-                              Giảm 10% đơn 20k giảm 210k
-                            </h3>
-                            <p className="mytrip-voucher-use">Lưu mã</p>
-                          </div>
-                          <div className="mytrip-voucher-bottom">
-                            <h3 className="mytrip-voucher-time">
-                              Sắp hết hạn: Còn 4 giờ
-                            </h3>
-                            <Condition />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mytrip-voucher-item">
-                        <div className="mytrip-voucher-left">
-                          <img
-                            className="mytrip-voucher-img"
-                            alt=""
-                            src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-                          />
-                          <h4 className="mytrip-voucher-name">Voucher</h4>
-                        </div>
-                        <div className="mytrip-voucher-right">
-                          <div className="mytrip-voucher-top">
-                            <h3 className="mytrip-voucher-title">
-                              Giảm 10% đơn 20k giảm 210k
-                            </h3>
-                            <p className="mytrip-voucher-use">Lưu mã</p>
-                          </div>
-                          <div className="mytrip-voucher-bottom">
-                            <h3 className="mytrip-voucher-time">
-                              Sắp hết hạn: Còn 4 giờ
-                            </h3>
-                            <Condition />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </TabPane>
-                </Tabs>
+                <Voucher />
               </TabPane>
             </Tabs>
           </div>
@@ -432,3 +437,126 @@ export default function MyTrip() {
     </>
   );
 }
+const Voucher = () => {
+  const { TabPane } = Tabs;
+  const [dataVoucher, setDataVoucher] = useState([]);
+  const [dataVoucherAvailable, setdataVoucherAvailable] = useState([]);
+
+  const listVoucher = async () => {
+    let res = await sendGet(`/vourchers`);
+    if (res.statusCode == 200) {
+      setDataVoucher(res.returnValue.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const listVoucherAvailable = async () => {
+    let res1 = await sendGet(`/vourchers/available`);
+    if (res1.statusCode == 200) {
+      setdataVoucherAvailable(res1.returnValue?.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const saveVoucher = async (e) => {
+    try {
+      let result = await sendPut(`/vourchers/${e}`);
+      if (result.statusCode == 200) {
+        message.success("Lưu voucher thành công");
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Bạn ko đủ xu để đổi voucher");
+    }
+  };
+  useEffect(() => {
+    listVoucher();
+    listVoucherAvailable();
+  }, []);
+  if (!Object.keys(dataVoucher).length) return <Skeleton />;
+
+  return (
+    <>
+      <Tabs defaultActiveKey="1" className="mytrip-sub-menu">
+        <TabPane tab={<p className="mytrip-sub-menu-name">Của bạn</p>} key="1">
+          <div className="mytrip-voucher">
+            {dataVoucherAvailable ? (
+              <>
+                {dataVoucherAvailable?.map((item, index) => (
+                  <div className="mytrip-voucher-item" key={index}>
+                    <div className="mytrip-voucher-left">
+                      <img
+                        className="mytrip-voucher-img"
+                        alt=""
+                        src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+                      />
+                      <h4 className="mytrip-voucher-name">{item?.name}</h4>
+                    </div>
+                    <div className="mytrip-voucher-right">
+                      <div className="mytrip-voucher-top">
+                        <h3 className="mytrip-voucher-title">
+                          {item?.description}
+                        </h3>
+                        <p className="mytrip-voucher-use">Dùng ngay</p>
+                      </div>
+                      <div className="mytrip-voucher-bottom">
+                        <h3 className="mytrip-voucher-time">
+                          Hạn sử dụng: {item?.endDate}
+                        </h3>
+                        <Condition data={item} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <p>Bạn chưa có voucher nào</p>
+            )}
+          </div>
+        </TabPane>
+        <TabPane tab={<p className="mytrip-sub-menu-name">Săn mã</p>} key="2">
+          <div className="mytrip-voucher">
+            {dataVoucher ? (
+              <>
+                {dataVoucher.map((item, index) => (
+                  <div className="mytrip-voucher-item" key={index}>
+                    <div className="mytrip-voucher-left">
+                      <img
+                        className="mytrip-voucher-img"
+                        alt=""
+                        src={voucher2}
+                      />
+                      <h4 className="mytrip-voucher-name">{item?.name}</h4>
+                    </div>
+                    <div className="mytrip-voucher-right">
+                      <div className="mytrip-voucher-top">
+                        <h3 className="mytrip-voucher-title">
+                          {item?.description}
+                        </h3>
+                        <p
+                          className="mytrip-voucher-use"
+                          onClick={() => saveVoucher(item.id)}
+                        >
+                          Lưu mã
+                        </p>
+                      </div>
+                      <div className="mytrip-voucher-bottom">
+                        <h3 className="mytrip-voucher-time">
+                          Hạn sử dụng: {item?.endDate}
+                        </h3>
+                        <Condition data={item} />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </>
+            ) : (
+              <p>Voucher chưa có sẵn</p>
+            )}
+          </div>
+        </TabPane>
+      </Tabs>
+    </>
+  );
+};

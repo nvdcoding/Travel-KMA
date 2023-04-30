@@ -758,7 +758,7 @@ background-color: #ccc; */
 }
 
 .mytrip-order__main-price {
-  text-decoration: line-through;
+  /* text-decoration: line-through; */
 }
 
 .mytrip-order__main-price-km {

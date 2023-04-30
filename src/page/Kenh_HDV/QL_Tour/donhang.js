@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from "react";
 import {
   Space,
@@ -8,14 +7,29 @@ import {
   Input,
   Button,
   Popconfirm,
+  message,
 } from "antd";
 import { Link } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
+import { useState } from "react";
+import { sendGet } from "../../../utils/api";
 
 export default function MyPage() {
+  const { RangePicker } = DatePicker;
+  const { Search } = Input;
+  const onSearch = (value) => console.log(value);
+  const [active, setActive] = useState(1);
+  const [data, setData] = useState([]);
+
   const columns = [
+    {
+      title: "STT",
+      dataIndex: "STT",
+      key: "STT",
+      render: (_, value, index) => <p>{index}</p>,
+    },
     {
       title: "Tên tour",
       dataIndex: "name",
@@ -24,18 +38,27 @@ export default function MyPage() {
     },
     {
       title: "Thời gian",
-      dataIndex: "time",
-      key: "time",
+      dataIndex: "timeOrder",
+      key: "timeOrder",
     },
     {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
+      render: (_, value) => (
+        <p>
+          {value.status == 1
+            ? "Chờ đặt cọc"
+            : value.status == 2
+            ? "Chờ thanh toán"
+            : "Đang thực hiện"}
+        </p>
+      ),
     },
     {
-      title: "Địa điểm",
-      dataIndex: "place",
-      key: "place",
+      title: "Giá tiền",
+      dataIndex: "price",
+      key: "price",
     },
     {
       title: "Thao tác",
@@ -44,19 +67,19 @@ export default function MyPage() {
         <Space size="middle">
           <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
             <Link
-              to={`/kenh-hdv/chi-tiet-don/${record.key}`}
+              to={`/kenh-hdv/chi-tiet-don/${record.id}`}
               style={{ color: "#fff" }}
             >
-              Sửa
+              Xem
             </Link>
           </div>
           <div className="action" style={{ backgroundColor: "#1890ff" }}>
             {data.length >= 1 ? (
               <Popconfirm
-                title="Xóa Tour?"
-                onConfirm={() => handleDelete(record.key)}
+                title="Từ chối Tour?"
+                onConfirm={() => listOrder(1, "Từ chối")}
               >
-                Xóa
+                Từ chối
               </Popconfirm>
             ) : null}
           </div>
@@ -64,51 +87,28 @@ export default function MyPage() {
       ),
     },
   ];
-  const data = [
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-  ];
-  const { RangePicker } = DatePicker;
-  const { Search } = Input;
-  const onSearch = (value) => console.log(value);
-  const handleDelete = async (key) => {
-    // eslint-disable-next-line no-unused-vars
-    const del = await sendDelete(`api/course/${key}`);
-    if (del.status === 200) {
-      await listCourse();
-    } else {
-      message.error("Không thể xóa khóa học");
-    }
-  };
-  const listCourse = async (key) => {
-    const res = await sendGet("/api/course", {});
-    if (res.status === 200) {
-      setData(res.data);
+
+  const listOrder = async (index, value) => {
+    const res = await sendGet("/orders/tourguide", { type: value });
+    if (res.statusCode === 200) {
+      setActive(index);
+      setData(
+        res.returnValue.map((e) => {
+          return {
+            ...e,
+            name: e.tour?.name ? e.tour?.name : "",
+            timeOrder: e?.orderSchedule[0].createdAt
+              ? e?.orderSchedule[0].createdAt
+              : "",
+          };
+        })
+      );
     } else {
       message.error("Cập nhật khóa học thất bại");
     }
   };
   useEffect(() => {
-    listCourse();
+    listOrder(1, "waiting");
   }, []);
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -158,15 +158,34 @@ export default function MyPage() {
           <div className="main-body">
             <div className="header-tab">
               <ul className="tab-nav">
-                <li className="tab-item active">Tất cả</li>
-                <li className="tab-item ">Yêu cầu người dùng</li>
-                <li className="tab-item">Chờ xác nhận</li>
-                <li className="tab-item">Đơn hủy</li>
-                <li className="tab-item">Hoàn thành</li>
+                <li
+                  className={active == 1 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(1, "waiting")}
+                >
+                  Yêu cầu người dùng
+                </li>
+                <li
+                  className={active == 2 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(2, "processing")}
+                >
+                  Đang thực hiện
+                </li>
+                <li
+                  className={active == 3 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(3, "end")}
+                >
+                  Hoàn thành
+                </li>
+                <li
+                  className={active == 4 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(4, "end")}
+                >
+                  Đơn hủy
+                </li>
               </ul>
             </div>
             <div className="main-content">
-              <h3 className="title">3 đơn hàng</h3>
+              <h3 className="title">{data.length} đơn hàng</h3>
               <Table columns={columns} dataSource={data} />
             </div>
           </div>

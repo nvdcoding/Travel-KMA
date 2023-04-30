@@ -36,6 +36,14 @@ export default function OrderDetail({ dataDetail, handleStep }) {
           </div>
         </div>
         <div className="process">
+          {/* sttus = 0: chờ xác nhận
+          1: chờ đặt cọc
+          2: chờ thanh toán:
+          3: chưa thực hiện
+          4: đang thực hiện
+          5: đã thực hiện
+          6: đã hủy
+          */}
           <Steps
             current={
               data.status == 0
@@ -53,6 +61,7 @@ export default function OrderDetail({ dataDetail, handleStep }) {
             status={data.status == 5 ? "error" : "process"}
           >
             <Step title="Chờ xác nhận" />
+            <Step title="Chờ đặt cọc" />
             <Step title="Chờ thanh toán" />
             <Step title="Chưa thực hiện" description={data?.startDate} />
             <Step title="Đang thực hiện" />
