@@ -60,7 +60,6 @@ const { Option } = Select;
 export default function HdvAll() {
   const { provice } = useContext(AppContext);
   const [data, setData] = useState([]);
-
   const getData = async (values) => {
     const result = await sendGet("tour-guide", { status: "1" });
     if (result.returnValue.data.length >= 0) {
@@ -74,7 +73,7 @@ export default function HdvAll() {
     }
   };
   useEffect(() => {
-    // getData();
+    getData();
   }, []);
   return (
     <>

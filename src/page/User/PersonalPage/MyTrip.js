@@ -16,6 +16,7 @@ export default function MyTrip() {
   const [dataProcessing, setDataProcessing] = useState([]);
   const [dataWaiting, setDataWaiting] = useState([]);
   const [dataEnd, setDataEnd] = useState([]);
+  const [dataVoucher, setDataVoucher] = useState([]);
   const { infoUser } = useContext(AppContext);
   const [step, setStep] = useState(false);
   const [dataDetail, setDataDetail] = useState();
@@ -57,13 +58,31 @@ export default function MyTrip() {
     }
   };
   const handleStep = async (values) => {
-    setStep(true);
+    setStep(!step);
     setDataDetail(values);
+  };
+  const listVoucher = async () => {
+    const result = await sendGet(`/vourchers`);
+    if (result.statusCode == 200) {
+      setDataVoucher(result.returnValue);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const listVoucherAvailable = async () => {
+    const result = await sendGet(`/vourchers/available`);
+    if (result.statusCode == 200) {
+      setDataVoucherAvailable(result.returnValue);
+    } else {
+      message.error("thất bại");
+    }
   };
   useEffect(() => {
     tourWaitting();
     tourEnd();
     tourProcessing();
+    listVoucher();
+    listVoucherAvailable();
   }, []);
   // if (!Object.keys(dataWaiting).length) return <Skeleton />;
 
@@ -87,7 +106,10 @@ export default function MyTrip() {
                 key="1"
               >
                 {step ? (
-                  <OrderDetail data={dataDetail} />
+                  <OrderDetail
+                    dataDetail={dataDetail}
+                    handleStep={handleStep}
+                  />
                 ) : (
                   <Tabs defaultActiveKey="0" className="mytrip-sub-menu">
                     <TabPane
@@ -347,10 +369,10 @@ export default function MyTrip() {
                     </div>
                   </TabPane>
                   <TabPane
-                    tab={<p className="mytrip-sub-menu-name">Hết hiệu lực</p>}
+                    tab={<p className="mytrip-sub-menu-name">Săn mã</p>}
                     key="2"
                   >
-                    <div className="mytrip-voucher voucher-expires">
+                    <div className="mytrip-voucher ">
                       <div className="mytrip-voucher-item">
                         <div className="mytrip-voucher-left">
                           <img
@@ -358,19 +380,20 @@ export default function MyTrip() {
                             alt=""
                             src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
                           />
-                          <h4 className="mytrip-voucher-name"> Voucher</h4>
+                          <h4 className="mytrip-voucher-name">Voucher</h4>
                         </div>
                         <div className="mytrip-voucher-right">
                           <div className="mytrip-voucher-top">
                             <h3 className="mytrip-voucher-title">
                               Giảm 10% đơn 20k giảm 210k
                             </h3>
-                            <p className="mytrip-voucher-use">Dùng ngay</p>
+                            <p className="mytrip-voucher-use">Lưu mã</p>
                           </div>
                           <div className="mytrip-voucher-bottom">
                             <h3 className="mytrip-voucher-time">
                               Sắp hết hạn: Còn 4 giờ
                             </h3>
+                            <Condition />
                           </div>
                         </div>
                       </div>
@@ -381,19 +404,20 @@ export default function MyTrip() {
                             alt=""
                             src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
                           />
-                          <h4 className="mytrip-voucher-name"> Voucher</h4>
+                          <h4 className="mytrip-voucher-name">Voucher</h4>
                         </div>
                         <div className="mytrip-voucher-right">
                           <div className="mytrip-voucher-top">
                             <h3 className="mytrip-voucher-title">
                               Giảm 10% đơn 20k giảm 210k
                             </h3>
-                            <p className="mytrip-voucher-use">Dùng ngay</p>
+                            <p className="mytrip-voucher-use">Lưu mã</p>
                           </div>
                           <div className="mytrip-voucher-bottom">
                             <h3 className="mytrip-voucher-time">
                               Sắp hết hạn: Còn 4 giờ
                             </h3>
+                            <Condition />
                           </div>
                         </div>
                       </div>

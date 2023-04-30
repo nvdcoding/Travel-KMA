@@ -214,20 +214,21 @@ export default function ToursAll() {
                       <div class=" select-with-status">
                         <div class="select-with-status__holder select-with-status__box-shadow">
                           <div className="select-price">
-                            {" "}
-                            <span class="select-with-status__placeholder">
-                              Giá
-                            </span>
-                            <i class="fa-solid fa-angle-down"></i>
-                          </div>
-                          <div className="price-menu">
-                            <div className="price-menu-item">
-                              <p>Giá tăng dần</p>
-                              <i class="fa-solid fa-arrow-up-long"></i>
+                            <div className="select-price">
+                              <span class="select-with-status__placeholder">
+                                Giá
+                              </span>
+                              <i class="fa-solid fa-angle-down"></i>
                             </div>
-                            <div className="price-menu-item">
-                              <p>Giá giảm dần</p>
-                              <i class="fa-solid fa-arrow-down-long"></i>
+                            <div className="price-menu">
+                              <div className="price-menu-item">
+                                <p>Giá tăng dần</p>
+                                <i class="fa-solid fa-arrow-up-long"></i>
+                              </div>
+                              <div className="price-menu-item">
+                                <p>Giá giảm dần</p>
+                                <i class="fa-solid fa-arrow-down-long"></i>
+                              </div>
                             </div>
                           </div>
                         </div>

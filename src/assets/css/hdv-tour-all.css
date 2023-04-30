@@ -422,11 +422,28 @@
   z-index: 2;
   width: 150px;
   top: 37px;
+  padding: 4px 0px;
+  display: none;
 }
 .price-menu-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.select-price:hover .price-menu {
+  display: block;
+}
+.price-menu-item:hover {
+  background-color: #d8fdbc;
+}
+.price-menu-item:first-child i {
+  color: #d93333;
+}
+.price-menu-item:last-child i {
+  color: #65d933;
 }
 .travel-sort-by-options .select-with-status__placeholder {
   margin: 0 10.125rem 0 0.75rem;

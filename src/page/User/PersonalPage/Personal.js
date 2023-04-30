@@ -6,7 +6,7 @@ import "../../../assets/css/personal.css";
 import { Tag } from "antd";
 import TourItem from "../../../components/tourItem";
 import OwlCarousel from "react-owl-carousel";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 export default function Personal() {
   const options = {
     loop: true,
@@ -175,7 +175,24 @@ export default function Personal() {
       id: "ghj6781q2",
     },
   ];
-  useEffect(() => {}, []);
+  const params = useParams();
+  const tourFiltter = async () => {
+    const result = await sendGet("/tours", {
+      tourGuideId: params.id,
+    });
+    if (result.returnValue.data.length >= 0) {
+      setData(
+        result.data.map((e) => {
+          return { ...e, place: e.province?.name ? e.province?.name : "" };
+        })
+      );
+    } else {
+      message.error("thất bại");
+    }
+  };
+  useEffect(() => {
+    tourFiltter();
+  }, []);
   return (
     <>
       <Layout>

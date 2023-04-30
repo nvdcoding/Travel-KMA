@@ -6,7 +6,7 @@ import { SmileOutlined } from "@ant-design/icons";
 
 import { Link, useHistory } from "react-router-dom";
 import { sendPost } from "../../utils/api";
-import { setRefreshToken, setToken } from "../../utils/storage";
+import { setItem, setRefreshToken, setToken } from "../../utils/storage";
 export default function SignIn() {
   const [form] = Form.useForm();
   const [formHDV] = Form.useForm();
@@ -22,7 +22,7 @@ export default function SignIn() {
       });
       setToken(res.returnValue.accessToken);
       setRefreshToken(res.returnValue.refreshToken);
-      // setItem("user", JSON.stringify(res?.userData));
+      setItem("user", JSON.stringify(res?.returnValue));
       history.push("/");
       form.resetFields();
     } else {
@@ -42,7 +42,8 @@ export default function SignIn() {
       });
       setToken(res.returnValue.accessToken);
       setRefreshToken(res.returnValue.refreshToken);
-      // setItem("user", JSON.stringify(res?.userData));
+
+      setItem("user", JSON.stringify(res?.returnValue));
       history.push("/kenh-hdv");
       form.resetFields();
     } else {

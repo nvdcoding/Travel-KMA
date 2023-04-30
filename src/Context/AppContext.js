@@ -1,11 +1,12 @@
 import { React, createContext, useEffect, useState } from "react";
 import { sendGet } from "../utils/api";
 import { message } from "antd";
+import { setItem } from "../utils/storage";
 export const AppContext = createContext({});
 export const AppProvider = ({ children }) => {
   const [provice, setProvice] = useState([]);
   const [infoUser, setInfo] = useState({});
-
+  const Token = localStorage.getItem("accessToken");
   const allChatUsers = [
     {
       image:
@@ -126,17 +127,21 @@ export const AppProvider = ({ children }) => {
       message.error("thất bại");
     }
   };
+
   const getInfoUser = async () => {
-    // let res = await sendGet("/auth/me");
-    // if (res.statusCode === 200) {
-    //   setInfo(res.returnValue);
-    // } else {
-    //   message.error("thất bại");
-    // }
+    if (Token) {
+      let res = await sendGet("/auth/me");
+      if (res.statusCode === 200) {
+        setInfo(res.returnValue);
+        setItem("user", JSON.stringify(res?.returnValue));
+      } else {
+        message.error("thất bại");
+      }
+    }
   };
   useEffect(() => {
     getProvice();
-    getInfoUser();
+    // getInfoUser();
   }, []);
   const [data, setData] = useState([]);
   return (
