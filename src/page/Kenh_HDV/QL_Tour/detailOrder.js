@@ -31,7 +31,7 @@ export default function DetailOrder() {
   };
   const handleStatusTour = async (e) => {
     try {
-      const res = await sendPut("/orders/tour-guide/approve-order", {
+      const res = await sendPut("/orders/tourguide/approve-order", {
         action: e,
         orderId: parseInt(params.id),
       });

@@ -14,7 +14,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
 import { useState } from "react";
-import { sendGet } from "../../../utils/api";
+import { sendDelete, sendGet, sendPut } from "../../../utils/api";
 
 export default function MyPage() {
   const { RangePicker } = DatePicker;
@@ -65,19 +65,32 @@ export default function MyPage() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
-            <Link
-              to={`/kenh-hdv/chi-tiet-don/${record.id}`}
-              style={{ color: "#fff" }}
+          {record.status < 3 ? (
+            <div
+              className="action"
+              style={{ backgroundColor: "rgb(255 79 32)" }}
             >
-              Xem
-            </Link>
-          </div>
+              <Link
+                to={`/kenh-hdv/chi-tiet-don/${record.id}`}
+                style={{ color: "#fff" }}
+              >
+                Xem
+              </Link>
+            </div>
+          ) : (
+            <div
+              className="action"
+              style={{ backgroundColor: "rgb(255 79 32)" }}
+              onClick={() => startGuide(record.id)}
+            >
+              Bắt đầu
+            </div>
+          )}
           <div className="action" style={{ backgroundColor: "#1890ff" }}>
             {data.length >= 1 ? (
               <Popconfirm
                 title="Từ chối Tour?"
-                onConfirm={() => listOrder(1, "Từ chối")}
+                onConfirm={() => deleteOrder(record.id)}
               >
                 Từ chối
               </Popconfirm>
@@ -106,6 +119,29 @@ export default function MyPage() {
     } else {
       message.error("Cập nhật khóa học thất bại");
     }
+  };
+  const deleteOrder = async (value) => {
+    const res = await sendDelete("/orders/tourguide", { orderId: value });
+    if (res.statusCode === 200) {
+      message.success("Từ chối order");
+      listOrder(1, "waiting");
+    } else {
+      message.error("Cập nhật khóa học thất bại");
+    }
+  };
+  const startGuide = async (e) => {
+    if (e.status == 3) {
+      try {
+        let res = await sendPut(`/orders/start-tourguide/${e}`);
+        if (res.statusCode == 200) {
+          message.success("Thanh công");
+        } else {
+          message.error("thất bại");
+        }
+      } catch (error) {
+        message.error("Chưa đến ngày bắt đầu");
+      }
+    } else message.success("Chuyến đi đang được thực hiện");
   };
   useEffect(() => {
     listOrder(1, "waiting");

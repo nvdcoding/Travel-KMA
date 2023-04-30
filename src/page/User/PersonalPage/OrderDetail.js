@@ -2,11 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { Popconfirm, Steps } from "antd";
 import "../../../assets/css/trip.css";
-import { sendGet } from "../../../utils/api";
+import { sendGet, sendPut } from "../../../utils/api";
 import { message } from "antd";
 import { Link } from "react-router-dom";
 import { avt } from "../../../constants/images";
-export default function OrderDetail({ dataDetail, handleStep }) {
+export default function OrderDetail({
+  dataDetail,
+  handleStep,
+  tourWaitting,
+  tourProcessing,
+}) {
   const [data, setData] = useState({});
   const orderDetail = async () => {
     const result = await sendGet(`/orders/user/${dataDetail}`);
@@ -17,7 +22,40 @@ export default function OrderDetail({ dataDetail, handleStep }) {
     }
   };
   const { Step } = Steps;
-
+  const prePaid = async (e) => {
+    try {
+      let res = await sendPut(`/orders/prepaid`, {
+        orderId: e,
+      });
+      if (res.statusCode == 200) {
+        message.success("Thanh toán thành công");
+        await tourWaitting();
+        handleStep();
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Số dư ko đủ");
+    }
+  };
+  const paid = async (e) => {
+    try {
+      let res = await sendPut(`/orders/paid`, {
+        orderId: e.id,
+        amount: parseInt(e.price - e.paid),
+      });
+      if (res.statusCode == 200) {
+        message.success("Thanh toán thành công");
+        await tourWaitting();
+        await tourProcessing();
+        handleStep();
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Số dư ko đủ");
+    }
+  };
   useEffect(() => {
     orderDetail();
   }, []);
@@ -49,13 +87,17 @@ export default function OrderDetail({ dataDetail, handleStep }) {
               data.status == 0
                 ? 1
                 : data.status == 1
-                ? 2
+                ? 1
                 : data.status == 2
-                ? 3
+                ? 2
                 : data.status == 3
-                ? 4
+                ? 3
                 : data.status == 4
+                ? 4
+                : data.status == 5
                 ? 5
+                : data.status == 6
+                ? 6
                 : 6
             }
             status={data.status == 5 ? "error" : "process"}
@@ -69,8 +111,24 @@ export default function OrderDetail({ dataDetail, handleStep }) {
             <Step title="Đã hủy" />
           </Steps>
         </div>
+        <p className="process-note">
+          Trạng thái đơn hàng:
+          {data.status == 0
+            ? "Chờ xác nhận"
+            : data.status == 1
+            ? "Chờ đặt cọc"
+            : data.status == 2
+            ? "Chờ thanh toán"
+            : data.status == 3
+            ? "Chưa thực hiện"
+            : data.status == 4
+            ? "Đang thực hiện"
+            : data.status == 5
+            ? "Đã thực hiện"
+            : "Đã hủy"}
+        </p>
         <div>
-          {data.status == 4 ? (
+          {data.status == 5 ? (
             <div class="evyOM">
               <div class="ICo-FQ">
                 <div class="-evyOM">
@@ -95,11 +153,11 @@ export default function OrderDetail({ dataDetail, handleStep }) {
                 </div>
               </div>
             </div>
-          ) : data.status < 4 ? (
+          ) : data.status == 4 ? (
             <div class="evyOM">
               <div class="ICo-FQ">
                 <div class="-evyOM">
-                  Thanh toán chuyến đi ngay
+                  Kêt thúc chuyến đi
                   <div
                     class="stardust-popover b6+tp4"
                     id="stardust-popover3"
@@ -113,13 +171,89 @@ export default function OrderDetail({ dataDetail, handleStep }) {
                   </div>
                   .
                 </div>
+              </div>
+            </div>
+          ) : data.status == 3 ? (
+            <div class="evyOM">
+              <div class="ICo-FQ">
+                <div class="-evyOM">
+                  Chuyến đi bắt đầu vào ngày
+                  <div
+                    class="stardust-popover b6+tp4"
+                    id="stardust-popover3"
+                    tabindex="0"
+                  >
+                    <div role="button" class="stardust-popover__target">
+                      <div>
+                        <u>{data?.startDate}</u>
+                      </div>
+                    </div>
+                  </div>
+                  .
+                </div>
+              </div>
+            </div>
+          ) : data.status == 2 ? (
+            <div class="evyOM">
+              <div class="ICo-FQ">
+                <div class="-evyOM">
+                  Thanh toán ngay
+                  <div
+                    class="stardust-popover b6+tp4"
+                    id="stardust-popover3"
+                    tabindex="0"
+                  >
+                    <p className="stardust1">
+                      Số tiền đã thanh toán: {data.paid}
+                    </p>
+                    <p className="stardust1">
+                      Số tiền còn lại: {data.price - data.paid}
+                    </p>
+                    <div role="button" class="stardust-popover__target">
+                      <div>
+                        <u>{data?.startDate}</u>
+                      </div>
+                    </div>
+                  </div>
+                  .
+                </div>
                 <div class="_5roFKV">
-                  <Link
-                    to={`/pay/${data?.id}`}
-                    class="stardust-button stardust-button--primary WgYvse"
+                  {" "}
+                  <div
+                    className="button button--primary"
+                    onClick={() => paid(data)}
                   >
                     Thanh toán ngay
-                  </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ) : data.status == 1 ? (
+            <div class="evyOM">
+              <div class="ICo-FQ">
+                <div class="-evyOM">
+                  Đặt cọc (10% giá trị đơn hàng)
+                  <div
+                    class="stardust-popover b6+tp4"
+                    id="stardust-popover3"
+                    tabindex="0"
+                  >
+                    <div role="button" class="stardust-popover__target">
+                      <div>
+                        Số tiền cần đặt cọc
+                        <u>{data?.price * 0.1}</u>
+                      </div>
+                    </div>
+                  </div>
+                  .
+                </div>
+                <div class="_5roFKV">
+                  <div
+                    className="button button--primary"
+                    onClick={() => prePaid(data.id)}
+                  >
+                    Đặt cọc ngay
+                  </div>
                 </div>
               </div>
             </div>

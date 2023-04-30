@@ -33,9 +33,6 @@ export default function MyTrip() {
   const handleCancel = () => {
     setIsCancelTour(false);
   };
-  const accesss = () => {
-    message.success("Xác nhận chuyến đi thành công");
-  };
   const tourWaitting = async () => {
     const result = await sendGet(`/orders/user`, {
       type: "waiting",
@@ -145,6 +142,8 @@ export default function MyTrip() {
                   <OrderDetail
                     dataDetail={dataDetail}
                     handleStep={handleStep}
+                    tourWaitting={tourWaitting}
+                    tourProcessing={tourProcessing}
                   />
                 ) : (
                   <Tabs defaultActiveKey="1" className="mytrip-sub-menu">
@@ -186,7 +185,10 @@ export default function MyTrip() {
                               </div>
                             </div>
                             <div className="mytrip-order__main">
-                              <div className="mytrip-order__main-left">
+                              <div
+                                className="mytrip-order__main-left"
+                                onClick={() => handleStep(value?.id)}
+                              >
                                 <img
                                   className="mytrip-order-img"
                                   alt=""
@@ -305,7 +307,10 @@ export default function MyTrip() {
                             </div>
                           </div>
                           <div className="mytrip-order__main">
-                            <div className="mytrip-order__main-left">
+                            <div
+                              className="mytrip-order__main-left"
+                              onClick={() => handleStep(value?.id)}
+                            >
                               <img
                                 className="mytrip-order-img"
                                 alt=""
@@ -380,7 +385,10 @@ export default function MyTrip() {
                             </div>
                           </div>
                           <div className="mytrip-order__main">
-                            <div className="mytrip-order__main-left">
+                            <div
+                              className="mytrip-order__main-left"
+                              onClick={() => handleStep(value?.id)}
+                            >
                               <img
                                 className="mytrip-order-img"
                                 alt=""

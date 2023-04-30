@@ -14,7 +14,7 @@ function RateScreen(props) {
     try {
       value.orderId = props.data.id;
       value.star = number;
-      let res = await sendPut(`/orders/end-order`, value);
+      let res = await sendPut(`/orders/rate-order`, value);
       if (res.statusCode === 200) {
         message.success("Đã đánh giá tour");
         setOpen(false);
@@ -22,7 +22,7 @@ function RateScreen(props) {
         message.error("thất bại");
       }
     } catch (error) {
-      message.error("Đánh giá tour thành công");
+      message.error("Không thể đánh giá tour");
     }
   };
   const handleCancel = (e) => {
