@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/hdv-tour-all.css";
-import { Button, Checkbox, Form, InputNumber, Select } from "antd";
+import { Button, Checkbox, Form, InputNumber, Select, Skeleton } from "antd";
 import HdvItem from "../../../components/hdvItem";
 import { AppContext } from "../../../Context/AppContext";
 import { sendGet } from "../../../utils/api";
@@ -60,14 +60,10 @@ const { Option } = Select;
 export default function HdvAll() {
   const { provice } = useContext(AppContext);
   const [data, setData] = useState([]);
-  const getData = async (values) => {
-    const result = await sendGet("tour-guide", { status: "1" });
+  const getData = async () => {
+    const result = await sendGet("/tour-guide");
     if (result.returnValue.data.length >= 0) {
-      setData(
-        result.data.map((e) => {
-          return { ...e, place: e.province?.name ? e.province?.name : "" };
-        })
-      );
+      setData(result.returnValue.data);
     } else {
       message.error("thất bại");
     }
@@ -75,6 +71,8 @@ export default function HdvAll() {
   useEffect(() => {
     getData();
   }, []);
+  if (!Object.keys(data).length) return <Skeleton />;
+
   return (
     <>
       <Layout>
@@ -105,10 +103,8 @@ export default function HdvAll() {
                     <Form.Item name="gender" label="Giới tính">
                       <Select placeholder="Giới tính">
                         <Option>Chọn giới tính</Option>
-
                         <Option value="FEMALE">Nữ</Option>
                         <Option value="MALE">Nam</Option>
-                        <Option value="Khác">Nam</Option>
                       </Select>
                     </Form.Item>
                     <Form.Item
@@ -143,7 +139,7 @@ export default function HdvAll() {
                   <div class="travel-sort-by-options__option">Yêu thích</div>
                 </div>
                 <div className="hdv-all__list">
-                  {tourview.map((item, index) => (
+                  {data.map((item, index) => (
                     <HdvItem item={item} key={index} />
                   ))}
                 </div>

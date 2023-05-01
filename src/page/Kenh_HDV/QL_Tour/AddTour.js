@@ -149,6 +149,18 @@ export default function AddTour() {
                   <Input placeholder="Mô tả" />
                 </Form.Item>
                 <Form.Item
+                  name="overview"
+                  label="Tổng quan"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Tổng quan ko để trống!",
+                    },
+                  ]}
+                >
+                  <TextArea rows={4} placeholder="Nhập tổng quan " />
+                </Form.Item>
+                <Form.Item
                   name="provinceId"
                   label="Tỉnh thành"
                   rules={[

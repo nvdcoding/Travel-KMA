@@ -1339,26 +1339,29 @@ ul.list-extra-services li {
 }
 
 .box-form-price-tour button {
-  background: #ffc600;
+  background: var(--color-primary-hover);
   border: 0px;
   box-shadow: none;
-  color: #3a2727;
+  color: #fff;
   font-size: 16px;
   text-transform: uppercase;
   text-align: center;
   display: block;
-  line-height: 40px;
+  /* line-height: 40px; */
+  height: 40px;
   width: 100%;
   margin-top: 15px;
   outline: 0;
 }
-
+.box-form-price-tour button:hover {
+  color: #fff;
+}
 .box-form-price-tour input,
 .box-form-price-tour select {
   color: #343434;
   font-size: 16px;
   border-radius: 0px;
-  height: 40px;
+  height: 38px;
   max-width: 175px;
   display: inline-block;
 }
@@ -2656,4 +2659,24 @@ ul.box-ul-anchor-text li a {
   display: block;
   font-size: 24px;
   color: #fc0309;
+}
+.ant-picker-input {
+  justify-content: space-between;
+}
+.sendyc-form .ant-picker {
+  padding: 0px 10px;
+}
+.box-form-price-tour.horizontal.box-left button {
+  margin-top: 23px;
+}
+.single-box-content
+  .single-content
+  .box-form-price-tour.horizontal.box-left
+  table
+  tr
+  td {
+  vertical-align: middle;
+  margin: 0px 3px;
+  display: inline-block;
+  width: 31%;
 }

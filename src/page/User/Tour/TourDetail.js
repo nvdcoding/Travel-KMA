@@ -35,7 +35,7 @@ export default function TourDetail() {
     values.tourId = data.id;
     values.startDate = date;
     let respon = await sendPost("/orders", values);
-    if (respon.statusCode == 0) {
+    if (respon.statusCode == 200) {
       message.success("gửi yêu cầu thành công");
       history.push("/chuyen-di");
     } else {
@@ -458,72 +458,65 @@ export default function TourDetail() {
                       </div>
                     </div>
                   </div>
-                  <div className="box-form-price-tour horizontal">
-                    <form
-                      action="https://www.vietnambooking.com/book-tour"
-                      method="POST"
+                  <div className="box-form-price-tour horizontal box-left">
+                    <Form
+                      name="normal_senyc"
+                      className="sendyc-form"
+                      initialValues={{
+                        remember: true,
+                      }}
+                      onFinish={onFinish}
                     >
                       <table className="tlb-box-price-tour">
                         <tbody>
                           <tr>
                             <td>
-                              <span className="price-tour">
-                                <div className="title-price-old horizontal">
-                                  <del>6,129,000 VND</del>
-                                </div>
-                                4,290,000 <span>VND/người</span>
-                              </span>
-                            </td>
-                            <td>
-                              <label>Khởi hành</label>
-                              <br />
-                              <input
-                                required="required"
-                                name="id"
-                                defaultValue={407034}
-                                type="hidden"
-                              />
-                              <input
-                                defaultValue="01/05/2023"
-                                name="date_start"
-                                className="form-control txt-date-start hasDatepicker"
-                                required="required"
-                                id="dp1682913295022"
-                              />
-                            </td>
-                            <td>
-                              <label>Số khách</label>
-                              <br />
-                              <select
-                                data-price={4290000}
-                                name="number_people"
-                                className="form-control slc-tour-people"
+                              <Form.Item
+                                name="startDate"
+                                label="Ngày bắt đầu:"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: "Ngày bắt đầu ko để trống!",
+                                  },
+                                ]}
                               >
-                                <option value={1}>01</option>
-                                <option value={2}>02</option>
-                                <option value={3}>03</option>
-                                <option value={4}>04</option>
-                                <option value={5}>05</option>
-                                <option value={6}>06</option>
-                                <option value={7}>07</option>
-                                <option value={8}>08</option>
-                                <option value={9}>09</option>
-                                <option value={10}>10</option>
-                              </select>
+                                <DatePicker
+                                  onChange={onChange}
+                                  className="form-control txt-date-start hasDatepicker"
+                                />
+                              </Form.Item>
                             </td>
                             <td>
-                              <button
-                                name="btn_submit_book_tour"
-                                className="btn-submit-set-tour"
-                                type="submit"
+                              <Form.Item
+                                name="numberOfMember"
+                                label="Số khách:"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: "số lượng ko để trống!",
+                                  },
+                                ]}
                               >
-                                Đặt Tour
-                              </button>
+                                <InputNumber
+                                  className="form-control slc-tour-people"
+                                  placeholder="Số lượng"
+                                  onChange={handleNumber}
+                                />
+                              </Form.Item>
+                            </td>
+                            <td>
+                              <Button
+                                htmlType="submit"
+                                className="button button--primary"
+                              >
+                                Đặt tour
+                              </Button>
                             </td>
                           </tr>
                         </tbody>
                       </table>
-                    </form>
+                    </Form>
                   </div>
                 </div>
                 <div className="box-tour-product-relative  ">
@@ -558,9 +551,13 @@ export default function TourDetail() {
               <div className="tour-detail__right">
                 <div className="tour-detail__plan">
                   <div className="box-form-price-tour vertical">
-                    <form
-                      action="https://www.vietnambooking.com/book-tour"
-                      method="POST"
+                    <Form
+                      name="normal_senyc"
+                      className="sendyc-form"
+                      initialValues={{
+                        remember: true,
+                      }}
+                      onFinish={onFinish}
                     >
                       <table className="tlb-box-price-tour">
                         <tbody>
@@ -568,72 +565,57 @@ export default function TourDetail() {
                             <td colSpan={2}>
                               <span className="price-tour">
                                 <div className="title-price-old">
-                                  <del>6,129,000 VND</del>
+                                  {/* <del>6,129,000 VND</del> */}
                                 </div>
-                                4,290,000 <span>VND/người</span>
+                                {data?.basePrice}{" "}
+                                <span>VND/tour/{data?.maxMember}người</span>
                               </span>
                             </td>
                           </tr>
                           <tr>
-                            <td>
-                              <label>Khởi hành</label>
-                            </td>
-                            <td>
-                              <input
-                                required="required"
-                                name="id"
-                                defaultValue={407034}
-                                type="hidden"
-                              />
-                              <input
-                                data-role="none"
-                                defaultValue="01/05/2023"
-                                name="date_start"
+                            <Form.Item
+                              name="startDate"
+                              label="Ngày bắt đầu:"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Ngày bắt đầu ko để trống!",
+                                },
+                              ]}
+                            >
+                              <DatePicker
+                                onChange={onChange}
                                 className="form-control txt-date-start hasDatepicker"
-                                required="required"
-                                id="dp1682913295023"
                               />
-                            </td>
+                            </Form.Item>
                           </tr>
                           <tr>
-                            <td>
-                              <label>Số khách</label>
-                            </td>
-                            <td>
-                              <select
-                                data-role="none"
-                                data-price={4290000}
-                                name="number_people"
+                            <Form.Item
+                              name="numberOfMember"
+                              label="Số khách:"
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "số lượng ko để trống!",
+                                },
+                              ]}
+                            >
+                              <InputNumber
                                 className="form-control slc-tour-people"
-                              >
-                                <option value={1}>01 Khách</option>
-                                <option value={2}>02 Khách</option>
-                                <option value={3}>03 Khách</option>
-                                <option value={4}>04 Khách</option>
-                                <option value={5}>05 Khách</option>
-                                <option value={6}>06 Khách</option>
-                                <option value={7}>07 Khách</option>
-                                <option value={8}>08 Khách</option>
-                                <option value={9}>09 Khách</option>
-                                <option value={10}>10 Khách</option>
-                              </select>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td colSpan={2}>
-                              <button
-                                data-role="none"
-                                name="btn_submit_book_tour"
-                                className="btn-submit-set-tour"
-                                type="submit"
-                              >
-                                Đặt Tour
-                              </button>
-                            </td>
+                                placeholder="Số lượng"
+                                onChange={handleNumber}
+                              />
+                            </Form.Item>
                           </tr>
                         </tbody>
                       </table>
-                    </form>
+                      <Button
+                        htmlType="submit"
+                        className="button button--primary"
+                      >
+                        Đặt tour
+                      </Button>
+                    </Form>
                   </div>
                 </div>
                 <div className="box-tour-special type-sidebar sidebar-tour-item sidebar-box-item sidebar-box-item-default">
