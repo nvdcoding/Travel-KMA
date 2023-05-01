@@ -14,7 +14,7 @@ function Footer() {
               <div className="tour-footer-img">
                 <img src={logo} alt="" />
               </div>
-              <h1 className="tour-footer-logo__text">TravelLocal Guarantees</h1>
+              <h1 className="tour-footer-logo__text">Ktravel</h1>
             </div>
             <div className="tour-footer-list">
               <ul className="tour-footer-content">
@@ -36,9 +36,7 @@ function Footer() {
                 </li>
                 <li className="tour-footer__item">
                   <i className="fa-solid fa-person-walking-luggage"></i>
-                  <p className="tour-footer__text">
-                    Personal TravelLocal Contact
-                  </p>
+                  <p className="tour-footer__text">Personal Ktravel Contact</p>
                 </li>
                 <li className="tour-footer__item">
                   <i className="fa-solid fa-comments"></i>
@@ -82,7 +80,7 @@ function Footer() {
           </ul>
           <div className="footer-right">
             <p className="footer-license">
-              © 2022 TravelLocal - All rights reserved
+              © 2022 Ktravel - All rights reserved
             </p>
           </div>
         </div>

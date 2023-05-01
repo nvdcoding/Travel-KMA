@@ -43,14 +43,16 @@ function HeaderLayout() {
                   </li>
                   <li className="menu-item">
                     <NavLink to="/tin-tuc">Tin tức</NavLink>
-                    <ul className="menu-sub">
-                      <li className="menu-sub_item">
-                        <NavLink to="/viet-bai">Viết bài</NavLink>
-                      </li>
-                      <li className="menu-sub_item">
-                        <NavLink to="/tin-tuc">Danh sách bài viết</NavLink>
-                      </li>
-                    </ul>
+                    {Token && (
+                      <ul className="menu-sub">
+                        <li className="menu-sub_item">
+                          <NavLink to="/viet-bai">Viết bài</NavLink>
+                        </li>
+                        <li className="menu-sub_item">
+                          <NavLink to="/tin-tuc">Danh sách bài viết</NavLink>
+                        </li>
+                      </ul>
+                    )}
                   </li>
                   {/* <li className="menu-item">
                     <NavLink to="/gioi-thieu">Giới thiệu</NavLink>

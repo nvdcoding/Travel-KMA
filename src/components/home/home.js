@@ -972,7 +972,7 @@ function Home() {
           <div className="tour-feedback">
             <h2 className="travel-title">Trải nghiệm đặc biệt</h2>
             <p className="travel-des">
-              Đánh giá từ du khách về trải nghiệm của họ với TravelLocal
+              Đánh giá từ du khách về trải nghiệm của họ với Ktravel
             </p>
             <div className="tour-feedback__main">
               <OwlCarousel

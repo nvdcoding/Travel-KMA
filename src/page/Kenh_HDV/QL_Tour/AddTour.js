@@ -180,18 +180,6 @@ export default function AddTour() {
                 </Form.Item>
                 <div className="group">
                   <Form.Item
-                    name="basePrice"
-                    label="Chi phí dự kiến một người"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Chi phí ko để trống!",
-                      },
-                    ]}
-                  >
-                    <InputNumber min={1} />
-                  </Form.Item>
-                  <Form.Item
                     name="feePerMember"
                     label="Phí phị thu thêm khi quá số người người"
                     rules={[
@@ -204,7 +192,7 @@ export default function AddTour() {
                     <InputNumber min={1} />
                   </Form.Item>
                   <Form.Item
-                    name="maxPrice"
+                    name="basePrice"
                     label="Giá tour"
                     rules={[
                       {
@@ -217,7 +205,6 @@ export default function AddTour() {
                   </Form.Item>
                 </div>
                 <Form.Item label="Ảnh mô tả" valuePropName="fileList">
-                  {/* <Image lengthImg={1} /> */}
                   <Upload
                     accept="image/png, image/jpeg"
                     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"

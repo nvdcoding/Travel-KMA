@@ -14,14 +14,14 @@
 }
 
 .tours-all__left {
-  width: 35%;
+  width: 28%;
   position: sticky;
   top: 0;
   left: 0;
 }
 
 .tours-all__right {
-  width: 62%;
+  width: 70%;
 }
 
 .hdv-search {
@@ -42,8 +42,8 @@
 .hdv-all__list {
   margin-top: 30px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 3rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.5rem;
 }
 
 .tour-all-box__search {
@@ -403,8 +403,7 @@
   border: 0;
 }
 
-.travel-sort-by-options .select-with-status__holder:hover,
-.travel-sort-by-options__option:hover {
+.travel-sort-by-options .select-with-status__holder:hover {
   background: #fdfdfd;
 }
 .select-price {
@@ -458,6 +457,9 @@
   }
   .tours-all__right {
     width: 70%;
+  }
+  .hdv-all__list {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
