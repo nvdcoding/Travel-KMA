@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useEffect } from "react";
 import {
   Space,
@@ -47,11 +48,19 @@ export default function MyPage() {
       key: "status",
       render: (_, value) => (
         <p>
-          {value.status == 1
+          {value.status == 0
+            ? "Chờ xác nhận"
+            : value.status == 1
             ? "Chờ đặt cọc"
             : value.status == 2
             ? "Chờ thanh toán"
-            : "Đang thực hiện"}
+            : value.status == 3
+            ? "Chưa thực hiện"
+            : value.status == 4
+            ? "Đang thực hiện"
+            : value.status == 5
+            ? "Đã thực hiện"
+            : "Đã hủy"}
         </p>
       ),
     },
@@ -77,25 +86,25 @@ export default function MyPage() {
                 Xem
               </Link>
             </div>
-          ) : (
+          ) : record.status == 3 ? (
             <div
               className="action"
               style={{ backgroundColor: "rgb(255 79 32)" }}
-              onClick={() => startGuide(record.id)}
+              onClick={() => startGuide(record)}
             >
               Bắt đầu
             </div>
-          )}
-          <div className="action" style={{ backgroundColor: "#1890ff" }}>
-            {data.length >= 1 ? (
+          ) : null}{" "}
+          {data.length >= 1 && record.status <= 4 ? (
+            <div className="action" style={{ backgroundColor: "#1890ff" }}>
               <Popconfirm
                 title="Từ chối Tour?"
                 onConfirm={() => deleteOrder(record.id)}
               >
                 Từ chối
               </Popconfirm>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </Space>
       ),
     },
@@ -117,7 +126,7 @@ export default function MyPage() {
         })
       );
     } else {
-      message.error("Cập nhật khóa học thất bại");
+      message.error("Thất bại");
     }
   };
   const deleteOrder = async (value) => {
@@ -126,13 +135,14 @@ export default function MyPage() {
       message.success("Từ chối order");
       listOrder(1, "waiting");
     } else {
-      message.error("Cập nhật khóa học thất bại");
+      message.error("Thất bại");
     }
   };
   const startGuide = async (e) => {
+    console.log("eeee", e);
     if (e.status == 3) {
       try {
-        let res = await sendPut(`/orders/start-tourguide/${e}`);
+        let res = await sendPut(`/orders/start-tourguide/${e.id}`);
         if (res.statusCode == 200) {
           message.success("Thanh công");
         } else {
@@ -142,6 +152,20 @@ export default function MyPage() {
         message.error("Chưa đến ngày bắt đầu");
       }
     } else message.success("Chuyến đi đang được thực hiện");
+  };
+  const endTour = async (e) => {
+    try {
+      let res = await sendPut(`/orders/end-order`, {
+        orderId: e.id,
+      });
+      if (res.statusCode == 200) {
+        message.success("Xác nhận kết thúc tour thành công");
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Chưa đến hạn kết thúc chuyến đi");
+    }
   };
   useEffect(() => {
     listOrder(1, "waiting");

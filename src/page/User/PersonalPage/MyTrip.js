@@ -409,11 +409,25 @@ export default function MyTrip() {
                             </div>
                           </div>
                           <div className="mytrip-order__rate ">
-                            <p className="mytrip-order__rate-note">
-                              Chưa nhận được đánh giá
-                            </p>
+                            {value?.tour?.rates.length > 0 ? (
+                              <>
+                                <p className="mytrip-order__rate-note">
+                                  Đã đánh giá
+                                </p>
+                                {/* <RateScreen
+                                  data={value}
+                                  rate={value?.tour?.rates}
+                                /> */}
+                              </>
+                            ) : (
+                              <>
+                                <p className="mytrip-order__rate-note">
+                                  Chưa nhận được đánh giá
+                                </p>
 
-                            <RateScreen data={value} />
+                                <RateScreen data={value} />
+                              </>
+                            )}
                           </div>
                         </div>
                       ))}

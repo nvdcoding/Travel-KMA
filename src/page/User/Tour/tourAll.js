@@ -104,6 +104,7 @@ export default function ToursAll() {
     setMaxValue(value * numEachPage);
   };
   const tourFiltter = async (values) => {
+    setData([]);
     const result = await sendGet("/tours", values);
     if (result.returnValue.data.length >= 0) {
       setData(
@@ -115,9 +116,17 @@ export default function ToursAll() {
       message.error("thất bại");
     }
   };
-
+  const getHDV = async () => {
+    const result = await sendGet("/tour-guide");
+    if (result.returnValue.data.length >= 0) {
+      setHdv(result.returnValue.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
   useEffect(() => {
     listTour();
+    getHDV();
   }, []);
   return (
     <>
@@ -150,8 +159,8 @@ export default function ToursAll() {
                       <Select placeholder="Hướng dẫn viên">
                         <Option>Chọn HDV</Option>
                         {hdv.map((item, index) => (
-                          <Option value={item?.id} key={index}>
-                            {item?.name}
+                          <Option value={item?.tourGuideId} key={index}>
+                            {item?.tourGuideName}
                           </Option>
                         ))}
                       </Select>

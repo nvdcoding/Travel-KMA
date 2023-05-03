@@ -401,6 +401,7 @@
   line-height: 35px;
   border-radius: 2px;
   border: 0;
+  position: relative;
 }
 
 .travel-sort-by-options .select-with-status__holder:hover {
@@ -431,7 +432,16 @@
   cursor: pointer;
   padding: 0 5px;
 }
-
+.travel-sort-by-options__option:hover {
+  color: #fff;
+  background: var(--colour-link);
+}
+.travel-sort-by-options__option:hover .price-menu {
+  display: block;
+}
+.hdv-search .price-menu-item p {
+  color: #343a40;
+}
 .select-price:hover .price-menu {
   display: block;
 }

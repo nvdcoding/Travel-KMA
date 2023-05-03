@@ -2,66 +2,45 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/hdv-tour-all.css";
-import { Button, Checkbox, Form, InputNumber, Select, Skeleton } from "antd";
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Skeleton,
+} from "antd";
 import HdvItem from "../../../components/hdvItem";
 import { AppContext } from "../../../Context/AppContext";
 import { sendGet } from "../../../utils/api";
-const tourview = [
-  {
-    img: "https://duhoctms.edu.vn/wp-content/uploads/2021/07/dien-tich-nuoc-anh-1-1.jpg",
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: "https://duhoctms.edu.vn/wp-content/uploads/2021/07/dien-tich-nuoc-anh-1-1.jpg",
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: "https://duhoctms.edu.vn/wp-content/uploads/2021/07/dien-tich-nuoc-anh-1-1.jpg",
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: "https://duhoctms.edu.vn/wp-content/uploads/2021/07/dien-tich-nuoc-anh-1-1.jpg",
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: "https://duhoctms.edu.vn/wp-content/uploads/2021/07/dien-tich-nuoc-anh-1-1.jpg",
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    img: "https://duhoctms.edu.vn/wp-content/uploads/2021/07/dien-tich-nuoc-anh-1-1.jpg",
-    id: "456789367289o0-1",
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-];
-const options = [
-  {
-    label: "Trên 18",
-    value: "Ecotourism",
-  },
-  {
-    label: "Dưới 25",
-    value: "Cultural",
-  },
-  {
-    label: "Dưới 35",
-    value: "Resort",
-  },
-  {
-    label: "Dưới 55",
-    value: "Resort",
-  },
-];
+
 const { Option } = Select;
 export default function HdvAll() {
   const { provice } = useContext(AppContext);
   const [data, setData] = useState([]);
-  const getData = async () => {
-    const result = await sendGet("/tour-guide");
+  const getData = async (values) => {
+    const result = await sendGet("/tour-guide", values);
+    if (result.returnValue.data.length >= 0) {
+      setData(result.returnValue.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const getDataFilterTourDirection = async (e) => {
+    const result = await sendGet("/tour-guide", {
+      totalTourDirection: e,
+    });
+    if (result.returnValue.data.length >= 0) {
+      setData(result.returnValue.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const getDataFilterFavorite = async (e) => {
+    const result = await sendGet("/tour-guide", {
+      totalFavorite: e,
+    });
     if (result.returnValue.data.length >= 0) {
       setData(result.returnValue.data);
     } else {
@@ -71,7 +50,7 @@ export default function HdvAll() {
   useEffect(() => {
     getData();
   }, []);
-  if (!Object.keys(data).length) return <Skeleton />;
+  // if (!Object.keys(data).length) return <Skeleton />;
 
   return (
     <>
@@ -88,7 +67,7 @@ export default function HdvAll() {
                     initialValues={{
                       remember: true,
                     }}
-                    // onFinish={tourFiltter}
+                    onFinish={getData}
                   >
                     <Form.Item name="provinceId" label="Tỉnh thành">
                       <Select placeholder="Tỉnh thành">
@@ -103,16 +82,12 @@ export default function HdvAll() {
                     <Form.Item name="gender" label="Giới tính">
                       <Select placeholder="Giới tính">
                         <Option>Chọn giới tính</Option>
-                        <Option value="FEMALE">Nữ</Option>
-                        <Option value="MALE">Nam</Option>
+                        <Option value="0">Nữ</Option>
+                        <Option value="1">Nam</Option>
                       </Select>
                     </Form.Item>
-                    <Form.Item
-                      name="bỉthday"
-                      label="Tuổi tác"
-                      className="tour-select"
-                    >
-                      <Checkbox.Group options={options} />
+                    <Form.Item name="keyword" label="Tìm theo tên">
+                      <Input placeholder="Nhập từ khóa tìm kiếm" />
                     </Form.Item>
                     <Form.Item>
                       <Button
@@ -133,10 +108,44 @@ export default function HdvAll() {
                 </h3>
                 <div className="hdv-search travel-sort-bar">
                   <p className="search-title">Sắp xếp theo</p>
-                  <div class="travel-sort-by-options__option travel-sort-by-options__option--selected">
+                  <div class="travel-sort-by-options__option ">
                     Số tour
+                    <div className="price-menu">
+                      <div
+                        className="price-menu-item"
+                        onClick={() => getDataFilterTourDirection("ASC")}
+                      >
+                        <p>Tăng dần</p>
+                        <i class="fa-solid fa-arrow-up-long"></i>
+                      </div>
+                      <div
+                        className="price-menu-item"
+                        onClick={() => getDataFilterTourDirection("DESC")}
+                      >
+                        <p>Giảm dần</p>
+                        <i class="fa-solid fa-arrow-down-long"></i>
+                      </div>
+                    </div>
                   </div>
-                  <div class="travel-sort-by-options__option">Yêu thích</div>
+                  <div class="travel-sort-by-options__option">
+                    Yêu thích
+                    <div className="price-menu">
+                      <div
+                        className="price-menu-item"
+                        onClick={() => getDataFilterFavorite("ASC")}
+                      >
+                        <p>Tăng dần</p>
+                        <i class="fa-solid fa-arrow-up-long"></i>
+                      </div>
+                      <div
+                        className="price-menu-item"
+                        onClick={() => getDataFilterFavorite("DESC")}
+                      >
+                        <p>Giảm dần</p>
+                        <i class="fa-solid fa-arrow-down-long"></i>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="hdv-all__list">
                   {data.map((item, index) => (

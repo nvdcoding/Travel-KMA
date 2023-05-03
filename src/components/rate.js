@@ -63,11 +63,7 @@ function RateScreen(props) {
             autoComplete="off"
           >
             <Form.Item name="content" style={{ marginTop: "20px" }}>
-              <TextArea
-                rows={4}
-                placeholder="nhập nội dung đánh giá"
-                maxLength={6}
-              />
+              <TextArea rows={4} placeholder="nhập nội dung đánh giá" />
             </Form.Item>
 
             <Form.Item name="star">

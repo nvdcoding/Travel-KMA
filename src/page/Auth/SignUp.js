@@ -240,9 +240,8 @@ export default function SignUp() {
                     ]}
                   >
                     <Select placeholder="Giới tính" allowClear>
-                      <Option value="MALE">Nam</Option>
-                      <Option value="FEMALE">Nữ</Option>
-                      <Option value="OTHER">Khác</Option>
+                      <Option value="1">Nam</Option>
+                      <Option value="0">Nữ</Option>
                     </Select>
                   </Form.Item>
                 </div>
