@@ -4,10 +4,22 @@ import { useHistory } from "react-router-dom";
 import Layout from "../../../components/layout/layout";
 import Condition from "../../../components/condition";
 import "../../../assets/css/pay.css";
-import { Modal } from "antd";
+import { Form, Input, Modal, Button } from "antd";
+import { sendPost } from "../../../utils/api";
 
 export default function Pay() {
   let history = useHistory();
+  const PayOnline = async (value) => {
+    const res = await sendPost("/users", value);
+    if (res.statusCode == 200) {
+      window.location.href = res.returnValue.data;
+    } else {
+      //đơn hàng thất bại
+    }
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   useEffect(() => {}, []);
   return (
     <>
@@ -55,7 +67,7 @@ export default function Pay() {
                                 <div className="method-payment__info">
                                   <div className="method-payment__top js-toggle">
                                     <h5 className="method-payment__name">
-                                      Viettel Paygate: ATM/VISA
+                                      VNPay: ATM/VISA
                                     </h5>
                                   </div>
                                   <div className="method-payment__choose">
@@ -65,9 +77,6 @@ export default function Pay() {
                                     </label>
                                   </div>
                                 </div>
-                                <p className="method-payment__des">
-                                  <span>Chiết khấu 3%</span>
-                                </p>
                               </div>
                             </div>
                           </li>
@@ -78,9 +87,9 @@ export default function Pay() {
                   <div className="payment-online__right">
                     <div className="order-payment">
                       <h4 className="order-payment__title">
-                        Thông tin chuyến đi
+                        Thông tin nạp tiền
                       </h4>
-                      <ul className="order-payment__list">
+                      {/* <ul className="order-payment__list">
                         <li className="order-payment__item">
                           <span className="order-payment__name">
                             Tên chuyến đi
@@ -131,7 +140,44 @@ export default function Pay() {
                         >
                           Quay lại
                         </div>
-                      </div>
+                      </div> */}
+                      <Form
+                        name="basic"
+                        initialValues={{
+                          remember: true,
+                        }}
+                        onFinish={PayOnline}
+                        onFinishFailed={onFinishFailed}
+                        autoComplete="off"
+                      >
+                        <Form.Item
+                          label="Tổng tiênf"
+                          name="amount"
+                          rules={[
+                            {
+                              required: true,
+                              message: "err",
+                            },
+                          ]}
+                        >
+                          <Input />
+                        </Form.Item>
+
+                        <Form.Item
+                          wrapperCol={{
+                            offset: 8,
+                            span: 16,
+                          }}
+                        >
+                          <Button
+                            type="primary"
+                            htmlType="submit"
+                            className="button button--primary"
+                          >
+                            Thanh toán
+                          </Button>
+                        </Form.Item>
+                      </Form>
                     </div>
                   </div>
                 </div>

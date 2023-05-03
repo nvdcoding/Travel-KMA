@@ -8,7 +8,7 @@ import { setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
   const history = useHistory();
   const Token = localStorage.getItem("accessToken");
-  console.log({Token});
+  console.log({ Token });
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -91,6 +91,12 @@ function HeaderLayout() {
                           <div class="box-list-info">
                             <i class="fas fa-user"></i>
                             <Link to="/kenh-hdv">Kênh HDV</Link>
+                          </div>
+                        </li>
+                        <li>
+                          <div class="box-list-info">
+                            <i class="fas fa-user"></i>
+                            <Link to="/pay">Nạp tiền</Link>
                           </div>
                         </li>
                         <li>
