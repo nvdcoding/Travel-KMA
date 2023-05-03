@@ -11,7 +11,7 @@ import {
 
 const axiosInstance = Axios.create({
   timeout: 3 * 60 * 1000,
-  baseURL: "https://api.klearnit.online/",
+  baseURL: "https://api.ktravel.online/",
 });
 
 axiosInstance.interceptors.request.use(
@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
 
         return Promise.reject(error);
       }
-      return Axios.get(`https://api.klearnit.online/auth/refresh-token`, {
+      return Axios.get(`https://api.ktravel.online/auth/refresh-token`, {
         params: {
           refreshToken,
         },
