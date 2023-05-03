@@ -46,11 +46,11 @@ export default function ToursAll() {
     <>
       <Layout>
         <div className="tours-all__wrapper">
-          <div className="banner">
+          {/* <div className="banner">
             <img alt="" src={halong} />
-          </div>
+          </div> */}
           <div className="content">
-            <div className="pathway">
+            {/* <div className="pathway">
               <ul>
                 <li>
                   <a href="/">Trang chủ</a>
@@ -70,7 +70,7 @@ export default function ToursAll() {
                   <strong>Xem tất cả</strong>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div className="tours-all__main">
               <div className="tours-all__left">
                 <div className="tour-all-box__search">
@@ -133,7 +133,7 @@ export default function ToursAll() {
                     <TourItem item={item} key={index} />
                   ))}
                 </div>
-                <Pagination defaultCurrent={1} total={50} />
+                {/* <Pagination defaultCurrent={1} total={50} /> */}
               </div>
             </div>
           </div>

@@ -8,6 +8,7 @@ import { setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
   const history = useHistory();
   const Token = localStorage.getItem("accessToken");
+  console.log({Token});
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
@@ -59,9 +60,9 @@ function HeaderLayout() {
               </div>
               <div className="menu-right">
                 <div className="pc">
-                  <div className="your-trip">
+                {Token? (<div className="your-trip">
                     <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
-                  </div>
+                  </div>) : null}
                   <div className="language">
                     <i className="fa-solid fa-globe"></i>
                   </div>
