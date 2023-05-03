@@ -8,6 +8,7 @@ import { setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
   const history = useHistory();
   const Token = localStorage.getItem("accessToken");
+  console.log({Token});
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);

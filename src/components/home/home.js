@@ -725,7 +725,7 @@ function Home() {
                 Tùy chỉnh và lên kế hoạch chuyến đi ngay
               </p>
               <div className="button button--primary">
-                <a href="#">Khám phá ngay</a>
+                <a href="/diem-den">Khám phá ngay</a>
               </div>
             </div>
           </div>

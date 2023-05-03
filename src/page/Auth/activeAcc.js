@@ -44,7 +44,7 @@ export default function ActiveAcc() {
           form={form}
           className="auth-form"
         >
-          <h3 className="auth-title">Active tài khoản</h3>
+          <h3 className="auth-title">Kích hoạt tài khoản</h3>
           <Form.Item
             className="auth-form-item"
             name="email"
