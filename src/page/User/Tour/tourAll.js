@@ -104,11 +104,10 @@ export default function ToursAll() {
     setMaxValue(value * numEachPage);
   };
   const tourFiltter = async (values) => {
-    setData([]);
     const result = await sendGet("/tours", values);
     if (result.returnValue.data.length >= 0) {
       setData(
-        result.data.map((e) => {
+        result.returnValue.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };
         })
       );

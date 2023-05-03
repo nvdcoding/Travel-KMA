@@ -101,6 +101,7 @@
 
 .tour-guide-right.owl-carousel .owl-item img {
   min-height: 300px;
+  max-height: 300px;
   object-fit: cover;
   border-radius: 10px;
   border: 1.4px solid #cccccc6e;
@@ -461,7 +462,8 @@
 }
 
 .tour-view .tour-view__img {
-  max-height: 220px;
+  max-height: 180px;
+  min-height: 180px;
 }
 
 .tour-view .tour-view__tag {

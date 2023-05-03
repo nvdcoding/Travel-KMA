@@ -6,11 +6,17 @@ import {
   global,
   vocher,
   avt,
-  people,
   address,
   hoguom,
+  banner3,
+  banner2,
+  banner4,
+  banner5,
+  banner6,
+  banner7,
+  banner8,
+  banner9,
 } from "../../constants/images";
-import axios from "axios";
 import OwlCarousel from "react-owl-carousel";
 import { DatePicker, Skeleton } from "antd";
 import { Link } from "react-router-dom";
@@ -18,52 +24,36 @@ import { sendGet } from "../../utils/api";
 import { AppContext } from "../../Context/AppContext";
 const images = [
   {
-    img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    img: banner2,
+    link: "#",
   },
   {
-    img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/f5eb7be92c10a7cd.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    img: banner3,
+    link: "#",
   },
   {
-    img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/24183ef65af1849b.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
+    img: banner4,
+    link: "#",
   },
   {
-    img: "https://d3icb70lnx3c24.cloudfront.net/1200x614/68fe37a1fec76684.jpeg",
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-];
-const person = [
-  {
-    img: { people },
-    link: "linkid",
-    title: "Nguyễn Văn A",
-    address: "HDV Bắc Ninh",
+    img: banner5,
+    link: "#",
   },
   {
-    img: { people },
-    link: "linkid",
-    title: "Nguyễn Văn A 1",
-    address: "HDV Bắc Ninh 1",
+    img: banner6,
+    link: "#",
   },
   {
-    img: { people },
-    link: "linkid",
-    title: "Nguyễn Văn A 2",
-    address: "HDV Bắc Ninh 2",
+    img: banner7,
+    link: "#",
   },
   {
-    img: { people },
-    link: "linkid",
-    title: "Nguyễn Văn A 3",
-    address: "HDV Bắc Ninh 3",
+    img: banner8,
+    link: "#",
   },
   {
-    img: { people },
-    link: "linkid",
-    title: "Nguyễn Văn A 4",
-    address: "HDV Bắc Ninh 4",
+    img: banner9,
+    link: "#",
   },
 ];
 const feedback = [
@@ -96,60 +86,6 @@ const feedback = [
     time: "Thứ 2, 20/11/2022",
     des: "HDV thân thiện, Phòng khách sạn 3* đúng tiêu chuẩn tuy nhiên hơi cũ. Bữa ăn đặc sản miền Tây ngon miệng. Giá cả hợp lý",
     img: { avt },
-  },
-];
-const touraddress = [
-  {
-    name: "Nguyễn Văn A",
-    img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    name: "Nguyễn Văn A 1",
-    img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    name: "Nguyễn Văn A 2",
-    img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    name: "Nguyễn Văn A 3",
-    img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    name: "Nguyễn Văn A 4",
-    img: { address },
-    link: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-];
-const tourview = [
-  {
-    img: address,
-    id: 111,
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    id: 111,
-    img: address,
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    id: 111,
-    img: address,
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    id: 111,
-    img: address,
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
-  },
-  {
-    id: 111,
-    img: address,
-    avt: "https://d3icb70lnx3c24.cloudfront.net/1200x614/7a7227030111fcf1.jpeg",
   },
 ];
 const optionsPerson = {
@@ -272,6 +208,8 @@ function Home() {
   const [more, setMore] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const { provice } = useContext(AppContext);
+  const [tourGuide, setTourGuide] = useState([]);
+  const [tour, setTour] = useState([]);
 
   const onChangeTime = (date, dateString) => {
     localStorage.setItem("Timeprovice", date);
@@ -285,8 +223,28 @@ function Home() {
     localStorage.setItem("proviceId", e.target.value);
   };
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
-  useEffect(() => {}, []);
-  if (!Object.keys(provice).length) return <Skeleton />;
+  const getData = async () => {
+    const result = await sendGet("/tour-guide");
+    if (result.returnValue.data.length >= 0) {
+      setTourGuide(result?.returnValue?.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const listTour = async () => {
+    const res = await sendGet("/tours", {});
+    if (res.returnValue.data.length >= 0) {
+      setTour(res.returnValue.data);
+    } else {
+      message.error("Cập nhật tour thất bại");
+    }
+  };
+  useEffect(() => {
+    getData();
+    listTour();
+  }, []);
+  if (!Object.keys(tourGuide).length || !Object.keys(tour).length)
+    return <Skeleton />;
   return (
     <>
       <div className="home__wrapper">
@@ -316,8 +274,9 @@ function Home() {
           >
             {images.map((item, index) => (
               <div className="item" key={index}>
-                <a href={item.link}></a>
-                <img src={item.img} alt="" />
+                <a href={item.link}>
+                  <img src={item.img} alt="" />
+                </a>
               </div>
             ))}
           </OwlCarousel>
@@ -401,25 +360,28 @@ function Home() {
               <p className="tour-guide-sub-title">
                 HDV của chúng tôi chính là những người dân tại nơi đến. Họ là
                 những người nắm rõ bản sắc văn hóa nơi mà họ đang sinh sống.{" "}
-                <strong>TourTravel</strong> đảm bảo rằng họ cung cấp các dịch vụ
+                <strong>KTravel</strong> đảm bảo rằng họ cung cấp các dịch vụ
                 tốt nhất, có kiến thức địa phương sâu rộng và có niềm đam mê
-                giúp bạn tạo ra chuyến đi đáng nhớcủa mình.
+                giúp bạn tạo ra chuyến đi đáng nhớ của mình.
               </p>
             </div>
             <OwlCarousel
               className="tour-guide-right owl-theme"
               {...optionsPerson}
             >
-              {person.map((item, index) => (
+              {tourGuide?.map((item, index) => (
                 <div className="tour-guide-item" key={index}>
-                  <div href={item.link}>
-                    <img src={item.img.people} alt="" />
+                  <div>
+                    <img src={item?.tourGuideAvatar} alt="" />
                     <div className="tour-guide-des">
-                      <h3 className="tour-guide-name">{item.title}</h3>
-                      <p className="tour-guide-place">{item.address}</p>
+                      <h3 className="tour-guide-name">{item?.tourGuideName}</h3>
+                      <p className="tour-guide-place">{item?.provinceName}</p>
                     </div>
                   </div>
-                  <Link to={`/trang-ca-nhan/${item.link}`} class="button_xem">
+                  <Link
+                    to={`/trang-ca-nhan/${item?.tourGuideId}`}
+                    class="button_xem"
+                  >
                     Xem HDV
                   </Link>
                 </div>
@@ -439,13 +401,13 @@ function Home() {
                 className="tour-guides__list owl-theme "
                 {...optionsTourview}
               >
-                {tourview.map((item, index) => (
+                {tourGuide?.map((item, index) => (
                   <div className="tour-guides__item" key={index}>
                     <div className="tour-guides__card-img tour-view__card-img">
                       <img
                         alt=""
                         className="tour-guides__img tour-view__img"
-                        src={item.img}
+                        src={item?.tourGuideAvatar}
                       />
                       <div className="tour-guides__tag tour-view__tag">
                         <p className="tour-guides__tag-name tour-view__tag-name">
@@ -458,40 +420,44 @@ function Home() {
                     </div>
                     <div className="tour-guides__card-content">
                       <div className="tour-guides__head">
-                        <p className="tour-guides__name">Nguyễn Văn Duy</p>
-                        <p className="tour-guides__time">Nam</p>
+                        <p className="tour-guides__name">
+                          {item?.tourGuideName}
+                        </p>
+                        <p className="tour-guides__time">
+                          {item?.tourGuideGender == 1 ? "Nam" : "Nữ"}
+                        </p>
                       </div>
                       <div className="tour-guides-body">
                         <ul className="tour-guides-list">
                           <li className="tour-guides--item">
                             <i className="fa-solid fa-calendar-days"></i>
-                            <p className="tour-guides__text">Tuổi: 41</p>
+                            <p className="tour-guides__text">
+                              Tuổi:{" "}
+                              {new Date().getFullYear() -
+                                item?.tourGuideDob.split("-")[0]}
+                            </p>
                           </li>
                           <li className="tour-guides--item">
                             <i className="fa-solid fa-location-dot"></i>
                             <p className="tour-guides__text">
-                              Địa chỉ: Yên Phong
+                              Địa chỉ: {item?.provinceName}
                             </p>
                           </li>
                           <li className="tour-guides--item">
                             <i className="fa-solid fa-heart"></i>
-                            <p className="tour-guides__text">Đánh giá:</p>
-                          </li>
-                          <li className="tour-guides--item">
-                            <i className="fa-solid fa-hand-holding-heart"></i>
                             <p className="tour-guides__text">
-                              Tham gia: 5 năm trước
+                              Đánh giá:{item?.star}{" "}
                             </p>
                           </li>
                           <li className="tour-guides--item">
                             <i className="fa-solid fa-plane-arrival"></i>
                             <p className="tour-guides__text">
-                              Chuyến đi: 234 chuyến đi
+                              Chuyến đi: {item?.totalTour}
                             </p>
                           </li>
                         </ul>
                         <Link
-                          to={`trang-ca-nhan/${item.id}`}
+                          to={`trang-ca-nhan/${item?.tourGuideId}`}
                           className="travel-link"
                         >
                           Chi tiết <i class="fa-solid fa-angles-right"></i>
@@ -528,227 +494,23 @@ function Home() {
             <p className="travel-des">
               Khám phá, tạo và đặt chuyến đi của bạn!
             </p>
-            {/* <div class="hide-1199">
-              <div class="specialLocationBox">
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${phuquoc})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-phu-quoc" title="Tour Phú Quốc">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Phú Quốc</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${halong})`,
-                      }}
-                    ></div>
-                    <a
-                      href="/tour-du-lich-vinh-ha-long"
-                      title="Tour Vịnh Hạ Long"
-                    >
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Vịnh Hạ Long</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${condao})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-con-dao" title="Tour Côn Đảo">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Côn Đảo</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${vungtau})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-vung-tau" title="Tour Vũng Tàu">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Vũng Tàu</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${sapa})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-sapa" title="Tour SaPa">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Sa Pa</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${phanthiet})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-phan-thiet" title="Tour Phan Thiết">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Phan Thiết</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${danang})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-da-nang" title="Tour Đà Nẵng">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Đà Nẵng</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${hoian})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-hoi-an" title="Tour Hội An">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Hội An</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${nhatrang})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-nha-trang" title="Tour Nha Trang">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Nha Trang</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${dalat})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-da-lat" title="Tour Đà Lạt">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Đà Lạt</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${hanoi})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-ha-noi" title="Tour Hà Nội">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Hà Nội</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${haiphong})`,
-                      }}
-                    ></div>
-                    <a href="/tour-du-lich-hai-phong" title="Tour Hải Phòng">
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Hải Phòng</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-                <div class="specialLocationBox_item">
-                  <div class="specialLocationBox_item_box">
-                    <div
-                      class="specialLocationBox_item_box_image"
-                      style={{
-                        backgroundImage: `url(${hochiminh})`,
-                      }}
-                    ></div>
-                    <a
-                      href="/tour-du-lich-ho-chi-minh"
-                      title="Tour Hồ Chí Minh"
-                    >
-                      <div class="specialLocationBox_item_box_title">
-                        <h3 class="maxLine_1">Hồ Chí Minh</h3>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div> */}
+
             <div className="tour-address__main">
               <OwlCarousel
                 className="tour-address__list owl-theme"
                 {...optionsTouraddress}
               >
-                {touraddress.map((item, index) => (
+                {provice?.map((item, index) => (
                   <div className="tour-address__item" key={index}>
-                    <Link to={item.link}>
+                    <Link to={`/du-lich/${item?.slug}`}>
                       <img
                         alt=""
                         className="tour-address__img"
-                        src={item.img.address}
+                        src={item?.images}
                       />
                       <div className="tour-address__info">
                         <i class="fa-solid fa-map-location-dot"></i>
-                        <p className="tour-address__name">{item.name}</p>
+                        <p className="tour-address__name">{item?.name}</p>
                       </div>
                       <button class="button_xem">Xem điểm đến</button>
                     </Link>
@@ -873,9 +635,9 @@ function Home() {
                   Chọn một chuyến đi bạn thích hoặc liên hệ trực tiếp với HDV
                 </p>
               </div>
-              <a href="#" className="travel-link">
+              <Link href="/tour" className="travel-link">
                 Xem tất cả<i class="fa-solid fa-angle-right"></i>
-              </a>
+              </Link>
             </div>
 
             <div className="tour-view__main">
@@ -883,49 +645,47 @@ function Home() {
                 className="tour-view__list owl-theme "
                 {...optionsTourview}
               >
-                {tourview.map((item, index) => (
+                {tour?.map((item, index) => (
                   <div className="tour-view__item" key={index}>
                     <div className="tour-view__card-img">
-                      <img alt="" className="tour-view__img" src={item.img} />
+                      <img
+                        alt=""
+                        className="tour-view__img"
+                        src={item?.images[0]?.url}
+                      />
                       <div className="tour-view__tag">
-                        <p className="tour-view__tag-name">Nature</p>
-                        <p className="tour-view__tag-name">Private Tour</p>
-                        <p className="tour-view__tag-name tour-primary">
-                          Carbon Friendly
-                        </p>
-                        <p className="tour-view__tag-name tour-primary">
-                          Social Impact
-                        </p>
+                        <p className="tour-view__tag-name">{item?.type}</p>
                       </div>
                       <div className="tour-view-avt">
-                        <img alt="" className="tour-view__avt" src={item.avt} />
+                        <img
+                          alt=""
+                          className="tour-view__avt"
+                          src={item?.tourGuide?.avatar}
+                        />
                       </div>
                     </div>
                     <div className="tour-view__card-content">
                       <div className="tour-view__head">
-                        <p className="tour-view__name">Nepal</p>
-                        <p className="tour-view__time">10 days</p>
+                        <p className="tour-view__name">
+                          {item?.province?.name}
+                        </p>
+                        <p className="tour-view__time">
+                          {item?.tourSchedule.length} ngày
+                        </p>
                       </div>
                       <div className="tour-view-body">
-                        <h3 className="tour-view__title">
-                          10-Day Luxury Annapurna Trek
-                        </h3>
-                        <p className="tour-view__des">
-                          Stay at Ker & Downey Lodges,
-                        </p>
+                        <h3 className="tour-view__title">{item?.name}</h3>
+                        <p className="tour-view__des">{item?.description}</p>
                         <div className="tour-view__place">
                           <i className="fa-solid fa-plane-arrival"></i>
                           <span className="tour-view__place-name">
-                            Bắc Ninh
+                            {item?.province?.name}
                           </span>
                         </div>
-                        <a href="#" className="travel-link">
-                          Xem chi tiết<i class="fa-solid fa-angles-right"></i>
-                        </a>
                       </div>
                       <div className="tour-view-footer">
                         <p className="tour-view__price">
-                          khoảng<span>200.000đ</span>một người
+                          khoảng <span>{item?.basePrice} đ</span>
                         </p>
                         <div className="tour-view__evaluate">
                           <div className="tour-view__star">
@@ -936,9 +696,11 @@ function Home() {
                             <i className="fa-regular fa-star"></i>
                             <span>Đã đi 1.2k</span>
                           </div>
-                          <div className="button button--primary button-contact">
-                            Tùy chỉnh và liên hệ
-                          </div>
+                          <Link to={`/tour/${item?.id}`}>
+                            <div className="button button--primary button-contact">
+                              Tùy chỉnh và liên hệ
+                            </div>
+                          </Link>
                         </div>
                       </div>
                     </div>
