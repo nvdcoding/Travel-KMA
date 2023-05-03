@@ -1,29 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Form, Button, Input, Skeleton, message } from "antd";
 import axios from "axios";
 import "../../../assets/css/personal.css";
-import { avt } from "../../../constants/images";
+import { avt, camera } from "../../../constants/images";
 import { sendPost } from "../../../utils/api";
 import Layout from "../../../components/layout/layout";
+import { AppContext } from "../../../Context/AppContext";
 function Account() {
-  const [profile, setProfile] = useState({});
+  const { infoUser } = useContext(AppContext);
+
   const [show, setShow] = useState(true);
   const [form] = Form.useForm();
   const onFinish = async (values) => {};
-  const fakeData = {
-    name: "duy nguyen",
-    email: "duy@gmail.com",
-    bio: "Mô tả",
-    avt: "https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg",
-  };
-  async function getProfile() {
-    // const res = await sendGet("/api/user/profile");
-    setProfile(fakeData);
-  }
-  useEffect(() => {
-    getProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   // eslint-disable-next-line no-unused-vars
   // const user = getItem("user") ? JSON.parse(getItem("user")) : {};
   const onFinishFailed = (errorInfo) => {
@@ -56,7 +44,7 @@ function Account() {
   const onCancelChangePass = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  if (!Object.keys(profile).length)
+  if (!Object.keys(infoUser).length)
     return (
       <>
         <Skeleton />
@@ -87,7 +75,7 @@ function Account() {
             <h2>Thông tin cá nhân</h2>
             <div className="info">
               <h3>Họ tên</h3>
-              <Form.Item name="name" initialValue={profile?.name}>
+              <Form.Item name="name" initialValue={infoUser?.username}>
                 <Input />
               </Form.Item>
               <p>
@@ -96,29 +84,29 @@ function Account() {
               </p>
             </div>
             <div className="info">
-              <h3>Bio</h3>
-              <Form.Item name="bio" initialValue={profile?.bio}>
-                <Input placeholder="Thêm giới thiệu" />
+              <h3>SĐT</h3>
+              <Form.Item name="bio" initialValue={infoUser?.phone}>
+                <Input placeholder="Số điện thoại" />
               </Form.Item>
-              <p>
+              {/* <p>
                 Bio hiển thị trên trang cá nhân và trong các bài viết (blog) của
                 bạn.
-              </p>
+              </p> */}
             </div>
 
             <div className="info">
               <h3>Avatar</h3>
               <p>
                 Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.
-                <Form.Item initialValue={profile?.avatar}>
+                <Form.Item initialValue={infoUser?.avatar}>
                   <div class="avtUpload">
                     <div class="avtUploadImg">
-                      <img src={profile?.avatar} alt="Avatar" />
+                      <img src={infoUser?.avatar} alt="Avatar" />
                     </div>
                     <label for="img">
                       <div class="photoupload" onChange={handleChangeImage}>
                         <img
-                          src="https://fullstack.edu.vn/assets/icon/camera.png"
+                          src={camera}
                           class="photoupload-img"
                           alt="camera"
                         />
@@ -141,7 +129,7 @@ function Account() {
 
             <div className="info">
               <h3>Email</h3>
-              <Form.Item name="email" initialValue={profile?.email}>
+              <Form.Item name="email" initialValue={infoUser?.email}>
                 <Input placeholder={"learnit@gmail.com"} readOnly />
               </Form.Item>
             </div>
@@ -149,7 +137,7 @@ function Account() {
           <div className="ChangPassword">
             <div className="changeinfo">
               <div className="title">
-                <i class="fa-regular fa-key"></i>
+                <i class="fa-solid fa-key"></i>
                 <div style={{ marginLeft: "13px" }}>
                   <p style={{ color: "#181717" }}>Đổi mật khẩu</p>
                   <p style={{ color: "#383838" }}>

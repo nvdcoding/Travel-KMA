@@ -48,9 +48,9 @@ export default function ToursFilter() {
   let params = useParams();
   const tourFiltter = async () => {
     const result = await sendGet(`/tours?provinceId=${params.id}`);
-    if (result.data.length >= 0) {
+    if (result.statusCode === 200) {
       setData(
-        result.data.map((e) => {
+        result.returnValue.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };
         })
       );
@@ -101,8 +101,8 @@ export default function ToursFilter() {
                       />
                       <div className="tour-detail__plan-info">
                         <span className="tour-plan__review">
-                          Lên kế hoạch cho chuyến tham quan {params.id} với
-                          TravelVN
+                          Lên kế hoạch cho chuyến tham quan
+                          <strong> {nameProvice}</strong> với TravelVN
                         </span>
                       </div>
                     </div>
@@ -134,7 +134,7 @@ export default function ToursFilter() {
                           defaultValue={moment(timeStart)}
                         />
                       </div>
-                      <label>Số lượng</label>
+                      {/* <label>Số lượng</label>
                       <div className="create-tour__people-item">
                         <p className="create-tour__people-des">
                           Trẻ em
@@ -161,7 +161,7 @@ export default function ToursFilter() {
                             <i class="fa-solid fa-plus"></i>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                       <label htmlFor="start">Mô tả chi tiết:</label>
                       <Input
                         placeholder="Nhập mô tả"

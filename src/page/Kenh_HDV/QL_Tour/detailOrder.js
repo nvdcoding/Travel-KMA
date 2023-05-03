@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Space,
   Table,
@@ -7,37 +7,89 @@ import {
   DatePicker,
   Input,
   Button,
-  Popconfirm,
+  Modal,
+  Result,
+  message,
 } from "antd";
+import "./style.css";
 import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
-import { Link } from "react-router-dom";
-import { sendDelete, sendGet } from "../../../utils/api/index";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { sendDelete, sendGet, sendPut } from "../../../utils/api/index";
 export default function DetailOrder() {
+  const params = useParams();
+  const history = useHistory();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleStatusTour = async (e) => {
+    try {
+      const res = await sendPut("/orders/tourguide/approve-order", {
+        action: e,
+        orderId: parseInt(params.id),
+      });
+      setIsModalOpen(false);
+      if (res.statusCode === 200) {
+        message.error("Thành công");
+        history.push("/kenh-hdv/don-hang");
+      } else {
+        message.error(" thất bại");
+      }
+    } catch (error) {
+      message.error("Ko thành công");
+    }
+  };
   return (
     <>
       <LayoutHDV>
         <div className="mainDetail">
+          <div className="btn-group">
+            <Button onClick={() => showModal()}>Xác nhận</Button>
+            <Button onClick={() => handleStatusTour("reject")}>Từ chối</Button>
+            <Button>Quay lại</Button>
+          </div>
           <h3 className="nameTour">Tên tour</h3>
-          <p className="des">
-            Đến khám phá những điều kỳ diệu của Bolivia! Từ thành phố thuộc địa
-            tuyệt đẹp đến cảnh quan quyến rũ của căn hộ Salyuni, chuyến đi này
-            là hoàn hảo cho những người muốn trải nghiệm tất cả những điểm nổi
-            bật của Bolivia. Bắt đầu hành trình của bạn ở thủ đô La Paz. Đi lang
-            thang qua những khu chợ nhộn nhịp với những sản phẩm đáng ngạc nhiên
-            và độc đáo, đồ thủ công phức tạp và những món ăn địa phương ngon
-            miệng. Bạn có thích kiến trúc thuộc địa nguyên sơ? Nhận điền vào La
-            Paz và Sucre, một trong những Các địa điểm thuộc địa chính của
-            Bolivia. Hãy liên lạc với lịch sử, khi bạn ghé thăm Casa de
-            Liberdad, nơi độc lập của Bolivia và Bảo tàng Nghệ thuật Bản địa ở
-            Sucre. Thiên nhiên không bao giờ xa - hãy tham quan phong cảnh yên
-            bình của Thung lũng Mặt trăng và vượt qua những dãy núi đẹp. Kết
-            thúc hành trình của bạn với chuyến thăm sa mạc muối lớn nhất thế
-            giới, như bạn đi xe trên căn hộ Uyuni Salt trên một chiếc xe jeep
-            riêng.
-          </p>
+          <p className="des">nội dung gì đó</p>
         </div>
+
+        <Modal
+          title=""
+          open={isModalOpen}
+          visible={isModalOpen}
+          onOk={handleStatusTour}
+          onCancel={handleCancel}
+          footer={null}
+          width={400}
+        >
+          <div className="noti-changestatus">
+            <h3>Xác nhận đặt cọc</h3>
+            <div className="change-money">
+              <p className="change-money-value">10.000đ</p>
+              <p className="change-money-icon">
+                <i class="fa-solid fa-repeat"></i>
+              </p>
+              <p className="change-money-value">30%</p>
+            </div>
+            <div className="btn-group">
+              <div
+                className="button button--primary"
+                onClick={() => handleStatusTour("accept")}
+              >
+                Xác nhận
+              </div>
+              <div className="button button--normal" onClick={handleCancel}>
+                Hủy
+              </div>
+            </div>
+          </div>
+        </Modal>
       </LayoutHDV>
     </>
   );

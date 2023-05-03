@@ -46,7 +46,7 @@ export default function SignUp() {
     console.log("Failed:", errorInfo);
   };
   const onFinishHDV = async (values) => {
-    const res = await sendPost("/auth/register-hdv", values);
+    const res = await sendPost("/auth/register-tourguide", values);
     if (res.statusCode === 200) {
       notification.open({
         message: "Đăng kí thành công",
@@ -183,7 +183,7 @@ export default function SignUp() {
 
                 <div className="auth-group">
                   <Form.Item
-                    name="userName"
+                    name="username"
                     hasFeedback
                     rules={[
                       {
@@ -216,7 +216,7 @@ export default function SignUp() {
                 </div>
                 <div className="auth-group">
                   <Form.Item
-                    name="phoneNumber"
+                    name="phone"
                     hasFeedback
                     rules={[
                       {
@@ -229,7 +229,7 @@ export default function SignUp() {
                     <Input placeholder="SDT của bạn" />
                   </Form.Item>
                   <Form.Item
-                    name="sex"
+                    name="gender"
                     hasFeedback
                     rules={[
                       {
@@ -240,17 +240,18 @@ export default function SignUp() {
                     ]}
                   >
                     <Select placeholder="Giới tính" allowClear>
-                      <Option value="male">Nam</Option>
-                      <Option value="female">Nữ</Option>
+                      <Option value="1">Nam</Option>
+                      <Option value="0">Nữ</Option>
                     </Select>
                   </Form.Item>
                 </div>
                 <div className="auth-group">
                   <Form.Item
-                    name="provice"
+                    name="provinces"
                     hasFeedback
                     rules={[
                       {
+                        type: "array",
                         validateStatus: "error",
                         required: true,
                         message: "Provice không được để trống!",
@@ -266,12 +267,13 @@ export default function SignUp() {
                     </Select>
                   </Form.Item>
                   <Form.Item
-                    name="birthday"
+                    name="dob"
                     hasFeedback
                     rules={[
                       {
                         validateStatus: "error",
                         required: true,
+                        type: "object",
                         message: "Ngày sinh không được để trống!",
                       },
                     ]}
@@ -291,29 +293,6 @@ export default function SignUp() {
                   ]}
                 >
                   <Input.Password placeholder="Mật khẩu của bạn" />
-                </Form.Item>
-                <Form.Item
-                  name="passwordConfirmation"
-                  dependencies={["password"]}
-                  hasFeedback
-                  rules={[
-                    {
-                      required: true,
-                      message: "Mật khẩu không để trống!",
-                    },
-                    ({ getFieldValue }) => ({
-                      validator(_, value) {
-                        if (!value || getFieldValue("password") === value) {
-                          return Promise.resolve();
-                        }
-                        return Promise.reject(
-                          new Error("Password không khớp!")
-                        );
-                      },
-                    }),
-                  ]}
-                >
-                  <Input.Password placeholder="Nhập lại mật khẩu" />
                 </Form.Item>
                 <Button htmlType="submit" className="button button--primary">
                   Đăng Ký

@@ -3,10 +3,12 @@ import React, { useEffect } from "react";
 import Layout from "../../../components/layout/layout";
 import { avt, banner } from "../../../constants/images";
 import "../../../assets/css/personal.css";
-import { Tag } from "antd";
+import { sendGet } from "../../../utils/api";
+import { Skeleton, Tag } from "antd";
 import TourItem from "../../../components/tourItem";
 import OwlCarousel from "react-owl-carousel";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
 export default function Personal() {
   const options = {
     loop: true,
@@ -175,7 +177,41 @@ export default function Personal() {
       id: "ghj6781q2",
     },
   ];
-  useEffect(() => {}, []);
+  const params = useParams();
+  const [data, setData] = useState({});
+  const [tour, setTour] = useState([]);
+  const [guide, setGuide] = useState([]);
+  function currencyFormat(num) {
+    return new Intl.NumberFormat().format(num);
+  }
+  const detailHdv = async () => {
+    const result = await sendGet(`/tour-guide/guest/${params.id}`);
+    if (result.statusCode == 200) {
+      setData(result.returnValue);
+      setTour(result.returnValue?.tours);
+      // return result.returnValue.data?.provinces[0]?.id;
+    } else {
+      message.error("thất bại");
+    }
+  };
+  // const allHdv = async () => {
+  //   let id = await detailHdv();
+  //   console.log("id1", id);
+  //   const result = await sendGet("/tour-guide", {
+  //     provinces: id,
+  //   });
+  //   if (result.statusCode == 200) {
+  //     setGuide(result.returnValue.data);
+  //   } else {
+  //     message.error("thất bại");
+  //   }
+  // };
+  useEffect(() => {
+    detailHdv();
+  }, []);
+  if (!Object.keys(data).length) return <Skeleton />;
+  // if (!Object.keys(guide).length) return <Skeleton />;
+
   return (
     <>
       <Layout>
@@ -203,11 +239,14 @@ export default function Personal() {
               <div className="personal-page__main">
                 <div className="personal-page-left">
                   <div className="personal-page__avt">
-                    <img alt="" src={avt} />
+                    <img alt="" src={data?.avatar} />
                   </div>
-                  <h3 className="personal-page__name">Nguyễn Duy</h3>
+                  <h3 className="personal-page__name">{data?.name}</h3>
                   <h3 className="personal-page__position">
-                    Hướng dẫn viên của Bắc Ninh
+                    Hướng dẫn viên của{" "}
+                    {data?.provinces?.map((item) => (
+                      <> - {item.name} </>
+                    ))}
                   </h3>
                   <div className="personal-page__contact">
                     <Link to="/chat" className="button button--primary">
@@ -224,27 +263,14 @@ export default function Personal() {
                       <i className="fa-solid fa-star-half-stroke"></i>
                       <i className="fa-regular fa-star"></i>
                     </div>
-                    <p className="evaluate-des">(44 đánh giá)</p>
+                    <p className="evaluate-des">({data?.avgStar} đánh giá)</p>
                   </div>
                 </div>
                 <div className="personal-page-right">
                   <h3 className="personal-page-title">
-                    Xin chào, mình là Duy!
+                    Xin chào, mình là {data?.name}!
                   </h3>
-                  <p className="personal-page-sub-title">
-                    Tôi sinh ra và lớn lên tại Bắc Ninh. Mảnh đất này đã gắn bó
-                    và để lại trong trái tim tôi nhiều kỷ niệm. Bắc Ninh một
-                    mảnh đất cổ lâu đời với nhiếu nét truyền thông văn hóa đặc
-                    sắc. Nói đến Bắc Ninh người ta nhớ ngay tới Quan Họ, làn
-                    điệu dân ca đã đi sâu trong tâm thức bao nhiều con đất Việt.
-                    Nhưng mảnh đất Bắc Ninh còn nhiều cảnh đẹp và điểm du lịch
-                    hấp dẫn khác, hãy cùng tôi thăm quan và tạo nên những chuyến
-                    đi đặc biệt. Tôi sẻ kể bạn nghe những điều thú vị và những
-                    trải nghiệm mới ở Bắc Ninh. Có quá nhiều điều để đến với Bắc
-                    Ninh, và mình sẽ dần dần giới thiệu chia sẻ với các bạn về
-                    mảnh đất ngàn năm này.
-                  </p>
-                  <p className="personal-page-sub-more">Đọc tiếp </p>
+                  <p className="personal-page-sub-title">{data?.bio}</p>
                   <div className="personal-page-infomation">
                     <div className="personal-page-infomation-item">
                       <h3 className="personal-page__title">Thông tin cơ bản</h3>
@@ -254,21 +280,27 @@ export default function Personal() {
                             <i className="fa-solid fa-location-dot"></i>
                             <p className="personal-page__des">Điểm đến chính</p>
                           </div>
-                          <p className="personal-page__value">Bắc Ninh</p>
+                          <p className="personal-page__value">
+                            {data?.provinces?.map((item) => (
+                              <> - {item.name} </>
+                            ))}
+                          </p>
                         </li>
                         <li className="personal-page__item">
                           <div className="personal-page-item__title">
                             <i class="fa-solid fa-user"></i>
                             <p className="personal-page__des">Giới tính</p>
                           </div>
-                          <p className="personal-page__value">Nam</p>
+                          <p className="personal-page__value">
+                            {data?.gender == 1 ? "Nam" : "Nữ"}
+                          </p>
                         </li>
                         <li className="personal-page__item">
                           <div className="personal-page-item__title">
                             <i class="fa-solid fa-cake-candles"></i>
                             <p className="personal-page__des">Ngày sinh</p>
                           </div>
-                          <p className="personal-page__value">25/10/2000</p>
+                          <p className="personal-page__value">{data?.dob}</p>
                         </li>
                       </ul>
                     </div>
@@ -281,7 +313,7 @@ export default function Personal() {
                             <p className="personal-page__des">Đánh giá</p>
                           </div>
                           <p className="personal-page__value">
-                            4.5/5(125 đánh giá)
+                            {data?.avgStar}/5(125 đánh giá)
                           </p>
                         </li>
                         <li className="personal-page__item">
@@ -289,7 +321,9 @@ export default function Personal() {
                             <i class="fa-solid fa-plane-arrival"></i>
                             <p className="personal-page__des">Chuyến đi</p>
                           </div>
-                          <p className="personal-page__value">127 chuyến</p>
+                          <p className="personal-page__value">
+                            {data?.numberOfOrder} chuyến
+                          </p>
                         </li>
                         <li className="personal-page__item">
                           <div className="personal-page-item__title">
@@ -315,8 +349,64 @@ export default function Personal() {
                     className="trip-suggest__list owl-theme"
                     {...options}
                   >
-                    {tourview.map((item, index) => (
-                      <TourItem key={index} item={item} />
+                    {data?.tours?.map((item, index) => (
+                      // <TourItem key={index} item={item} />
+                      <div className="tour-view__item" key={index}>
+                        <div className="tour-view__card-img">
+                          <img alt="" className="tour-view__img" src={banner} />
+                          <div className="tour-view__tag">
+                            <p className="tour-view__tag-name tour-primary">
+                              {item.type == "Ecotourism"
+                                ? "Văn hóa"
+                                : item.type == "Cultural"
+                                ? "Nghỉ dưỡng"
+                                : item.type == "Entertainment"
+                                ? "Giải trí"
+                                : item.type == "Sports"
+                                ? "Thể thao"
+                                : "Khác"}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="tour-view__card-content">
+                          <div className="tour-view__head"></div>
+                          <div className="tour-view-body">
+                            <h3 className="tour-view__title">{item?.name}</h3>
+                            <p className="tour-view__des">
+                              {item?.description}
+                            </p>
+                            <div className="tour-view__place">
+                              <i className="fa-solid fa-plane-arrival"></i>
+                              {/* <span className="tour-view__place-name">
+                                {item?.place}
+                              </span> */}
+                            </div>
+                            <Link
+                              to={`/tour/${item?.id}`}
+                              className="travel-link"
+                            >
+                              Xem chi tiết
+                            </Link>
+                          </div>
+                          <div className="tour-view-footer">
+                            <p className="tour-view__price">
+                              khoảng
+                              <span>{currencyFormat(item?.basePrice)}đ</span>
+                              /một người
+                            </p>
+                            <div className="tour-view__evaluate">
+                              <div className="tour-view__star">
+                                <i className="fa-solid fa-star"></i>
+                                <i className="fa-solid fa-star"></i>
+                                <i className="fa-solid fa-star"></i>
+                                <i className="fa-solid fa-star-half-stroke"></i>
+                                <i className="fa-regular fa-star"></i>
+                                {/* <span>Đã đi {props?.item?.rate}</span> */}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     ))}
                   </OwlCarousel>
                 </div>
@@ -356,20 +446,24 @@ export default function Personal() {
                     className="trip-suggest__list owl-theme"
                     {...optionsPeople}
                   >
-                    {tourview.map((item, index) => (
+                    {guide.map((item, index) => (
                       <div className="trip-suggest-main" key={index}>
-                        <a href={item.link}>
+                        <Link to={`/trang-ca-nhan/${item?.tourGuideId}`}>
                           <img
-                            src={item.img}
+                            src={item?.tourGuideAvatar}
                             alt=""
                             className="tour-guide-hdv"
                           />
                           <div className="">
-                            <h3 className="tour-guide-name">{item.hdv}</h3>
-                            <p className="tour-guide-place">{item.place}</p>
+                            <h3 className="tour-guide-name">
+                              {item?.tourGuideName}
+                            </h3>
+                            <p className="tour-guide-place">
+                              {item?.provinceName}
+                            </p>
                           </div>
                           <button class="button_xem">Xem HDV</button>
-                        </a>
+                        </Link>
                       </div>
                     ))}
                   </OwlCarousel>

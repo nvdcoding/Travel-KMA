@@ -44,14 +44,16 @@ function HeaderLayout() {
                   </li>
                   <li className="menu-item">
                     <NavLink to="/tin-tuc">Tin tức</NavLink>
-                    <ul className="menu-sub">
-                      <li className="menu-sub_item">
-                        <NavLink to="/viet-bai">Viết bài</NavLink>
-                      </li>
-                      <li className="menu-sub_item">
-                        <NavLink to="/tin-tuc">Danh sách bài viết</NavLink>
-                      </li>
-                    </ul>
+                    {Token && (
+                      <ul className="menu-sub">
+                        <li className="menu-sub_item">
+                          <NavLink to="/viet-bai">Viết bài</NavLink>
+                        </li>
+                        <li className="menu-sub_item">
+                          <NavLink to="/tin-tuc">Danh sách bài viết</NavLink>
+                        </li>
+                      </ul>
+                    )}
                   </li>
                   {/* <li className="menu-item">
                     <NavLink to="/gioi-thieu">Giới thiệu</NavLink>
@@ -60,9 +62,11 @@ function HeaderLayout() {
               </div>
               <div className="menu-right">
                 <div className="pc">
-                {Token? (<div className="your-trip">
-                    <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
-                  </div>) : null}
+                  {Token ? (
+                    <div className="your-trip">
+                      <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
+                    </div>
+                  ) : null}
                   <div className="language">
                     <i className="fa-solid fa-globe"></i>
                   </div>
@@ -171,8 +175,8 @@ function HeaderLayout() {
                         </NavLink>
                       </li> */}
                       {Token ? (
-                        <li className="menu-item-mb">
-                          <NavLink to="/signout">
+                        <li className="menu-item-mb" onClick={SignOut}>
+                          <NavLink to="#">
                             <i class="fa-solid fa-right-from-bracket"></i>Đăng
                             xuẩt
                           </NavLink>

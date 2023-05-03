@@ -2,15 +2,13 @@
 
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { address, avt, haiphong } from "../constants/images";
+import { avt, banner } from "../constants/images";
 
 function TourItem(props) {
   function currencyFormat(num) {
-    console.log(num.toFixed(3).replace(/(\d)(?=(\d{3})+(?!\d))/g, ".") + "đ");
+    return new Intl.NumberFormat().format(num);
   }
-  useEffect(() => {
-    currencyFormat(200000);
-  }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <div className="tour-view__item">
@@ -18,35 +16,47 @@ function TourItem(props) {
           <img
             alt=""
             className="tour-view__img"
-            // src={
-            //   props?.item?.images[0]?.url
-            //     ? props?.item?.images[0]?.url
-            //     : { avt }
-            // }
-            src={haiphong}
+            src={
+              props?.item?.images[0]?.url
+                ? props?.item?.images[0]?.url
+                : { banner }
+            }
           />
           <div className="tour-view__tag">
-            <p className="tour-view__tag-name">Nature</p>
-            <p className="tour-view__tag-name">Private Tour</p>
-            <p className="tour-view__tag-name tour-primary">Carbon Friendly</p>
-            <p className="tour-view__tag-name tour-primary">Social Impact</p>
+            <p className="tour-view__tag-name tour-primary">
+              {props.type == "Ecotourism"
+                ? "Văn hóa"
+                : props.type == "Cultural"
+                ? "Nghỉ dưỡng"
+                : props.type == "Entertainment"
+                ? "Giải trí"
+                : props.type == "Sports"
+                ? "Thể thao"
+                : "Khác"}
+            </p>
           </div>
           <div className="tour-view-avt">
             <img
               alt=""
               className="tour-view__avt"
-              src={props?.item?.tourGuide?.avatar}
+              src={
+                props?.item?.tourGuide?.avatar
+                  ? props?.item?.tourGuide?.avatar
+                  : { avt }
+              }
             />
           </div>
         </div>
         <div className="tour-view__card-content">
           <div className="tour-view__head">
-            <p className="tour-view__name">{props?.item?.hdv}</p>
-            <p className="tour-view__time">{props?.item?.time}</p>
+            <p className="tour-view__name">{props?.item?.tourGuide?.name}</p>
+            <p className="tour-view__time">
+              {props?.item?.tourSchedule.length} ngày
+            </p>
           </div>
           <div className="tour-view-body">
-            <h3 className="tour-view__title">{props?.item?.title}</h3>
-            <p className="tour-view__des">{props?.item?.des}</p>
+            <h3 className="tour-view__title">{props?.item?.name}</h3>
+            <p className="tour-view__des">{props?.item?.description}</p>
             <div className="tour-view__place">
               <i className="fa-solid fa-plane-arrival"></i>
               <span className="tour-view__place-name">
@@ -60,17 +70,9 @@ function TourItem(props) {
           <div className="tour-view-footer">
             <p className="tour-view__price">
               khoảng
-              <span>
-                {props?.item?.basePrice.toLocaleString("it-IT", {
-                  style: "currency",
-                  currency: "VND",
-                })}
-              </span>
+              <span> {currencyFormat(props?.item?.basePrice)}đ </span>
               /một người
             </p>
-            {/* <p className="tour-view__price">
-              khoảng <span>{props?.item?.maxPrice}</span>/Tour
-            </p> */}
             <div className="tour-view__evaluate">
               <div className="tour-view__star">
                 <i className="fa-solid fa-star"></i>
@@ -78,7 +80,7 @@ function TourItem(props) {
                 <i className="fa-solid fa-star"></i>
                 <i className="fa-solid fa-star-half-stroke"></i>
                 <i className="fa-regular fa-star"></i>
-                <span>Đã đi {props?.item?.rate}</span>
+                {/* <span>Đã đi {props?.item?.rate}</span> */}
               </div>
               <Link to={`/tour/${props?.item?.id}`}>
                 <div className="button button--primary button-contact">

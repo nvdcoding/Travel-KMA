@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable eqeqeq */
 import React, { useEffect } from "react";
 import {
   Space,
@@ -8,14 +8,29 @@ import {
   Input,
   Button,
   Popconfirm,
+  message,
 } from "antd";
 import { Link } from "react-router-dom";
 import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
+import { useState } from "react";
+import { sendDelete, sendGet, sendPut } from "../../../utils/api";
 
 export default function MyPage() {
+  const { RangePicker } = DatePicker;
+  const { Search } = Input;
+  const onSearch = (value) => console.log(value);
+  const [active, setActive] = useState(1);
+  const [data, setData] = useState([]);
+
   const columns = [
+    {
+      title: "STT",
+      dataIndex: "STT",
+      key: "STT",
+      render: (_, value, index) => <p>{index}</p>,
+    },
     {
       title: "Tên tour",
       dataIndex: "name",
@@ -24,91 +39,136 @@ export default function MyPage() {
     },
     {
       title: "Thời gian",
-      dataIndex: "time",
-      key: "time",
+      dataIndex: "timeOrder",
+      key: "timeOrder",
     },
     {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
+      render: (_, value) => (
+        <p>
+          {value.status == 0
+            ? "Chờ xác nhận"
+            : value.status == 1
+            ? "Chờ đặt cọc"
+            : value.status == 2
+            ? "Chờ thanh toán"
+            : value.status == 3
+            ? "Chưa thực hiện"
+            : value.status == 4
+            ? "Đang thực hiện"
+            : value.status == 5
+            ? "Đã thực hiện"
+            : "Đã hủy"}
+        </p>
+      ),
     },
     {
-      title: "Địa điểm",
-      dataIndex: "place",
-      key: "place",
+      title: "Giá tiền",
+      dataIndex: "price",
+      key: "price",
     },
     {
       title: "Thao tác",
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
-            <Link
-              to={`/kenh-hdv/chi-tiet-don/${record.key}`}
-              style={{ color: "#fff" }}
+          {record.status < 3 ? (
+            <div
+              className="action"
+              style={{ backgroundColor: "rgb(255 79 32)" }}
             >
-              Sửa
-            </Link>
-          </div>
-          <div className="action" style={{ backgroundColor: "#1890ff" }}>
-            {data.length >= 1 ? (
-              <Popconfirm
-                title="Xóa Tour?"
-                onConfirm={() => handleDelete(record.key)}
+              <Link
+                to={`/kenh-hdv/chi-tiet-don/${record.id}`}
+                style={{ color: "#fff" }}
               >
-                Xóa
+                Xem
+              </Link>
+            </div>
+          ) : record.status == 3 ? (
+            <div
+              className="action"
+              style={{ backgroundColor: "rgb(255 79 32)" }}
+              onClick={() => startGuide(record)}
+            >
+              Bắt đầu
+            </div>
+          ) : null}{" "}
+          {data.length >= 1 && record.status <= 4 ? (
+            <div className="action" style={{ backgroundColor: "#1890ff" }}>
+              <Popconfirm
+                title="Từ chối Tour?"
+                onConfirm={() => deleteOrder(record.id)}
+              >
+                Từ chối
               </Popconfirm>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
         </Space>
       ),
     },
   ];
-  const data = [
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-    {
-      key: "1",
-      name: "Du lịch Cẩn thơ 2 ngày",
-      time: "20/10/2023-22/10/2023",
-      place: "Cần thơ",
-      status: 1,
-    },
-  ];
-  const { RangePicker } = DatePicker;
-  const { Search } = Input;
-  const onSearch = (value) => console.log(value);
-  const handleDelete = async (key) => {
-    // eslint-disable-next-line no-unused-vars
-    const del = await sendDelete(`api/course/${key}`);
-    if (del.status === 200) {
-      await listCourse();
+
+  const listOrder = async (index, value) => {
+    const res = await sendGet("/orders/tourguide", { type: value });
+    if (res.statusCode === 200) {
+      setActive(index);
+      setData(
+        res.returnValue.map((e) => {
+          return {
+            ...e,
+            name: e.tour?.name ? e.tour?.name : "",
+            timeOrder: e?.orderSchedule[0].createdAt
+              ? e?.orderSchedule[0].createdAt
+              : "",
+          };
+        })
+      );
     } else {
-      message.error("Không thể xóa khóa học");
+      message.error("Thất bại");
     }
   };
-  const listCourse = async (key) => {
-    const res = await sendGet("/api/course", {});
-    if (res.status === 200) {
-      setData(res.data);
+  const deleteOrder = async (value) => {
+    const res = await sendDelete("/orders/tourguide", { orderId: value });
+    if (res.statusCode === 200) {
+      message.success("Từ chối order");
+      listOrder(1, "waiting");
     } else {
-      message.error("Cập nhật khóa học thất bại");
+      message.error("Thất bại");
+    }
+  };
+  const startGuide = async (e) => {
+    console.log("eeee", e);
+    if (e.status == 3) {
+      try {
+        let res = await sendPut(`/orders/start-tourguide/${e.id}`);
+        if (res.statusCode == 200) {
+          message.success("Thanh công");
+        } else {
+          message.error("thất bại");
+        }
+      } catch (error) {
+        message.error("Chưa đến ngày bắt đầu");
+      }
+    } else message.success("Chuyến đi đang được thực hiện");
+  };
+  const endTour = async (e) => {
+    try {
+      let res = await sendPut(`/orders/end-order`, {
+        orderId: e.id,
+      });
+      if (res.statusCode == 200) {
+        message.success("Xác nhận kết thúc tour thành công");
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Chưa đến hạn kết thúc chuyến đi");
     }
   };
   useEffect(() => {
-    listCourse();
+    listOrder(1, "waiting");
   }, []);
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -158,15 +218,34 @@ export default function MyPage() {
           <div className="main-body">
             <div className="header-tab">
               <ul className="tab-nav">
-                <li className="tab-item active">Tất cả</li>
-                <li className="tab-item ">Yêu cầu người dùng</li>
-                <li className="tab-item">Chờ xác nhận</li>
-                <li className="tab-item">Đơn hủy</li>
-                <li className="tab-item">Hoàn thành</li>
+                <li
+                  className={active == 1 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(1, "waiting")}
+                >
+                  Yêu cầu người dùng
+                </li>
+                <li
+                  className={active == 2 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(2, "processing")}
+                >
+                  Đang thực hiện
+                </li>
+                <li
+                  className={active == 3 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(3, "end")}
+                >
+                  Hoàn thành
+                </li>
+                <li
+                  className={active == 4 ? "tab-item active" : "tab-item"}
+                  onClick={() => listOrder(4, "end")}
+                >
+                  Đơn hủy
+                </li>
               </ul>
             </div>
             <div className="main-content">
-              <h3 className="title">3 đơn hàng</h3>
+              <h3 className="title">{data.length} đơn hàng</h3>
               <Table columns={columns} dataSource={data} />
             </div>
           </div>
