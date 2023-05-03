@@ -130,11 +130,6 @@ export default function DanhGia() {
                 <Form.Item name="times" label="Thời gian đánh giá ">
                   <RangePicker />
                 </Form.Item>
-                <h3 className="title-voucher">Thiết lập mã giảm giá</h3>
-
-                <Form.Item name="user" label="Tên người dùng">
-                  <Input placeholder="Nhập tên user" />
-                </Form.Item>
 
                 <Form.Item>
                   <Button

@@ -11,7 +11,7 @@ import {
 
 const axiosInstance = Axios.create({
   timeout: 3 * 60 * 1000,
-  baseURL: "http://35.240.179.203:3000/",
+  baseURL: "https://api.ktravel.online/",
 });
 
 axiosInstance.interceptors.request.use(
@@ -44,7 +44,7 @@ axiosInstance.interceptors.response.use(
 
         return Promise.reject(error);
       }
-      // return Axios.get(`http://35.240.179.203:3000/auth/refresh-token`, {
+      // return Axios.get(`https://api.ktravel.online//auth/refresh-token`, {
       //   params: {
       //     refreshToken,
       //   },

@@ -178,19 +178,20 @@ export default function AddTour() {
                     ))}
                   </Select>
                 </Form.Item>
-                <Form.Item
-                  name="maxMember"
-                  label="Số lượng người tối đa"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Số lượng ko để trống!",
-                    },
-                  ]}
-                >
-                  <InputNumber min={1} />
-                </Form.Item>
+
                 <div className="group">
+                  <Form.Item
+                    name="maxMember"
+                    label="Số lượng người tối đa"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Số lượng ko để trống!",
+                      },
+                    ]}
+                  >
+                    <InputNumber min={1} />
+                  </Form.Item>
                   <Form.Item
                     name="feePerMember"
                     label="Phí phị thu thêm khi quá số người người"

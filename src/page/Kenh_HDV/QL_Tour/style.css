@@ -174,3 +174,8 @@
 .mainDetail .btn-group {
   justify-content: flex-start;
 }
+.main-content .title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #383838;
+}

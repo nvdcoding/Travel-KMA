@@ -45,10 +45,7 @@ export default function MyPage() {
                   <p class="item-desc">Tour ẩn</p>
                 </a>
 
-                <a
-                  href="/portal/web-my-campaigns/campaign"
-                  class="to-do-box-aitem"
-                >
+                {/* <a href="#" class="to-do-box-aitem">
                   <p class="item-title">0</p>
                   <p class="item-desc">
                     <span>Chương Trình Khuyến Mãi Chờ Xử Lý</span>
@@ -56,12 +53,12 @@ export default function MyPage() {
                       <span class="text">New</span>
                     </span>
                   </p>
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
         </div>
-        <div class="card">
+        {/* <div class="card">
           <div class="title-box">
             <div class="title">
               Hiệu Quả Hoạt Động
@@ -193,7 +190,7 @@ export default function MyPage() {
               </Tabs.TabPane>
             </Tabs>
           </div>
-        </div>
+        </div> */}
         <div class="card">
           <div class="title-box">
             <div class="title">
