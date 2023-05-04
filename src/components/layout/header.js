@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { Drawer } from "antd";
 import { logo } from "../../constants/images";
-import { setRefreshToken, setToken } from "../../utils/storage";
+import { getItem, setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
   const history = useHistory();
   const Token = localStorage.getItem("accessToken");
-  console.log({ Token });
   const [open, setOpen] = useState(false);
+  const user = getItem("user") ? JSON.parse(getItem("user")) : {};
   const showDrawer = () => {
     setOpen(true);
   };
@@ -88,10 +88,12 @@ function HeaderLayout() {
                           </div>
                         </li>
                         <li>
-                          <div class="box-list-info">
-                            <i class="fas fa-user"></i>
-                            <Link to="/kenh-hdv">Kênh HDV</Link>
-                          </div>
+                          {user.role == "TOURGUIDE" ? (
+                            <div class="box-list-info">
+                              <i class="fas fa-user"></i>
+                              <Link to="/kenh-hdv">Kênh HDV</Link>
+                            </div>
+                          ) : null}
                         </li>
                         <li>
                           <div class="box-list-info">
