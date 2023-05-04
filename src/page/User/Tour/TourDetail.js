@@ -567,8 +567,8 @@ export default function TourDetail() {
                                 <div className="title-price-old">
                                   {/* <del>6,129,000 VND</del> */}
                                 </div>
-                                {data?.basePrice}{" "}
-                                <span>VND/tour/{data?.maxMember}người</span>
+                                {data?.basePrice.toLocaleString('en-US', {style : 'currency', currency : 'VND'})}{" "}
+                                <span>VND/{data?.numOfFreeMember}người</span>
                               </span>
                             </td>
                           </tr>
