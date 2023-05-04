@@ -44,12 +44,12 @@ function Account() {
   const onCancelChangePass = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  if (!Object.keys(infoUser).length)
-    return (
-      <>
-        <Skeleton />
-      </>
-    );
+  // if (!Object.keys(infoUser).length)
+  // return (
+  //   <>
+  //     <Skeleton />
+  //   </>
+  // );
   return (
     <>
       <Layout>

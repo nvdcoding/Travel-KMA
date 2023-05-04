@@ -37,6 +37,7 @@ const Quenmk = lazy(() => import("../page/Auth/forgotpasswprd"));
 const chitiet = lazy(() => import("../page/Kenh_HDV/QL_Tour/detailTour"));
 const chitietOrder = lazy(() => import("../page/Kenh_HDV/QL_Tour/detailOrder"));
 const activeTK = lazy(() => import("../page/Auth/activeAcc"));
+const UpdatePay = lazy(() => import("../page/User/Thanh-toan/updatePay"));
 
 /**
  * define main pages routes
@@ -237,6 +238,11 @@ const RoutePage = [
     path: ROUTES.ACTIVETK,
     exact: true,
     component: activeTK,
+  },
+  {
+    path: ROUTES.UPDATEPAY,
+    exact: true,
+    component: UpdatePay,
   },
 ];
 export default RoutePage;

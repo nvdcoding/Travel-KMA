@@ -2,7 +2,7 @@ export const ROUTES = {
   HOME: "/",
   TOUR: "/diem-den",
   CREATETOUR: "/tao-tour-du-lich",
-  PAY: "/pay/:id",
+  PAY: "/pay",
   TOURALL: "/tour",
   HDVALL: "/hdv",
   DULICH: "/du-lich/:id",
@@ -33,4 +33,5 @@ export const ROUTES = {
   CHITIETTOUR: "/kenh-hdv/chi-tiet-tour/:id",
   CHITIETORDER: "/kenh-hdv/chi-tiet-don/:id",
   ACTIVETK: "/active-user/:id",
+  UPDATEPAY: "/update-pay",
 };

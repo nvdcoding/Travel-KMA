@@ -1077,6 +1077,9 @@ iframe {
   width: 120px;
   height: 120px;
 }
+.layout__wrapper .main-travel {
+  min-height: 96vh;
+}
 /* responsive */
 @media (max-width: 1120px) {
   html {

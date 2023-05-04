@@ -23,6 +23,7 @@
 }
 
 .mytrip-order {
+  min-height: 50vh;
 }
 
 .mytrip-order-item {
