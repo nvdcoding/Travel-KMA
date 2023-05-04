@@ -280,157 +280,166 @@ export default function MyTrip() {
                       }
                       key="2"
                     >
-                      {dataProcessing?.map((value, index) => (
-                        <div className="mytrip-order-item" key={index}>
-                          <div className="mytrip-order__header">
-                            <div className="mytrip-order__header-left">
-                              <p className="mytrip-order__name">{value?.hdv}</p>
-                              <div className="mytrip-order__chat">
-                                <i className="fa-regular fa-comments"></i>
-                                <p className="mytrip-order__contact">Chat</p>
+                      <div className="mytrip-order">
+                        {dataProcessing?.map((value, index) => (
+                          <div className="mytrip-order-item" key={index}>
+                            <div className="mytrip-order__header">
+                              <div className="mytrip-order__header-left">
+                                <p className="mytrip-order__name">
+                                  {value?.hdv}
+                                </p>
+                                <div className="mytrip-order__chat">
+                                  <i className="fa-regular fa-comments"></i>
+                                  <p className="mytrip-order__contact">Chat</p>
+                                </div>
+                              </div>{" "}
+                              <div className="mytrip-order__header-right">
+                                {value.status == 0
+                                  ? "Chờ xác nhận"
+                                  : value.status == 1
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
-                            </div>{" "}
-                            <div className="mytrip-order__header-right">
-                              {value.status == 0
-                                ? "Chờ xác nhận"
-                                : value.status == 1
-                                ? "Chờ đặt cọc"
-                                : value.status == 2
-                                ? "Chờ thanh toán"
-                                : value.status == 3
-                                ? "Chưa thực hiện"
-                                : value.status == 4
-                                ? "Đang thực hiện"
-                                : value.status == 5
-                                ? "Đã thực hiện"
-                                : "Đã hủy"}
                             </div>
-                          </div>
-                          <div className="mytrip-order__main">
-                            <div
-                              className="mytrip-order__main-left"
-                              onClick={() => handleStep(value?.id)}
-                            >
-                              <img
-                                className="mytrip-order-img"
-                                alt=""
-                                src={
-                                  value?.tour?.images[0].url
-                                    ? value?.tour?.images[0].url
-                                    : banner
-                                }
-                              />
-                              <h4 className="mytrip-order-name">
-                                {value?.tour?.name}
-                              </h4>
-                            </div>
-                            <div className="mytrip-order__main-right">
-                              <p className="mytrip-order__main-price">
-                                {value?.price} đ
-                              </p>
-                            </div>
-                          </div>
-                          {value.status == 3 ? (
-                            <div className="mytrip-order__rate">
-                              Khởi hành vào ngày {value?.startDate}
+                            <div className="mytrip-order__main">
                               <div
-                                className="button button--primary"
-                                onClick={() => startUser(value)}
+                                className="mytrip-order__main-left"
+                                onClick={() => handleStep(value?.id)}
                               >
-                                Bắt đầu
+                                <img
+                                  className="mytrip-order-img"
+                                  alt=""
+                                  src={
+                                    value?.tour?.images[0].url
+                                      ? value?.tour?.images[0].url
+                                      : banner
+                                  }
+                                />
+                                <h4 className="mytrip-order-name">
+                                  {value?.tour?.name}
+                                </h4>
+                              </div>
+                              <div className="mytrip-order__main-right">
+                                <p className="mytrip-order__main-price">
+                                  {value?.price} đ
+                                </p>
                               </div>
                             </div>
-                          ) : (
-                            <div className="mytrip-order__rate">
-                              Kết thúc vào ngày vào ngày {value?.endDate}
-                              <div
-                                className="button button--primary"
-                                onClick={() => endTour(value)}
-                              >
-                                Kết thúc
+                            {value.status == 3 ? (
+                              <div className="mytrip-order__rate">
+                                Khởi hành vào ngày {value?.startDate}
+                                <div
+                                  className="button button--primary"
+                                  onClick={() => startUser(value)}
+                                >
+                                  Bắt đầu
+                                </div>
                               </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                            ) : (
+                              <div className="mytrip-order__rate">
+                                Kết thúc vào ngày vào ngày {value?.endDate}
+                                <div
+                                  className="button button--primary"
+                                  onClick={() => endTour(value)}
+                                >
+                                  Kết thúc
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
                     </TabPane>
                     <TabPane
                       tab={<p className="mytrip-sub-menu-name">Đã đi</p>}
                       key="3"
                     >
-                      {dataEnd?.map((value, index) => (
-                        <div className="mytrip-order-item" key={index}>
-                          <div className="mytrip-order__header">
-                            <div className="mytrip-order__header-left">
-                              <p className="mytrip-order__name">{value?.hdv}</p>
-                              <div className="mytrip-order__chat">
-                                <i className="fa-regular fa-comments"></i>
-                                <p className="mytrip-order__contact">Chat</p>
-                              </div>
-                            </div>{" "}
-                            <div className="mytrip-order__header-right">
-                              {value.status == 0
-                                ? "Chờ xác nhận"
-                                : value.status == 1
-                                ? "Chờ đặt cọc"
-                                : value.status == 2
-                                ? "Chờ thanh toán"
-                                : value.status == 3
-                                ? "Chưa thực hiện"
-                                : value.status == 4
-                                ? "Đang thực hiện"
-                                : value.status == 5
-                                ? "Đã thực hiện"
-                                : "Đã hủy"}
-                            </div>
-                          </div>
-                          <div className="mytrip-order__main">
-                            <div
-                              className="mytrip-order__main-left"
-                              onClick={() => handleStep(value?.id)}
-                            >
-                              <img
-                                className="mytrip-order-img"
-                                alt=""
-                                src={
-                                  value?.tour?.images[0].url
-                                    ? value?.tour?.images[0].url
-                                    : banner
-                                }
-                              />
-                              <h4 className="mytrip-order-name">
-                                {value?.tour?.name}
-                              </h4>
-                            </div>
-                            <div className="mytrip-order__main-right">
-                              <p className="mytrip-order__main-price">
-                                {value?.price} đ
-                              </p>
-                            </div>
-                          </div>
-                          <div className="mytrip-order__rate ">
-                            {value?.tour?.rates.length > 0 ? (
-                              <>
-                                <p className="mytrip-order__rate-note">
-                                  Đã đánh giá
+                      {" "}
+                      <div className="mytrip-order">
+                        {dataEnd?.map((value, index) => (
+                          <div className="mytrip-order-item" key={index}>
+                            <div className="mytrip-order__header">
+                              <div className="mytrip-order__header-left">
+                                <p className="mytrip-order__name">
+                                  {value?.hdv}
                                 </p>
-                                {/* <RateScreen
+                                <div className="mytrip-order__chat">
+                                  <i className="fa-regular fa-comments"></i>
+                                  <p className="mytrip-order__contact">Chat</p>
+                                </div>
+                              </div>{" "}
+                              <div className="mytrip-order__header-right">
+                                {value.status == 0
+                                  ? "Chờ xác nhận"
+                                  : value.status == 1
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
+                              </div>
+                            </div>
+                            <div className="mytrip-order__main">
+                              <div
+                                className="mytrip-order__main-left"
+                                onClick={() => handleStep(value?.id)}
+                              >
+                                <img
+                                  className="mytrip-order-img"
+                                  alt=""
+                                  src={
+                                    value?.tour?.images[0].url
+                                      ? value?.tour?.images[0].url
+                                      : banner
+                                  }
+                                />
+                                <h4 className="mytrip-order-name">
+                                  {value?.tour?.name}
+                                </h4>
+                              </div>
+                              <div className="mytrip-order__main-right">
+                                <p className="mytrip-order__main-price">
+                                  {value?.price} đ
+                                </p>
+                              </div>
+                            </div>
+                            <div className="mytrip-order__rate ">
+                              {value?.tour?.rates.length > 0 ? (
+                                <>
+                                  <p className="mytrip-order__rate-note">
+                                    Đã đánh giá
+                                  </p>
+                                  {/* <RateScreen
                                   data={value}
                                   rate={value?.tour?.rates}
                                 /> */}
-                              </>
-                            ) : (
-                              <>
-                                <p className="mytrip-order__rate-note">
-                                  Chưa nhận được đánh giá
-                                </p>
+                                </>
+                              ) : (
+                                <>
+                                  <p className="mytrip-order__rate-note">
+                                    Chưa nhận được đánh giá
+                                  </p>
 
-                                <RateScreen data={value} />
-                              </>
-                            )}
+                                  <RateScreen data={value} />
+                                </>
+                              )}
+                            </div>
                           </div>
-                        </div>
-                      ))}
+                        ))}
+                      </div>
                     </TabPane>
                   </Tabs>
                 )}

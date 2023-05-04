@@ -1496,3 +1496,23 @@ background-color: #ccc; */
   color: #222121eb;
   margin-top: 10px;
 }
+.pay__wrapper .ant-input {
+  padding: 0 10px;
+}
+.pay__wrapper .ant-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.pay__wrapper .ant-form-horizontal .ant-form-item-control {
+  width: 100%;
+}
+.pay__wrapper .ant-radio-button-wrapper {
+  margin: 5px 7px;
+}
+.pay__wrapper .ant-btn-primary:focus,
+.ant-btn-primary:hover,
+.ant-btn-primary {
+  height: 40px;
+}

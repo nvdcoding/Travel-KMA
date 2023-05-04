@@ -44,3 +44,4 @@ export { default as banner6 } from "../assets/images/banner6.jpg";
 export { default as banner7 } from "../assets/images/banner7.jpg";
 export { default as banner8 } from "../assets/images/banner8.jpg";
 export { default as banner9 } from "../assets/images/banner9.jpg";
+export { default as vnpay } from "../assets/images/vnpay.png";

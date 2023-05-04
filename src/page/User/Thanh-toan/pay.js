@@ -4,15 +4,17 @@ import { useHistory } from "react-router-dom";
 import Layout from "../../../components/layout/layout";
 import Condition from "../../../components/condition";
 import "../../../assets/css/pay.css";
-import { Form, Input, Modal, Button } from "antd";
+import { Form, Input, Modal, Button, Radio } from "antd";
 import { sendPost } from "../../../utils/api";
+import { vnpay } from "../../../constants/images";
 
 export default function Pay() {
   let history = useHistory();
   const PayOnline = async (value) => {
-    const res = await sendPost("/users", value);
+    value.amount = parseInt(value.amount);
+    const res = await sendPost("/users/deposit", value);
     if (res.statusCode == 200) {
-      window.location.href = res.returnValue.data;
+      window.location.href = res.returnValue;
     } else {
       //đơn hàng thất bại
     }
@@ -20,6 +22,32 @@ export default function Pay() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const optionsWithDisabled = [
+    {
+      label: "100.000đ",
+      value: "100000",
+    },
+    {
+      label: "500.000đ",
+      value: "500000",
+    },
+    {
+      label: "1.000.000đ",
+      value: "1000000",
+    },
+    {
+      label: "2.000.000đ",
+      value: "2000000",
+    },
+    {
+      label: "3.000.000đ",
+      value: "3000000",
+    },
+    {
+      label: "5.000.000đ",
+      value: "5000000",
+    },
+  ];
   useEffect(() => {}, []);
   return (
     <>
@@ -48,43 +76,6 @@ export default function Pay() {
                 <h3 className="payment-online__title">Thông tin chuyến đi</h3>
                 <div className="payment-online__inner">
                   <div className="payment-online__left">
-                    <div className="payment-online__row">
-                      <h4 className="payment-online__sub">
-                        Chọn phương thức thanh toán*
-                      </h4>
-                      <div className="method-payment">
-                        <ul className="method-payment__list">
-                          <li className="method-payment__item">
-                            <div className="method-payment__left">
-                              <span className="method-payment__icon">
-                                <img
-                                  src="http://media.vietteltelecom.vn/upload//88/ad/d8/0535006780b9b3c234343bafa8fa718116781b1d.png"
-                                  width="30"
-                                  height="30"
-                                />
-                              </span>
-                              <div className="method-payment__detail">
-                                <div className="method-payment__info">
-                                  <div className="method-payment__top js-toggle">
-                                    <h5 className="method-payment__name">
-                                      VNPay: ATM/VISA
-                                    </h5>
-                                  </div>
-                                  <div className="method-payment__choose">
-                                    <label className="radio-custom1">
-                                      <input type="radio" name="radio" />
-                                      <span className="checkmark"></span>
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="payment-online__right">
                     <div className="order-payment">
                       <h4 className="order-payment__title">
                         Thông tin nạp tiền
@@ -151,7 +142,7 @@ export default function Pay() {
                         autoComplete="off"
                       >
                         <Form.Item
-                          label="Tổng tiênf"
+                          label="Số tiền thanh toán"
                           name="amount"
                           rules={[
                             {
@@ -161,6 +152,13 @@ export default function Pay() {
                           ]}
                         >
                           <Input />
+                        </Form.Item>
+                        <Form.Item label="" name="amount">
+                          <Radio.Group
+                            options={optionsWithDisabled}
+                            optionType="button"
+                            buttonStyle="solid"
+                          />
                         </Form.Item>
 
                         <Form.Item
@@ -180,8 +178,41 @@ export default function Pay() {
                       </Form>
                     </div>
                   </div>
+                  <div className="payment-online__right">
+                    <div className="payment-online__row">
+                      <h4 className="payment-online__sub">
+                        Phương thức thanh toán*
+                      </h4>
+                      <div className="method-payment">
+                        <ul className="method-payment__list">
+                          <li className="method-payment__item">
+                            <div className="method-payment__left">
+                              <span className="method-payment__icon">
+                                <img src={vnpay} width="30" height="30" />
+                              </span>
+                              <div className="method-payment__detail">
+                                <div className="method-payment__info">
+                                  <div className="method-payment__top js-toggle">
+                                    <h5 className="method-payment__name">
+                                      VNPay: ATM/VISA
+                                    </h5>
+                                  </div>
+                                  <div className="method-payment__choose">
+                                    <label className="radio-custom1">
+                                      <input type="radio" name="radio" />
+                                      <span className="checkmark"></span>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <ul className="hot-line">
+                {/* <ul className="hot-line">
                   <li className="hot-line__item">
                     <span className="hot-line__icon">
                       <img
@@ -233,7 +264,7 @@ export default function Pay() {
                       Group giải đáp online
                     </span>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
