@@ -2,6 +2,10 @@
 import React, { useContext, useEffect } from "react";
 import "../../../assets/css/homehdv.css";
 import "./style.css";
+import MdEditor from "react-markdown-editor-lite";
+import "react-markdown-editor-lite/lib/index.css";
+import MarkdownIt from "markdown-it";
+
 import {
   Form,
   Input,
@@ -27,7 +31,6 @@ export default function AddTour() {
   const history = useHistory();
   const [fileList, setFileList] = React.useState([]);
   const [listFile, setListFile] = React.useState([]);
-
   const handleChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
@@ -75,6 +78,7 @@ export default function AddTour() {
   };
   const onFinish = async (values) => {
     values.tourImages = await onGetImg();
+    console.log(`values`, values);
     const res = await sendPost("/tours", values);
     if (res.statusCode === 400) {
       message.error("Thất bại");
@@ -279,9 +283,14 @@ export default function AddTour() {
 function StepItem({ field, index }) {
   const { TextArea } = Input;
   const [active, setActive] = useState(true);
+  const [content, setContent] = useState("true");
+  const mdParser = new MarkdownIt();
   const openServices = () => {
     setActive(!active);
   };
+  function handleEditorChange({ html }) {
+    setContent(html);
+  }
   return (
     <>
       <div className="main-form-step3">
@@ -306,7 +315,13 @@ function StepItem({ field, index }) {
               </Form.Item>
               <Form.Item name={[index, "content"]} label="Mô tả">
                 <div className="service-group">
-                  <TextArea rows={4} placeholder="Mô tả ngắn" />
+                  {/* <TextArea rows={4} placeholder="Mô tả ngắn" /> */}
+                  <MdEditor
+                    placeholder="Mô tả"
+                    style={{ height: "200px" }}
+                    renderHTML={(text) => mdParser.render(text)}
+                    onChange={handleEditorChange}
+                  />
                   {/* <TextArea rows={4} placeholder="Mô tả dài" /> */}
                 </div>
               </Form.Item>

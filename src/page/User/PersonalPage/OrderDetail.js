@@ -295,7 +295,7 @@ export default function OrderDetail({
               </div>
             </div>
           </div>
-          <div class="RZJjTX">
+          {/* <div class="RZJjTX">
             <div class="TokOv1">
               <div class="_8kMYJ3">
                 <span>Phí tour</span>
@@ -345,7 +345,7 @@ export default function OrderDetail({
                 <div class="_8ZGgbl">₫37.499</div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

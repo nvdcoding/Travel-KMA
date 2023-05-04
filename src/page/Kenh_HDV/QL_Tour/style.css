@@ -179,3 +179,10 @@
   font-weight: 600;
   color: #383838;
 }
+.rc-md-editor .rc-md-navigation .button-wrap .button {
+  width: auto;
+  padding: 0;
+}
+.rc-md-editor {
+  width: 100%;
+}
