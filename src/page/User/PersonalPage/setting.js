@@ -3,13 +3,13 @@ import { Form, Button, Input, Skeleton, message } from "antd";
 import axios from "axios";
 import "../../../assets/css/personal.css";
 import { avt, camera } from "../../../constants/images";
-import { sendPost } from "../../../utils/api";
+import { sendGet, sendPost } from "../../../utils/api";
 import Layout from "../../../components/layout/layout";
 import { AppContext } from "../../../Context/AppContext";
 function Account() {
-  const { infoUser } = useContext(AppContext);
-
+  // const { infoUser } = useContext(AppContext);
   const [show, setShow] = useState(true);
+  const [infoUser, setInfoUser] = useState([]);
   const [form] = Form.useForm();
   const onFinish = async (values) => {};
   // eslint-disable-next-line no-unused-vars
@@ -44,6 +44,16 @@ function Account() {
   const onCancelChangePass = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const getData = async (values) => {
+    const res = await sendGet("/users");
+    if (res.statusCode === 200) {
+      console.log(`data`, res.returnValue.data);
+      setInfoUser(res.returnValue.data);
+    }
+  };
+  useEffect(() => {
+    getData();
+  }, []);
   // if (!Object.keys(infoUser).length)
   // return (
   //   <>

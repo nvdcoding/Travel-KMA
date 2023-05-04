@@ -77,26 +77,31 @@ export default function MyPage() {
           {record.status < 3 ? (
             <div
               className="action"
-              style={{ backgroundColor: "rgb(255 79 32)" }}
+              style={{ backgroundColor: "rgb(255 79 32)", color: "#fff" }}
+              onClick={() => acceptOrder(record)}
             >
-              <Link
+              {/* <Link
                 to={`/kenh-hdv/chi-tiet-don/${record.id}`}
                 style={{ color: "#fff" }}
               >
                 Xem
-              </Link>
+              </Link> */}
+              Chấp nhận
             </div>
           ) : record.status == 3 ? (
             <div
               className="action"
-              style={{ backgroundColor: "rgb(255 79 32)" }}
+              style={{ backgroundColor: "rgb(255 79 32)", color: "#fff" }}
               onClick={() => startGuide(record)}
             >
               Bắt đầu
             </div>
           ) : null}{" "}
           {data.length >= 1 && record.status <= 4 ? (
-            <div className="action" style={{ backgroundColor: "#1890ff" }}>
+            <div
+              className="action"
+              style={{ backgroundColor: "#1890ff", color: "#fff" }}
+            >
               <Popconfirm
                 title="Từ chối Tour?"
                 onConfirm={() => deleteOrder(record.id)}
@@ -138,6 +143,22 @@ export default function MyPage() {
       message.error("Thất bại");
     }
   };
+  const acceptOrder = async (e) => {
+    try {
+      const res = await sendPut("/orders/tourguide/approve-order", {
+        action: "accept",
+        orderId: parseInt(e.id),
+      });
+      if (res.statusCode === 200) {
+        message.error("Thành công");
+        listOrder(1, "waiting");
+      } else {
+        message.error(" thất bại");
+      }
+    } catch (error) {
+      message.error("Ko thành công");
+    }
+  };
   const startGuide = async (e) => {
     console.log("eeee", e);
     if (e.status == 3) {
@@ -152,20 +173,6 @@ export default function MyPage() {
         message.error("Chưa đến ngày bắt đầu");
       }
     } else message.success("Chuyến đi đang được thực hiện");
-  };
-  const endTour = async (e) => {
-    try {
-      let res = await sendPut(`/orders/end-order`, {
-        orderId: e.id,
-      });
-      if (res.statusCode == 200) {
-        message.success("Xác nhận kết thúc tour thành công");
-      } else {
-        message.error("thất bại");
-      }
-    } catch (error) {
-      message.error("Chưa đến hạn kết thúc chuyến đi");
-    }
   };
   useEffect(() => {
     listOrder(1, "waiting");
