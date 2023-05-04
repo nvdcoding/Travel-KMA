@@ -136,7 +136,7 @@ export default function TourDetail() {
                               className="fa fa-calendar-alt"
                               aria-hidden="true"
                             />
-                            Khởi hành từ: <span>{data?.createdAt}</span>
+                            {/* Khởi hành từ: <span>{data?.createdAt}</span> */}
                           </td>
                         </tr>
                       </tbody>
@@ -252,7 +252,7 @@ export default function TourDetail() {
                           <h3 dir="ltr" style={{ textAlign: "center" }}>
                             <span style={{ color: "#B22222" }}>
                               <u>
-                                <strong>QUY TRÌNH ĐĂNG KÝ TOUR</strong>
+                                <div style={{marginTop: 5}}><strong>QUY TRÌNH ĐĂNG KÝ TOUR</strong></div>
                               </u>
                             </span>
                           </h3>
@@ -568,7 +568,10 @@ export default function TourDetail() {
                                   {/* <del>6,129,000 VND</del> */}
                                 </div>
                                 {data?.basePrice.toLocaleString('en-US', {style : 'currency', currency : 'VND'})}{" "}
-                                <span>VND/{data?.numOfFreeMember}người</span>
+                                <span>VNĐ/{data?.numOfFreeMember} người</span>
+                              </span>
+                              <span className="price-tour">
+                                <span>Từ người thứ {data?.numOfFreeMember + 1}, chi phí phụ thu thêm: {data?.feePerMember} / người</span>
                               </span>
                             </td>
                           </tr>
