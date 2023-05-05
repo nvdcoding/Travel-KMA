@@ -65,7 +65,7 @@ export default function TourDetail() {
       <Layout>
         <div className="tour-detail single-box-content">
           <div className="content">
-            <div className="pathway">
+            {/* <div className="pathway">
               <ul>
                 <li>
                   <a href="/">Trang chủ</a>
@@ -85,7 +85,7 @@ export default function TourDetail() {
                   <strong>Chi tiết</strong>
                 </li>
               </ul>
-            </div>
+            </div> */}
             <div className="tour-detail__content">
               <div className="single-box-content-inner tour-detail__left">
                 <h1 className="title-tour">{data?.name}</h1>
@@ -567,14 +567,17 @@ export default function TourDetail() {
                                 <div className="title-price-old">
                                   {/* <del>6,129,000 VND</del> */}
                                 </div>
-                                {data?.basePrice.toLocaleString('en-US', {style : 'currency', currency : 'VND'})}{" "}
+                                Giá cơ bản: {data?.basePrice.toLocaleString('en-US', {style : 'currency', currency : 'VND'}).replace('₫','')}{" "}
                                 <span>VNĐ/{data?.numOfFreeMember} người</span>
                               </span>
-                              <span className="price-tour">
-                                <span>Từ người thứ {data?.numOfFreeMember + 1}, chi phí phụ thu thêm: {data?.feePerMember} / người</span>
-                              </span>
+                              
                             </td>
                           </tr>
+                          {/* <tr>
+                            <span className="price-tour">
+                                <span>Từ người thứ {data?.numOfFreeMember + 1}, chi phí phụ thu thêm: {data?.feePerMember.toLocaleString('en-US', {style : 'currency', currency : 'VND'}).replace('₫','')} / người</span>
+                            </span>
+                          </tr> */}
                           <tr>
                             <Form.Item
                               name="startDate"
@@ -582,7 +585,7 @@ export default function TourDetail() {
                               rules={[
                                 {
                                   required: true,
-                                  message: "Ngày bắt đầu ko để trống!",
+                                  message: "Ngày bắt đầu không để trống!",
                                 },
                               ]}
                             >
@@ -599,7 +602,7 @@ export default function TourDetail() {
                               rules={[
                                 {
                                   required: true,
-                                  message: "số lượng ko để trống!",
+                                  message: "số lượng không để trống!",
                                 },
                               ]}
                             >
@@ -610,6 +613,7 @@ export default function TourDetail() {
                               />
                             </Form.Item>
                           </tr>
+                          //ADD CODE Heere 
                         </tbody>
                       </table>
                       <Button

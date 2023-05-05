@@ -17,21 +17,6 @@ export default function News() {
           </div>
           <div className="news-content">
             <div className="content">
-              <div className="pathway">
-                <ul>
-                  <li>
-                    <a href="/">Trang chủ</a>
-                  </li>
-                  <li>
-                    <span>
-                      <i className="fa-solid fa-chevron-right"></i>
-                    </span>
-                  </li>
-                  <li>
-                    <strong>Cam nang </strong>
-                  </li>
-                </ul>
-              </div>
               <div className="news-search">
                 <div className="news-input">
                   <i className="fa-solid fa-magnifying-glass"></i>
