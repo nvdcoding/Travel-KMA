@@ -22,7 +22,7 @@ export const ROUTES = {
   MYPAGE: "/kenh-hdv",
   ADDTOUR: "/kenh-hdv/them-tour",
   DOANHTHU: "/kenh-hdv/doanh-thu",
-  BANKACC: "/kenh-hdv/tai-khoan",
+  BANKACC: "/kenh-hdv/thanh-toan",
   // ADDVOUCHER: "/kenh-hdv/create-voucher",
   QLVOUCHER: "/kenh-hdv/voucher",
   DSTOUR: "/kenh-hdv/ds-tour",

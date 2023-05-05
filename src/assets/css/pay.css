@@ -1869,3 +1869,10 @@ background-color: #ccc; */
 .ant-form-item-label > label::before {
   content: "";
 }
+.pay__wrapper {
+  padding: 15px;
+  background-color: #fff;
+}
+.wallet-entry {
+  cursor: pointer;
+}

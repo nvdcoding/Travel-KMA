@@ -125,19 +125,13 @@ function LayoutHDV({ children }) {
                     <NavLink to="/kenh-hdv/doanh-thu"> Doanh thu</NavLink>
                   </Menu.Item>
                 )}
-                {window.location.pathname === "/kenh-hdv/tai-khoan" ? (
+                {window.location.pathname === "/kenh-hdv/thanh-toan" ? (
                   <Menu.Item className="ant-menu-item-selected ">
-                    <NavLink to="/kenh-hdv/tai-khoan">
-                      {" "}
-                      Cài đặt tài khoản
-                    </NavLink>
+                    <NavLink to="/kenh-hdv/thanh-toan"> Nạp tiền</NavLink>
                   </Menu.Item>
                 ) : (
                   <Menu.Item>
-                    <NavLink to="/kenh-hdv/tai-khoan">
-                      {" "}
-                      Cài đặt tài khoản
-                    </NavLink>
+                    <NavLink to="/kenh-hdv/thanh-toan"> Nạp tiền</NavLink>
                   </Menu.Item>
                 )}
               </Menu.SubMenu>

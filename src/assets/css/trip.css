@@ -142,12 +142,13 @@
 }
 
 .mytrip-voucher__search {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
   text-transform: capitalize;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgb(50, 50, 50);
   margin-top: 20px;
-  margin-bottom: 20;
+  margin-bottom: 20px;
 }
 
 .mytrip-voucher-box-search {

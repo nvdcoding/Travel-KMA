@@ -505,7 +505,7 @@ const Voucher = () => {
   const listVoucherAvailable = async () => {
     let res1 = await sendGet(`/vourchers/available`);
     if (res1.statusCode == 200) {
-      setdataVoucherAvailable(res1.returnValue?.data);
+      setdataVoucherAvailable(res1.returnValue);
     } else {
       message.error("thất bại");
     }
@@ -541,9 +541,9 @@ const Voucher = () => {
                       <img
                         className="mytrip-voucher-img"
                         alt=""
-                        src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
+                        src={voucher1}
                       />
-                      <h4 className="mytrip-voucher-name">{item?.name}</h4>
+                      <h4 className="mytrip-voucher-name">{item?.code}</h4>
                     </div>
                     <div className="mytrip-voucher-right">
                       <div className="mytrip-voucher-top">
@@ -579,7 +579,7 @@ const Voucher = () => {
                         alt=""
                         src={voucher2}
                       />
-                      <h4 className="mytrip-voucher-name">{item?.name}</h4>
+                      <h4 className="mytrip-voucher-name">{item?.code}</h4>
                     </div>
                     <div className="mytrip-voucher-right">
                       <div className="mytrip-voucher-top">
