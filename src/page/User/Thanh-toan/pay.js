@@ -98,11 +98,11 @@ export default function Pay() {
                               rules={[
                                 {
                                   required: true,
-                                  message: "err",
+                                  message: "Nhập số tiền bạn muốn thanh toán.",
                                 },
                               ]}
                             >
-                              <Input />
+                              <Input placeholder="Nhập số tiền bạn muốn thanh toán" />
                             </Form.Item>
                             <Form.Item label="" name="amount">
                               <Radio.Group

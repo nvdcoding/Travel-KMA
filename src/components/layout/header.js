@@ -67,9 +67,9 @@ function HeaderLayout() {
                       <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
                     </div>
                   ) : null}
-                  <div className="language">
+                  {/* <div className="language">
                     <i className="fa-solid fa-globe"></i>
-                  </div>
+                  </div> */}
                   <div className="support">
                     <i className="fa-solid fa-circle-question"></i>
                   </div>
@@ -104,9 +104,7 @@ function HeaderLayout() {
                         <li>
                           <div class="box-list-info">
                             <i class="fas fa-newspaper"></i>
-                            <Link to="/me/bookmark/posts">
-                              Bài viết của tôi
-                            </Link>
+                            <Link to="/me/posts">Bài viết của tôi</Link>
                           </div>
                         </li>
                         <li>
@@ -175,6 +173,16 @@ function HeaderLayout() {
                       <li className="menu-item-mb">
                         <NavLink to="/tin-tuc">
                           <i class="fa-solid fa-newspaper"></i>Tin tức
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/pay">
+                          <i class="fa-solid fa-newspaper"></i>Nạp tiền
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/me/posts">
+                          <i class="fa-solid fa-newspaper"></i>Bài viết của tôi
                         </NavLink>
                       </li>
                       {/* <li className="menu-item-mb">

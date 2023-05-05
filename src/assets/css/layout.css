@@ -52,14 +52,17 @@
   position: relative;
 }
 .menu-sub {
+  font-size: 18px;
   position: absolute;
   top: 25px;
   display: none;
-  width: 200px;
-  background-color: #fff;
+  width: 206px;
+  background-color: #fdfdfd;
   padding: 15px 10px;
+  border-radius: 7px;
 }
 .menu-sub_item {
+  padding: 4px 0;
   border-bottom: 1px solid #cccccc4f;
 }
 .menu-list .menu-item:hover .menu-sub_item a {
@@ -211,6 +214,7 @@
 }
 .menu-right .pc {
   display: flex;
+  align-items: center;
 }
 
 @media (max-width: 991px) {

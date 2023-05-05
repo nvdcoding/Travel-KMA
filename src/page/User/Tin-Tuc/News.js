@@ -1,9 +1,31 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/news.css";
+import { sendGet } from "../../../utils/api";
+import { Pagination } from "antd";
 export default function News() {
+  const numberPage = 6;
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(numberPage);
+  const handleChange = (value) => {
+    if (value <= 1) {
+      setMinValue(0);
+      setMaxValue(numberPage);
+    } else {
+      setMinValue((value - 1) * numberPage);
+      setMaxValue(value * numberPage);
+    }
+  };
+  const listNews = async () => {
+    const res = await sendGet("/news", {});
+    if (res.returnValue.data.length >= 0) {
+      setData(res.returnValue.data);
+    } else {
+      message.error("Thất bại");
+    }
+  };
   useEffect(() => {}, []);
   return (
     <>
@@ -28,7 +50,7 @@ export default function News() {
                     </span>
                   </li>
                   <li>
-                    <strong>Cam nang </strong>
+                    <strong>Tin tức</strong>
                   </li>
                 </ul>
               </div>
@@ -169,11 +191,14 @@ export default function News() {
                 </div>
               </div>
               <div className="news-paging">
-                <div className="news-paging__item">0</div>
-                <div className="news-paging__item">1</div>
-                <div className="news-paging__item active">2</div>
-                <div className="news-paging__item">3</div>
-                <div className="news-paging__item">4</div>
+                {/* {data.length > 0 && ( */}
+                <Pagination
+                  defaultCurrent={1}
+                  defaultPageSize={numberPage}
+                  total={10}
+                  onChange={(value) => handleChange(value)}
+                />
+                {/* )} */}
               </div>
             </div>
           </div>

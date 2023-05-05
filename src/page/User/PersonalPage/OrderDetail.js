@@ -241,7 +241,7 @@ export default function OrderDetail({
                     <div role="button" class="stardust-popover__target">
                       <div>
                         Số tiền cần đặt cọc
-                        <u>{data?.price * 0.1}</u>
+                        <u>{formatterPrice.format(data?.price * 0.1)} đ</u>
                       </div>
                     </div>
                   </div>
@@ -287,10 +287,7 @@ export default function OrderDetail({
               </Link>
               <div className="mytrip-order__main-right">
                 <p className="mytrip-order__main-price">
-                  {data?.tour?.basePrice}đ
-                </p>
-                <p className="mytrip-order__main-price-km">
-                  {data?.tour?.pricekm}đ
+                  {formatterPrice.format(data?.tour?.basePrice)}đ
                 </p>
               </div>
             </div>

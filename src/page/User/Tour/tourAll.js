@@ -21,10 +21,18 @@ export default function ToursAll() {
   const [data, setData] = useState([]);
   const { provice } = useContext(AppContext);
   const [hdv, setHdv] = useState([]);
-  const numEachPage = 2;
+  const numberPage = 6;
   const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(1);
-
+  const [maxValue, setMaxValue] = useState(numberPage);
+  const handleChange = (value) => {
+    if (value <= 1) {
+      setMinValue(0);
+      setMaxValue(numberPage);
+    } else {
+      setMinValue((value - 1) * numberPage);
+      setMaxValue(value * numberPage);
+    }
+  };
   const options = [
     {
       label: "Sinh thái",
@@ -98,10 +106,6 @@ export default function ToursAll() {
     } else {
       message.error("Cập nhật tour thất bại");
     }
-  };
-  const handleChange = (value) => {
-    setMinValue((value - 1) * numEachPage);
-    setMaxValue(value * numEachPage);
   };
   const tourFiltter = async (values) => {
     const result = await sendGet("/tours", values);
@@ -245,17 +249,20 @@ export default function ToursAll() {
                   </div>
                 </div>
                 <div className="tours-all__list">
-                  {/* {data.slice(minValue, maxValue).map((item, index) => ( */}
-                  {data.map((item, index) => (
-                    <TourItem item={item} key={index} />
-                  ))}
+                  {data &&
+                    data.length > 0 &&
+                    data
+                      .slice(minValue, maxValue)
+                      .map((item, index) => (
+                        <TourItem item={item} key={index} />
+                      ))}
                 </div>
                 {data.length > 0 && (
                   <Pagination
                     defaultCurrent={1}
-                    defaultPageSize={numEachPage}
+                    defaultPageSize={numberPage}
                     total={data.length}
-                    onChange={() => handleChange()}
+                    onChange={(value) => handleChange(value)}
                   />
                 )}
               </div>
