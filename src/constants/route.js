@@ -17,6 +17,7 @@ export const ROUTES = {
   ONBOARDING: "/onboarding",
   CHAT: "/chat",
   NEWPOST: "/viet-bai",
+  LISTPOST: "/me/posts",
   SETTING: "/account",
   MYPAGE: "/kenh-hdv",
   ADDTOUR: "/kenh-hdv/them-tour",

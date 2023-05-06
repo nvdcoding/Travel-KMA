@@ -8,6 +8,7 @@ import {
   Form,
   Input,
   InputNumber,
+  Pagination,
   Select,
   Skeleton,
 } from "antd";
@@ -19,12 +20,24 @@ const { Option } = Select;
 export default function HdvAll() {
   const { provice } = useContext(AppContext);
   const [data, setData] = useState([]);
+  const numberPage = 6;
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(numberPage);
   const getData = async (values) => {
     const result = await sendGet("/tour-guide", values);
     if (result.returnValue.data.length >= 0) {
       setData(result.returnValue.data);
     } else {
       message.error("thất bại");
+    }
+  };
+  const handleChange = (value) => {
+    if (value <= 1) {
+      setMinValue(0);
+      setMaxValue(numberPage);
+    } else {
+      setMinValue((value - 1) * numberPage);
+      setMaxValue(value * numberPage);
     }
   };
   const getDataFilterTourDirection = async (e) => {
@@ -148,10 +161,22 @@ export default function HdvAll() {
                   </div>
                 </div>
                 <div className="hdv-all__list">
-                  {data.map((item, index) => (
-                    <HdvItem item={item} key={index} />
-                  ))}
+                  {data &&
+                    data.length > 0 &&
+                    data
+                      .slice(minValue, maxValue)
+                      .map((item, index) => (
+                        <HdvItem item={item} key={index} />
+                      ))}
                 </div>
+                {data.length > 0 && (
+                  <Pagination
+                    defaultCurrent={1}
+                    defaultPageSize={numberPage}
+                    total={data.length}
+                    onChange={(value) => handleChange(value)}
+                  />
+                )}
               </div>
             </div>
           </div>

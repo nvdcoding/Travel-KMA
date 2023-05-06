@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { Drawer } from "antd";
 import { logo } from "../../constants/images";
-import { setRefreshToken, setToken } from "../../utils/storage";
+import { getItem, setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
   const history = useHistory();
   const Token = localStorage.getItem("accessToken");
-  console.log({ Token });
   const [open, setOpen] = useState(false);
+  const user = getItem("user") ? JSON.parse(getItem("user")) : {};
   const showDrawer = () => {
     setOpen(true);
   };
@@ -67,9 +67,9 @@ function HeaderLayout() {
                       <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
                     </div>
                   ) : null}
-                  <div className="language">
+                  {/* <div className="language">
                     <i className="fa-solid fa-globe"></i>
-                  </div>
+                  </div> */}
                   <div className="support">
                     <i className="fa-solid fa-circle-question"></i>
                   </div>
@@ -88,10 +88,12 @@ function HeaderLayout() {
                           </div>
                         </li>
                         <li>
-                          <div class="box-list-info">
-                            <i class="fas fa-user"></i>
-                            <Link to="/kenh-hdv">Kênh HDV</Link>
-                          </div>
+                          {user.role == "TOURGUIDE" ? (
+                            <div class="box-list-info">
+                              <i class="fas fa-user"></i>
+                              <Link to="/kenh-hdv">Kênh HDV</Link>
+                            </div>
+                          ) : null}
                         </li>
                         <li>
                           <div class="box-list-info">
@@ -102,9 +104,7 @@ function HeaderLayout() {
                         <li>
                           <div class="box-list-info">
                             <i class="fas fa-newspaper"></i>
-                            <Link to="/me/bookmark/posts">
-                              Bài viết của tôi
-                            </Link>
+                            <Link to="/me/posts">Bài viết của tôi</Link>
                           </div>
                         </li>
                         <li>
@@ -173,6 +173,16 @@ function HeaderLayout() {
                       <li className="menu-item-mb">
                         <NavLink to="/tin-tuc">
                           <i class="fa-solid fa-newspaper"></i>Tin tức
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/pay">
+                          <i class="fa-solid fa-newspaper"></i>Nạp tiền
+                        </NavLink>
+                      </li>
+                      <li className="menu-item-mb">
+                        <NavLink to="/me/posts">
+                          <i class="fa-solid fa-newspaper"></i>Bài viết của tôi
                         </NavLink>
                       </li>
                       {/* <li className="menu-item-mb">

@@ -94,8 +94,8 @@
 .mytrip-order__main-right,
 .mytrip-order__main-left {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 .mytrip-order__main-left {
@@ -103,24 +103,21 @@
 }
 
 .mytrip-order-img {
-  width: 100px;
-  height: 100px;
+  width: 800px;
+  height: 80px;
+  border-radius: 4px;
 }
-
+.info-group {
+  margin: 0 20px;
+  width: 70%;
+  margin-top: 10px;
+}
 .mytrip-order-name {
   font-size: 1.8rem;
   line-height: 2rem;
   width: 70%;
-  margin-left: 20px;
   color: var(--color-text-title);
   cursor: pointer;
-}
-
-.mytrip-order__main-price {
-  /* text-decoration: line-through; */
-}
-
-.mytrip-order__main-price-km {
 }
 
 .mytrip-order__rate .button {
@@ -374,29 +371,38 @@
 .mytrip-order__main-right,
 .mytrip-order__main-left {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+}
+.mytrip-order-time {
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: 15px;
+  color: #7a7a7a;
 }
 
 .mytrip-order__main-left {
   justify-content: flex-start;
+  width: 80%;
 }
 
 .mytrip-order-img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
+  border-radius: 4px;
 }
 
 .mytrip-order-name {
   font-size: 1.8rem;
   line-height: 2rem;
   width: 70%;
-  margin-left: 20px;
   color: var(--color-text-title);
 }
 
 .mytrip-order__main-price {
-  /* text-decoration: line-through; */
+  font-size: 16px;
+  color: #e34040;
+  font-weight: 600;
 }
 
 .mytrip-order__main-price-km {

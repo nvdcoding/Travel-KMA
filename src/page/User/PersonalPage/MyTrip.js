@@ -111,7 +111,10 @@ export default function MyTrip() {
     setStep(!step);
     setDataDetail(values);
   };
-
+  const formatterPrice = new Intl.NumberFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
   useEffect(() => {
     tourWaitting();
     tourEnd();
@@ -198,16 +201,24 @@ export default function MyTrip() {
                                       : banner
                                   }
                                 />
-                                <h4
-                                  className="mytrip-order-name"
-                                  onClick={() => handleStep(value?.id)}
-                                >
-                                  {value?.tour?.name}
-                                </h4>
+                                <div className="info-group">
+                                  <h4
+                                    className="mytrip-order-name"
+                                    onClick={() => handleStep(value?.id)}
+                                  >
+                                    {value?.tour?.name}
+                                  </h4>
+                                  <h4 className="mytrip-order-time">
+                                    {value?.startDate}
+                                  </h4>
+                                </div>
                               </div>
                               <div className="mytrip-order__main-right">
                                 <p className="mytrip-order__main-price">
-                                  {value?.tour?.basePrice} đ
+                                  {formatterPrice.format(
+                                    value?.tour?.basePrice
+                                  )}{" "}
+                                  đ
                                 </p>
                               </div>
                             </div>
@@ -323,13 +334,18 @@ export default function MyTrip() {
                                       : banner
                                   }
                                 />
-                                <h4 className="mytrip-order-name">
-                                  {value?.tour?.name}
-                                </h4>
+                                <div className="info-group">
+                                  <h4 className="mytrip-order-name">
+                                    {value?.tour?.name}
+                                  </h4>{" "}
+                                  <h4 className="mytrip-order-time">
+                                    {value?.startDate}
+                                  </h4>
+                                </div>
                               </div>
                               <div className="mytrip-order__main-right">
                                 <p className="mytrip-order__main-price">
-                                  {value?.price} đ
+                                  {formatterPrice.format(value?.price)} đ
                                 </p>
                               </div>
                             </div>
@@ -406,13 +422,18 @@ export default function MyTrip() {
                                       : banner
                                   }
                                 />
-                                <h4 className="mytrip-order-name">
-                                  {value?.tour?.name}
-                                </h4>
+                                <div className="info-group">
+                                  <h4 className="mytrip-order-name">
+                                    {value?.tour?.name}
+                                  </h4>{" "}
+                                  <h4 className="mytrip-order-time">
+                                    {value?.startDate}
+                                  </h4>
+                                </div>
                               </div>
                               <div className="mytrip-order__main-right">
                                 <p className="mytrip-order__main-price">
-                                  {value?.price} đ
+                                  {formatterPrice.format(value?.price)} đ
                                 </p>
                               </div>
                             </div>

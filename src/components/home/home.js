@@ -239,6 +239,10 @@ function Home() {
       message.error("Cập nhật tour thất bại");
     }
   };
+  const formatterPrice = new Intl.NumberFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
   useEffect(() => {
     getData();
     listTour();
@@ -685,7 +689,10 @@ function Home() {
                       </div>
                       <div className="tour-view-footer">
                         <p className="tour-view__price">
-                          khoảng <span>{item?.basePrice} đ</span>
+                          khoảng{" "}
+                          <span>
+                            {formatterPrice.format(item?.basePrice)} đ
+                          </span>
                         </p>
                         <div className="tour-view__evaluate">
                           <div className="tour-view__star">
