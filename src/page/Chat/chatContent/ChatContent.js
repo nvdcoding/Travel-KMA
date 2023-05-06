@@ -1,94 +1,54 @@
 import React, { createRef, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { sendGet } from "../../../utils/api";
 
 import Avatar from "../chatList/Avatar";
 import ChatItem from "./ChatItem";
-import io, {Socket} from 'socket.io-client';
-import { socketInstance } from '../../../utils/SocketInstance';
-export default function ChatContent() {
+
+export default function ChatContent({ messages, setMessages, socket }) {
+  const { chatId } = useParams();
 
   const messagesEndRef = createRef(null);
-  const chatItms = [
-    // {
-    //   image:
-    //     "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-    //   type: "",
-    //   msg: "Hi Tim, How are you?",
-    // },
-    // {
-    //   image:
-    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-    //   type: "other",
-    //   msg: "I am fine.",
-    // },
-    // {
-    //   image:
-    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-    //   type: "other",
-    //   msg: "What about you?",
-    // },
-    // {
-    //   image:
-    //     "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-    //   type: "",
-    //   msg: "Awesome these days.",
-    // },
-    // {
-    //   image:
-    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-    //   type: "other",
-    //   msg: "Finally. What's the plan?",
-    // },
-    // {
-    //   image:
-    //     "https://pbs.twimg.com/profile_images/1116431270697766912/-NfnQHvh_400x400.jpg",
-    //   type: "",
-    //   msg: "what plan mate?",
-    // },
-    // {
-    //   image:
-    //     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU",
-    //   type: "other",
-    //   msg: "I'm taliking about the tutorial",
-    // },
-  ];
-  const [chat, setChat] = useState(chatItms);
-  const [msg, setMsg] = useState([]);
-  const [socket, setSocket] = useState(null);
+
+  const [profile, setProfile] = useState({ role: "USER" });
+
+  const [msg, setMsg] = useState("");
   const scrollToBottom = () => {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current.scroll({
+      top: messagesEndRef.current.scrollHeight,
+      behavior: "smooth",
+    });
   };
-  const handleChat = (messageSend) => {
-      if (messageSend !== "") {
-       if ( socketInstance.getInstance()) {
-         socketInstance.getInstance().emit('message', messageSend);
+
+  useEffect(() => {
+    const getProfile = async () => {
+      const res = await sendGet("/auth/me");
+      console.log(res);
+      if (res) {
+        setProfile(res.data);
       }
+    };
+
+    getProfile();
+  }, []);
+
+  const handleChat = () => {
+    if (msg !== "") {
       const newChat = {
-        type: "",
-        msg: msg,
-        image:
-          "https://www.google.com/url?sa=i&url=https%3A%2F%2Fvietotaku.com%2Fone-piece-suc-manh-moi-cua-luffy-se-xuat-hien-trong-phan-phim-sap-toi&psig=AOvVaw07ZN0DtfizzKu-DOG1Rcvi&ust=1683365614472000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCOiy2N3v3f4CFQAAAAAdAAAAABAE",
+        message: msg,
+        sender: "USER",
       };
-      // setChat((chatItms) => [...chatItms, newChat]);
-      scrollToBottom();
+      setMessages((chatItms) => [...chatItms, newChat]);
       setMsg("");
+
+      socket.emit("send-message", { chatId, content: newChat.message });
     }
   };
 
   useEffect(() => {
-      socketInstance.getInstance().on("hehe", (message) => {
-      const data = {
-        image:
-        "https://www.google.com/url?sa=i&url=https%3A%2F%2Fvietotaku.com%2Fone-piece-suc-manh-moi-cua-luffy-se-xuat-hien-trong-phan-phim-sap-toi&psig=AOvVaw07ZN0DtfizzKu-DOG1Rcvi&ust=1683365614472000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCOiy2N3v3f4CFQAAAAAdAAAAABAE",
-        type: "",
-        msg: message,
-      };
-      setChat((chatItms) => [...chatItms, data]);
-      });
-  }, [chatItms.length]);
+    scrollToBottom();
+  }, [messages]);
 
-  const messageListener = (message) => {
-    setMsg([...msg, message])
-  }
   const onStateChange = (e) => {
     setMsg(e.target.value);
   };
@@ -119,20 +79,19 @@ export default function ChatContent() {
           </div>
         </div>
       </div>
-      <div className="content__body">
+      <div className="content__body" ref={messagesEndRef}>
         <div className="chat__items">
-          {chat.map((itm, index) => {
+          {messages.map((itm, index) => {
             return (
               <ChatItem
-                animationDelay={index + 2}
+                animationDelay={index + 1}
                 key={index}
-                user={itm.type ? itm.type : "me"}
-                msg={itm.msg}
-                image={itm.image}
+                sender={itm.sender || "USER"}
+                message={itm.message}
+                profile={profile}
               />
             );
           })}
-          <div ref={messagesEndRef} />
         </div>
       </div>
       <div className="content__footer">
