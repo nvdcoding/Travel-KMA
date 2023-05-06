@@ -39,8 +39,6 @@ export default function News() {
           </div>
           <div className="news-content">
             <div className="content">
-<<<<<<< HEAD
-=======
               <div className="pathway">
                 <ul>
                   <li>
@@ -56,7 +54,6 @@ export default function News() {
                   </li>
                 </ul>
               </div>
->>>>>>> 5fc01e84320ad86b6434153ad21f11593edd8d15
               <div className="news-search">
                 <div className="news-input">
                   <i className="fa-solid fa-magnifying-glass"></i>
