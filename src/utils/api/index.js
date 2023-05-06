@@ -11,7 +11,7 @@ import {
 
 const axiosInstance = Axios.create({
   timeout: 3 * 60 * 1000,
-  baseURL: "https://api.ktravel.online/",
+  baseURL: process.env.REACT_APP_BASE_URL_API,
 });
 
 axiosInstance.interceptors.request.use(
