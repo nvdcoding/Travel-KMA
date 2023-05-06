@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
-import { AppContext } from "../../../Context/AppContext";
+import React from "react";
+import { useHistory } from "react-router-dom";
+
 import Avatar from "./Avatar";
 
-export default function ChatList() {
-  const allChatUsers = useContext(AppContext);
-  const selectChat = (e) => {
+export default function ChatList({ users }) {
+  const history = useHistory();
+
+  const selectChat = (e, user) => {
     for (
       let index = 0;
       index < e.currentTarget.parentNode.children.length;
@@ -13,7 +15,9 @@ export default function ChatList() {
       e.currentTarget.parentNode.children[index].classList.remove("active");
     }
     e.currentTarget.classList.add("active");
+    history.push(`/chat/${user.id}`);
   };
+
   return (
     <div className="main__chatlist">
       <button className="btn">
@@ -35,11 +39,11 @@ export default function ChatList() {
         </div>
       </div>
       <div className="chatlist__items">
-        {allChatUsers.allChatUsers.map((item, index) => {
+        {users.map((item, index) => {
           return (
             <div
               style={{ animationDelay: `0.${item.animationDelay}s` }}
-              onClick={selectChat}
+              onClick={(e) => selectChat(e, item)}
               className={`chatlist__item ${item.active ? item.active : ""} `}
               key={index}
             >
