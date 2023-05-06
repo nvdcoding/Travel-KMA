@@ -25,7 +25,7 @@ export default function ChatContent({ messages, setMessages, socket }) {
       const res = await sendGet("/auth/me");
       console.log(res);
       if (res) {
-        setProfile(res.data);
+        setProfile(res.returnValue);
       }
     };
 
@@ -36,7 +36,7 @@ export default function ChatContent({ messages, setMessages, socket }) {
     if (msg !== "") {
       const newChat = {
         message: msg,
-        sender: "USER",
+        sender: profile.role,
       };
       setMessages((chatItms) => [...chatItms, newChat]);
       setMsg("");
@@ -54,7 +54,7 @@ export default function ChatContent({ messages, setMessages, socket }) {
   };
   const handleSendMessage = (message) => {
     if (socket) {
-      socket.emit('message', message);
+      socket.emit("message", message);
     }
   };
 
@@ -105,7 +105,11 @@ export default function ChatContent({ messages, setMessages, socket }) {
             onChange={onStateChange}
             value={msg}
           />
-          <button className="btnSendMsg" id="sendMsgBtn" onClick={e => handleChat(msg)}>
+          <button
+            className="btnSendMsg"
+            id="sendMsgBtn"
+            onClick={(e) => handleChat(msg)}
+          >
             <i className="fa fa-paper-plane"></i>
           </button>
         </div>
