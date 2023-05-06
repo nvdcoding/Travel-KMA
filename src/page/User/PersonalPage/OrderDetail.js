@@ -87,18 +87,18 @@ export default function OrderDetail({
               data.status == 0
                 ? 1
                 : data.status == 1
-                ? 1
-                : data.status == 2
-                ? 2
-                : data.status == 3
-                ? 3
-                : data.status == 4
-                ? 4
-                : data.status == 5
-                ? 5
-                : data.status == 6
-                ? 6
-                : 6
+                  ? 1
+                  : data.status == 2
+                    ? 2
+                    : data.status == 3
+                      ? 3
+                      : data.status == 4
+                        ? 4
+                        : data.status == 5
+                          ? 5
+                          : data.status == 6
+                            ? 6
+                            : 6
             }
             status={data.status == 5 ? "error" : "process"}
           >
@@ -116,16 +116,16 @@ export default function OrderDetail({
           {data.status == 0
             ? "Chờ xác nhận"
             : data.status == 1
-            ? "Chờ đặt cọc"
-            : data.status == 2
-            ? "Chờ thanh toán"
-            : data.status == 3
-            ? "Chưa thực hiện"
-            : data.status == 4
-            ? "Đang thực hiện"
-            : data.status == 5
-            ? "Đã thực hiện"
-            : "Đã hủy"}
+              ? "Chờ đặt cọc"
+              : data.status == 2
+                ? "Chờ thanh toán"
+                : data.status == 3
+                  ? "Chưa thực hiện"
+                  : data.status == 4
+                    ? "Đang thực hiện"
+                    : data.status == 5
+                      ? "Đã thực hiện"
+                      : "Đã hủy"}
         </p>
         <div>
           {data.status == 5 ? (
@@ -265,7 +265,7 @@ export default function OrderDetail({
             <div className="mytrip-order__header">
               <div className="mytrip-order__header-left">
                 <p className="mytrip-order__name">{data?.name}</p>
-                <Link to="/chat">
+                <Link to={`/chat/${data?.tourGuide?.id}`}>
                   <div className="mytrip-order__chat">
                     <i className="fa-regular fa-comments"></i>
                     <p className="mytrip-order__contact">Chat</p>

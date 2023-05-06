@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function HdvItem({ item }) {
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <>
       <div className="tour-guides__item">
@@ -66,7 +66,7 @@ function HdvItem({ item }) {
             </ul>
           </div>
           <Link to={`/trang-ca-nhan/${item?.tourGuideId}`}>
-            <div className="button button--primary button-contact">Liên hệ</div>
+            <div className="button button--primary button-contact">Chi tiết</div>
           </Link>
         </div>
       </div>

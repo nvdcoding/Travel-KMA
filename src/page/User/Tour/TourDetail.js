@@ -252,7 +252,7 @@ export default function TourDetail() {
                           <h3 dir="ltr" style={{ textAlign: "center" }}>
                             <span style={{ color: "#B22222" }}>
                               <u>
-                                <div style={{marginTop: 5}}><strong>QUY TRÌNH ĐĂNG KÝ TOUR</strong></div>
+                                <div style={{ marginTop: 5 }}><strong>QUY TRÌNH ĐĂNG KÝ TOUR</strong></div>
                               </u>
                             </span>
                           </h3>
@@ -262,7 +262,7 @@ export default function TourDetail() {
                               style={{ textAlign: "justify" }}
                             >
                               <strong>Đợt 01:</strong> Quý khách thanh toán 70%
-                              giá trị của tour ngay khi đăng ký mua tour.​​
+                              giá trị của tour ngay khi đăng ký mua tour.
                             </li>
                             <li
                               role="presentation"
@@ -567,10 +567,10 @@ export default function TourDetail() {
                                 <div className="title-price-old">
                                   {/* <del>6,129,000 VND</del> */}
                                 </div>
-                                Giá cơ bản: {data?.basePrice.toLocaleString('en-US', {style : 'currency', currency : 'VND'}).replace('₫','')}{" "}
+                                Giá cơ bản: {data?.basePrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }).replace('₫', '')}{" "}
                                 <span>VNĐ/{data?.numOfFreeMember} người</span>
                               </span>
-                              
+
                             </td>
                           </tr>
                           {/* <tr>
@@ -613,7 +613,6 @@ export default function TourDetail() {
                               />
                             </Form.Item>
                           </tr>
-                          //ADD CODE Heere 
                         </tbody>
                       </table>
                       <Button

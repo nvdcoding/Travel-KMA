@@ -45,7 +45,7 @@ export default function Pay() {
       value: "5000000",
     },
   ];
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <>
       <LayoutHDV>
@@ -139,7 +139,6 @@ export default function Pay() {
                                         </label>
                                       </div>
                                     </div>
-                                    payHistory{" "}
                                   </div>
                                 </div>
                               </li>

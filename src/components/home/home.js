@@ -469,7 +469,7 @@ function Home() {
                       </div>
 
                       <div className="button button--primary button-contact">
-                        <Link to="/chat">Liên hệ</Link>
+                        <Link to={`/chat/${item?.tourGuideId}`}>Liên hệ</Link>
                       </div>
                     </div>
                   </div>

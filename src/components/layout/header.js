@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
-import { Drawer } from "antd";
+import { Badge, Drawer } from "antd";
 import { logo } from "../../constants/images";
+import { CommentOutlined } from '@ant-design/icons';
 import { getItem, setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
   const history = useHistory();
@@ -21,7 +22,7 @@ function HeaderLayout() {
     setRefreshToken("");
     history.push("/dang-nhap");
   };
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <>
       <header id="header" className="header header-sticky">
@@ -71,7 +72,14 @@ function HeaderLayout() {
                     <i className="fa-solid fa-globe"></i>
                   </div> */}
                   <div className="support">
-                    <i className="fa-solid fa-circle-question"></i>
+                    <Link to={`/chat/10`}>
+                      <Badge dot>
+                        <CommentOutlined
+                          style={{
+                            fontSize: 30,
+                          }}
+                        />
+                      </Badge></Link>
                   </div>
 
                   {Token ? (

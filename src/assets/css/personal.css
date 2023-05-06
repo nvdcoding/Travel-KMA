@@ -1,5 +1,4 @@
-.personal-page__wrapper {
-}
+.personal-page__wrapper {}
 
 .cover-image img {
   width: 100%;
@@ -27,6 +26,7 @@
   width: 140px;
   height: 140px;
   border-radius: 50%;
+  overflow: hidden;
 }
 
 .personal-page__name {
@@ -36,18 +36,31 @@
   color: var(--colour-navy);
   font-weight: 500;
 }
+
 .personal-page__position {
   font-size: 1.6rem;
   line-height: 2;
   color: var(--colour-navy);
   font-weight: 300;
 }
+
 .personal-page__contact .button {
   margin: auto;
 }
 
 .evaluate {
   text-align: center;
+  margin-top: 10px;
+}
+
+.evaluate h4 {
+  font-size: 16px;
+  line-height: 28px;
+  color: #f75656;
+}
+
+.evaluate-star {
+  color: #eecd5f;
 }
 
 .personal-page-right {
@@ -91,8 +104,7 @@
   margin: 10px 0;
 }
 
-.personal-page__list {
-}
+.personal-page__list {}
 
 .personal-page__item {
   display: flex;
@@ -124,22 +136,27 @@
   font-weight: 300;
   margin-right: 15px;
 }
+
 .personal-page__value span {
   margin: 2px 2px;
 }
+
 .trip-suggest img.tour-view__img {
   height: 130px;
   object-fit: cover;
 }
+
 .trip-suggest .tour-view-body {
   margin-top: 5px;
 }
+
 .trip-suggest .tour-view__title {
   font-style: normal;
   font-weight: 500;
   font-size: 18.6px;
   line-height: 23px;
 }
+
 .trip-suggest-title {
   font-style: normal;
   font-weight: 500;
@@ -148,6 +165,7 @@
   margin: 20px 0;
   margin-top: 40px;
 }
+
 .trip-suggest .tour-view-footer,
 .trip-suggest .travel-link,
 .trip-suggest .tour-view__place {
@@ -178,6 +196,7 @@
   margin: 7px 0;
   color: var(--color-seconds);
 }
+
 .tour-guide-item::before {
   /* content: ""; */
   position: absolute;
@@ -188,6 +207,7 @@
   display: block;
   background: rgba(0, 0, 0, 0.15);
 }
+
 .tour-guide-place {
   font-size: 1.2rem;
   line-height: 1.5rem;
@@ -215,26 +235,31 @@
   white-space: nowrap;
   text-align: center;
 }
+
 .tour-guide-item .button_xem {
   font-size: 1.2rem;
   padding: 6px 8px;
   color: var(--color-seconds);
 }
+
 .trip-suggest-main {
   text-align: center;
   margin: auto;
 }
+
 .tour-guide-item:hover .button_xem {
   opacity: 1;
   visibility: visible;
   top: 50%;
 }
+
 .owl-carousel .owl-item img.tour-guide-hdv {
   width: 100px;
   height: 100px;
   border-radius: 100%;
   margin: auto;
 }
+
 .trip-suggest {
   margin: 20px 0;
 }

@@ -8,6 +8,7 @@
   z-index: 99;
   box-shadow: 0px -3px 10px 3px #000000d9;
 }
+
 .layout__wrapper {
   background-color: #fbfbfbc4;
 }
@@ -17,13 +18,16 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .menu-list .menu-item a.active {
   color: var(--color-primary);
 }
-.ant-layout.ant-layout-has-sider > .ant-layout {
+
+.ant-layout.ant-layout-has-sider>.ant-layout {
   min-height: 91vh;
   overflow: scroll;
 }
+
 .menu-right,
 .menu-left {
   display: flex;
@@ -51,6 +55,7 @@
 .menu-item {
   position: relative;
 }
+
 .menu-sub {
   font-size: 18px;
   position: absolute;
@@ -61,19 +66,24 @@
   padding: 15px 10px;
   border-radius: 7px;
 }
+
 .menu-sub_item {
   padding: 4px 0;
   border-bottom: 1px solid #cccccc4f;
 }
+
 .menu-list .menu-item:hover .menu-sub_item a {
   color: initial;
 }
+
 .menu-list .menu-item .menu-sub_item:hover a {
   color: var(--color-primary);
 }
+
 .menu-item:hover .menu-sub {
   display: block;
 }
+
 .user-info .button {
   width: 140px;
 }
@@ -162,6 +172,7 @@
   font-size: 25px;
   color: var(--color-text);
 }
+
 .tour-footer-sub .tour-footer__text {
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -171,10 +182,12 @@
   text-align: center;
   color: var(--color-text);
 }
+
 .tour-footer-content .tour-footer__item:hover i,
 .tour-footer-content .tour-footer__item:hover .tour-footer__text {
   color: var(--colour-link);
 }
+
 .footer .content {
   display: flex;
   align-items: center;
@@ -209,9 +222,11 @@
   line-height: 2.6rem;
   color: var(--color-text-title);
 }
+
 .menu-left .mb {
   display: none;
 }
+
 .menu-right .pc {
   display: flex;
   align-items: center;
@@ -222,16 +237,20 @@
     display: flex;
     align-items: center;
   }
+
   .menu-right .pc {
     display: none;
   }
 }
+
 .menu-mb.mb i {
   font-size: 28px;
 }
+
 .menu-list-mb {
   margin-top: 30px;
 }
+
 .menu-item-mb {
   border-bottom-left-radius: 5px;
   border-top-left-radius: 5px;
@@ -243,33 +262,41 @@
   padding: 20px 0 20px 20px;
   transition: 0.3s;
 }
+
 .menu-item-mb:last-child {
   bottom: 20px;
   position: absolute;
   width: 100%;
 }
+
 .menu-item-mb:hover {
   background-color: #ededed;
 }
+
 .ant-drawer-body {
   padding: 0;
 }
+
 .menu-item-mb i {
   margin-right: 10px;
 }
+
 .user-info .button {
   width: 140px;
 }
+
 .header-user {
   background-color: #fff;
   position: relative;
   margin-left: 15px;
 }
+
 .header-user img {
   width: 35px;
   height: 35px;
   border-radius: 50%;
 }
+
 .header-user ul {
   z-index: 10;
   position: absolute;
@@ -282,21 +309,25 @@
   border-radius: 6px;
   box-shadow: 0px 2px 14px -1px #888888;
 }
+
 .header-user ul li {
   text-align: left;
   list-style: none;
   overflow: hidden;
 }
+
 .header-user .box-list-info {
   margin: 20px 20px 0 20px;
   padding-bottom: 20px;
   font-weight: 100;
   border-bottom: 1px solid #dddddd;
 }
+
 .header-user .box-list-info i {
   color: #888;
   padding-right: 5px;
 }
+
 .header-user .box-list-info a {
   color: #222;
 }
@@ -306,6 +337,7 @@
   color: #222;
   font-weight: 400;
 }
+
 .header-user:hover .box-list-info:last-child {
   border-bottom: none;
 }
@@ -320,17 +352,20 @@
   padding: 100px 9%;
   width: 80%;
 }
+
 .InfoUser-wwrapper h1 {
   color: var(--color-primary);
   font-size: 18px;
   font-weight: 600;
 }
+
 .InfoUser-wwrapper .btn-active {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 80%;
 }
+
 .InfoUser-wwrapper .btn-active button {
   border: 1px solid #9b9b9b;
   border-radius: 3px;
@@ -338,21 +373,25 @@
   color: #9b9999;
   margin: 2px 5px;
 }
+
 .InfoUser-wwrapper .btn-active button:hover {
   cursor: pointer;
   border: 1px solid #464545;
   color: #464545;
 }
+
 .InfoUser-wwrapper .btn-active .active {
   border-color: #76860c;
   color: #9eb60a;
   background-color: #dce2b3;
 }
+
 .InfoUser-wwrapper .btn-active .active:hover {
   background-color: #9aa746;
   color: #fff;
   border: 1px solid #9eb60a;
 }
+
 .InfoUser-wwrapper h2 {
   color: #9aa746;
   font-weight: 600;
@@ -360,14 +399,17 @@
   width: 80%;
   margin-top: 35px;
 }
+
 .InfoUser-wwrapper .info {
   width: 80%;
   margin: 10px 0;
 }
+
 .InfoUser-wwrapper .info h3 {
   color: #403e3e;
   font-weight: 600;
 }
+
 .InfoUser-wwrapper .info input {
   padding: 5px 5px;
   border: none;
@@ -376,18 +418,22 @@
   outline: none;
   border-radius: 0;
 }
+
 .ant-form-item-control-input {
   border-radius: 0;
 }
+
 .InfoUser-wwrapper .info p {
   width: 80%;
   margin: 10px 0;
   display: flex;
 }
+
 .InfoUser-wwrapper .info p .avtUpload {
   margin-left: 90px;
   position: relative;
 }
+
 .InfoUser-wwrapper .info p .avtUpload .avtUploadImg {
   width: 100px;
   height: 100px;
@@ -396,11 +442,13 @@
   overflow: hidden;
   cursor: pointer;
 }
+
 .InfoUser-wwrapper .info p .avtUpload .avtUploadImg img {
   width: 100%;
   height: 100px;
   object-fit: cover;
 }
+
 .InfoUser-wwrapper .info p .avtUpload label .photoupload {
   position: absolute;
   display: flex;
@@ -417,32 +465,39 @@
   cursor: pointer;
   background: #00000024;
 }
+
 .InfoUser-wwrapper .info p .avtUpload label .photoupload img {
   width: 75%;
   opacity: 0.5;
 }
+
 .InfoUser-wwrapper .info p .avtUpload label .PhotoPic {
   position: absolute;
   bottom: 28px;
 }
+
 .InfoUser-wwrapper .ChangPassword {
   border: 1px solid #ccc;
   padding: 10px;
   box-shadow: -0.1px 2px 7.6px 0.2px #bbb7b7;
 }
+
 .InfoUser-wwrapper .ChangPassword .changeinfo {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .InfoUser-wwrapper .ChangPassword .changeinfo .title {
   width: 70%;
   display: flex;
   align-items: center;
 }
+
 .InfoUser-wwrapper .ChangPassword .changeinfo .title p {
   margin: 0;
 }
+
 .InfoUser-wwrapper .ChangPassword button {
   border: 0;
   padding: 4px 9px;
@@ -450,22 +505,43 @@
   background-color: var(--color-sub);
   color: #fff;
 }
+
 .InfoUser-wwrapper .ChangPassword button:hover {
   background-color: var(--color-sub);
 }
-.InfoUser-wwrapper
-  .ant-form-item-label
-  > label.ant-form-item-required:not(
-    .ant-form-item-required-mark-optional
-  )::before {
+
+.InfoUser-wwrapper .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
   content: "";
 }
-.InfoUser-wwrapper .ant-form-item-label > label {
+
+.InfoUser-wwrapper .ant-form-item-label>label {
   font-weight: 600;
   color: #000;
   width: 150px;
 }
+
 .foorwr__wrapper {
   background: #faf9f8;
   border: 1px solid #ededed;
+}
+
+.support {
+  cursor: pointer;
+}
+
+.support .ant-badge-dot {
+  width: 8px;
+  min-width: 8px;
+  height: 8px;
+  top: 8px;
+  right: 3px;
+}
+
+.ant-message .ant-message-notice .ant-message-notice-content {
+  padding: 18px 12px !important;
+  font-size: 16px !important;
+}
+
+.ant-message .ant-message-notice .ant-message-custom-content>.anticon {
+  font-size: 24px !important;
 }

@@ -221,21 +221,6 @@ export default function Personal() {
               <img alt="" src={banner} />
             </div>
             <div className="content">
-              <div className="pathway">
-                <ul>
-                  <li>
-                    <a href="/">Trang chủ</a>
-                  </li>
-                  <li>
-                    <span>
-                      <i className="fa-solid fa-chevron-right"></i>
-                    </span>
-                  </li>
-                  <li>
-                    <strong>Hướng dẫn viên</strong>
-                  </li>
-                </ul>
-              </div>
               <div className="personal-page__main">
                 <div className="personal-page-left">
                   <div className="personal-page__avt">
@@ -249,7 +234,7 @@ export default function Personal() {
                     ))}
                   </h3>
                   <div className="personal-page__contact">
-                    <Link to="/chat" className="button button--primary">
+                    <Link to={`/chat/${data?.id}`} className="button button--primary">
                       Liên hệ
                     </Link>
                   </div>
@@ -343,7 +328,7 @@ export default function Personal() {
                 </div>
               </div>
               <div className="personal-page__container">
-                <p className="trip-suggest-title">Các chuyến đi gợi ý từ Duy</p>
+                <p className="trip-suggest-title">Các chuyến đi gợi ý</p>
                 <div className="trip-suggest">
                   <OwlCarousel
                     className="trip-suggest__list owl-theme"
@@ -359,12 +344,12 @@ export default function Personal() {
                               {item.type == "Ecotourism"
                                 ? "Văn hóa"
                                 : item.type == "Cultural"
-                                ? "Nghỉ dưỡng"
-                                : item.type == "Entertainment"
-                                ? "Giải trí"
-                                : item.type == "Sports"
-                                ? "Thể thao"
-                                : "Khác"}
+                                  ? "Nghỉ dưỡng"
+                                  : item.type == "Entertainment"
+                                    ? "Giải trí"
+                                    : item.type == "Sports"
+                                      ? "Thể thao"
+                                      : "Khác"}
                             </p>
                           </div>
                         </div>

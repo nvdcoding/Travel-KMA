@@ -160,9 +160,9 @@ export default function MyTrip() {
                             <div className="mytrip-order__header">
                               <div className="mytrip-order__header-left">
                                 <p className="mytrip-order__name">
-                                  {value?.name}
+                                  {value?.tourGuide?.name}
                                 </p>
-                                <Link to="/chat">
+                                <Link to={`/chat/${value?.tourGuide?.id}`}>
                                   <div className="mytrip-order__chat">
                                     <i className="fa-regular fa-comments"></i>
                                     <p className="mytrip-order__contact">
@@ -175,16 +175,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
+                                    ? "Chờ đặt cọc"
+                                    : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                        ? "Chưa thực hiện"
+                                        : value.status == 4
+                                          ? "Đang thực hiện"
+                                          : value.status == 5
+                                            ? "Đã thực hiện"
+                                            : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -297,27 +297,31 @@ export default function MyTrip() {
                             <div className="mytrip-order__header">
                               <div className="mytrip-order__header-left">
                                 <p className="mytrip-order__name">
-                                  {value?.hdv}
+                                  {value?.tourGuide?.name}
                                 </p>
-                                <div className="mytrip-order__chat">
-                                  <i className="fa-regular fa-comments"></i>
-                                  <p className="mytrip-order__contact">Chat</p>
-                                </div>
+                                <Link to={`/chat/${value?.tourGuide?.id}`}>
+                                  <div className="mytrip-order__chat">
+                                    <i className="fa-regular fa-comments"></i>
+                                    <p className="mytrip-order__contact">
+                                      Chat
+                                    </p>
+                                  </div>
+                                </Link>
                               </div>{" "}
                               <div className="mytrip-order__header-right">
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
+                                    ? "Chờ đặt cọc"
+                                    : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                        ? "Chưa thực hiện"
+                                        : value.status == 4
+                                          ? "Đang thực hiện"
+                                          : value.status == 5
+                                            ? "Đã thực hiện"
+                                            : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -385,27 +389,31 @@ export default function MyTrip() {
                             <div className="mytrip-order__header">
                               <div className="mytrip-order__header-left">
                                 <p className="mytrip-order__name">
-                                  {value?.hdv}
+                                  {value?.tourGuide?.name}
                                 </p>
-                                <div className="mytrip-order__chat">
-                                  <i className="fa-regular fa-comments"></i>
-                                  <p className="mytrip-order__contact">Chat</p>
-                                </div>
+                                <Link to={`/chat/${value?.tourGuide?.id}`}>
+                                  <div className="mytrip-order__chat">
+                                    <i className="fa-regular fa-comments"></i>
+                                    <p className="mytrip-order__contact">
+                                      Chat
+                                    </p>
+                                  </div>
+                                </Link>
                               </div>{" "}
                               <div className="mytrip-order__header-right">
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
+                                    ? "Chờ đặt cọc"
+                                    : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                        ? "Chưa thực hiện"
+                                        : value.status == 4
+                                          ? "Đang thực hiện"
+                                          : value.status == 5
+                                            ? "Đã thực hiện"
+                                            : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">

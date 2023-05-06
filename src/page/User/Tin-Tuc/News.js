@@ -1,12 +1,13 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/news.css";
 import { sendGet } from "../../../utils/api";
 import { Pagination } from "antd";
 export default function News() {
   const numberPage = 6;
+  const [data, setData] = useState();
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(numberPage);
   const handleChange = (value) => {
@@ -19,14 +20,16 @@ export default function News() {
     }
   };
   const listNews = async () => {
-    const res = await sendGet("/news", {});
-    if (res.returnValue.data.length >= 0) {
+    const res = await sendGet("/posts/user-tourguide");
+    if (res.statusCode == 200) {
       setData(res.returnValue.data);
     } else {
       message.error("Thất bại");
     }
   };
-  useEffect(() => {}, []);
+  useEffect(() => {
+    listNews();
+  }, []);
   return (
     <>
       <Layout>
@@ -65,130 +68,39 @@ export default function News() {
                 </div>
               </div>
               <div className="news-list">
-                <div className="news-item">
-                  <div className="news-img">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <img alt="" src="http://i.imgur.com/PBGq1ov.jpg" />
-                    </Link>
-                  </div>
-                  <div className="news-main">
-                    <h2 className="news-title">
-                      <Link to={`/tin-tuc/thflsnmx`}>
-                        [Tổng hợp] Các concept chụp ảnh nhóm lầy lội “bá đạo như
-                        hạt gạo”
+                {data?.map((item, index) => (
+                  <div className="news-item" key={index}>
+                    <div className="news-img">
+                      <Link to={`/tin-tuc/${item?.id}`}>
+                        <img alt="" src={item?.image} />
                       </Link>
-                    </h2>
-                    <p className="news-des">
-                      Bạn muốn tìm những cách tạo dáng chụp ảnh nhóm lầy lội để
-                      giữ lại…
-                    </p>
-                    <div className="news-post-share-box">
-                      <div className="news-post-share-item">
-                        <a href="#" className="news-post-like" title="Like">
-                          <i className="fa-regular fa-heart"></i>
-                        </a>
-                        <a
-                          className="post-share-facebook"
-                          target="_blank"
-                          rel="noreferrer"
-                          href="#"
-                          title="Facebook"
-                        >
-                          <i className="fa-brands fa-facebook-f"></i>
-                        </a>
+                    </div>
+                    <div className="news-main">
+                      <h2 className="news-title">
+                        <Link to={`/tin-tuc/${item?.id}`}>
+                          {item?.title}
+                        </Link>
+                      </h2>
+                      <p className="news-des" dangerouslySetInnerHTML={{ __html: item?.currentContent }} />
+                      <div className="news-post-share-box">
+                        <div className="news-post-share-item">
+                          <a href="#" className="news-post-like" title="Like">
+                            <i className="fa-regular fa-heart"></i>
+                          </a>
+                          <a
+                            className="post-share-facebook"
+                            target="_blank"
+                            rel="noreferrer"
+                            href="#"
+                            title="Facebook"
+                          >
+                            <i className="fa-brands fa-facebook-f"></i>
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="news-item">
-                  <div className="news-img">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <img alt="" src="http://i.imgur.com/PBGq1ov.jpg" />
-                    </Link>
-                  </div>
-                  <div className="news-main">
-                    <h2 className="news-title">
-                      <Link to={`/tin-tuc/thflsnmx`}>
-                        [Tổng hợp] Các concept chụp ảnh nhóm lầy lội “bá đạo như
-                        hạt gạo”
-                      </Link>
-                    </h2>
-                    <p className="news-des">
-                      Bạn muốn tìm những cách tạo dáng chụp ảnh nhóm lầy lội để
-                      giữ lại…
-                    </p>
-                    <div className="news-post-share-box">
-                      <div className="news-post-share-item">
-                        <a href="#" className="news-post-like" title="Like">
-                          <i className="fa-regular fa-heart"></i>
-                        </a>
-                        <a
-                          className="post-share-facebook"
-                          target="_blank"
-                          rel="noreferrer"
-                          href="#"
-                          title="Facebook"
-                        >
-                          <i className="fa-brands fa-facebook-f"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="news-item">
-                  <div className="news-img">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <img alt="" src="http://i.imgur.com/PBGq1ov.jpg" />
-                    </Link>
-                  </div>
-                  <div className="news-main">
-                    <h2 className="news-title">
-                      <Link to={`/tin-tuc/thflsnmx`}>
-                        [Tổng hợp] Các concept chụp ảnh nhóm lầy lội “bá đạo như
-                        hạt gạo”
-                      </Link>
-                    </h2>
-                    <p className="news-des">
-                      Bạn muốn tìm những cách tạo dáng chụp ảnh nhóm lầy lội để
-                      giữ lại…
-                    </p>
-                    <div className="news-post-share-box">
-                      <div className="news-post-share-item">
-                        <a href="#" className="news-post-like" title="Like">
-                          <i className="fa-regular fa-heart"></i>
-                        </a>
-                        <a
-                          className="post-share-facebook"
-                          target="_blank"
-                          rel="noreferrer"
-                          href="#"
-                          title="Facebook"
-                        >
-                          <i className="fa-brands fa-facebook-f"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="news-item">
-                  <div className="news-img">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <img alt="" src="http://i.imgur.com/PBGq1ov.jpg" />
-                    </Link>
-                  </div>
-                  <div className="news-main">
-                    <h2 className="news-title">
-                      <Link to={`/tin-tuc/thflsnmx`}>
-                        [Tổng hợp] Các concept chụp ảnh nhóm lầy lội “bá đạo như
-                        hạt gạo”
-                      </Link>
-                    </h2>
-                    <p className="news-des">
-                      Bạn muốn tìm những cách tạo dáng chụp ảnh nhóm lầy lội để
-                      giữ lại…
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
               <div className="news-paging">
                 {/* {data.length > 0 && ( */}

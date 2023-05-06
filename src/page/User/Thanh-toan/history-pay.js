@@ -50,8 +50,8 @@ export default function PayHistory() {
                       {item?.status == 1
                         ? "Nạp tiền thành công"
                         : item?.status == 2
-                        ? "Đang xử lý"
-                        : "Thanh toán thất bại"}
+                          ? "Đang xử lý"
+                          : "Thanh toán thất bại"}
                     </h4>
                     <div class="History-des__sub-price">
                       <p>{formatterPrice.format(item?.amount)}đ</p>

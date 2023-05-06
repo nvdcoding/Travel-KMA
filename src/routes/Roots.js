@@ -39,6 +39,7 @@ const chitietOrder = lazy(() => import("../page/Kenh_HDV/QL_Tour/detailOrder"));
 const activeTK = lazy(() => import("../page/Auth/activeAcc"));
 const UpdatePay = lazy(() => import("../page/User/Thanh-toan/updatePay"));
 const listPost = lazy(() => import("../page/User/Tin-Tuc/ListPost"));
+const EditPost = lazy(() => import("../page/User/Tin-Tuc/EditPost"));
 
 /**
  * define main pages routes
@@ -138,6 +139,12 @@ const RoutePage = [
     path: ROUTES.MYTRIP,
     exact: true,
     component: MyTrip,
+    authen: true,
+  },
+  {
+    path: ROUTES.EDITPOST,
+    exact: true,
+    component: EditPost,
     authen: true,
   },
   {

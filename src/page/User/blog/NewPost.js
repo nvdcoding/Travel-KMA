@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import MarkdownIt from "markdown-it";
-import { message } from "antd";
+import { message, Select } from "antd";
 import MdEditor from "react-markdown-editor-lite";
 import "react-markdown-editor-lite/lib/index.css";
 import { useHistory } from "react-router-dom";
@@ -15,20 +15,37 @@ function Blogging() {
   const [imageUrl, setImageUrl] = useState("11");
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
-
-  const handleChangeImage = (e) => {
+  const [select, setSelect] = useState('FOOD');
+  const options = [
+    // thay doi
+    { label: "Ẩm thực", value: "FOOD" },
+    { label: "Chia sẻ", value: "SHARE" },
+    { label: "Trải nghiệm", value: "REVIEW" },
+    { label: "Hướng dẫn đi", value: "SUGGEST" },
+  ];
+  const handleChange = (value) => {
+    setSelect(value)
+  };
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageUrl(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+  const handleGetImage = async () => {
     const { files } = document.querySelector(".img-input");
     const formData = new FormData();
     formData.append("file", files[0]);
     formData.append("upload_preset", "descriptionCourse");
-    axios
-      .post(
+    try {
+      const { data } = await axios.post(
         "https://api.cloudinary.com/v1_1/learnit2022/image/upload",
         formData
-      )
-      .then((response) => setImageUrl(response.data.secure_url))
-      .catch((err) => console.error(err));
-    return imageUrl;
+      );
+      setImageUrl(data.secure_url);
+      return data.secure_url;
+    } catch (error) {
+      console.error(error);
+    }
   };
   //nội dung trong mackdown
   function handleEditorChange({ html }) {
@@ -45,16 +62,17 @@ function Blogging() {
   }
   const handleChangeSubmit = async (values) => {
     const data = {
-      img: imageUrl,
+      image: await handleGetImage(),
       title: title,
       content: content,
+      topic: select
     };
     // eslint-disable-next-line no-unused-vars
-    const add = await sendPost("/api/blog", data);
+    const add = await sendPost("/posts/user-tourguide", data);
     // console.log(add);
-    if (add.status === 201) {
+    if (add.statusCode === 200) {
       message.success("Bài viết của bạn đang được duyệt");
-      history.push("/");
+      history.push("/viet-bai");
     } else {
       message.error("Lỗi kĩ thuật");
     }
@@ -82,6 +100,12 @@ function Blogging() {
             onImageUpload={onImageUpload}
             onChange={handleEditorChange}
           />
+          <Select placeholder="Chọn Topic"
+            onChange={handleChange}
+            defaultValue="FOOD"
+            style={{ width: "100%" }}
+            options={options}
+          />
           <section className="block-img_thumb">
             <label htmlFor="img">
               <div
@@ -102,7 +126,7 @@ function Blogging() {
                   id="img"
                   name="img"
                   accept="image/*"
-                  onChange={handleChangeImage}
+                  onChange={onImageChange}
                 />
               </div>
             </label>
