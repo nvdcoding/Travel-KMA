@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import { banner, address } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
-import { Pagination } from "antd";
+import { Pagination, message } from "antd";
 import TourItem from "../../../components/tourItem";
 import {
   Modal,
@@ -17,25 +17,17 @@ import {
 } from "antd";
 import { useParams } from "react-router-dom";
 import moment from "moment";
-import { sendGet } from "../../../utils/api";
+import { sendGet, sendPost } from "../../../utils/api";
+import TextArea from "antd/lib/input/TextArea";
 
 export default function ToursFilter() {
-  const { Option } = Select;
   const [data, setData] = useState([]);
-  const [provice, setProvice] = useState([]);
-  const [hdv, setHdv] = useState([]);
-  const handleRequest = () => {
-    setIsModalOpen(true);
-  };
+
   const nameProvice = localStorage.getItem("provice");
   const timeStart = localStorage.getItem("Timeprovice");
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [desc, setDesc] = useState("");
-  const [place, setPlace] = useState("");
   const [show, setShow] = useState(false);
-
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -43,8 +35,18 @@ export default function ToursFilter() {
     setIsModalOpen(false);
     setShow(false);
   };
-  const onChangeTimeStart = (date, dateString) => {};
-  const onChangeTimeEnd = (date, dateString) => {};
+  const handleRequest = async (values) => {
+    values.provinceId = parseInt(params.id)
+    let res = await sendPost(`/requests`, values);
+    if (res.statusCode === 200) {
+      setIsModalOpen(true);
+      message.success("Bạn đã gửi yêu cầu thành công");
+    } else {
+      message.error("thất bại");
+    }
+    setIsModalOpen(true);
+  };
+  const onChangeTimeStart = (date, dateString) => { };
   let params = useParams();
   const tourFiltter = async () => {
     const result = await sendGet(`/tours?provinceId=${params.id}`);
@@ -102,78 +104,45 @@ export default function ToursFilter() {
                       <div className="tour-detail__plan-info">
                         <span className="tour-plan__review">
                           Lên kế hoạch cho chuyến tham quan
-                          <strong> {nameProvice}</strong> với TravelVN
+                          <strong> {nameProvice}</strong> với KTravel
                         </span>
                       </div>
                     </div>
                     <div className="tour-detail__plan-body">
-                      <label htmlFor="start">Tên chuyến đi:</label>
-                      <Input
-                        placeholder="nhập tên chuyến đi"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                      <label htmlFor="place">Địa điểm:</label>
-                      <p className="ant-input">{nameProvice}</p>
-                      <label htmlFor="times">Thời gian bắt đầu:</label>
-                      <div>
-                        {" "}
-                        <DatePicker
-                          onChange={onChangeTimeStart}
-                          placeholder="Chọn ngày"
-                          format={dateFormatList}
-                          defaultValue={moment(timeStart)}
-                        />
-                      </div>
-                      <label htmlFor="times">Thời gian kết thúc:</label>
-                      <div>
-                        <DatePicker
-                          onChange={onChangeTimeStart}
-                          placeholder="Chọn ngày"
-                          format={dateFormatList}
-                          defaultValue={moment(timeStart)}
-                        />
-                      </div>
-                      {/* <label>Số lượng</label>
-                      <div className="create-tour__people-item">
-                        <p className="create-tour__people-des">
-                          Trẻ em
-                          <br /> Lứa tuổi 2 - 12
-                        </p>
-                        <div className="people_unit">
-                          <div className="minus">
-                            <i class="fa-solid fa-minus"></i>
-                          </div>
-                          <div className="unit">0</div>
-                          <div className="plus">
-                            <i class="fa-solid fa-plus"></i>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="create-tour__people-item">
-                        <p className="create-tour__people-des">Người lớn</p>
-                        <div className="people_unit">
-                          <div className="minus">
-                            <i class="fa-solid fa-minus"></i>
-                          </div>
-                          <div className="unit">0</div>
-                          <div className="plus">
-                            <i class="fa-solid fa-plus"></i>
-                          </div>
-                        </div>
-                      </div> */}
-                      <label htmlFor="start">Mô tả chi tiết:</label>
-                      <Input
-                        placeholder="Nhập mô tả"
-                        value={desc}
-                        onChange={(e) => setDesc(e.target.value)}
-                      />
-                      <div
-                        className="button button--primary"
-                        onClick={handleRequest}
+                      <Form
+                        name="normal_senyc"
+                        className="sendyc-form"
+                        initialValues={{
+                          remember: true,
+                        }}
+                        onFinish={handleRequest}
                       >
-                        Yêu cầu
-                      </div>
+                        <label htmlFor="place">Địa điểm:</label>
+                        <p className="ant-input">{nameProvice}</p>
+                        <Form.Item
+                          name="startDate"
+                          label="Ngày bắt đầu:"
+                        >
+                          <DatePicker
+                            onChange={onChangeTimeStart}
+                            placeholder="Chọn ngày"
+                            format={dateFormatList}
+                            defaultValue={moment(timeStart)}
+                          />
+                        </Form.Item>
+
+                        <Form.Item name="content" label="Mô tả:">
+                          <TextArea placeholder="Nhập yêu cầu" rows={3} />
+                        </Form.Item>
+
+                        <Button
+                          htmlType="submit"
+                          className="button button--primary"
+                        >
+                          Yêu cầu
+                        </Button>
+                      </Form>
+
                       <Modal
                         title=""
                         open={isModalOpen}

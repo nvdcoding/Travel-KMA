@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { Tabs, Popconfirm, message, Skeleton, Modal } from "antd";
+import { Tabs, Popconfirm, message, Card, Space, Skeleton, Modal } from "antd";
 
 import "../../../assets/css/trip.css";
 import {
@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import Condition from "../../../components/condition";
 import { sendDelete, sendGet, sendPut } from "../../../utils/api";
 import OrderDetail from "./OrderDetail";
+import Request from "./Request";
 export default function MyTrip() {
   const { TabPane } = Tabs;
   const [dataProcessing, setDataProcessing] = useState([]);
@@ -104,9 +105,10 @@ export default function MyTrip() {
         message.error("thất bại");
       }
     } catch (error) {
-      message.error("Chưa đến hạn kết thúc chuyến đi");
+      message.error("Không thành công.");
     }
   };
+
   const handleStep = async (values) => {
     setStep(!step);
     setDataDetail(values);
@@ -489,6 +491,17 @@ export default function MyTrip() {
                   <div className="button button--primary">Tìm</div>
                 </div>
                 <Voucher />
+              </TabPane>
+              <TabPane
+                tab={
+                  <div className="mytrip-menu-item">
+                    <i className="fa-solid fa-tags"></i>
+                    <p className="mytrip-menu-name">Yêu cầu</p>
+                  </div>
+                }
+                key="3"
+              >
+                <Request />
               </TabPane>
             </Tabs>
           </div>

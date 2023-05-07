@@ -40,6 +40,7 @@ const activeTK = lazy(() => import("../page/Auth/activeAcc"));
 const UpdatePay = lazy(() => import("../page/User/Thanh-toan/updatePay"));
 const listPost = lazy(() => import("../page/User/Tin-Tuc/ListPost"));
 const EditPost = lazy(() => import("../page/User/Tin-Tuc/EditPost"));
+const ChatHdv = lazy(() => import("../page/Kenh_HDV/Chat/index"));
 
 /**
  * define main pages routes
@@ -194,6 +195,13 @@ const RoutePage = [
     path: ROUTES.DSTOUR,
     exact: true,
     component: DsTour,
+    roles: ["TOURGUIDE"],
+    authen: true,
+  },
+  {
+    path: ROUTES.CHATHDV,
+    exact: true,
+    component: ChatHdv,
     roles: ["TOURGUIDE"],
     authen: true,
   },

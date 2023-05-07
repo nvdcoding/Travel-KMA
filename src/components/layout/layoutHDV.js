@@ -4,6 +4,7 @@ import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { avt, logo } from "../../constants/images";
 import "../../assets/css/layoutHDV.css";
+import { CommentOutlined } from '@ant-design/icons';
 import { setRefreshToken, setToken } from "../../utils/storage";
 
 function LayoutHDV({ children }) {
@@ -32,6 +33,16 @@ function LayoutHDV({ children }) {
             <Badge count={1}>
               <BellOutlined />
             </Badge>
+          </div>
+          <div className="support">
+            <Link to={`/kenh-hdv/chat/10`}>
+              <Badge dot>
+                <CommentOutlined
+                  style={{
+                    fontSize: 30,
+                  }}
+                />
+              </Badge></Link>
           </div>
         </Header>
         <Layout>

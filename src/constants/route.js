@@ -35,5 +35,6 @@ export const ROUTES = {
   CHITIETORDER: "/kenh-hdv/chi-tiet-don/:id",
   ACTIVETK: "/active-user/:id",
   UPDATEPAY: "/update-pay",
-  EDITPOST: "/edit-post/:id"
+  EDITPOST: "/edit-post/:id",
+  CHATHDV: "/kenh-hdv/chat/:chatId",
 };
