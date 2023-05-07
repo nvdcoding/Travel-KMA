@@ -58,6 +58,7 @@ export default function ChatBody() {
     if (socket) {
       socket.emit("get-users", { chatId });
       socket.emit("get-messages", { chatId });
+      socket.emit("join-room", { chatId });
     }
   }, [socket, chatId]);
 
