@@ -5,6 +5,7 @@ import Layout from "../../../components/layout/layout";
 import { Link, useHistory, useParams } from "react-router-dom";
 import "../../../assets/css/tour-detail.css";
 import OwlCarousel from "react-owl-carousel";
+import ReactMarkdown from "react-markdown";
 import {
   Input,
   InputNumber,
@@ -24,6 +25,11 @@ export default function TourDetail() {
   const [priceNumber, setPriceNumber] = useState(20000);
   const [date, setdate] = useState("");
   const [data, setData] = useState([]);
+  const [tourProvice, setTourProvice] = useState();
+  const formatterPrice = new Intl.NumberFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
   const param = useParams();
   const history = useHistory();
   const onChange = (date, dateString) => {
@@ -32,14 +38,18 @@ export default function TourDetail() {
   };
 
   const onFinish = async (values) => {
-    values.tourId = data.id;
-    values.startDate = date;
-    let respon = await sendPost("/orders", values);
-    if (respon.statusCode == 200) {
-      message.success("gửi yêu cầu thành công");
-      history.push("/chuyen-di");
-    } else {
-      message.error("thất bại");
+    try {
+      values.tourId = data.id;
+      values.startDate = date;
+      let respon = await sendPost("/orders", values);
+      if (respon.statusCode == 200) {
+        message.success("gửi yêu cầu thành công");
+        history.push("/chuyen-di");
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Bạn đang là HDV");
     }
   };
   const handleNumber = (value) => {
@@ -51,8 +61,17 @@ export default function TourDetail() {
     const res = await sendGet(`/tours/${param.id}`);
     if (res.statusCode == 200) {
       setData(res.returnValue);
+      await tourFiltter(res.returnValue?.province.id);
     } else {
       message.error("Lỗi hệ thống");
+    }
+  };
+  const tourFiltter = async (e) => {
+    const result = await sendGet(`/tours?provinceId=${e}`);
+    if (result.statusCode === 200) {
+      setTourProvice(result.returnValue.data);
+    } else {
+      message.error("thất bại");
     }
   };
   useEffect(() => {
@@ -65,27 +84,6 @@ export default function TourDetail() {
       <Layout>
         <div className="tour-detail single-box-content">
           <div className="content">
-            {/* <div className="pathway">
-              <ul>
-                <li>
-                  <a href="/">Trang chủ</a>
-                </li>
-                <li>
-                  <span>
-                    <i className="fa-solid fa-chevron-right"></i>
-                  </span>
-                </li>
-                <li>Du lịch</li>
-                <li>
-                  <span>
-                    <i className="fa-solid fa-chevron-right"></i>
-                  </span>
-                </li>
-                <li>
-                  <strong>Chi tiết</strong>
-                </li>
-              </ul>
-            </div> */}
             <div className="tour-detail__content">
               <div className="single-box-content-inner tour-detail__left">
                 <h1 className="title-tour">{data?.name}</h1>
@@ -146,14 +144,20 @@ export default function TourDetail() {
                     <p style={{ textAlign: "justify" }}>
                       <b>{data?.description} </b>
                     </p>
-                    <p style={{ textAlign: "justify" }}>
+                    <p
+                      style={{
+                        textAlign: "justify",
+                        marginTop: "20px",
+                        marginBottom: "10px",
+                      }}
+                    >
                       <span style={{ color: "#FF0000" }}>
                         <u>
                           <b>ĐIỂM NỔI BẬT NHẤT:</b>
                         </u>
                       </span>
                     </p>
-                    <ul>
+                    <ul style={{ marginBottom: "20px" }}>
                       <li style={{ textAlign: "justify" }}>
                         <span style={{ color: "#008000" }}>
                           {data?.description}
@@ -191,7 +195,7 @@ export default function TourDetail() {
                       </div>
                       <div
                         id="program-tour-0"
-                        className="panel-collapse collapse in"
+                        className="panel-collapse collapse in show"
                         role="tabpanel"
                         aria-labelledby="heading-program-tour-0"
                         style={{ height: "auto" }}
@@ -199,18 +203,31 @@ export default function TourDetail() {
                         <div className="panel-body content-tour-item content-tour-tab-program-tour-0 active">
                           {data?.tourSchedule.map((value, index) => (
                             <>
-                              <h3 style={{ textAlign: "justify" }}>
+                              <h3
+                                className="title"
+                                style={{
+                                  textAlign: "justify",
+                                  fontSize: "18px",
+                                }}
+                              >
                                 <span style={{ color: "#B22222" }}>
                                   <strong> Ngày {index + 1}</strong>
                                 </span>
                               </h3>
 
-                              <p style={{ textAlign: "justify" }}>
-                                {value?.name ? value?.name : "tiêu đề"}
+                              <p
+                                className="title-tour"
+                                style={{ textAlign: "justify" }}
+                              >
+                                {value?.title ? value?.title : ""}
                               </p>
-                              <p style={{ textAlign: "justify" }}>
-                                {value?.content}
-                              </p>
+                              <div className="content-tour">
+                                <p style={{ textAlign: "justify" }}>
+                                  <ReactMarkdown>
+                                    {value?.content}
+                                  </ReactMarkdown>
+                                </p>
+                              </div>
                             </>
                           ))}
                         </div>
@@ -231,7 +248,6 @@ export default function TourDetail() {
                             href="#tour-rule-2"
                             aria-expanded="true"
                             aria-controls="tour-rule-2"
-                            className="collapsed"
                           >
                             Quy định
                             <i className="pull-right fa fa-chevron-down" />
@@ -240,10 +256,9 @@ export default function TourDetail() {
                       </div>
                       <div
                         id="tour-rule-2"
-                        className="panel-collapse collapse"
+                        className="panel-collapse collapse show"
                         role="tabpanel"
                         aria-labelledby="heading-tour-rule-2"
-                        style={{ height: 0 }}
                       >
                         <div className="panel-body content-tour-item content-tour-tab-tour-rule-2 active">
                           <p>
@@ -252,7 +267,9 @@ export default function TourDetail() {
                           <h3 dir="ltr" style={{ textAlign: "center" }}>
                             <span style={{ color: "#B22222" }}>
                               <u>
-                                <div style={{ marginTop: 5 }}><strong>QUY TRÌNH ĐĂNG KÝ TOUR</strong></div>
+                                <div style={{ marginTop: 5 }}>
+                                  <strong>QUY TRÌNH ĐĂNG KÝ TOUR</strong>
+                                </div>
                               </u>
                             </span>
                           </h3>
@@ -519,34 +536,6 @@ export default function TourDetail() {
                     </Form>
                   </div>
                 </div>
-                <div className="box-tour-product-relative  ">
-                  <h4>Các tour khác có thể bạn quan tâm</h4>
-                  <ul>
-                    <li>
-                      <Link to="">
-                        <div className="box-img">
-                          <img alt="" src={halong} />
-                        </div>
-                        <div className="box-content">
-                          <div className="title-h4">
-                            Tour du lịch Mỹ Tho – Cần Thơ 2 ngày 1 đêm giá tốt,
-                            khởi hành từ TPHCM
-                          </div>
-                          <div className="box-price">
-                            Giá: <span>2,190,000 VND</span>
-                          </div>
-                          <div className="box-date-start">
-                            <i
-                              className="fa fa-calendar-alt"
-                              aria-hidden="true"
-                            />{" "}
-                            Khởi hành: KH 30-04, Thứ 2, chủ nhật hàng tuần
-                          </div>
-                        </div>
-                      </Link>
-                    </li>
-                  </ul>
-                </div>
               </div>
               <div className="tour-detail__right">
                 <div className="tour-detail__plan">
@@ -567,10 +556,15 @@ export default function TourDetail() {
                                 <div className="title-price-old">
                                   {/* <del>6,129,000 VND</del> */}
                                 </div>
-                                Giá cơ bản: {data?.basePrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }).replace('₫', '')}{" "}
+                                Giá cơ bản:{" "}
+                                {data?.basePrice
+                                  .toLocaleString("en-US", {
+                                    style: "currency",
+                                    currency: "VND",
+                                  })
+                                  .replace("₫", "")}{" "}
                                 <span>VNĐ/{data?.numOfFreeMember} người</span>
                               </span>
-
                             </td>
                           </tr>
                           {/* <tr>
@@ -626,37 +620,40 @@ export default function TourDetail() {
                 </div>
                 <div className="box-tour-special type-sidebar sidebar-tour-item sidebar-box-item sidebar-box-item-default">
                   <div style={{ marginTop: 20 }} className="box-title">
-                    <h3>Tour Cùng Tỉnh!@</h3>
+                    <h3>Tour Cùng Tỉnh</h3>
                   </div>
                   <ul className="list-item">
-                    <li>
-                      <div className="box-img">
-                        <Link to="">
-                          <img src={haiphong} alt="" />
-                        </Link>
-                      </div>
-                      <div className="box-content">
-                        <div className="box-title">
-                          <Link to="">
-                            Tour du lịch Mỹ Tho – Cần Thơ 2 ngày 1 đêm giá tốt,
-                            khởi hành từ TPHCM
-                          </Link>
-                        </div>
-                        <div className="box-price">
-                          <div className="box-price-old">
-                            <del className="price">2,600,000 VND</del>
-                            <div className="promo">
-                              <span className="arrow-left" />
-                              16 %
+                    {tourProvice?.length >= 0 &&
+                      tourProvice.slice(0, 4)?.map((item, index) => (
+                        <li key={index}>
+                          <div className="box-img">
+                            <Link to={`/tour/${item.id}`}>
+                              <img
+                                src={
+                                  item?.images[0]
+                                    ? item?.images[0].url
+                                    : { hanoi }
+                                }
+                                alt=""
+                              />
+                            </Link>
+                          </div>
+                          <div className="box-content">
+                            <div className="box-title">
+                              <Link to={`/tour/${item.id}`}>{item?.name}</Link>
+                            </div>
+                            <div className="box-price">
+                              <div className="box-price-old"></div>
+                              <div className="price-present">
+                                {formatterPrice.format(item?.basePrice)} VND
+                              </div>
+                            </div>
+                            <div className="box-readmore">
+                              <Link to={`/tour/${item.id}`}>Xem chi tiết</Link>
                             </div>
                           </div>
-                          <div className="price-present">2,190,000 VND</div>
-                        </div>
-                        <div className="box-readmore">
-                          <Link to="">Xem chi tiết</Link>
-                        </div>
-                      </div>
-                    </li>
+                        </li>
+                      ))}
                   </ul>
                 </div>
               </div>

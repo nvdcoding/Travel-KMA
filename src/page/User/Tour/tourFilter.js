@@ -36,7 +36,7 @@ export default function ToursFilter() {
     setShow(false);
   };
   const handleRequest = async (values) => {
-    values.provinceId = parseInt(params.id)
+    values.provinceId = parseInt(params.id);
     let res = await sendPost(`/requests`, values);
     if (res.statusCode === 200) {
       setIsModalOpen(true);
@@ -46,7 +46,7 @@ export default function ToursFilter() {
     }
     setIsModalOpen(true);
   };
-  const onChangeTimeStart = (date, dateString) => { };
+  const onChangeTimeStart = (date, dateString) => {};
   let params = useParams();
   const tourFiltter = async () => {
     const result = await sendGet(`/tours?provinceId=${params.id}`);
@@ -119,10 +119,7 @@ export default function ToursFilter() {
                       >
                         <label htmlFor="place">Địa điểm:</label>
                         <p className="ant-input">{nameProvice}</p>
-                        <Form.Item
-                          name="startDate"
-                          label="Ngày bắt đầu:"
-                        >
+                        <Form.Item name="startDate" label="Ngày bắt đầu:">
                           <DatePicker
                             onChange={onChangeTimeStart}
                             placeholder="Chọn ngày"

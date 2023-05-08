@@ -224,7 +224,7 @@ function Home() {
   };
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
   const getData = async () => {
-    const result = await sendGet("/tour-guide");
+    const result = await sendGet("/tour-guide", { limit: 100 });
     if (result.returnValue.data.length >= 0) {
       setTourGuide(result?.returnValue?.data);
     } else {
@@ -232,7 +232,7 @@ function Home() {
     }
   };
   const listTour = async () => {
-    const res = await sendGet("/tours", {});
+    const res = await sendGet("/tours", { limit: 100 });
     if (res.returnValue.data.length >= 0) {
       setTour(res.returnValue.data);
     } else {

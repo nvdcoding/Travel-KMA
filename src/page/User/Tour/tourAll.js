@@ -96,7 +96,7 @@ export default function ToursAll() {
     },
   ];
   const listTour = async () => {
-    const res = await sendGet("/tours", {});
+    const res = await sendGet("/tours", { limit: 100 });
     if (res.returnValue.data.length >= 0) {
       setData(
         res.returnValue.data.map((e) => {
@@ -108,6 +108,7 @@ export default function ToursAll() {
     }
   };
   const tourFiltter = async (values) => {
+    values.limit = 100;
     const result = await sendGet("/tours", values);
     if (result.returnValue.data.length >= 0) {
       setData(
@@ -120,7 +121,7 @@ export default function ToursAll() {
     }
   };
   const getHDV = async () => {
-    const result = await sendGet("/tour-guide");
+    const result = await sendGet("/tour-guide", { limit: 100 });
     if (result.returnValue.data.length >= 0) {
       setHdv(result.returnValue.data);
     } else {

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/news.css";
 import { sendGet } from "../../../utils/api";
@@ -20,7 +20,7 @@ export default function News() {
     }
   };
   const listNews = async () => {
-    const res = await sendGet("/posts/user-tourguide");
+    const res = await sendGet("/posts/user-tourguide", { limit: 100 });
     if (res.statusCode == 200) {
       setData(res.returnValue.data);
     } else {
@@ -77,11 +77,14 @@ export default function News() {
                     </div>
                     <div className="news-main">
                       <h2 className="news-title">
-                        <Link to={`/tin-tuc/${item?.id}`}>
-                          {item?.title}
-                        </Link>
+                        <Link to={`/tin-tuc/${item?.id}`}>{item?.title}</Link>
                       </h2>
-                      <p className="news-des" dangerouslySetInnerHTML={{ __html: item?.currentContent }} />
+                      <p
+                        className="news-des"
+                        dangerouslySetInnerHTML={{
+                          __html: item?.currentContent,
+                        }}
+                      />
                       <div className="news-post-share-box">
                         <div className="news-post-share-item">
                           <a href="#" className="news-post-like" title="Like">

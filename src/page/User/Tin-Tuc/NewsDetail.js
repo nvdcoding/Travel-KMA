@@ -6,10 +6,10 @@ import { Link, useParams } from "react-router-dom";
 import { sendGet } from "../../../utils/api";
 import { avt, logo } from "../../../constants/images";
 export default function NewsDetail() {
-  const params = useParams()
+  const params = useParams();
   const [show, setShow] = useState(false);
   const [data, setData] = useState();
-  const [dataHot, setDataHot] = useState()
+  const [dataHot, setDataHot] = useState();
 
   const getData = async () => {
     const res = await sendGet(`/posts/user-tourguide/${params.id}`);
@@ -20,7 +20,7 @@ export default function NewsDetail() {
     }
   };
   const listNews = async () => {
-    const res = await sendGet("/posts/user-tourguide");
+    const res = await sendGet("/posts/user-tourguide", { limit: 100 });
     if (res.statusCode == 200) {
       setDataHot(res.returnValue.data);
     } else {
@@ -64,9 +64,7 @@ export default function NewsDetail() {
             </div>
             <div className="news-content-details">
               <div className="news-content-left">
-                <h3 className="news-detail-title">
-                  {data?.title}
-                </h3>
+                <h3 className="news-detail-title">{data?.title}</h3>
                 <div className="news-detail__header">
                   <div className="news-detail-author">
                     <img
@@ -75,8 +73,16 @@ export default function NewsDetail() {
                       src={data?.author?.avt ? data?.author?.avt : logo}
                     />
                     <div className="news-detail-info">
-                      <span className="news-detail-name">{data?.tourGuide?.username != null ? data?.tourGuide?.username : data?.user?.username}</span>
-                      <span className="news-detail-time"> {data?.createdAt && formatterDate.format(Date.parse(data?.createdAt))}</span>
+                      <span className="news-detail-name">
+                        {data?.tourGuide?.username != null
+                          ? data?.tourGuide?.username
+                          : data?.user?.username}
+                      </span>
+                      <span className="news-detail-time">
+                        {" "}
+                        {data?.createdAt &&
+                          formatterDate.format(Date.parse(data?.createdAt))}
+                      </span>
                     </div>
                   </div>
                   <div className="Blog-action">
@@ -117,14 +123,13 @@ export default function NewsDetail() {
                   </div>
                 </div>
                 <div className="news-detail__main">
-                  <p dangerouslySetInnerHTML={{ __html: data?.currentContent }} />
+                  <p
+                    dangerouslySetInnerHTML={{ __html: data?.currentContent }}
+                  />
                 </div>
                 <div className="news-detail__comment">
                   <div className="news-detail__create-comment">
-                    <img
-                      alt=""
-                      src={logo}
-                    />
+                    <img alt="" src={logo} />
                     <input
                       className="comment--text"
                       placeholder="Viết bình luận... "
@@ -135,10 +140,7 @@ export default function NewsDetail() {
                   </div>
                   <div className="news-detail__list-cmt">
                     <div className="news-detail__item-cmt">
-                      <img
-                        alt=""
-                        src={avt}
-                      />
+                      <img alt="" src={avt} />
                       <div className="news-detail__item-main">
                         <p className="news-detail__name">Nguyễn A</p>
                         <p className="news-detail__des ">
@@ -156,20 +158,19 @@ export default function NewsDetail() {
                 <div class="news-content__hot-main">
                   {dataHot?.slice(0, 3)?.map((item, index) => (
                     <div class="news-content__hot-item" key={index}>
-                      <Link to={`/tin-tuc/${item?.id}`} class="news-content__hot-link">
+                      <Link
+                        to={`/tin-tuc/${item?.id}`}
+                        class="news-content__hot-link"
+                      >
                         <div className="news-content__hot-img">
-                          <img
-                            src={item?.image}
-                            alt=""
-                          />
+                          <img src={item?.image} alt="" />
                         </div>
                         <div class="news-content__hot-intro">
                           <span class="news-content__hot-time">
-                            {item?.createdAt && formatterDate.format(Date.parse(item?.createdAt))}
+                            {item?.createdAt &&
+                              formatterDate.format(Date.parse(item?.createdAt))}
                           </span>
-                          <p class="news-content__hot-name">
-                            {item?.title}
-                          </p>
+                          <p class="news-content__hot-name">{item?.title}</p>
                         </div>
                       </Link>
                     </div>

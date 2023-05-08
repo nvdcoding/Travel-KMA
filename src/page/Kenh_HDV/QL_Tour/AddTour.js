@@ -281,16 +281,11 @@ export default function AddTour() {
   );
 }
 function StepItem({ field, index }) {
-  const { TextArea } = Input;
   const [active, setActive] = useState(true);
-  const [content, setContent] = useState("true");
   const mdParser = new MarkdownIt();
   const openServices = () => {
     setActive(!active);
   };
-  function handleEditorChange({ html }) {
-    setContent(html);
-  }
   return (
     <>
       <div className="main-form-step3">
@@ -315,14 +310,11 @@ function StepItem({ field, index }) {
               </Form.Item>
               <Form.Item name={[index, "content"]} label="Mô tả">
                 <div className="service-group">
-                  {/* <TextArea rows={4} placeholder="Mô tả ngắn" /> */}
                   <MdEditor
                     placeholder="Mô tả"
                     style={{ height: "200px" }}
                     renderHTML={(text) => mdParser.render(text)}
-                    onChange={handleEditorChange}
                   />
-                  {/* <TextArea rows={4} placeholder="Mô tả dài" /> */}
                 </div>
               </Form.Item>
             </Input.Group>

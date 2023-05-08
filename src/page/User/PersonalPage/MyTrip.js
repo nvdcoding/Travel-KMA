@@ -37,6 +37,7 @@ export default function MyTrip() {
   const tourWaitting = async () => {
     const result = await sendGet(`/orders/user`, {
       type: "waiting",
+      limit: 100,
     });
     if (result.statusCode == 200) {
       setDataWaiting(result.returnValue);
@@ -47,6 +48,7 @@ export default function MyTrip() {
   const tourProcessing = async () => {
     const result = await sendGet(`/orders/user`, {
       type: "processing",
+      limit: 100,
     });
     if (result.statusCode == 200) {
       setDataProcessing(result.returnValue);
@@ -57,6 +59,7 @@ export default function MyTrip() {
   const tourEnd = async () => {
     const result = await sendGet(`/orders/user`, {
       type: "end",
+      limit: 100,
     });
     if (result.statusCode == 200) {
       setDataEnd(result.returnValue);
@@ -177,16 +180,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -314,16 +317,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -406,16 +409,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -516,7 +519,7 @@ const Voucher = () => {
   const [dataVoucherAvailable, setdataVoucherAvailable] = useState([]);
 
   const listVoucher = async () => {
-    let res = await sendGet(`/vourchers`);
+    let res = await sendGet(`/vourchers`, { limit: 100 });
     if (res.statusCode == 200) {
       setDataVoucher(res.returnValue.data);
     } else {
@@ -524,7 +527,7 @@ const Voucher = () => {
     }
   };
   const listVoucherAvailable = async () => {
-    let res1 = await sendGet(`/vourchers/available`);
+    let res1 = await sendGet(`/vourchers/available`, { limit: 100 });
     if (res1.statusCode == 200) {
       setdataVoucherAvailable(res1.returnValue);
     } else {

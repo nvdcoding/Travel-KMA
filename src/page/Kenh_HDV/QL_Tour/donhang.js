@@ -116,7 +116,7 @@ export default function MyPage() {
   ];
 
   const listOrder = async (index, value) => {
-    const res = await sendGet("/orders/tourguide", { type: value });
+    const res = await sendGet("/orders/tourguide", { type: value, limit: 100 });
     if (res.statusCode === 200) {
       setActive(index);
       setData(

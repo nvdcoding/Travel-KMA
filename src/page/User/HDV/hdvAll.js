@@ -24,6 +24,17 @@ export default function HdvAll() {
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(numberPage);
   const getData = async (values) => {
+    const result = await sendGet("/tour-guide", {
+      limit: 100,
+    });
+    if (result.returnValue.data.length >= 0) {
+      setData(result.returnValue.data);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const getDataSearch = async (values) => {
+    values.limit = 100;
     const result = await sendGet("/tour-guide", values);
     if (result.returnValue.data.length >= 0) {
       setData(result.returnValue.data);
@@ -43,6 +54,7 @@ export default function HdvAll() {
   const getDataFilterTourDirection = async (e) => {
     const result = await sendGet("/tour-guide", {
       totalTourDirection: e,
+      limit: 100,
     });
     if (result.returnValue.data.length >= 0) {
       setData(result.returnValue.data);
@@ -53,6 +65,7 @@ export default function HdvAll() {
   const getDataFilterFavorite = async (e) => {
     const result = await sendGet("/tour-guide", {
       totalFavorite: e,
+      limit: 100,
     });
     if (result.returnValue.data.length >= 0) {
       setData(result.returnValue.data);
@@ -80,7 +93,7 @@ export default function HdvAll() {
                     initialValues={{
                       remember: true,
                     }}
-                    onFinish={getData}
+                    onFinish={getDataSearch}
                   >
                     <Form.Item name="provinceId" label="Tỉnh thành">
                       <Select placeholder="Tỉnh thành">

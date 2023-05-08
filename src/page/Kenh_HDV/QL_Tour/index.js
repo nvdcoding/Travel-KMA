@@ -78,7 +78,7 @@ export default function MyPage() {
     }
   };
   const listTour = async () => {
-    const res = await sendGet("/tours", {});
+    const res = await sendGet("/tours", { limit: 100 });
     if (res.returnValue.data.length >= 0) {
       setData(
         res.returnValue.data.map((e) => {
@@ -91,6 +91,7 @@ export default function MyPage() {
   };
 
   const tourFiltter = async (values) => {
+    values.limit = 100;
     const result = await sendGet("/tours", values);
     if (result.returnValue.data.length >= 0) {
       setData(
