@@ -52,7 +52,7 @@ export default function ChatBody() {
         socket.off("receive-messages");
       }
     };
-  }, [socket, messages, users]);
+  }, [socket, messages, users, chatId]);
 
   useEffect(() => {
     if (socket) {
