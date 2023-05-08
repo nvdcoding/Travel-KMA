@@ -1,15 +1,17 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PayHistory from "./history-pay";
 import { Form, Input, Button, Radio, Tabs } from "antd";
-import { sendPost } from "../../../utils/api";
+import { sendGet, sendPost } from "../../../utils/api";
 import { vnpay } from "../../../constants/images";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 
 export default function Pay() {
+  const [coin, setCoin] = useState();
+
   const PayOnline = async (value) => {
     value.amount = parseInt(value.amount);
-    const res = await sendPost("/users/deposit", value);
+    const res = await sendPost("/tour-guide/deposit", value);
     if (res.statusCode == 200) {
       window.location.href = res.returnValue;
     } else {
@@ -45,7 +47,19 @@ export default function Pay() {
       value: "5000000",
     },
   ];
-  useEffect(() => { }, []);
+  const HdvTransactions = async () => {
+    const res = await sendGet("/auth/me");
+    if (res.statusCode == 200) {
+      setCoin(res?.returnValue?.availableBalance);
+    }
+  };
+  const formatterPrice = new Intl.NumberFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
+  useEffect(() => {
+    HdvTransactions();
+  }, []);
   return (
     <>
       <LayoutHDV>
@@ -54,7 +68,9 @@ export default function Pay() {
             <div className="payment-online">
               <div className="content">
                 <h3 className="payment-online__title">Nạp tiền</h3>
-
+                <h4 className="payment-online__sub-title">
+                  Tổng số tiền bạn đang có: {formatterPrice.format(coin)} VND
+                </h4>
                 <Tabs defaultActiveKey="1">
                   <Tabs.TabPane tab="Nạp tiền " key="1">
                     <div className="payment-online__inner">
@@ -63,6 +79,7 @@ export default function Pay() {
                           <h4 className="order-payment__title">
                             Thông tin chi tiết
                           </h4>
+
                           <Form
                             name="basic"
                             initialValues={{

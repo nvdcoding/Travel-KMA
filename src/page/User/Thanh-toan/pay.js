@@ -6,10 +6,11 @@ import Condition from "../../../components/condition";
 import PayHistory from "./history-pay";
 import "../../../assets/css/pay.css";
 import { Form, Input, Modal, Button, Radio, Tabs } from "antd";
-import { sendPost } from "../../../utils/api";
+import { sendGet, sendPost } from "../../../utils/api";
 import { vnpay } from "../../../constants/images";
 
 export default function Pay() {
+  const [coin, setCoin] = useState();
   const PayOnline = async (value) => {
     value.amount = parseInt(value.amount);
     const res = await sendPost("/users/deposit", value);
@@ -19,6 +20,16 @@ export default function Pay() {
       //đơn hàng thất bại
     }
   };
+  const UserTransactions = async () => {
+    const res = await sendGet("/auth/me");
+    if (res.statusCode == 200) {
+      setCoin(res?.returnValue?.availableBalance);
+    }
+  };
+  const formatterPrice = new Intl.NumberFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -48,7 +59,9 @@ export default function Pay() {
       value: "5000000",
     },
   ];
-  useEffect(() => {}, []);
+  useEffect(() => {
+    UserTransactions();
+  }, []);
   return (
     <>
       <Layout>
@@ -74,6 +87,9 @@ export default function Pay() {
             <div className="payment-online">
               <div className="content">
                 <h3 className="payment-online__title">Thông tin chi tiết</h3>
+                <h3 className="payment-online__sub-title">
+                  Bạn đang có {formatterPrice.format(coin)} VND
+                </h3>
 
                 <Tabs defaultActiveKey="1">
                   <Tabs.TabPane tab="Nạp tiền " key="1">

@@ -186,3 +186,6 @@
 .rc-md-editor {
   width: 100%;
 }
+.add-tour .ant-input-number {
+  width: 80%;
+}

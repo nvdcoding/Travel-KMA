@@ -9,9 +9,9 @@ import { Skeleton } from "antd";
 export default function PayHistory() {
   const [history, seyHistory] = useState([]);
   const historyPay = async () => {
-    const res = await sendGet("/auth/me");
+    const res = await sendGet("/users/transaction");
     if (res.statusCode == 200) {
-      seyHistory(res?.returnValue?.transactions);
+      seyHistory(res?.returnValue?.data);
     } else {
       //đơn hàng thất bại
     }
@@ -50,8 +50,8 @@ export default function PayHistory() {
                       {item?.status == 1
                         ? "Nạp tiền thành công"
                         : item?.status == 2
-                          ? "Đang xử lý"
-                          : "Thanh toán thất bại"}
+                        ? "Đang xử lý"
+                        : "Thanh toán thất bại"}
                     </h4>
                     <div class="History-des__sub-price">
                       <p>{formatterPrice.format(item?.amount)}đ</p>

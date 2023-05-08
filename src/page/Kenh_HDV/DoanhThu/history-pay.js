@@ -9,9 +9,9 @@ import { Skeleton } from "antd";
 export default function PayHistory() {
   const [history, seyHistory] = useState([]);
   const historyPay = async () => {
-    const res = await sendGet("/auth/me");
+    const res = await sendGet("/tour-guide/transaction");
     if (res.statusCode == 200) {
-      seyHistory(res?.returnValue?.transactions);
+      seyHistory(res?.returnValue?.data);
     } else {
       //đơn hàng thất bại
     }

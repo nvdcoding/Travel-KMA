@@ -4,7 +4,7 @@ import React from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { avt, logo } from "../../constants/images";
 import "../../assets/css/layoutHDV.css";
-import { CommentOutlined } from '@ant-design/icons';
+import { CommentOutlined } from "@ant-design/icons";
 import { setRefreshToken, setToken } from "../../utils/storage";
 
 function LayoutHDV({ children }) {
@@ -42,7 +42,8 @@ function LayoutHDV({ children }) {
                     fontSize: 30,
                   }}
                 />
-              </Badge></Link>
+              </Badge>
+            </Link>
           </div>
         </Header>
         <Layout>
@@ -98,7 +99,7 @@ function LayoutHDV({ children }) {
                   </Menu.Item>
                 )}
               </Menu.SubMenu>
-              <Menu.SubMenu
+              {/* <Menu.SubMenu
                 title="Kênh Marketing"
                 icon={<SettingOutlined />}
                 key="3"
@@ -112,7 +113,7 @@ function LayoutHDV({ children }) {
                     <NavLink to="/kenh-hdv/voucher">Voucher</NavLink>
                   </Menu.Item>
                 )}
-                {/* {window.location.pathname === "/kenh-hdv/create-voucher" ? (
+                {window.location.pathname === "/kenh-hdv/create-voucher" ? (
               <Menu.Item className="ant-menu-item-selected ">
                 <NavLink to="/kenh-hdv/create-voucher"> Thêm Voucher</NavLink>
               </Menu.Item>
@@ -120,8 +121,8 @@ function LayoutHDV({ children }) {
               <Menu.Item>
                 <NavLink to="/kenh-hdv/create-voucher"> ThêmVoucher</NavLink>
               </Menu.Item>
-            )} */}
-              </Menu.SubMenu>
+            )}
+              </Menu.SubMenu> */}
               <Menu.SubMenu
                 title="Tài chính"
                 icon={<SettingOutlined />}

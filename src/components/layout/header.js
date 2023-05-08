@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useHistory } from "react-router-dom";
 import { Badge, Drawer } from "antd";
 import { logo } from "../../constants/images";
-import { CommentOutlined } from '@ant-design/icons';
+import { CommentOutlined } from "@ant-design/icons";
 import { getItem, setRefreshToken, setToken } from "../../utils/storage";
 function HeaderLayout() {
   const history = useHistory();
@@ -22,7 +22,7 @@ function HeaderLayout() {
     setRefreshToken("");
     history.push("/dang-nhap");
   };
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <header id="header" className="header header-sticky">
@@ -79,7 +79,8 @@ function HeaderLayout() {
                             fontSize: 30,
                           }}
                         />
-                      </Badge></Link>
+                      </Badge>
+                    </Link>
                   </div>
 
                   {Token ? (
@@ -103,12 +104,15 @@ function HeaderLayout() {
                             </div>
                           ) : null}
                         </li>
-                        <li>
-                          <div class="box-list-info">
-                            <i class="fas fa-user"></i>
-                            <Link to="/pay">Nạp tiền</Link>
-                          </div>
-                        </li>
+                        {user.role == "USER" && (
+                          <li>
+                            <div class="box-list-info">
+                              <i class="fas fa-user"></i>
+                              <Link to="/pay">Nạp tiền</Link>
+                            </div>
+                          </li>
+                        )}
+
                         <li>
                           <div class="box-list-info">
                             <i class="fas fa-newspaper"></i>
@@ -183,11 +187,14 @@ function HeaderLayout() {
                           <i class="fa-solid fa-newspaper"></i>Tin tức
                         </NavLink>
                       </li>
-                      <li className="menu-item-mb">
-                        <NavLink to="/pay">
-                          <i class="fa-solid fa-newspaper"></i>Nạp tiền
-                        </NavLink>
-                      </li>
+                      {user.role == "USER" && (
+                        <li className="menu-item-mb">
+                          <NavLink to="/pay">
+                            <i class="fa-solid fa-newspaper"></i>Nạp tiền
+                          </NavLink>
+                        </li>
+                      )}
+
                       <li className="menu-item-mb">
                         <NavLink to="/me/posts">
                           <i class="fa-solid fa-newspaper"></i>Bài viết của tôi
