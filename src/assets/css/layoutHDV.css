@@ -112,12 +112,19 @@ th {
 }
 
 .landing-page-title {
-  font-size: 20px;
+  font-size: 33px;
+  color: rgb(61, 61, 61);
+  line-height: 24px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+.landing-page-sub-title {
+  font-size: 18px;
   color: rgb(61, 61, 61);
   line-height: 24px;
   font-weight: 600;
+  margin: 10px 0;
 }
-
 .desc-content {
   display: flex;
   font-size: 16px;
@@ -291,6 +298,6 @@ th {
   font-size: 16px !important;
 }
 
-.ant-message .ant-message-notice .ant-message-custom-content>.anticon {
+.ant-message .ant-message-notice .ant-message-custom-content > .anticon {
   font-size: 24px !important;
 }

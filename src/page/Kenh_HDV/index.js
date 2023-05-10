@@ -1,16 +1,45 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../assets/css/homehdv.css";
 import { Tabs } from "antd";
 
 import LayoutHDV from "../../components/layout/layoutHDV";
+import { sendGet } from "../../utils/api";
 export default function MyPage() {
-  useEffect(() => {}, []);
+  const [request, setRequest] = useState();
+  const [deposit, setDeposit] = useState();
+  const [waitPay, setWaitPay] = useState();
+  const [unfulfilled, setUnfulfilled] = useState();
+  const [progress, setProgress] = useState();
+  const [made, setMade] = useState();
+  const [cancel, setCancel] = useState();
+
+  const listOrder = async () => {
+    const res = await sendGet("/orders/tourguide", {
+      type: "all",
+      limit: 100,
+    });
+    if (res.statusCode === 200) {
+      setRequest(res.returnValue?.filter((item) => item.status == 0));
+      setDeposit(res.returnValue?.filter((item) => item.status == 1));
+      setWaitPay(res.returnValue?.filter((item) => item.status == 2));
+      setUnfulfilled(res.returnValue?.filter((item) => item.status == 3));
+      setProgress(res.returnValue?.filter((item) => item.status == 4));
+      setMade(res.returnValue?.filter((item) => item.status == 5));
+      setCancel(res.returnValue?.filter((item) => item.status == 6));
+    } else {
+      message.error("Thất bại");
+    }
+  };
+
+  useEffect(() => {
+    listOrder();
+  }, []);
   return (
     <>
       <LayoutHDV>
         <div class="card card-offset">
-          <div class="title">
+          <div class="landing-page-title">
             Danh sách cần làm
             <p class="card-tips">Những việc bạn sẽ phải làm</p>
           </div>
@@ -21,179 +50,55 @@ export default function MyPage() {
                 style={{ minHeight: "154px", overflow: "hidden" }}
               >
                 <a href="/portal/sale/" class="to-do-box-aitem">
-                  <p class="item-title">0</p>
+                  <p class="item-title">
+                    {request?.length >= 0 ? request?.length : "0"}
+                  </p>
                   <p class="item-desc">Chờ Xác Nhận</p>
                 </a>
 
                 <a href="/portal/shipment" class="to-do-box-aitem">
-                  <p class="item-title">0</p>
-                  <p class="item-desc">Đã Xử Lý</p>
-                </a>
-                <a href="/portal/sale" class="to-do-box-aitem">
-                  <p class="item-title">0</p>
-                  <p class="item-desc">chuyến đi Hủy</p>
-                </a>
-                <a href="/portal/sale" class="to-do-box-aitem">
-                  <p class="item-title">0</p>
-                  <p class="item-desc">Hoàn thành</p>
-                </a>
-                <a
-                  href="/portal/product/list/banned/action"
-                  class="to-do-box-aitem"
-                >
-                  <p class="item-title">0</p>
-                  <p class="item-desc">Tour ẩn</p>
-                </a>
-
-                {/* <a href="#" class="to-do-box-aitem">
-                  <p class="item-title">0</p>
-                  <p class="item-desc">
-                    <span>Chương Trình Khuyến Mãi Chờ Xử Lý</span>
-                    <span class="todo-new-icon">
-                      <span class="text">New</span>
-                    </span>
+                  <p class="item-title">
+                    {deposit?.length >= 0 ? deposit?.length : "0"}
                   </p>
-                </a> */}
+                  <p class="item-desc">Chờ đặt cọc</p>
+                </a>
+                <a href="/portal/sale" class="to-do-box-aitem">
+                  <p class="item-title">
+                    {waitPay?.length >= 0 ? waitPay?.length : "0"}
+                  </p>
+                  <p class="item-desc">Chờ thanh toán</p>
+                </a>
+                <a href="/portal/sale" class="to-do-box-aitem">
+                  <p class="item-title">
+                    {unfulfilled?.length >= 0 ? unfulfilled?.length : "0"}
+                  </p>
+                  <p class="item-desc">Chưa thực hiện</p>
+                </a>
+                <a href="/portal/shipment" class="to-do-box-aitem">
+                  <p class="item-title">
+                    {progress?.length >= 0 ? progress?.length : "0"}
+                  </p>
+                  <p class="item-desc">Đang thực hiện</p>
+                </a>
+                <a href="/portal/sale" class="to-do-box-aitem">
+                  <p class="item-title">
+                    {made?.length >= 0 ? made?.length : "0"}
+                  </p>
+                  <p class="item-desc">Đã hoàn thành</p>
+                </a>
+                <a href="/portal/sale" class="to-do-box-aitem">
+                  <p class="item-title">
+                    {cancel?.length >= 0 ? cancel?.length : "0"}
+                  </p>
+                  <p class="item-desc">Đã hủy</p>
+                </a>
               </div>
             </div>
           </div>
         </div>
-        {/* <div class="card">
-          <div class="title-box">
-            <div class="title">
-              Hiệu Quả Hoạt Động
-              <p class="card-tips">
-                Bảng Hiệu Quả Hoạt Động giúp HDV hiểu rõ hơn về hoạt động của
-                mình dựa trên những chỉ tiêu sau:
-              </p>
-            </div>
-            <button
-              type="button"
-              class="shopee-button shopee-button--link shopee-button--normal"
-            >
-              <span> Xem thêm </span>
-              <i class="shopee-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
-                  <path d="m9.19 8-3.97 3.97a.75.75 0 0 0 1.06 1.06l4.5-4.5a.75.75 0 0 0 0-1.06l-4.5-4.5a.75.75 0 0 0-1.06 1.06L9.19 8Z"></path>
-                </svg>
-              </i>
-            </button>
-          </div>
-          <div class="async-data-wrapper">
-            <Tabs defaultActiveKey="1">
-              <Tabs.TabPane tab="Quản Lý Đơn Hàng" key="1">
-                <div class="shopee-tabs-tabpane">
-                  <div class="performance-content">
-                    <table class="performance-table">
-                      <tr class="border_tr">
-                        <th width="40%"> Tiêu Chí </th>
-                        <th width="25%"> Shop của tôi </th>
-                        <th width="35%"> Chỉ tiêu </th>
-                      </tr>
-                      <tr class="">
-                        <td>
-                          <span>Tỉ lệ đơn không thành công</span>
-                        </td>
-                        <td>
-                          <span>-</span>
-                        </td>
-                        <td>
-                          <span>&lt;10.00%</span>
-                        </td>
-                      </tr>
-                      <tr class="">
-                        <td>
-                          <span>Tỷ lệ giao hàng trễ</span>
-                        </td>
-                        <td>
-                          <span>-</span>
-                        </td>
-                        <td>
-                          <span>10.00%</span>
-                        </td>
-                      </tr>
-                      <tr class="">
-                        <td>
-                          <span>Thời gian chuẩn bị hàng</span>
-                        </td>
-                        <td>
-                          <span>-</span>
-                        </td>
-                        <td>
-                          <span>&lt;1.50 days</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="Chăm sóc khách hàng" key="2">
-                <div class="shopee-tabs-tabpane">
-                  <div class="performance-content">
-                    <table class="performance-table">
-                      <tr class="border_tr">
-                        <th width="40%"> Tiêu Chí </th>
-                        <th width="25%"> Shop của tôi </th>
-                        <th width="35%"> Chỉ tiêu </th>
-                      </tr>
-                      <tr class="hover">
-                        <td>
-                          <span>Tỉ lệ phản hồi</span>
-                        </td>
-                        <td>
-                          <span style={{ color: "rgb(255, 71, 66)" }}>
-                            57.00%
-                          </span>
-                        </td>
-                        <td>
-                          <span>≥80.00%</span>
-                        </td>
-                      </tr>
-                      <tr class="">
-                        <td>
-                          <span>Thời gian phản hồi</span>
-                        </td>
-                        <td>
-                          <span>-</span>
-                        </td>
-                        <td>
-                          <span>&lt;0.50 days</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </Tabs.TabPane>
-              <Tabs.TabPane tab="Mức độ hài lòng của du khách" key="3">
-                <div class="shopee-tabs-tabpane">
-                  <div class="performance-content">
-                    <table class="performance-table">
-                      <tr class="border_tr">
-                        <th width="40%"> Tiêu Chí </th>
-                        <th width="25%"> Shop của tôi </th>
-                        <th width="35%"> Chỉ tiêu </th>
-                      </tr>
-                      <tr class="">
-                        <td>
-                          <span>Đánh giá Shop</span>
-                        </td>
-                        <td>
-                          <span>-</span>
-                        </td>
-                        <td>
-                          <span>≥4.00/5</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-              </Tabs.TabPane>
-            </Tabs>
-          </div>
-        </div> */}
         <div class="card">
           <div class="title-box">
-            <div class="title">
+            <div class="landing-page-sub-title">
               Điểm Sao Quả Tạ
               <span class="title-tip">
                 (Từ 2 Tháng 1 2023 đến 2 Tháng 4 2023)

@@ -1654,10 +1654,13 @@ background-color: #ccc; */
 
 .History-list__info {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 20px 30px;
 }
-
+.History-list__info-year {
+  width: 80%;
+  margin: auto;
+}
 .History-item__info {
   background-color: #ffffff;
   display: flex;

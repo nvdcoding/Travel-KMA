@@ -8,6 +8,8 @@
   font-size: 18px;
   font-weight: 500;
   font-weight: var(--font-weight);
+  white-space: nowrap;
+  margin-right: 25px;
 }
 .seller-meta {
   margin-bottom: 16px;
@@ -19,7 +21,11 @@
   width: 100%;
   color: #333;
 }
-
+.section-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .seller-meta .meta-overview {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -931,7 +937,7 @@
 
 .History-list__info {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: 20px 30px;
 }
 
@@ -943,7 +949,10 @@
   border-radius: 8px 8px 8px 0;
   border: 1px solid #ee003400;
 }
-
+.History-list__info-year {
+  width: 80%;
+  margin: auto;
+}
 .History-item__info:hover {
   border: 1px solid var(--color-primary-hover);
 }

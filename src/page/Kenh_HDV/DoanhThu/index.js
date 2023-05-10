@@ -3,9 +3,22 @@ import React, { useEffect, useState } from "react";
 import "../../../assets/css/homehdv.css";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
-import { Form, Input, Modal, Radio, Tabs, Table, Button, message } from "antd";
+import {
+  Form,
+  Input,
+  Modal,
+  Radio,
+  Tabs,
+  Table,
+  Button,
+  message,
+  DatePicker,
+} from "antd";
+import moment from "moment";
 
 export default function AddTour() {
+  const dateFormat = "DD/MM/YYYY";
+
   const columns = [
     {
       title: "Tour",
@@ -92,6 +105,7 @@ export default function AddTour() {
     },
   ];
   const onSearch = (value) => console.log(value);
+  const { RangePicker } = DatePicker;
 
   return (
     <>
@@ -99,7 +113,13 @@ export default function AddTour() {
         <div class="container">
           <div class="left">
             <div class="seller-meta">
-              <div class="section-title">Tổng Quan</div>
+              <div className="section-group-header">
+                <div class="section-title">Tổng Quan</div>
+                <RangePicker
+                  defaultValue={[moment(), moment()]}
+                  format={dateFormat}
+                />
+              </div>
               <div class="meta-section">
                 <div class="meta-overview">
                   <div class="meta-to-release">

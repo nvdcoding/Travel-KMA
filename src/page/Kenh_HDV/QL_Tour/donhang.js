@@ -16,6 +16,7 @@ import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
 import { useState } from "react";
 import { sendDelete, sendGet, sendPut } from "../../../utils/api";
+import moment from "moment";
 
 export default function MyPage() {
   const { RangePicker } = DatePicker;
@@ -180,6 +181,7 @@ export default function MyPage() {
   const onFinish = (values) => {
     console.log("Success:", values);
   };
+  const dateFormat = "DD/MM/YYYY";
   return (
     <>
       <LayoutHDV>
@@ -196,7 +198,10 @@ export default function MyPage() {
                 onFinish={onFinish}
               >
                 <Form.Item name="name" label="Khoảng thời gian">
-                  <RangePicker />
+                  <RangePicker
+                    defaultValue={[moment(), moment()]}
+                    format={dateFormat}
+                  />
                 </Form.Item>
                 <Form.Item name="code">
                   <Search
