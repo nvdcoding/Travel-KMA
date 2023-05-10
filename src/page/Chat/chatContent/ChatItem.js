@@ -16,13 +16,20 @@ export default function ChatItem(props) {
             : "chat__item__content_participant"
         }`}
       >
-        <div className={`chat__msg`}>{props.message}</div>
+        <div className={`chat__msg`}>{props.message.message}</div>
         <div className="chat__meta">
           {/* <span>16 mins ago</span>
           <span>Seen 1.03PM</span> */}
         </div>
       </div>
-      <Avatar isOnline="active" image={props.image} />
+      <Avatar
+        isOnline="active"
+        image={
+          props.sender === "USER"
+            ? props.profile?.user?.avatar
+            : props.profile?.tourGuide?.avatar
+        }
+      />
     </div>
   );
 }
