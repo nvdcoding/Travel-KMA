@@ -37,6 +37,28 @@
   margin: auto;
 }
 
+.stardust1 {
+  font-size: 16px;
+  margin: 5px 0
+}
+
+.stardust1 span {
+  color: #1d951b;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.stardust-popover__target span {
+  color: #2f80ed;
+  font-weight: 600;
+  font-size: 17px;
+  margin-left: 5px;
+}
+
+.mytrip-order__main a {
+  width: 90%;
+}
+
 .mytrip-order__header {
   display: flex;
   align-items: center;
@@ -1075,8 +1097,14 @@
   text-align: left;
   word-wrap: break-word;
   color: rgba(0, 0, 0, 0.54);
-  font-size: 12px;
+  font-size: 15px;
   line-height: 16px;
+}
+
+.-evyOM .price {
+  color: #ee4d2d;
+  margin-left: 5px;
+  font-weight: 500;
 }
 
 ._5roFKV {
@@ -1590,4 +1618,32 @@
   font-weight: 600;
   color: #333333;
   font-size: 23px;
+}
+
+.process-note {
+  line-height: 27px;
+  font-weight: 600;
+  color: #4d4d4d;
+  font-size: 23px;
+  margin: 10px 0;
+}
+
+.process-note span {
+  color: #c03939;
+  margin-left: 4px;
+}
+
+.modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.modal-btn .button {
+  width: 48%;
+}
+
+.tour-request-group .ant-input {
+  line-height: 17px;
 }

@@ -54,46 +54,46 @@ export default function Request() {
         <div className="tour-request-group">
           <h3>Các chuyến đi bạn yêu cầu</h3>
           <Search
-            placeholder="input search text"
+            placeholder="Tìm kiếm..."
             onSearch={onSearch}
-            style={{ width: 200 }}
+            style={{ width: 300 }}
           />
         </div>
         <div className="vertical">
           {tourRequest
             ? tourRequest.map((item, index) => (
-                <Card
-                  title={item.province?.name}
-                  key={index}
-                  extra={
-                    <Popconfirm
-                      title="Xác nhận hủy yêu cầu?"
-                      onConfirm={() => confirm(item.id)}
-                      okText="Đồng ý"
-                      cancelText="Không"
-                    >
-                      <p className="btn-cancel">Hủy</p>
-                    </Popconfirm>
-                  }
-                >
-                  <p>
-                    <strong>Mã yêu cầu: </strong>
-                    {item?.id}
-                  </p>
-                  <p>
-                    <strong>Nội dung: </strong>
-                    {item?.content}
-                  </p>
-                  <p>
-                    <strong>Loại hình: </strong>
-                    {item?.type}
-                  </p>
-                  <p>
-                    <strong>Thời gian mong muốn: </strong>
-                    {item?.startDate}
-                  </p>
-                </Card>
-              ))
+              <Card
+                title={item.province?.name}
+                key={index}
+                extra={
+                  <Popconfirm
+                    title="Xác nhận hủy yêu cầu?"
+                    onConfirm={() => confirm(item.id)}
+                    okText="Đồng ý"
+                    cancelText="Không"
+                  >
+                    <p className="btn-cancel">Hủy</p>
+                  </Popconfirm>
+                }
+              >
+                <p>
+                  <strong>Mã yêu cầu: </strong>
+                  {item?.id}
+                </p>
+                <p>
+                  <strong>Nội dung: </strong>
+                  {item?.content}
+                </p>
+                <p>
+                  <strong>Loại hình: </strong>
+                  {item?.type}
+                </p>
+                <p>
+                  <strong>Thời gian mong muốn: </strong>
+                  {item?.startDate}
+                </p>
+              </Card>
+            ))
             : "loading"}
         </div>
       </div>

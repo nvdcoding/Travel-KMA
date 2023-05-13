@@ -180,16 +180,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
+                                    ? "Chờ đặt cọc"
+                                    : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                        ? "Chưa thực hiện"
+                                        : value.status == 4
+                                          ? "Đang thực hiện"
+                                          : value.status == 5
+                                            ? "Đã thực hiện"
+                                            : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -317,16 +317,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
+                                    ? "Chờ đặt cọc"
+                                    : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                        ? "Chưa thực hiện"
+                                        : value.status == 4
+                                          ? "Đang thực hiện"
+                                          : value.status == 5
+                                            ? "Đã thực hiện"
+                                            : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -409,16 +409,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
+                                    ? "Chờ đặt cọc"
+                                    : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                        ? "Chưa thực hiện"
+                                        : value.status == 4
+                                          ? "Đang thực hiện"
+                                          : value.status == 5
+                                            ? "Đã thực hiện"
+                                            : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">

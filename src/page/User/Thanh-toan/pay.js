@@ -7,10 +7,12 @@ import PayHistory from "./history-pay";
 import "../../../assets/css/pay.css";
 import { Form, Input, Modal, Button, Radio, Tabs } from "antd";
 import { sendGet, sendPost } from "../../../utils/api";
-import { vnpay } from "../../../constants/images";
+import { note, vnpay } from "../../../constants/images";
 
 export default function Pay() {
   const [coin, setCoin] = useState();
+  const [amount, setAmount] = useState();
+
   const PayOnline = async (value) => {
     value.amount = parseInt(value.amount);
     const res = await sendPost("/users/deposit", value);
@@ -96,9 +98,6 @@ export default function Pay() {
                     <div className="payment-online__inner">
                       <div className="payment-online__left">
                         <div className="order-payment">
-                          <h4 className="order-payment__title">
-                            Thông tin chi tiết
-                          </h4>
                           <Form
                             name="basic"
                             initialValues={{
@@ -118,7 +117,7 @@ export default function Pay() {
                                 },
                               ]}
                             >
-                              <Input placeholder="Nhập số tiền bạn muốn thanh toán" />
+                              <Input placeholder="Nhập số tiền bạn muốn thanh toán" onChange={(e) => setAmount(e.target.value)} />
                             </Form.Item>
                             <Form.Item label="" name="amount">
                               <Radio.Group
@@ -127,7 +126,10 @@ export default function Pay() {
                                 buttonStyle="solid"
                               />
                             </Form.Item>
-
+                            <label class="trouble-warn__text"><div ><img src={note} alt=".png" /></div> <p class="check-box__txt check-box__txt-payment">
+                              Nhấn vào "Thanh toán" đồng nghĩa với việc Quý khách đồng ý với
+                              <a href="#" class="check-box__link">điều khoản mua
+                                hàng và thanh toán của Viettel</a></p></label>
                             <Form.Item
                               wrapperCol={{
                                 offset: 8,
@@ -146,6 +148,20 @@ export default function Pay() {
                         </div>
                       </div>
                       <div className="payment-online__right">
+                        <div className="payment-online__row">
+                          <h4 className="payment-online__sub">
+                            Tổng thanh toán
+                          </h4>
+                          <div className="method-payment">
+                            <ul className="method-payment__list">
+                              <li class="order-payment__item last"><span class="order-payment__name">
+                                Tổng tiền
+                              </span> <span class="order-payment__value">
+                                  {formatterPrice.format(amount)} đ
+                                </span></li>
+                            </ul>
+                          </div>
+                        </div>
                         <div className="payment-online__row">
                           <h4 className="payment-online__sub">
                             Phương thức thanh toán*
@@ -171,7 +187,6 @@ export default function Pay() {
                                         </label>
                                       </div>
                                     </div>
-                                    payHistory{" "}
                                   </div>
                                 </div>
                               </li>

@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { logo } from "../../constants/images";
 
 function Footer() {
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
   return (
     <>
       <footer className="foorwr__wrapper">
@@ -47,44 +47,7 @@ function Footer() {
           </div>
         </div>
       </footer>
-      <div className="footer">
-        <div className="content">
-          <ul className="footer-left">
-            <li className="footer-item">
-              <a href="#">Destinations</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">About us</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">Become a Partner</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">FAQ</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">Careers</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">Privacy</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">Imprint</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">Terms</a>
-            </li>
-            <li className="footer-item">
-              <a href="#">Payment</a>
-            </li>
-          </ul>
-          <div className="footer-right">
-            <p className="footer-license">
-              © 2022 Ktravel - All rights reserved
-            </p>
-          </div>
-        </div>
-      </div>
+
     </>
   );
 }
