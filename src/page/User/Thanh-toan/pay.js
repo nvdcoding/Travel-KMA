@@ -5,7 +5,17 @@ import Layout from "../../../components/layout/layout";
 import Condition from "../../../components/condition";
 import PayHistory from "./history-pay";
 import "../../../assets/css/pay.css";
-import { Form, Input, Modal, Button, Radio, Tabs, message } from "antd";
+import moment from "moment";
+import {
+  Form,
+  Input,
+  Modal,
+  Button,
+  Radio,
+  Tabs,
+  message,
+  DatePicker,
+} from "antd";
 import { sendGet, sendPost } from "../../../utils/api";
 import { note, vnpay } from "../../../constants/images";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
@@ -94,127 +104,160 @@ export default function Pay() {
                 <h3 className="payment-online__sub-title">
                   Bạn đang có {formatterPrice.format(coin)} VND
                 </h3>
-                {active && <p className="payment-money" onClick={() => setActive(false)}>Rút tiền ngay {`>>`}</p>}
-                {!active && <p className="payment-money" onClick={() => setActive(true)}>Nạp tiền ngay {`>>`}</p>}
-                {active && <div className="payment-main">
-                  <Tabs defaultActiveKey="1">
-                    <Tabs.TabPane tab="Nạp tiền " key="1">
-                      <div className="payment-online__inner">
-                        <div className="payment-online__left">
-                          <div className="order-payment">
-                            <Form
-                              name="basic"
-                              initialValues={{
-                                remember: true,
-                              }}
-                              onFinish={PayOnline}
-                              onFinishFailed={onFinishFailed}
-                              autoComplete="off"
-                            >
-                              <Form.Item
-                                label="Số tiền thanh toán"
-                                name="amount"
-                                rules={[
-                                  {
-                                    required: true,
-                                    message: "Nhập số tiền bạn muốn thanh toán.",
-                                  },
-                                ]}
-                              >
-                                <Input placeholder="Nhập số tiền bạn muốn thanh toán" onChange={(e) => setAmount(e.target.value)} />
-                              </Form.Item>
-                              <Form.Item label="" name="amount">
-                                <Radio.Group
-                                  options={optionsWithDisabled}
-                                  optionType="button"
-                                  buttonStyle="solid"
-                                />
-                              </Form.Item>
-                              <label class="trouble-warn__text"><div ><img src={note} alt=".png" /></div> <p class="check-box__txt check-box__txt-payment">
-                                Nhấn vào "Thanh toán" đồng nghĩa với việc Quý khách đồng ý với
-                                <a href="#" class="check-box__link">điều khoản mua
-                                  hàng và thanh toán của Viettel</a></p></label>
-                              <Form.Item
-                                wrapperCol={{
-                                  offset: 8,
-                                  span: 16,
+                {active && (
+                  <p className="payment-money" onClick={() => setActive(false)}>
+                    Rút tiền ngay {`>>`}
+                  </p>
+                )}
+                {!active && (
+                  <p className="payment-money" onClick={() => setActive(true)}>
+                    Nạp tiền ngay {`>>`}
+                  </p>
+                )}
+                {active && (
+                  <div className="payment-main">
+                    <Tabs defaultActiveKey="1">
+                      <Tabs.TabPane tab="Nạp tiền " key="1">
+                        <div className="payment-online__inner">
+                          <div className="payment-online__left">
+                            <div className="order-payment">
+                              <Form
+                                name="basic"
+                                initialValues={{
+                                  remember: true,
                                 }}
+                                onFinish={PayOnline}
+                                onFinishFailed={onFinishFailed}
+                                autoComplete="off"
                               >
-                                <Button
-                                  type="primary"
-                                  htmlType="submit"
-                                  className="button button--primary"
+                                <Form.Item
+                                  label="Số tiền thanh toán"
+                                  name="amount"
+                                  rules={[
+                                    {
+                                      required: true,
+                                      message:
+                                        "Nhập số tiền bạn muốn thanh toán.",
+                                    },
+                                  ]}
                                 >
-                                  Thanh toán
-                                </Button>
-                              </Form.Item>
-                            </Form>
-                          </div>
-                        </div>
-                        <div className="payment-online__right">
-                          <div className="payment-online__row">
-                            <h4 className="payment-online__sub">
-                              Tổng thanh toán
-                            </h4>
-                            <div className="method-payment">
-                              <ul className="method-payment__list">
-                                <li class="order-payment__item last"><span class="order-payment__name">
-                                  Tổng tiền
-                                </span> <span class="order-payment__value">
-                                    {formatterPrice.format(amount)} đ
-                                  </span></li>
-                              </ul>
+                                  <Input
+                                    placeholder="Nhập số tiền bạn muốn thanh toán"
+                                    onChange={(e) => setAmount(e.target.value)}
+                                  />
+                                </Form.Item>
+                                <Form.Item label="" name="amount">
+                                  <Radio.Group
+                                    options={optionsWithDisabled}
+                                    optionType="button"
+                                    buttonStyle="solid"
+                                  />
+                                </Form.Item>
+                                <label class="trouble-warn__text">
+                                  <div>
+                                    <img src={note} alt=".png" />
+                                  </div>{" "}
+                                  <p class="check-box__txt check-box__txt-payment">
+                                    Nhấn vào "Thanh toán" đồng nghĩa với việc
+                                    Quý khách đồng ý với
+                                    <a href="#" class="check-box__link">
+                                      điều khoản mua hàng và thanh toán của
+                                      Viettel
+                                    </a>
+                                  </p>
+                                </label>
+                                <Form.Item
+                                  wrapperCol={{
+                                    offset: 8,
+                                    span: 16,
+                                  }}
+                                >
+                                  <Button
+                                    type="primary"
+                                    htmlType="submit"
+                                    className="button button--primary"
+                                  >
+                                    Thanh toán
+                                  </Button>
+                                </Form.Item>
+                              </Form>
                             </div>
                           </div>
-                          <div className="payment-online__row">
-                            <h4 className="payment-online__sub">
-                              Phương thức thanh toán*
-                            </h4>
-                            <div className="method-payment">
-                              <ul className="method-payment__list">
-                                <li className="method-payment__item">
-                                  <div className="method-payment__left">
-                                    <span className="method-payment__icon">
-                                      <img src={vnpay} width="30" height="30" />
+                          <div className="payment-online__right">
+                            <div className="payment-online__row">
+                              <h4 className="payment-online__sub">
+                                Tổng thanh toán
+                              </h4>
+                              <div className="method-payment">
+                                <ul className="method-payment__list">
+                                  <li class="order-payment__item last">
+                                    <span class="order-payment__name">
+                                      Tổng tiền
+                                    </span>{" "}
+                                    <span class="order-payment__value">
+                                      {formatterPrice.format(amount)} đ
                                     </span>
-                                    <div className="method-payment__detail">
-                                      <div className="method-payment__info">
-                                        <div className="method-payment__top js-toggle">
-                                          <h5 className="method-payment__name">
-                                            VNPay: ATM/VISA
-                                          </h5>
-                                        </div>
-                                        <div className="method-payment__choose">
-                                          <label className="radio-custom1">
-                                            <input type="radio" name="radio" />
-                                            <span className="checkmark"></span>
-                                          </label>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                            <div className="payment-online__row">
+                              <h4 className="payment-online__sub">
+                                Phương thức thanh toán*
+                              </h4>
+                              <div className="method-payment">
+                                <ul className="method-payment__list">
+                                  <li className="method-payment__item">
+                                    <div className="method-payment__left">
+                                      <span className="method-payment__icon">
+                                        <img
+                                          src={vnpay}
+                                          width="30"
+                                          height="30"
+                                        />
+                                      </span>
+                                      <div className="method-payment__detail">
+                                        <div className="method-payment__info">
+                                          <div className="method-payment__top js-toggle">
+                                            <h5 className="method-payment__name">
+                                              VNPay: ATM/VISA
+                                            </h5>
+                                          </div>
+                                          <div className="method-payment__choose">
+                                            <label className="radio-custom1">
+                                              <input
+                                                type="radio"
+                                                name="radio"
+                                              />
+                                              <span className="checkmark"></span>
+                                            </label>
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </li>
-                              </ul>
+                                  </li>
+                                </ul>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </Tabs.TabPane>
-                    <Tabs.TabPane tab="Tra cứu" key="2">
-                      <PayHistory />
-                    </Tabs.TabPane>
-                  </Tabs>
-                </div>
-                }
-                {!active && <div className="payment-main">
-                  <DrwarMoney coin={coin} />
-                </div>}
-
+                      </Tabs.TabPane>
+                      <Tabs.TabPane tab="Tra cứu" key="2">
+                        <PayHistory />
+                      </Tabs.TabPane>
+                    </Tabs>
+                  </div>
+                )}
+                {!active && (
+                  <div className="payment-main">
+                    <DrwarMoney coin={coin} />
+                  </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-      </Layout >
+      </Layout>
     </>
   );
 }
@@ -308,21 +351,23 @@ const ModalVoucher = () => {
 };
 const DrwarMoney = ({ coin }) => {
   const [amountDraw, setAmountDraw] = useState();
-
+  const { RangePicker } = DatePicker;
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const dateFormat = "YYYY-MM-DD";
+  const [history, seyHistory] = useState([]);
   const DrawOnline = async (value) => {
     value.amount = parseInt(value.amount);
     try {
       const res = await sendPost("/transactions/user-withdraw", value);
       if (res.statusCode == 200) {
-        message.success("Tạo yêu cầu rút tiền thành công")
+        message.success("Tạo yêu cầu rút tiền thành công");
       } else {
         //đơn hàng thất bại
       }
     } catch (error) {
-      message.success("Lỗi")
-
+      message.success("Lỗi");
     }
-
   };
   const formatterPrice = new Intl.NumberFormat("vi-VN", {
     hour: "2-digit",
@@ -361,7 +406,47 @@ const DrwarMoney = ({ coin }) => {
       value: coin,
     },
   ];
+
+  const gethistoryDraw = async () => {
+    const res = await sendGet("/transactions/my-request-witrhdraw", {
+      startDate: moment()
+        .subtract(1, "months")
+        .startOf("month")
+        .format("YYYY-MM-DD"),
+      endDate: moment().format("YYYY-MM-DD"),
+    });
+    if (res.statusCode == 200) {
+      seyHistory(res?.returnValue?.data);
+    } else {
+      //đơn hàng thất bại
+    }
+  };
+  const historyDrawFilter = async () => {
+    const res = await sendGet("/transactions/my-request-witrhdraw", {
+      startDate: startDate,
+      endDate: endDate,
+    });
+    if (res.statusCode == 200) {
+      seyHistory(res?.returnValue?.data);
+    } else {
+      //đơn hàng thất bại
+    }
+  };
+  const changeDate = (date, dateString) => {
+    setStartDate(dateString[0]);
+    setEndDate(dateString[1]);
+  };
+  const formatterDate = new Intl.DateTimeFormat("vi-VN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const formatterTime = new Intl.DateTimeFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
   useEffect(() => {
+    gethistoryDraw();
   }, []);
   return (
     <Tabs defaultActiveKey="1">
@@ -388,7 +473,10 @@ const DrwarMoney = ({ coin }) => {
                     },
                   ]}
                 >
-                  <Input placeholder="Nhập số tiền bạn muốn rút" onChange={(e) => setAmountDraw(e.target.value)} />
+                  <Input
+                    placeholder="Nhập số tiền bạn muốn rút"
+                    onChange={(e) => setAmountDraw(e.target.value)}
+                  />
                 </Form.Item>
                 <Form.Item label="" name="amount">
                   <Radio.Group
@@ -397,10 +485,17 @@ const DrwarMoney = ({ coin }) => {
                     buttonStyle="solid"
                   />
                 </Form.Item>
-                <label class="trouble-warn__text"><div ><img src={note} alt=".png" /></div> <p class="check-box__txt check-box__txt-payment">
-                  Nhấn vào "Rút tiền" đồng nghĩa với việc Quý khách đồng ý với
-                  <a href="#" class="check-box__link">điều khoản mua
-                    hàng và thanh toán của Viettel</a></p></label>
+                <label class="trouble-warn__text">
+                  <div>
+                    <img src={note} alt=".png" />
+                  </div>{" "}
+                  <p class="check-box__txt check-box__txt-payment">
+                    Nhấn vào "Rút tiền" đồng nghĩa với việc Quý khách đồng ý với
+                    <a href="#" class="check-box__link">
+                      điều khoản mua hàng và thanh toán của Viettel
+                    </a>
+                  </p>
+                </label>
                 <Form.Item
                   wrapperCol={{
                     offset: 8,
@@ -420,16 +515,15 @@ const DrwarMoney = ({ coin }) => {
           </div>
           <div className="payment-online__right">
             <div className="payment-online__row">
-              <h4 className="payment-online__sub">
-                Tổng thanh toán
-              </h4>
+              <h4 className="payment-online__sub">Tổng thanh toán</h4>
               <div className="method-payment">
                 <ul className="method-payment__list">
-                  <li class="order-payment__item last"><span class="order-payment__name">
-                    Tổng tiền
-                  </span> <span class="order-payment__value">
+                  <li class="order-payment__item last">
+                    <span class="order-payment__name">Tổng tiền</span>{" "}
+                    <span class="order-payment__value">
                       {formatterPrice.format(amountDraw)} đ
-                    </span></li>
+                    </span>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -437,13 +531,32 @@ const DrwarMoney = ({ coin }) => {
         </div>
       </Tabs.TabPane>
       <Tabs.TabPane tab="Tra cứu yêu cầu" key="2">
+        <div className="pay-search">
+          <RangePicker
+            defaultValue={[
+              moment().subtract(1, "months").startOf("month"),
+              moment(),
+            ]}
+            format={dateFormat}
+            onChange={changeDate}
+          />
+          <div
+            className="btn-pay-search button button--primary"
+            onClick={() => historyDrawFilter()}
+          >
+            Tìm kiếm
+          </div>
+        </div>
+        <h4 className="search-title">Kết quả tìm kiếm </h4>
         <ul className="Result-request__list">
           <li className="Result-request__item">
             <div className="box-request__top">
               <div className="code-request">
                 <p className="code-request__name">
                   Mã yêu cầu:{" "}
-                  <span className="code-request__name name-highlight">261696</span>
+                  <span className="code-request__name name-highlight">
+                    261696
+                  </span>
                 </p>
               </div>{" "}
               <a href="#" className="icon-request__detail">
@@ -469,7 +582,9 @@ const DrwarMoney = ({ coin }) => {
               <div className="code-request">
                 <p className="code-request__name">
                   Mã yêu cầu:{" "}
-                  <span className="code-request__name name-highlight">261696</span>
+                  <span className="code-request__name name-highlight">
+                    261696
+                  </span>
                 </p>
               </div>{" "}
               <a href="#" className="icon-request__detail">
@@ -493,5 +608,5 @@ const DrwarMoney = ({ coin }) => {
         </ul>
       </Tabs.TabPane>
     </Tabs>
-  )
-}
+  );
+};

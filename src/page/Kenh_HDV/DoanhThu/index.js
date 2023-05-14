@@ -15,69 +15,128 @@ import {
   DatePicker,
 } from "antd";
 import moment from "moment";
+import { sendGet, sendPost } from "../../../utils/api";
 
 export default function AddTour() {
-  const dateFormat = "DD/MM/YYYY";
-
+  const [startDate, setStartDate] = useState(
+    moment().subtract(1, "months").startOf("month").format("YYYY-MM-DD")
+  );
+  const [endDate, setEndDate] = useState(moment().format("YYYY-MM-DD"));
+  const [request, setRequest] = useState([]);
+  const [deny, setDeny] = useState([]);
+  const [accept, setAccept] = useState([]);
+  const dateFormat = "YYYY-MM-DD";
   const columns = [
     {
-      title: "Tour",
-      dataIndex: "name",
-      key: "name",
-      render: (text) => <a>{text}</a>,
+      title: "STT",
+      dataIndex: "STT",
+      key: "index",
+      render: (_, record, index) => <a>{index + 1}</a>,
     },
     {
-      title: "Ngày thanh toán dự kiến",
-      dataIndex: "time",
-      key: "time",
+      title: "Ngày yêu cầu",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      render: (_, record) => (
+        <> {formatterDate.format(Date.parse(record?.createdAt))}</>
+      ),
     },
     {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
+      render: (_, record) => (
+        <>
+          {record.status == 1
+            ? "Đã rút"
+            : record.status == 0
+            ? "Đã từ chối"
+            : "Đang xử lý"}
+        </>
+      ),
     },
     {
       title: "Số tiền",
-      dataIndex: "price",
-      key: "price",
-    },
-  ];
-  const data = [
-    {
-      key: "1",
-      name: "Tour BN",
-      time: "20/11/2012",
-      status: 0,
-      price: "3.000.000đ",
+      dataIndex: "amount",
+      key: "amount",
+      render: (_, record) => <>{formatterPrice.format(record?.amount)} đ</>,
     },
     {
-      key: "2",
-      name: "Tour BN",
-      time: "20/11/2012",
-      status: 0,
-      price: "3.000.000đ",
-    },
-    {
-      key: "3",
-      name: "Tour BN",
-      time: "20/11/2012",
-      status: 0,
-      price: "3.000.000đ",
+      title: "Phương thức ",
+      dataIndex: "wallet",
+      key: "wallet",
     },
   ];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-    message.success("Bạn đã gửi yêu cầu rút tiền. Đợi Adin duyệt nhé!");
+  const handleOk = async (value) => {
+    value.amount = parseInt(value.amount);
+    try {
+      const res = await sendPost("/transactions/tourguide-withdraw", value);
+      if (res.statusCode == 200) {
+        setIsModalOpen(false);
+        message.success("Tạo yêu cầu rút tiền thành công");
+        await gethistoryDrawTour();
+      } else {
+        //đơn hàng thất bại
+      }
+    } catch (error) {
+      message.success("Lỗi");
+    }
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  useEffect(() => {}, []);
-  const { Search } = Input;
+  const formatterDate = new Intl.DateTimeFormat("vi-VN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const formatterPrice = new Intl.NumberFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
+  const gethistoryDrawTour = async () => {
+    const res = await sendGet("/transactions/my-request-witrhdraw", {
+      startDate: moment()
+        .subtract(1, "months")
+        .startOf("month")
+        .format("YYYY-MM-DD"),
+      endDate: moment().format("YYYY-MM-DD"),
+    });
+    if (res.statusCode == 200) {
+      setRequest(res.returnValue?.data?.filter((item) => item.status == 3));
+      setAccept(res.returnValue?.data?.filter((item) => item.status == 1));
+      setDeny(res.returnValue?.data?.filter((item) => item.status == 0));
+    } else {
+      //đơn hàng thất bại
+    }
+  };
+  const changeDate = (date, dateString) => {
+    setStartDate(dateString[0]);
+    setEndDate(dateString[1]);
+  };
+  const historyDrawFilterTour = async () => {
+    const res = await sendGet("/transactions/my-request-witrhdraw", {
+      startDate: startDate,
+      endDate: endDate,
+    });
+    if (res.statusCode == 200) {
+      setRequest(res.returnValue?.data?.filter((item) => item.status == 3));
+      setAccept(res.returnValue?.data?.filter((item) => item.status == 1));
+      setDeny(res.returnValue?.data?.filter((item) => item.status == 0));
+    } else {
+      //đơn hàng thất bại
+    }
+  };
+  useEffect(() => {
+    gethistoryDrawTour();
+  }, []);
   const optionsWithDisabled = [
     {
       label: "100.000đ",
@@ -104,9 +163,7 @@ export default function AddTour() {
       value: "5000000",
     },
   ];
-  const onSearch = (value) => console.log(value);
   const { RangePicker } = DatePicker;
-
   return (
     <>
       <LayoutHDV>
@@ -174,6 +231,7 @@ export default function AddTour() {
                         remember: true,
                       }}
                       onFinish={handleOk}
+                      onFinishFailed={onFinishFailed}
                       autoComplete="off"
                     >
                       <Form.Item
@@ -217,15 +275,36 @@ export default function AddTour() {
             </div>
             <div class="right-main-table">
               <div class="main-content">
-                <Tabs defaultActiveKey="1">
-                  <Tabs.TabPane tab="Lịch sử" key="1">
+                <div className="pay-search">
+                  <RangePicker
+                    defaultValue={[
+                      moment().subtract(1, "months").startOf("month"),
+                      moment(),
+                    ]}
+                    format={dateFormat}
+                    onChange={changeDate}
+                  />
+                  <div
+                    className="btn-pay-search button button--primary"
+                    onClick={() => historyDrawFilterTour()}
+                  >
+                    Tìm kiếm
+                  </div>
+                </div>
+                <Tabs defaultActiveKey="0">
+                  <Tabs.TabPane tab="Yêu cầu thanh toán" key="0">
                     <div class="transactions-table-wrap">
-                      <Table columns={columns} dataSource={data} />
+                      <Table columns={columns} dataSource={request} />
                     </div>
                   </Tabs.TabPane>
-                  <Tabs.TabPane tab="Yêu cầu thanh toán" key="2">
+                  <Tabs.TabPane tab="Thành công" key="1">
                     <div class="transactions-table-wrap">
-                      <Table columns={columns} dataSource={data} />
+                      <Table columns={columns} dataSource={accept} />
+                    </div>
+                  </Tabs.TabPane>
+                  <Tabs.TabPane tab="Thất bại" key="2">
+                    <div class="transactions-table-wrap">
+                      <Table columns={columns} dataSource={deny} />
                     </div>
                   </Tabs.TabPane>
                 </Tabs>

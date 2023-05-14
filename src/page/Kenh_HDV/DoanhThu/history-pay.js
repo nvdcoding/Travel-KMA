@@ -4,12 +4,39 @@ import Layout from "../../../components/layout/layout";
 import "../../../assets/css/pay.css";
 import { sendGet, sendPost } from "../../../utils/api";
 import { vnpay, vnpayv2 } from "../../../constants/images";
-import { Skeleton } from "antd";
+import { Skeleton, DatePicker } from "antd";
+import moment from "moment";
 
 export default function PayHistory() {
+  const [startDate, setStartDate] = useState(
+    moment().subtract(1, "months").startOf("month").format("YYYY-MM-DD")
+  );
+  const [endDate, setEndDate] = useState(moment().format("YYYY-MM-DD"));
   const [history, seyHistory] = useState([]);
+  const dateFormat = "YYYY-MM-DD";
+  const changeDate = (date, dateString) => {
+    setStartDate(dateString[0]);
+    setEndDate(dateString[1]);
+  };
   const historyPay = async () => {
-    const res = await sendGet("/tour-guide/transaction");
+    const res = await sendGet("/tour-guide/transaction", {
+      startDate: moment()
+        .subtract(1, "months")
+        .startOf("month")
+        .format("YYYY-MM-DD"),
+      endDate: moment().format("YYYY-MM-DD"),
+    });
+    if (res.statusCode == 200) {
+      seyHistory(res?.returnValue?.data);
+    } else {
+      //đơn hàng thất bại
+    }
+  };
+  const historyPayOnline = async () => {
+    const res = await sendGet("/tour-guide/transaction", {
+      startDate: startDate,
+      endDate: endDate,
+    });
     if (res.statusCode == 200) {
       seyHistory(res?.returnValue?.data);
     } else {
@@ -29,6 +56,7 @@ export default function PayHistory() {
     hour: "2-digit",
     minute: "numeric",
   });
+  const { RangePicker } = DatePicker;
   useEffect(() => {
     historyPay();
   }, []);
@@ -36,8 +64,24 @@ export default function PayHistory() {
     <>
       {history ? (
         <div className="pay__wrapper">
+          <div className="pay-search">
+            <RangePicker
+              defaultValue={[
+                moment().subtract(1, "months").startOf("month"),
+                moment(),
+              ]}
+              format={dateFormat}
+              onChange={changeDate}
+            />
+            <div
+              className="btn-pay-search button button--primary"
+              onClick={() => historyPayOnline()}
+            >
+              Tìm kiếm
+            </div>
+          </div>
           <li class="History-list__info-year">
-            <p class="History-list__label">03/2023</p>
+            <h4 className="search-title">Kết quả tìm kiếm </h4>
             <ul class="History-list__info">
               {history.map((item, index) => (
                 <li class="History-item__info">

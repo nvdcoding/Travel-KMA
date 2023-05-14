@@ -15,8 +15,11 @@ export default function PayHistory() {
   const [history, seyHistory] = useState([]);
   const historyPay = async () => {
     const res = await sendGet("/users/transaction", {
-      startDate: moment().subtract(1, 'months').startOf('month').format("YYYY-MM-DD"),
-      endDate: moment().format("YYYY-MM-DD")
+      startDate: moment()
+        .subtract(1, "months")
+        .startOf("month")
+        .format("YYYY-MM-DD"),
+      endDate: moment().format("YYYY-MM-DD"),
     });
     if (res.statusCode == 200) {
       seyHistory(res?.returnValue?.data);
@@ -25,10 +28,9 @@ export default function PayHistory() {
     }
   };
   const historyPayOnline = async () => {
-
     const res = await sendGet("/users/transaction", {
       startDate: startDate,
-      endDate: endDate
+      endDate: endDate,
     });
     if (res.statusCode == 200) {
       seyHistory(res?.returnValue?.data);
@@ -39,7 +41,7 @@ export default function PayHistory() {
   const changeDate = (date, dateString) => {
     console.log("llllhihi", dateString);
     setStartDate(dateString[0]);
-    setEndDate(dateString[1])
+    setEndDate(dateString[1]);
   };
   const formatterDate = new Intl.DateTimeFormat("vi-VN", {
     year: "numeric",
@@ -63,14 +65,23 @@ export default function PayHistory() {
       <div className="pay__wrapper">
         <div className="pay-search">
           <RangePicker
-            defaultValue={[moment().subtract(1, 'months').startOf('month'), moment()]}
+            defaultValue={[
+              moment().subtract(1, "months").startOf("month"),
+              moment(),
+            ]}
             format={dateFormat}
             onChange={changeDate}
           />
-          <div className="btn-pay-search button button--primary" onClick={() => historyPayOnline()}>Tìm kiếm</div>
+          <div
+            className="btn-pay-search button button--primary"
+            onClick={() => historyPayOnline()}
+          >
+            Tìm kiếm
+          </div>
         </div>
 
         <li class="History-list__info-year">
+          <h4 className="search-title">Kết quả tìm kiếm </h4>
           <ul class="History-list__info">
             {history.map((item, index) => (
               <li class="History-item__info">
@@ -83,8 +94,8 @@ export default function PayHistory() {
                       {item?.status == 1
                         ? "Nạp tiền thành công"
                         : item?.status == 2
-                          ? "Đang xử lý"
-                          : "Thanh toán thất bại"}
+                        ? "Đang xử lý"
+                        : "Thanh toán thất bại"}
                     </h4>
                     <div class="History-des__sub-price">
                       <p>{formatterPrice.format(item?.amount)}đ</p>

@@ -1170,3 +1170,24 @@
 .wallet-entry {
   cursor: pointer;
 }
+.pay-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pay-search .ant-picker {
+  padding: 7px 11px;
+  margin-right: 20px;
+}
+.pay-search .button {
+  padding: 7px 20px;
+  border-radius: 5px;
+}
+
+.search-title {
+  margin: 20px 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--colour-link);
+  cursor: pointer;
+}
