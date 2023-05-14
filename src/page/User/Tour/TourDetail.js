@@ -33,10 +33,8 @@ export default function TourDetail() {
   const param = useParams();
   const history = useHistory();
   const onChange = (date, dateString) => {
-    console.log(date, dateString);
     setdate(dateString);
   };
-
   const onFinish = async (values) => {
     try {
       values.tourId = data.id;
@@ -278,29 +276,18 @@ export default function TourDetail() {
                               role="presentation"
                               style={{ textAlign: "justify" }}
                             >
-                              <strong>Đợt 01:</strong> Quý khách thanh toán 70%
+                              <strong>Đợt 01:</strong> Quý khách thanh toán 10%
                               giá trị của tour ngay khi đăng ký mua tour.
                             </li>
                             <li
                               role="presentation"
                               style={{ textAlign: "justify" }}
                             >
-                              <strong>Đợt 02:</strong> Quý khách thanh toán 30%
-                              giá trị của tour trước lịch khởi hành
-                              07&nbsp;ngày.
+                              <strong>Đợt 02:</strong> Quý khách thanh toán 90%
+                              giá trị của tour trước lịch khởi hành.
                             </li>
                           </ul>
-                          <p dir="ltr" style={{ textAlign: "justify" }}>
-                            <u>
-                              <strong>*Lưu ý:</strong>
-                            </u>
-                            Đối với những tour quý khách đăng ký sát lịch khởi
-                            hành từ 03&nbsp;cho đến 07&nbsp;ngày, quý khách vui
-                            lòng liên hệ
-                            <span style={{ color: "#FF0000" }}>1900 3398</span>
-                            để xác nhận số chỗ còn lại và&nbsp;thanh toán 100%
-                            giá trị của tour.
-                          </p>
+
                           <h3 dir="ltr" style={{ textAlign: "center" }}>
                             <span style={{ color: "#B22222" }}>
                               <u>
@@ -318,8 +305,8 @@ export default function TourDetail() {
                             </u>
                           </p>
                           <p dir="ltr" style={{ textAlign: "justify" }}>
-                            Nếu <strong>Ktravel</strong> không thực hiện được
-                            chuyến du lịch/ dịch vụ, công ty phải báo ngay cho
+                            Nếu <strong>HDV</strong> không thực hiện được
+                            chuyến du lịch/ dịch vụ, HDV phải báo ngay cho
                             khách hàng biết và thanh toán lại cho khách hàng
                             toàn bộ số tiền mà khách hàng đã đóng trong vòng 3
                             ngày kể từ lúc chính thức thông báo hủy chuyến đi/
@@ -337,18 +324,11 @@ export default function TourDetail() {
                           </p>
                           <p dir="ltr" style={{ textAlign: "justify" }}>
                             Trong trường hợp không thể tiếp tục sử dụng dịch vụ/
-                            tour, Quý khách phải thông báo cho Công ty bằng văn
-                            bản hoặc email (Không giải quyết các trường hợp liên
-                            hệ chuyển/ hủy tour qua điện thoại). Đồng thời Quý
-                            khách vui lòng mang Biên bản đăng ký tour/ dịch vụ
-                            &amp; biên lai đóng tiền đến văn phòng Vietnam
-                            Booking để làm thủ tục hủy/ chuyển tour.
+                            tour, Quý khách phải hủy chuyến trên hệ thống.
                           </p>
                           <ul dir="ltr">
                             <li style={{ textAlign: "justify" }}>
-                              Các trường hợp chuyển/ đổi dịch vụ/ tour: Cty sẽ
-                              căn cứ xem xét tình hình thực tế để tính phí và có
-                              mức hỗ trợ Quý khách hàng
+                              Các trường hợp chuyển/ đổi dịch vụ/ tour: Khách hàng sẽ không được hoàn lại phí đặt cọc
                             </li>
                             <li style={{ textAlign: "justify" }}>
                               Trường hợp hủy dịch vụ/ tour: Quý khách phải chịu
@@ -360,41 +340,10 @@ export default function TourDetail() {
                           <p style={{ textAlign: "justify" }}>
                             <strong>Phí hủy được quy định như sau:</strong>
                           </p>
-                          <ul>
-                            <li>
-                              Ngay sau khi đặt cọc hoặc thanh toán hoặc trước 10
-                              ngày: phí hủy 30% tiền tour.
-                            </li>
-                            <li>
-                              Hủy 7 ngày trước ngày khởi hành: phí hủy 50% tiền
-                              tour.
-                            </li>
-                            <li>
-                              Hủy 3 ngày trước ngày khởi hành: phí hủy 85% tiền
-                              tour
-                            </li>
-                            <li>
-                              Hủy 05 ngày trước ngày khởi hành: phí hủy 100%
-                              tiền tour
-                            </li>
-                            <li>
-                              Trường hợp quý khách đến trễ giờ khởi hành được
-                              tính là hủy 05&nbsp;ngày trước ngày khởi hành.
-                            </li>
-                            <li>
-                              Giai đoạn Lễ/Tết: không hoàn, không hủy, không
-                              đổi.
-                            </li>
-                          </ul>
+
                           <p>
-                            Việc huỷ bỏ chuyến đi phải được thông báo trực tiếp
-                            với Công ty hoặc qua fax, email, tin nhắn và phải
-                            được Công ty xác nhận. Việc huỷ bỏ bằng điện thoại
+                            Việc huỷ bỏ chuyến đi phải được hủy bỏ trên hệ thống. Việc huỷ bỏ bằng liên hệ qua kênh chat, trao đổi
                             không được chấp nhận.
-                          </p>
-                          <p>
-                            Các ngày đặt cọc, thanh toán, huỷ và dời tour: không
-                            tính thứ 07, Chủ Nhật.
                           </p>
                           <p>
                             Đến ngày hẹn thanh toán 100% giá trị tour, nếu quý
@@ -402,75 +351,7 @@ export default function TourDetail() {
                             tiền, xem như quý khách tự ý&nbsp;hủy tour và mất
                             hết số tiền đặt cọc giữ chỗ.
                           </p>
-                          <h3 dir="ltr" style={{ textAlign: "center" }}>
-                            <span style={{ color: "#B22222" }}>
-                              <u>
-                                <strong>NHỮNG LƯU Ý KHÁC</strong>
-                              </u>
-                            </span>
-                          </h3>
-                          <ul>
-                            <li>
-                              Quý khách phải mang theo: giấy tờ tùy thân hợp
-                              pháp (CMND hoặc Passport).
-                            </li>
-                            <li>
-                              Trẻ em dưới 14 tuổi có thể sử dụng giấy khai sinh
-                              bản sao hoặc Hộ chiếu.
-                            </li>
-                            <li>
-                              Trẻ em từ 14 tuổi trở lên phải có Thẻ căn cước
-                              hoặc Hộ chiếu.
-                            </li>
-                            <li>
-                              Quý khách nên mang theo: thuốc chống côn trùng,
-                              thuốc cảm sốt thông thường hoặc các thuốc đã được
-                              kê đơn riêng theo chỉ định của bác sĩ.
-                            </li>
-                            <li>
-                              Quý khách là người ăn chay vui lòng mang thêm đồ
-                              ăn chay để đảm bảo khẩu vị của mình.
-                            </li>
-                            <li>
-                              Bất cứ dịch vụ nào trong tour nếu quý khách không
-                              sử dụng cũng không được hoàn lại.
-                            </li>
-                            <li>
-                              Hướng dẫn viên có quyền sắp xếp lại thứ tự các
-                              điểm thăm quan cho phù hợp điều kiện từng ngày
-                              khởi hành cụ thể nhưng vẫn đảm bảo tất cả các điểm
-                              thăm quan trong chương trình.
-                            </li>
-                            <li>
-                              Trường hợp mua đồ hải sản phải được đựng trong
-                              thùng xốp dán kín và sạch sẽ. Lái xe có quyền từ
-                              chối vận chuyển nếu Quý khách mang theo đồ hải sản
-                              lên xe mà không được đóng gói cẩn thận.
-                            </li>
-                          </ul>
-                          <p
-                            dir="ltr"
-                            role="presentation"
-                            style={{ textAlign: "justify" }}
-                          >
-                            **Trong những trường hợp khách quan như: khủng bố,
-                            thiên tai… hoặc do có sự cố, có sự thay đổi lịch
-                            trình của các phương tiện vận chuyển công cộng như:
-                            máy bay, tàu hỏa… thì Ktravel&nbsp;sẽ giữ quyền thay
-                            đổi lộ trình bất cứ lúc nào vì sự thuận tiện, an
-                            toàn cho khách hàng và sẽ không chịu trách nhiệm bồi
-                            thường những thiệt hại phát sinh**.
-                          </p>
-                          <p
-                            dir="ltr"
-                            role="presentation"
-                            style={{ textAlign: "justify" }}
-                          >
-                            ***Nếu số khách tham gia không đủ số lượng tối thiểu
-                            để khởi hành, Công ty sẽ hỗ trợ dời sang ngày khởi
-                            hành gần nhất hoặc hoàn lại phí tour như đã đặt
-                            cọc&nbsp;cho quý khách​***.
-                          </p>
+
                         </div>
                       </div>
                     </div>
