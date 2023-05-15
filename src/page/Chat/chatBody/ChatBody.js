@@ -52,7 +52,7 @@ export default function ChatBody() {
         socket.off("receive-messages");
       }
     };
-  }, [socket, messages, users, chatId]);
+  }, [socket, messages, users]);
 
   useEffect(() => {
     if (socket) {
@@ -61,6 +61,10 @@ export default function ChatBody() {
       socket.emit("join-room", { chatId });
     }
   }, [socket, chatId]);
+
+  useEffect(() => {
+    setMessages([]);
+  }, [chatId]);
 
   return (
     <div className="main__chatbody">
