@@ -5,7 +5,7 @@ import Layout from "../../../components/layout/layout";
 import { Link, useHistory, useParams } from "react-router-dom";
 import "../../../assets/css/tour-detail.css";
 import OwlCarousel from "react-owl-carousel";
-import ReactMarkdown from "react-markdown";
+import * as ReactMarkdown from "react-markdown";
 import {
   Input,
   InputNumber,

@@ -10,7 +10,7 @@ export default function ChatBody() {
   const [messages, setMessages] = useState([]);
 
   const { chatId } = useParams();
-
+  console.log(users);
   useEffect(() => {
     const socket = io(process.env.REACT_APP_WEB_SOCKET_DOMAIN || "", {
       path: "/chat",
@@ -73,6 +73,7 @@ export default function ChatBody() {
         messages={messages}
         setMessages={setMessages}
         socket={socket}
+        users={users}
       />
     </div>
   );

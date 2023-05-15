@@ -23,10 +23,10 @@ export default function ChatList({ users }) {
 
   return (
     <div className="main__chatlist">
-      <button className="btn">
+      {/* <button className="btn">
         <i className="fa fa-plus"></i>
         <span>New conversation</span>
-      </button>
+      </button> */}
       <div className="chatlist__heading">
         <h2>Chats</h2>
         <button className="btn-nobg">
@@ -45,7 +45,7 @@ export default function ChatList({ users }) {
         {users.map((item, index) => {
           const chattedUser =
             infoUser.role === "USER" ? item.tourGuide : item.user;
-
+            console.log(chattedUser);
           const id = infoUser.role === "USER" ? item.tourGuideId : item.userId;
 
           return (
@@ -57,8 +57,8 @@ export default function ChatList({ users }) {
             >
               <Avatar
                 image={
-                  chattedUser?.image
-                    ? chattedUser?.image
+                  chattedUser?.avatar
+                    ? chattedUser?.avatar
                     : "http://placehold.it/80x80"
                 }
                 isOnline={item.isOnline}
@@ -66,7 +66,7 @@ export default function ChatList({ users }) {
 
               <div className="userMeta">
                 <p>{chattedUser?.name}</p>
-                <span className="activeTime">32 mins ago</span>
+                {/* <span className="activeTime">32 mins ago</span> */}
               </div>
             </div>
           );

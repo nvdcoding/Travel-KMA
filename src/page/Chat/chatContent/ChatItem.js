@@ -26,8 +26,8 @@ export default function ChatItem(props) {
         isOnline="active"
         image={
           props.sender === "USER"
-            ? props.profile?.user?.avatar
-            : props.profile?.tourGuide?.avatar
+            ? props.profile?.avatar
+            : props.user?.avatar
         }
       />
     </div>
