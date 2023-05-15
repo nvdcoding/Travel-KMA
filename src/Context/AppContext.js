@@ -141,7 +141,7 @@ export const AppProvider = ({ children }) => {
   };
   useEffect(() => {
     getProvice();
-    // getInfoUser();
+    getInfoUser();
   }, []);
   const [data, setData] = useState([]);
   return (
