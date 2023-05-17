@@ -4,7 +4,7 @@ import Layout from "../../../components/layout/layout";
 import { avt, banner } from "../../../constants/images";
 import "../../../assets/css/personal.css";
 import { sendGet } from "../../../utils/api";
-import { Skeleton, Tag } from "antd";
+import { Rate, Skeleton, Tag } from "antd";
 import TourItem from "../../../components/tourItem";
 import OwlCarousel from "react-owl-carousel";
 import { Link, useParams } from "react-router-dom";
@@ -242,13 +242,9 @@ export default function Personal() {
                   <div className="evaluate">
                     <h4 className="evaluate-title">Hài lòng</h4>
                     <div className="evaluate-star">
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star-half-stroke"></i>
-                      <i className="fa-regular fa-star"></i>
+                      <Rate allowHalf disabled defaultValue={data?.avgStar} />
                     </div>
-                    <p className="evaluate-des">({data?.avgStar} đánh giá)</p>
+                    {/* <p className="evaluate-des">({data?.avgStar} đánh giá)</p> */}
                   </div>
                 </div>
                 <div className="personal-page-right">
@@ -298,7 +294,7 @@ export default function Personal() {
                             <p className="personal-page__des">Đánh giá</p>
                           </div>
                           <p className="personal-page__value">
-                            {data?.avgStar}/5(125 đánh giá)
+                            {parseFloat(data?.avgStar).toFixed(1)}/5 sao
                           </p>
                         </li>
                         <li className="personal-page__item">
@@ -328,73 +324,77 @@ export default function Personal() {
                 </div>
               </div>
               <div className="personal-page__container">
-                <p className="trip-suggest-title">Các chuyến đi gợi ý</p>
-                <div className="trip-suggest">
-                  <OwlCarousel
-                    className="trip-suggest__list owl-theme"
-                    {...options}
-                  >
-                    {data?.tours?.map((item, index) => (
-                      // <TourItem key={index} item={item} />
-                      <div className="tour-view__item" key={index}>
-                        <div className="tour-view__card-img">
-                          <img alt="" className="tour-view__img" src={banner} />
-                          <div className="tour-view__tag">
-                            <p className="tour-view__tag-name tour-primary">
-                              {item.type == "Ecotourism"
-                                ? "Văn hóa"
-                                : item.type == "Cultural"
-                                  ? "Nghỉ dưỡng"
-                                  : item.type == "Entertainment"
-                                    ? "Giải trí"
-                                    : item.type == "Sports"
-                                      ? "Thể thao"
-                                      : "Khác"}
-                            </p>
-                          </div>
-                        </div>
-                        <div className="tour-view__card-content">
-                          <div className="tour-view__head"></div>
-                          <div className="tour-view-body">
-                            <h3 className="tour-view__title">{item?.name}</h3>
-                            <p className="tour-view__des">
-                              {item?.description}
-                            </p>
-                            <div className="tour-view__place">
-                              <i className="fa-solid fa-plane-arrival"></i>
-                              {/* <span className="tour-view__place-name">
+                {data?.tours.length > 0 &&
+                  <> <p className="trip-suggest-title">Các chuyến đi gợi ý</p>
+                    <div className="trip-suggest">
+                      <OwlCarousel
+                        className="trip-suggest__list owl-theme"
+                        {...options}
+                      >
+                        {data?.tours?.map((item, index) => (
+                          // <TourItem key={index} item={item} />
+                          <div className="tour-view__item" key={index}>
+                            <div className="tour-view__card-img">
+                              <img alt="" className="tour-view__img" src={banner} />
+                              <div className="tour-view__tag">
+                                <p className="tour-view__tag-name tour-primary">
+                                  {item.type == "Ecotourism"
+                                    ? "Văn hóa"
+                                    : item.type == "Cultural"
+                                      ? "Nghỉ dưỡng"
+                                      : item.type == "Entertainment"
+                                        ? "Giải trí"
+                                        : item.type == "Sports"
+                                          ? "Thể thao"
+                                          : "Khác"}
+                                </p>
+                              </div>
+                            </div>
+                            <div className="tour-view__card-content">
+                              <div className="tour-view__head"></div>
+                              <div className="tour-view-body">
+                                <h3 className="tour-view__title">{item?.name}</h3>
+                                <p className="tour-view__des">
+                                  {item?.description}
+                                </p>
+                                <div className="tour-view__place">
+                                  <i className="fa-solid fa-plane-arrival"></i>
+                                  {/* <span className="tour-view__place-name">
                                 {item?.place}
                               </span> */}
-                            </div>
-                            <Link
-                              to={`/tour/${item?.id}`}
-                              className="travel-link"
-                            >
-                              Xem chi tiết
-                            </Link>
-                          </div>
-                          <div className="tour-view-footer">
-                            <p className="tour-view__price">
-                              khoảng
-                              <span>{currencyFormat(item?.basePrice)}đ</span>
-                              /một người
-                            </p>
-                            <div className="tour-view__evaluate">
-                              <div className="tour-view__star">
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star"></i>
-                                <i className="fa-solid fa-star-half-stroke"></i>
-                                <i className="fa-regular fa-star"></i>
-                                {/* <span>Đã đi {props?.item?.rate}</span> */}
+                                </div>
+                                <Link
+                                  to={`/tour/${item?.id}`}
+                                  className="travel-link"
+                                >
+                                  Xem chi tiết
+                                </Link>
+                              </div>
+                              <div className="tour-view-footer">
+                                <p className="tour-view__price">
+                                  khoảng
+                                  <span>{currencyFormat(item?.basePrice)}đ</span>
+                                  /một người
+                                </p>
+                                <div className="tour-view__evaluate">
+                                  <div className="tour-view__star">
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star"></i>
+                                    <i className="fa-solid fa-star-half-stroke"></i>
+                                    <i className="fa-regular fa-star"></i>
+                                    {/* <span>Đã đi {props?.item?.rate}</span> */}
+                                  </div>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    ))}
-                  </OwlCarousel>
-                </div>
+                        ))}
+                      </OwlCarousel>
+                    </div>
+                  </>
+                }
+
                 <p className="trip-suggest-title">Đánh giá từ du khách</p>
                 <div className="tour-feedback__main">
                   <OwlCarousel

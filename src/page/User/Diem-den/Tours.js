@@ -1,14 +1,31 @@
 /* eslint-disable */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Collapse } from "antd";
 
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/tour.css";
 import { banner, trangan } from "../../../constants/images";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { sendGet } from "../../../utils/api";
 export default function Tours() {
+  const [data, setData] = useState();
   const { Panel } = Collapse;
-
-  useEffect(() => {}, []);
+  const formatterDate = new Intl.DateTimeFormat("vi-VN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const listNews = async () => {
+    const res = await sendGet("/posts/user-tourguide", { limit: 100 });
+    if (res.statusCode == 200) {
+      setData(res.returnValue.data);
+    } else {
+      message.error("Thất bại");
+    }
+  };
+  useEffect(() => {
+    listNews();
+  }, []);
   return (
     <>
       <Layout>
@@ -23,7 +40,7 @@ export default function Tours() {
                 <div className="lp-travel__detail-inner">
                   <div className="lp-travel__info">
                     <p className="lp-travel__des">
-                      Cùng TravelVN khám phá vẻ đẹp của cảnh và người, để hiểu
+                      Cùng Ktravel khám phá vẻ đẹp của cảnh và người, để hiểu
                       sâu về văn hóa các vùng miền, để dâng trào cảm xúc tự hào
                       dân tộc, và thêm yêu tổ quốc.
                     </p>
@@ -131,166 +148,71 @@ export default function Tours() {
             </div>
             <hr className="line" />
             <div className="content">
-              {/* <div className="banner-bg">
-                <img
-                  src="https://dulich3mien.vn/wp-content/uploads/2022/07/Dulich3mien-Banner-Du-lich-viet-nam-1-1024x171.jpg"
-                  alt=""
-                />
-              </div> */}
-              <div className="travel-tips">
+              {data && <div className="travel-tips">
                 <div className="travel-title-all">
-                  <h3 className="travel-title">Cẩm nang du lịch</h3>
-                  <a href="#" className="travel-link">
+                  <h3 className="travel-title">Tin tức</h3>
+                  <Link to='/tin-tuc' className="travel-link">
                     Xem tất cả
-                  </a>
+                  </Link>
                 </div>
                 <div className="travel-tip__content">
                   <div className="travel-tip__left">
                     <div className="travel-tip__thumb">
-                      <a className="" href="#">
+                      <Link className="" to={`/tin-tuc/${data[0]?.id}`}>
                         <img
                           alt=""
-                          src="https://dulich3mien.vn/wp-content/uploads/2022/11/Roving-Chillhouse-1-585x390.jpg"
+                          src={data[0]?.image}
                         />
-                      </a>
+                      </Link>
                     </div>
                     <div className="travel-tip__detail">
                       <a className="" href="#">
                         <h4 className="travel-tip__title">
-                          Roving Chillhouse | Quán cafe giữa cánh đồng xanh có
-                          gì đặc biệt?
+                          {data[0]?.title}
                         </h4>
                         <div className="travel-tip__meta">
                           <div className="travel-tip__author">
                             <img
                               alt=""
-                              src="https://fullstack.edu.vn//static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"
+                              src={data[0]?.user != null ? data[0]?.user.avatar : data[0]?.tourGuide.avatar}
                             />
                             <p className="travel-tip__name">Tác giả</p>
                           </div>
-                          <p className="travel-tip__time">20/11/2022</p>
+                          <p className="travel-tip__time">{formatterDate.format(Date.parse(data[0]?.createdAt))}</p>
                         </div>
                       </a>
                     </div>
                   </div>
                   <div className="travel-tip__right">
                     <ul className="travel-tip__list">
-                      <li className="travel-tip__item">
-                        <div className="travel-tip__thumb">
-                          <a className="" href="#">
-                            <img
-                              alt=""
-                              src="https://dulich3mien.vn/wp-content/uploads/2022/11/Roving-Chillhouse-1-585x390.jpg"
-                            />
-                          </a>
-                        </div>
-                        <div className="travel-tip__detail">
-                          <a className="" href="#">
-                            <h4 className="travel-tip__title">
-                              Roving Chillhouse | Quán cafe giữa cánh đồng xanh
-                              có gì đặc biệt?
-                            </h4>
-                            <div className="travel-tip__meta">
-                              <div className="travel-tip__author">
-                                <img
-                                  alt=""
-                                  src="https://fullstack.edu.vn//static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"
-                                />
-                                <p className="travel-tip__name">Tác giả</p>
+                      {data?.slice(1, 4)?.map((item, index) => (
+                        <li className="travel-tip__item" key={index}>
+                          <div className="travel-tip__thumb">
+                            <Link to={`/tin-tuc/${item?.id}`}>
+                              <img alt="" src={item?.image} />
+                            </Link>
+                          </div>
+                          <div className="travel-tip__detail">
+                            <Link to={`/tin-tuc/${item?.id}`}>
+                              <h4 className="travel-tip__title">
+                                {item?.title}
+                              </h4>
+                              <div className="travel-tip__meta">
+                                <div className="travel-tip__author">
+                                  <img alt="" src={item?.image} />
+                                  <p className="travel-tip__name">Tác giả</p>
+                                </div>
+                                <p className="travel-tip__time">{formatterDate.format(Date.parse(item?.createdAt))}</p>
                               </div>
-                              <p className="travel-tip__time">20/11/2022</p>
-                            </div>
-                          </a>
-                        </div>
-                      </li>
-                      <li className="travel-tip__item">
-                        <div className="travel-tip__thumb">
-                          <a className="" href="#">
-                            <img
-                              alt=""
-                              src="https://dulich3mien.vn/wp-content/uploads/2022/11/Roving-Chillhouse-1-585x390.jpg"
-                            />
-                          </a>
-                        </div>
-                        <div className="travel-tip__detail">
-                          <a className="" href="#">
-                            <h4 className="travel-tip__title">
-                              Roving Chillhouse | Quán cafe giữa cánh đồng xanh
-                              có gì đặc biệt?
-                            </h4>
-                            <div className="travel-tip__meta">
-                              <div className="travel-tip__author">
-                                <img
-                                  alt=""
-                                  src="https://fullstack.edu.vn//static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"
-                                />
-                                <p className="travel-tip__name">Tác giả</p>
-                              </div>
-                              <p className="travel-tip__time">20/11/2022</p>
-                            </div>
-                          </a>
-                        </div>
-                      </li>
-                      <li className="travel-tip__item">
-                        <div className="travel-tip__thumb">
-                          <a className="" href="#">
-                            <img
-                              alt=""
-                              src="https://dulich3mien.vn/wp-content/uploads/2022/11/Roving-Chillhouse-1-585x390.jpg"
-                            />
-                          </a>
-                        </div>
-                        <div className="travel-tip__detail">
-                          <a className="" href="#">
-                            <h4 className="travel-tip__title">
-                              Roving Chillhouse | Quán cafe giữa cánh đồng xanh
-                              có gì đặc biệt?
-                            </h4>
-                            <div className="travel-tip__meta">
-                              <div className="travel-tip__author">
-                                <img
-                                  alt=""
-                                  src="https://fullstack.edu.vn//static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"
-                                />
-                                <p className="travel-tip__name">Tác giả</p>
-                              </div>
-                              <p className="travel-tip__time">20/11/2022</p>
-                            </div>
-                          </a>
-                        </div>
-                      </li>
-                      <li className="travel-tip__item">
-                        <div className="travel-tip__thumb">
-                          <a className="" href="#">
-                            <img
-                              alt=""
-                              src="https://dulich3mien.vn/wp-content/uploads/2022/11/Roving-Chillhouse-1-585x390.jpg"
-                            />
-                          </a>
-                        </div>
-                        <div className="travel-tip__detail">
-                          <a className="" href="#">
-                            <h4 className="travel-tip__title">
-                              Roving Chillhouse | Quán cafe giữa cánh đồng xanh
-                              có gì đặc biệt?
-                            </h4>
-                            <div className="travel-tip__meta">
-                              <div className="travel-tip__author">
-                                <img
-                                  alt=""
-                                  src="https://fullstack.edu.vn//static/media/fallback-avatar.155cdb2376c5d99ea151.jpg"
-                                />
-                                <p className="travel-tip__name">Tác giả</p>
-                              </div>
-                              <p className="travel-tip__time">20/11/2022</p>
-                            </div>
-                          </a>
-                        </div>
-                      </li>
+                            </Link>
+                          </div>
+                        </li>
+                      ))}
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div>}
+
               <div className="travel-question">
                 <h3 className="travel-title">CÂU HỎI THƯỜNG GẶP</h3>
                 <hr className="line" />
@@ -300,21 +222,32 @@ export default function Tours() {
                     className="custom-collapse__header-name"
                     key="1"
                   >
-                    <p className="custom-collapse__content">Câu trả lời 1</p>
+                    <p className="custom-collapse__content">Việt Nam sở hữu hàng ngàn những cảnh đẹp làm xao xuyến lòng người, trong đó một vài địa điểm du lịch nổi tiếng ở Việt Nam có thể kể đến như: Phú Quốc, Nha Trang, Đà Nẵng, Huế, Hà Nội, Sài Gòn, Bình Định.</p>
                   </Panel>
                   <Panel
-                    header="This is panel header 2"
+                    header="2. Du lịch Việt Nam nên đi tháng mấy?"
                     className="custom-collapse__header-name"
                     key="2"
                   >
-                    <p className="custom-collapse__content">Câu trả lời 1</p>
+                    <p className="custom-collapse__content">Để có những trải nghiệm du lịch tốt nhất khi đi khám phá các địa danh nổi tiếng ở Việt Nam, 2 thời điểm đẹp nhất là khoảng thời gian từ tháng 2 – tháng 5 hay từ tháng 8 – tháng 10. Đây là khoảng thời điểm có lượng mưa thấp, nhiệt độ không quá cao để đi du lịch.</p>
                   </Panel>
                   <Panel
-                    header="This is panel header 3"
+                    header="3. Du lịch Việt Nam ở đâu đẹp nhất?"
                     className="custom-collapse__header-name"
                     key="3"
                   >
-                    <p className="custom-collapse__content">Câu trả lời 1</p>
+                    <p className="custom-collapse__content">KTravel xin giới thiệu đến bạn 9 điểm đến được nhiều du khách ưa thích nhất mảnh đất hình chữ S năm 2022: 1. Mù Cang Chải – Yên Bái; 2.Pù Luông – Thanh Hóa; 3. Tràng An – Ninh Bình; 4. Quần thể cố đô Huế; 5. Hội An – Đà Nẵng; 6. Các bãi biển đẹp tại Nha Trang – Khánh Hòa; 7. Đảo Phú Quốc – Kiên Giang; 8. Thành phố Sài Gòn; 9. Thủ đô Hà Nội.</p>
+                  </Panel>
+                  <Panel
+                    header="4. Khám phá slogan du lịch Việt Nam qua các thời kỳ?"
+                    className="custom-collapse__header-name"
+                    key="4"
+                  >
+                    <p className="custom-collapse__content">1. Slogan du lịch Việt Nam 2001 – 2004: “Việt Nam – Điểm đến của thiên niên kỷ mới”</p>
+                    <p className="custom-collapse__content">2. Slogan du lịch Việt Nam 2004 – 2005: “Hãy đến với Việt Nam”</p>
+                    <p className="custom-collapse__content">3. Slogan du lịch Việt Nam 2006 – 2011: “Việt Nam – Vẻ đẹp tiềm ẩn”</p>
+                    <p className="custom-collapse__content">4. Slogan du lịch Việt Nam 2012 – nay: “Việt Nam – Vẻ đẹp bất tận”.</p>
+
                   </Panel>
                 </Collapse>
               </div>

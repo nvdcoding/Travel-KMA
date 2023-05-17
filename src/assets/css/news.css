@@ -565,6 +565,27 @@
   margin-top: 30px;
 }
 
+.no-post {
+  text-align: center;
+}
+
+.no-post img {
+  width: 60%;
+  margin: auto;
+}
+
+.no-post-desc {
+  margin-top: 30px;
+  font-weight: 500;
+  font-size: 23px;
+  color: #3b3b3b;
+}
+
+.no-post-desc .travel-link {
+  font-weight: 700;
+  font-size: 23px;
+}
+
 @keyframes Tippy-module_fadeIn__2LeID {
   0% {
     opacity: 0;

@@ -632,7 +632,7 @@
 }
 
 .custom-collapse__header-name {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 20px;
   line-height: 30px;
   color: var(--color-text-title);
@@ -641,8 +641,8 @@
 .custom-collapse__content {
   font-size: 17px;
   line-height: 25px;
-  color: var(--color-text);
-  font-weight: 500;
+  color: #086915;
+  font-weight: 400;
 }
 
 @media (max-width: 991px) {
@@ -748,7 +748,17 @@
   margin-bottom: 2rem;
   color: #ffffffde;
 }
+
 .mainDetail {
   background-color: #fff;
   padding: 15px;
+}
+
+.ant-collapse-icon-position-right>.ant-collapse-item>.ant-collapse-header {
+  position: relative;
+  padding: 2px 40px 2px 16px;
+}
+
+.ant-collapse-item.ant-collapse-item-active.custom-collapse__header-name>.ant-collapse-header {
+  color: #F45A06
 }

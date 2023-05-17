@@ -22,6 +22,8 @@ import TextArea from "antd/lib/input/TextArea";
 
 export default function ToursFilter() {
   const [data, setData] = useState([]);
+  const [desc, setDesc] = useState();
+  const [time, setTime] = useState(localStorage.getItem("Timeprovice"));
 
   const nameProvice = localStorage.getItem("provice");
   const timeStart = localStorage.getItem("Timeprovice");
@@ -46,7 +48,10 @@ export default function ToursFilter() {
     }
     setIsModalOpen(true);
   };
-  const onChangeTimeStart = (date, dateString) => {};
+  const onChangeTimeStart = (date, dateString) => {
+    console.log("dataa", dateString);
+    setTime(dateString)
+  };
   let params = useParams();
   const tourFiltter = async () => {
     const result = await sendGet(`/tours?provinceId=${params.id}`);
@@ -129,7 +134,7 @@ export default function ToursFilter() {
                         </Form.Item>
 
                         <Form.Item name="content" label="Mô tả:">
-                          <TextArea placeholder="Nhập yêu cầu" rows={3} />
+                          <TextArea placeholder="Nhập yêu cầu" rows={3} onChange={(e) => setDesc(e.target.value)} />
                         </Form.Item>
 
                         <Button
@@ -151,15 +156,12 @@ export default function ToursFilter() {
                         <div className="modal-content">
                           {show && (
                             <div className="modal-body">
-                              <p className="modal-name">
-                                <strong>Tên chuyến đi:</strong> {name}
+
+                              <p className="modal-place">
+                                <strong>Địa điểm:</strong> {nameProvice}
                               </p>
                               <p className="modal-place">
-                                <strong>Địa điểm:</strong> {place}
-                              </p>
-                              <p className="modal-place">
-                                <strong>Thời gian:</strong> 20/11/2022
-                                =24/11/2022
+                                <strong>Thời gian:</strong> {time}
                               </p>
                               <p>
                                 <strong>Mô tả:</strong>{" "}

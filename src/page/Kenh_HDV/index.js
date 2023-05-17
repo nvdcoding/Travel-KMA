@@ -49,44 +49,44 @@ export default function MyPage() {
                 class="to-do-box"
                 style={{ minHeight: "154px", overflow: "hidden" }}
               >
-                <a href="/portal/sale/" class="to-do-box-aitem">
+                <a href="#" class="to-do-box-aitem">
                   <p class="item-title">
                     {request?.length >= 0 ? request?.length : "0"}
                   </p>
                   <p class="item-desc">Chờ Xác Nhận</p>
                 </a>
 
-                <a href="/portal/shipment" class="to-do-box-aitem">
+                <a href="" class="to-do-box-aitem">
                   <p class="item-title">
                     {deposit?.length >= 0 ? deposit?.length : "0"}
                   </p>
                   <p class="item-desc">Chờ đặt cọc</p>
                 </a>
-                <a href="/portal/sale" class="to-do-box-aitem">
+                <a href="" class="to-do-box-aitem">
                   <p class="item-title">
                     {waitPay?.length >= 0 ? waitPay?.length : "0"}
                   </p>
                   <p class="item-desc">Chờ thanh toán</p>
                 </a>
-                <a href="/portal/sale" class="to-do-box-aitem">
+                <a href="" class="to-do-box-aitem">
                   <p class="item-title">
                     {unfulfilled?.length >= 0 ? unfulfilled?.length : "0"}
                   </p>
                   <p class="item-desc">Chưa thực hiện</p>
                 </a>
-                <a href="/portal/shipment" class="to-do-box-aitem">
+                <a href="" class="to-do-box-aitem">
                   <p class="item-title">
                     {progress?.length >= 0 ? progress?.length : "0"}
                   </p>
                   <p class="item-desc">Đang thực hiện</p>
                 </a>
-                <a href="/portal/sale" class="to-do-box-aitem">
+                <a href="" class="to-do-box-aitem">
                   <p class="item-title">
                     {made?.length >= 0 ? made?.length : "0"}
                   </p>
                   <p class="item-desc">Đã hoàn thành</p>
                 </a>
-                <a href="/portal/sale" class="to-do-box-aitem">
+                <a href="" class="to-do-box-aitem">
                   <p class="item-title">
                     {cancel?.length >= 0 ? cancel?.length : "0"}
                   </p>
@@ -96,7 +96,7 @@ export default function MyPage() {
             </div>
           </div>
         </div>
-        <div class="card">
+        {/* <div class="card">
           <div class="title-box">
             <div class="landing-page-sub-title">
               Điểm Sao Quả Tạ
@@ -140,7 +140,7 @@ export default function MyPage() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </LayoutHDV>
     </>
   );

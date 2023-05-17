@@ -16,6 +16,7 @@
   max-height: 350px;
   object-fit: contain;
 }
+
 .tour-detail__left .travel-title {
   font-size: 25px;
   color: #e50131;
@@ -117,8 +118,7 @@ table.table-journeys td {
   border-width: 0px;
 }
 
-.tour-detail__basic {
-}
+.tour-detail__basic {}
 
 td {
   font-family: "Mulish";
@@ -345,6 +345,7 @@ table.table-journeys tr td:first-child {
   line-height: 3.6rem;
   color: #ffffff;
 }
+
 .tour-plan__rate {
   color: #f2ea47;
 }
@@ -515,17 +516,20 @@ table.table-journeys tr td:first-child {
   text-decoration: underline;
   cursor: pointer;
 }
+
 .order-payment_voucher i {
   padding: 5px;
   /* border-radius: 9999px;
 border: 1px solid #ccc;
 background-color: #ccc; */
 }
+
 .order-payment__note {
   font-style: italic;
   font-size: 12px;
   color: #020202;
 }
+
 .coupon-label {
   border: 1px solid #080;
   color: #080;
@@ -535,6 +539,7 @@ background-color: #ccc; */
   margin-right: 5px;
   text-decoration: none;
 }
+
 .ant-modal-title {
   text-align: center;
   color: rgb(29 29 29 / 84%);
@@ -584,9 +589,11 @@ background-color: #ccc; */
   cursor: pointer;
   font-weight: 600;
 }
+
 .mytrip-voucher-use:hover {
   color: rgb(228, 10, 10);
 }
+
 .mytrip-voucher-bottom {
   display: flex;
   align-items: center;
@@ -598,8 +605,7 @@ background-color: #ccc; */
   white-space: nowrap;
 }
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
 .md-1 {
   justify-content: flex-end !important;
@@ -662,14 +668,11 @@ background-color: #ccc; */
   font-size: 20px;
 }
 
-.mytrip-sub-menu {
-}
+.mytrip-sub-menu {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-order {
-}
+.mytrip-order {}
 
 .mytrip-order-item {
   margin-bottom: 30px;
@@ -756,7 +759,7 @@ background-color: #ccc; */
   font-size: 1.8rem;
   line-height: 2rem;
   width: 70%;
-  margin-left: 20px;
+  margin-left: 0px;
   color: var(--color-text-title);
 }
 
@@ -764,8 +767,7 @@ background-color: #ccc; */
   /* text-decoration: line-through; */
 }
 
-.mytrip-order__main-price-km {
-}
+.mytrip-order__main-price-km {}
 
 .mytrip-order__rate .button {
   width: auto;
@@ -773,20 +775,15 @@ background-color: #ccc; */
   border-radius: 5px;
 }
 
-.mytrip-order__rate-note {
-}
+.mytrip-order__rate-note {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-voucher__search {
-}
+.mytrip-voucher__search {}
 
 .mytrip-voucher-box-search {
   display: flex;
@@ -806,11 +803,9 @@ background-color: #ccc; */
   margin-right: 10px;
 }
 
-.mytrip-sub-menu {
-}
+.mytrip-sub-menu {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
 .mytrip-voucher {
   display: grid;
@@ -879,6 +874,7 @@ background-color: #ccc; */
   color: rgb(233, 55, 55);
   cursor: pointer;
 }
+
 .ant-modal {
   width: 90%;
   max-width: 1000px;
@@ -892,6 +888,7 @@ background-color: #ccc; */
   font-size: 15px;
   margin-top: 5px;
 }
+
 .voucher-popup-title {
   font-family: "Roboto";
   font-style: normal;
@@ -901,6 +898,7 @@ background-color: #ccc; */
   color: var(--colour-navy);
   margin: 10px 0;
 }
+
 .voucher-popup-time {
   font-family: "Roboto";
   font-style: normal;
@@ -909,6 +907,7 @@ background-color: #ccc; */
   line-height: 20px;
   color: #c42424eb;
 }
+
 .voucher-popup-dk {
   font-family: "Roboto";
   font-style: normal;
@@ -918,51 +917,61 @@ background-color: #ccc; */
   color: #222121eb;
   margin-top: 10px;
 }
+
 .sendyc-form .ant-form-item {
   flex-direction: column;
   align-items: flex-start;
 }
+
 .sendyc-form.ant-form-horizontal .ant-form-item-control {
   width: 100%;
 }
+
 .sendyc-form .ant-input-number,
 .sendyc-form .ant-picker {
   width: 100%;
 }
+
 .tour-detail__plan-body .sendyc-form label {
   margin: 0;
 }
+
 .sendyc-form .ant-picker {
   padding: 9px;
 }
+
 .sendyc-form .ant-input-number-input {
   height: 38px;
 }
-.sendyc-form .ant-form-item-label > label {
+
+.sendyc-form .ant-form-item-label>label {
   height: 23px;
 }
+
 .sendyc-form .ant-form-item {
   margin: 0 0 9px;
 }
+
 .sendyc-form .ant-input {
   padding: 4px 10px;
 }
+
 .tour-detail__plan-body .sendyc-form .button {
   height: 40px;
 }
+
 .sendyc-form .button:after {
   background-color: var(--color-primary-hover);
 }
-.sendyc-form
-  .ant-form-item-label
-  > label.ant-form-item-required:not(
-    .ant-form-item-required-mark-optional
-  ):before {
+
+.sendyc-form .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
   content: "";
 }
+
 .sendyc-form .ant-form-item-control-input {
   border-radius: 0;
 }
+
 .owl-image {
   margin-top: 0px;
   margin-bottom: 30px;
@@ -973,20 +982,25 @@ td,
 th {
   border: 0 !important;
 }
+
 table {
   margin: auto;
   margin-bottom: 50px;
 }
+
 table {
   width: 100%;
 }
+
 table {
   background-color: transparent;
 }
+
 table {
   border-spacing: 0;
   border-collapse: collapse;
 }
+
 /* css new */
 .single-box-content h1.title-tour {
   font-size: 25px;
@@ -1073,11 +1087,7 @@ table {
   text-transform: uppercase;
 }
 
-.single-box-content
-  .single-content
-  .tlb-info-tour
-  tr:first-child
-  td:last-child {
+.single-box-content .single-content .tlb-info-tour tr:first-child td:last-child {
   text-align: right;
 }
 
@@ -1118,9 +1128,9 @@ ul.list-extra-services li {
   font-size: 14px;
 }
 
-.single-content .nav-tabs > li.active > a,
-.single-content .nav-tabs > li.active > a:hover,
-.single-content .nav-tabs > li.active > a:focus {
+.single-content .nav-tabs>li.active>a,
+.single-content .nav-tabs>li.active>a:hover,
+.single-content .nav-tabs>li.active>a:focus {
   background: #f0f2f5;
   color: #fefefe;
   height: 30px;
@@ -1136,7 +1146,7 @@ ul.list-extra-services li {
   padding: 0px 15px;
 }
 
-.single-content .nav-tabs > li > a {
+.single-content .nav-tabs>li>a {
   background: #00a1fe;
   color: #a09295;
   font-size: 18px;
@@ -1353,9 +1363,11 @@ ul.list-extra-services li {
   margin-top: 15px;
   outline: 0;
 }
+
 .box-form-price-tour button:hover {
   color: #fff;
 }
+
 .box-form-price-tour input,
 .box-form-price-tour select {
   color: #343434;
@@ -1428,8 +1440,7 @@ ul.list-extra-services li {
   margin-bottom: 0px;
 }
 
-.full-box-form.full-box-form-tour .full-box-form-inner div.title-h2 span {
-}
+.full-box-form.full-box-form-tour .full-box-form-inner div.title-h2 span {}
 
 .full-box-form.full-box-form-tour .full-box-form-inner div.title-h3 {
   margin: 0px;
@@ -1747,10 +1758,7 @@ ul.list-extra-services li {
   padding-left: 35px;
 }
 
-.tour-box-details
-  .tlb-page-set-tour.tlb-info-confirm-tour
-  tr
-  td:first-child:after {
+.tour-box-details .tlb-page-set-tour.tlb-info-confirm-tour tr td:first-child:after {
   content: ":";
   position: absolute;
   right: 0px;
@@ -1765,8 +1773,7 @@ ul.list-extra-services li {
   border-bottom: 1px solid #00c9e7;
 }
 
-.tour-box-details .tlb-page-set-tour.tlb-info-confirm-tour tr td {
-}
+.tour-box-details .tlb-page-set-tour.tlb-info-confirm-tour tr td {}
 
 .tour-box-details .tlb-deatils-tour.page-confirm {
   margin: 20px 0px;
@@ -1799,21 +1806,13 @@ ul.list-extra-services li {
   padding: 0px 10px;
 }
 
-.tour-box-details
-  .tlb-deatils-tour.page-confirm
-  tr
-  td:last-child
-  span.number-people {
+.tour-box-details .tlb-deatils-tour.page-confirm tr td:last-child span.number-people {
   font-size: 12px;
   color: #000;
   padding: 0px 20px;
 }
 
-.tour-box-details
-  .tlb-deatils-tour.page-confirm
-  tr
-  td:last-child
-  span.number-people:first-child {
+.tour-box-details .tlb-deatils-tour.page-confirm tr td:last-child span.number-people:first-child {
   padding-left: 0px;
 }
 
@@ -1823,11 +1822,7 @@ ul.list-extra-services li {
   padding: 0px 10px;
 }
 
-.tour-box-details
-  .tlb-deatils-tour.page-confirm
-  tr
-  td:last-child
-  span.note-deputy {
+.tour-box-details .tlb-deatils-tour.page-confirm tr td:last-child span.note-deputy {
   padding-left: 0px;
 }
 
@@ -1981,8 +1976,7 @@ ul.list-extra-services li {
 /* END TOUR PRODUCT RELATEVE */
 /* post relation tour */
 .box-post-relation.type-tour {
-  background: url(https://data.vietnambooking.com/common/svg/bg/bg_combo_tour.svg)
-    no-repeat bottom center;
+  background: url(https://data.vietnambooking.com/common/svg/bg/bg_combo_tour.svg) no-repeat bottom center;
   padding: 20px;
   line-height: 1.4;
   min-height: 170px;
@@ -2045,9 +2039,7 @@ table.tlb-contact-payment-tour .box-voucher-promo-results.voucher-tour {
   color: #ff0000;
 }
 
-table.tlb-contact-payment-tour
-  .box-voucher-promo-results.voucher-tour
-  .btn-submit-cancel {
+table.tlb-contact-payment-tour .box-voucher-promo-results.voucher-tour .btn-submit-cancel {
   display: inline-block;
   background: red;
   color: #fff;
@@ -2065,9 +2057,7 @@ table.tlb-contact-payment-tour .box-voucher-code {
   top: 5px;
 }
 
-table.tlb-contact-payment-tour
-  .box-voucher-promo-results.voucher-tour
-  .box-error {
+table.tlb-contact-payment-tour .box-voucher-promo-results.voucher-tour .box-error {
   text-align: center;
 }
 
@@ -2104,12 +2094,7 @@ ul.box-ul-anchor-text li a {
   font-size: 16px;
 }
 
-.single-box-content
-  .single-content
-  .box-form-price-tour.horizontal
-  table
-  tr
-  td {
+.single-box-content .single-content .box-form-price-tour.horizontal table tr td {
   vertical-align: bottom;
 }
 
@@ -2127,8 +2112,7 @@ ul.box-ul-anchor-text li a {
   border-radius: 5px;
 }
 
-.panel.panel-tour-product h4.panel-title {
-}
+.panel.panel-tour-product h4.panel-title {}
 
 .panel.panel-tour-product h4.panel-title a {
   display: block;
@@ -2180,12 +2164,14 @@ ul.box-ul-anchor-text li a {
   cursor: pointer;
   border-radius: 5px;
 }
+
 .panel-body .title {
   text-align: justify;
   font-size: 18px;
   color: rgb(178, 34, 34);
   margin: 5px 0;
 }
+
 .panel-body .title-tour {
   font-size: 28px;
   text-align: justify;
@@ -2193,17 +2179,19 @@ ul.box-ul-anchor-text li a {
   line-height: 32px;
   color: #cd3b3b;
 }
+
 .content-tour {
   margin: 20px 0;
 }
+
 .content-tour p {
   font-size: 15px;
   color: #404040;
   line-height: 24px;
 }
+
 /*  TOUR SPECIAL */
-.box-tour-special {
-}
+.box-tour-special {}
 
 .box-tour-special .list-item {
   margin: 0px;
@@ -2310,48 +2298,24 @@ ul.box-ul-anchor-text li a {
   font-size: 20px;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  table.tlb-time-and-traffic-tour
-  tr
-  td {
+.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td {
   padding: 0px;
   border-top: 0px;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  table.tlb-time-and-traffic-tour
-  tr
-  td:first-child {
+.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td:first-child {
   text-align: left;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  table.tlb-time-and-traffic-tour
-  tr
-  td:last-child {
+.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td:last-child {
   text-align: right;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  table.tlb-time-and-traffic-tour
-  tr
-  td:last-child
-  img {
+.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td:last-child img {
   padding: 0px 2px;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  .box-summary-content-tour {
+.single-post_special .box-content .box-content-promotion-tour .box-summary-content-tour {
   font-size: 14px;
   color: #5c5c5c;
 
@@ -2368,38 +2332,22 @@ ul.box-ul-anchor-text li a {
   margin-top: 10px;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  .box-price-promotion-tour
-  span {
+.single-post_special .box-content .box-content-promotion-tour .box-price-promotion-tour span {
   display: block;
   font-size: 24px;
   color: #fc0309;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  .box-price-promotion-tour
-  span
-  sup {
+.single-post_special .box-content .box-content-promotion-tour .box-price-promotion-tour span sup {
   font-size: 17px;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  .box-price-promotion-tour
-  del {
+.single-post_special .box-content .box-content-promotion-tour .box-price-promotion-tour del {
   font-size: 18px;
   color: #bcbfc4;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  .box-percent-tour {
+.single-post_special .box-content .box-content-promotion-tour .box-percent-tour {
   background: #ff0000;
   font-size: 16px;
 
@@ -2413,11 +2361,7 @@ ul.box-ul-anchor-text li a {
   top: 10px;
 }
 
-.single-post_special
-  .box-content
-  .box-content-promotion-tour
-  .box-percent-tour
-  .arrow-left {
+.single-post_special .box-content .box-content-promotion-tour .box-percent-tour .arrow-left {
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -2444,17 +2388,11 @@ ul.box-ul-anchor-text li a {
   color: #161616;
 }
 
-#ui-datepicker-div.tour-box-date
-  .ui-datepicker-calendar
-  tr
-  th.ui-datepicker-week-end {
+#ui-datepicker-div.tour-box-date .ui-datepicker-calendar tr th.ui-datepicker-week-end {
   color: #10bef3;
 }
 
-#ui-datepicker-div.tour-box-date
-  .ui-datepicker-calendar
-  tr
-  th.ui-datepicker-week-end:last-child {
+#ui-datepicker-div.tour-box-date .ui-datepicker-calendar tr th.ui-datepicker-week-end:last-child {
   color: #ff0000;
 }
 
@@ -2477,17 +2415,11 @@ ul.box-ul-anchor-text li a {
   color: #fff;
 }
 
-#ui-datepicker-div.tour-box-date
-  .ui-datepicker-current-day
-  .ui-state-active
-  .ui-datepicker-day {
+#ui-datepicker-div.tour-box-date .ui-datepicker-current-day .ui-state-active .ui-datepicker-day {
   color: #fff;
 }
 
-#ui-datepicker-div.tour-box-date
-  .ui-datepicker-current-day
-  .ui-state-active
-  .ui-datepicker-lunar {
+#ui-datepicker-div.tour-box-date .ui-datepicker-current-day .ui-state-active .ui-datepicker-lunar {
   color: #fff;
 }
 
@@ -2523,12 +2455,7 @@ ul.box-ul-anchor-text li a {
   font-size: 16px;
 }
 
-#ui-datepicker-div.tour-box-date
-  .ui-datepicker-calendar
-  tbody
-  tr
-  td
-  a.ui-state-default {
+#ui-datepicker-div.tour-box-date .ui-datepicker-calendar tbody tr td a.ui-state-default {
   border: 1px solid #0096ff;
 }
 
@@ -2540,8 +2467,7 @@ ul.box-ul-anchor-text li a {
 
 /* END FORM TOUR */
 /* CAT TOUR */
-.fullcat-hot-tour-data {
-}
+.fullcat-hot-tour-data {}
 
 #owl-slider-product-tour-cat-hot {
   padding: 20px 0px;
@@ -2567,8 +2493,7 @@ ul.box-ul-anchor-text li a {
   text-decoration: none;
 }
 
-#owl-slider-product-tour-cat-hot .item a .box-img {
-}
+#owl-slider-product-tour-cat-hot .item a .box-img {}
 
 #owl-slider-product-tour-cat-hot .item a .box-img img {
   max-width: 100%;
@@ -2591,11 +2516,13 @@ ul.box-ul-anchor-text li a {
   margin-bottom: 13px;
   min-height: 65px;
 }
+
 .sidebar-box-item-default.sidebar-box-item .box-title {
   display: block;
   margin-top: 50px;
   margin-bottom: 30px;
 }
+
 .sidebar-box-item-default.sidebar-box-item .box-title h3 {
   background: transparent;
   font-size: 20px;
@@ -2618,18 +2545,16 @@ ul.box-ul-anchor-text li a {
 .ant-picker-input {
   justify-content: space-between;
 }
+
 .sendyc-form .ant-picker {
   padding: 0px 10px;
 }
+
 .box-form-price-tour.horizontal.box-left button {
   margin-top: 23px;
 }
-.single-box-content
-  .single-content
-  .box-form-price-tour.horizontal.box-left
-  table
-  tr
-  td {
+
+.single-box-content .single-content .box-form-price-tour.horizontal.box-left table tr td {
   vertical-align: middle;
   margin: 0px 3px;
   display: inline-block;

@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import "./NewPost.scss";
 import { sendPost } from "../../../utils/api";
 import Layout from "../../../components/layout/layout";
+import { add } from "../../../constants/images";
 const mdParser = new MarkdownIt();
 function Blogging() {
   document.title = "Viết Blog";
@@ -82,11 +83,7 @@ function Blogging() {
     <>
       <Layout>
         <div className="Blogging-wrapper ">
-          <div style={{ display: " flex", justifyContent: "flex-end" }}>
-            <button className="Xuat-ban" onClick={handleChangeSubmit}>
-              Xuất bản
-            </button>
-          </div>
+
           <input
             placeholder="Tiêu đề"
             value={title}
@@ -100,25 +97,23 @@ function Blogging() {
             onImageUpload={onImageUpload}
             onChange={handleEditorChange}
           />
-          <Select placeholder="Chọn Topic"
-            onChange={handleChange}
-            defaultValue="FOOD"
-            style={{ width: "100%" }}
-            options={options}
-          />
+          <div className="select-toppic">
+            <p className="select-topic-title">Phân loại bài viết</p>
+            <Select placeholder="Chọn Topic"
+              onChange={handleChange}
+              defaultValue="FOOD"
+              style={{ width: "100%" }}
+              options={options}
+            />
+          </div>
           <section className="block-img_thumb">
             <label htmlFor="img">
               <div
                 className="img"
                 style={{ backgroundImage: `url(${imageUrl})` }}
               >
-                <p style={{ padding: "38px 20px 0" }}>
-                  Thêm một ảnh đại diện hấp dẫn sẽ giúp bài viết của bạn cuốn
-                  hút hơn với độc giả.
-                </p>
-                <p style={{ color: "red" }}>
-                  Kéo thả ảnh vào đây, hoặc bấm để chọn ảnh.
-                </p>
+                <p>Upload ảnh tại đây</p>
+                <img alt="" src={add} />
                 <input
                   className="img-input"
                   hidden
@@ -131,6 +126,11 @@ function Blogging() {
               </div>
             </label>
           </section>
+          <div style={{ display: " flex", justifyContent: "flex-end" }}>
+            <button className="Xuat-ban" onClick={handleChangeSubmit}>
+              Xuất bản
+            </button>
+          </div>
         </div>
       </Layout>
     </>

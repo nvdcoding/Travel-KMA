@@ -22,7 +22,7 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Pay() {
   const [coin, setCoin] = useState();
-  const [amount, setAmount] = useState();
+  const [amount, setAmount] = useState(0);
   const [active, setActive] = useState(true);
 
   const PayOnline = async (value) => {
@@ -82,6 +82,9 @@ export default function Pay() {
       value: "5000000",
     },
   ];
+  const onChangeAmount = (e) => {
+    setAmount(e.target.value);
+  };
   useEffect(() => {
     UserTransactions();
   }, []);
@@ -157,6 +160,7 @@ export default function Pay() {
                                 </Form.Item>
                                 <Form.Item label="" name="amount">
                                   <Radio.Group
+                                    onChange={onChangeAmount}
                                     options={optionsWithDisabled}
                                     optionType="button"
                                     buttonStyle="solid"
@@ -270,96 +274,8 @@ export default function Pay() {
     </>
   );
 }
-const ModalVoucher = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const handleVoucher = () => {
-    setIsModalOpen(false);
-    setVoucher("TM12");
-  };
-  const [voucher, setVoucher] = useState();
-  return (
-    <>
-      <span className="order-payment_voucher" onClick={showModal}>
-        <span className="coupon-label success">{voucher}</span>
-        {/* <i className="fa-solid fa-percent"></i> */}
-        Mã Voucher
-      </span>
-      <Modal
-        footer={null}
-        width="90%"
-        title="Mã giảm giá "
-        visible={isModalOpen}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        centered
-      >
-        <div className="mytrip-voucher">
-          <div className="mytrip-voucher-item">
-            <div className="mytrip-voucher-left">
-              <img
-                className="mytrip-voucher-img"
-                alt=""
-                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-              />
-              <h4 className="mytrip-voucher-name">Voucher</h4>
-            </div>
-            <div className="mytrip-voucher-right">
-              <div className="mytrip-voucher-top">
-                <h3 className="mytrip-voucher-title">
-                  Giảm 10% đơn 20k giảm 210k
-                </h3>
-                <p
-                  className="mytrip-voucher-use"
-                  onClick={() => handleVoucher()}
-                >
-                  Dùng ngay
-                </p>
-              </div>
-              <div className="mytrip-voucher-bottom">
-                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
-                <Condition />
-              </div>
-            </div>
-          </div>
-          <div className="mytrip-voucher-item">
-            <div className="mytrip-voucher-left">
-              <img
-                className="mytrip-voucher-img"
-                alt=""
-                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-              />
-              <h4 className="mytrip-voucher-name">Voucher</h4>
-            </div>
-            <div className="mytrip-voucher-right">
-              <div className="mytrip-voucher-top">
-                <h3 className="mytrip-voucher-title">
-                  Giảm 10% đơn 20k giảm 210k
-                </h3>
-                <p className="mytrip-voucher-use">Dùng ngay</p>
-              </div>
-              <div className="mytrip-voucher-bottom">
-                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
-                <Condition />
-              </div>
-            </div>
-          </div>
-        </div>
-      </Modal>
-    </>
-  );
-};
 const DrwarMoney = ({ coin }) => {
-  const [amountDraw, setAmountDraw] = useState();
+  const [amountDraw, setAmountDraw] = useState(0);
   const { RangePicker } = DatePicker;
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -416,7 +332,9 @@ const DrwarMoney = ({ coin }) => {
       value: coin,
     },
   ];
-
+  const onChangeAmountDraw = (e) => {
+    setAmountDraw(e.target.value);
+  };
   const gethistoryDraw = async () => {
     const res = await sendGet("/transactions/my-request-witrhdraw", {
       startDate: moment()
@@ -490,6 +408,7 @@ const DrwarMoney = ({ coin }) => {
                 </Form.Item>
                 <Form.Item label="" name="amount">
                   <Radio.Group
+                    onChange={onChangeAmountDraw}
                     options={optionsPayMoney}
                     optionType="button"
                     buttonStyle="solid"
@@ -557,7 +476,7 @@ const DrwarMoney = ({ coin }) => {
             Tìm kiếm
           </div>
         </div>
-        <h4 className="search-title">Kết quả tìm kiếm </h4>
+        <h4 className="search-title">Kết quả tìm kiếm ({history.length}) </h4>
         <ul className="Result-request__list">
           {history &&
             history.length > 0 &&

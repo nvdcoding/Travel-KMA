@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Modal } from "antd";
 function Condition(props) {
   const [open, setOpen] = useState(false);
+  const formatterDate = new Intl.DateTimeFormat("vi-VN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
   const showModal = () => {
     setOpen(true);
   };
@@ -30,10 +35,13 @@ function Condition(props) {
           {props.data?.name ? props.data?.name : " Tên Voucher"}
         </h4>
         <p className="voucher-popup-time">
-          Thời gian: Áp dụng đến {props.data.endDate}
+          Thời gian: Áp dụng đến {formatterDate.format(Date.parse(props.data.endDate))}
         </p>
         <p className="voucher-popup-dk">Điều kiện sử dụng:</p>
         <p className="voucher-popup-des">{props.data?.description}</p>
+        {props.data?.claimed && <h3 className="voucher-popup-claimed">
+          <i class="fa-solid fa-bag-shopping"></i>Số lượng đã lấy:  <span>{ }/{props.data?.quantity}</span>
+        </h3>}
       </Modal>
     </>
   );

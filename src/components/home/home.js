@@ -210,6 +210,7 @@ function Home() {
   const { provice } = useContext(AppContext);
   const [tourGuide, setTourGuide] = useState([]);
   const [tour, setTour] = useState([]);
+  const [post, setPost] = useState([]);
 
   const onChangeTime = (date, dateString) => {
     localStorage.setItem("Timeprovice", date);
@@ -243,6 +244,17 @@ function Home() {
     hour: "2-digit",
     minute: "numeric",
   });
+  const listNews = async () => {
+    const res = await sendGet("/posts/user-tourguide", { limit: 100 });
+    if (res.statusCode == 200) {
+      setPost(res.returnValue.data);
+    } else {
+      message.error("Thất bại");
+    }
+  };
+  useEffect(() => {
+    listNews();
+  }, []);
   useEffect(() => {
     getData();
     listTour();
@@ -524,112 +536,64 @@ function Home() {
             </div>
           </div>
           {/* bai viet */}
-          <div className="news">
+          {post && <div className="news">
             <div className="travel-title-all">
               <h2 className="travel-title">Bài viết</h2>
-              <a href="#" className="travel-link">
+              <Link to='/tin-tuc' className="travel-link">
                 Xem tất cả <i class="fa-solid fa-angle-right"></i>
-              </a>
+              </Link>
             </div>
             <div className="news-main">
               <ul className="news-left">
                 <li className="news-left-item">
-                  <Link to={`/tin-tuc/thflsnmx`}>
+                  <Link to={`/tin-tuc/${post[0]?.id}`}>
                     <div className="news-left-thumb">
                       <img
                         alt=""
-                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
+                        src={post[0]?.image}
                       />
                     </div>{" "}
                   </Link>
                   <div className="news-left__intro">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <h3 className="news-left__name">bài viết số 1</h3>
+                    <Link to={`/tin-tuc/${post[0]?.id}`}>
+                      <h3 className="news-left__name"> {post[0]?.title}</h3>
                     </Link>
-                    <p className="news-left-des">
-                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
-                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
-                      khí hậu và sự bất cẩn của con người.
+                    <p className="news-left-des" dangerouslySetInnerHTML={{
+                      __html: post[0]?.currentContent,
+                    }}>
                     </p>
-                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
+                    <Link to={`/tin-tuc/${post[0]?.id}`} className="news-link">
                       Xem chi tiết
                     </Link>
                   </div>
                 </li>
               </ul>
               <ul className="news-right">
-                <li className="news-right-item">
-                  <div className="news-right-thumb">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <img
-                        alt=""
-                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
-                      />
-                    </Link>
-                  </div>
-                  <div className="news-right__intro">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <h3 className="news-right__name">bài viết số 1</h3>
-                    </Link>
-                    <p className="news-right-des">
-                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
-                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
-                      khí hậu và sự bất cẩn của con người.
-                    </p>
-                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
-                      Xem chi tiết
-                    </Link>
-                  </div>
-                </li>
-                <li className="news-right-item">
-                  <div className="news-right-thumb">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <img
-                        alt=""
-                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
-                      />
-                    </Link>
-                  </div>
-                  <div className="news-right__intro">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <h3 className="news-right__name">bài viết số 1</h3>
-                    </Link>
-                    <p className="news-right-des">
-                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
-                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
-                      khí hậu và sự bất cẩn của con người.
-                    </p>
-                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
-                      Xem chi tiết
-                    </Link>
-                  </div>
-                </li>
-                <li className="news-right-item">
-                  <div className="news-right-thumb">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <img
-                        alt=""
-                        src=" https://media.vietteltelecom.vn/upload//3d/7c/c3/8fcba0cf72a19ac1d3b68fc171d711d2cd2d7a65.jpg"
-                      />
-                    </Link>
-                  </div>
-                  <div className="news-right__intro">
-                    <Link to={`/tin-tuc/thflsnmx`}>
-                      <h3 className="news-right__name">bài viết số 1</h3>
-                    </Link>
-                    <p className="news-right-des">
-                      Đây là những điểm đến đẹp nhất hành tinh, nhưng thật đáng
-                      tiếc vì chúng có nguy cơ biến mất mãi mãi do sự biến đổi
-                      khí hậu và sự bất cẩn của con người.
-                    </p>
-                    <Link to={`/tin-tuc/thflsnmx`} className="news-link">
-                      Xem chi tiết
-                    </Link>
-                  </div>
-                </li>
+                {post?.slice(1, 3)?.map((item, index) => (
+                  <li className="news-right-item" key={index}>
+                    <div className="news-right-thumb">
+                      <Link to={`/tin-tuc/${item?.id}`}>
+                        <img alt="" src={item?.image} />
+                      </Link>
+                    </div>
+                    <div className="news-right__intro">
+                      <Link to={`/tin-tuc/${item?.id}`}>
+                        <h3 className="news-right__name"> {item?.title}</h3>
+                      </Link>
+                      <p className="news-right-des" dangerouslySetInnerHTML={{
+                        __html: data[0]?.currentContent,
+                      }}>
+                      </p>
+                      <Link to={`/tin-tuc/${item?.id}`} className="news-link">
+                        Xem chi tiết
+                      </Link>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
-          </div>
+          </div>}
+
           <div className="tour-view">
             <div className="travel-title-all">
               <div>

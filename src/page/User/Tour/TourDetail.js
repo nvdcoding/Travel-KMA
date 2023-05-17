@@ -5,7 +5,8 @@ import Layout from "../../../components/layout/layout";
 import { Link, useHistory, useParams } from "react-router-dom";
 import "../../../assets/css/tour-detail.css";
 import OwlCarousel from "react-owl-carousel";
-import * as ReactMarkdown from "react-markdown";
+import ReactMarkdown from 'react-markdown'
+
 import {
   Input,
   InputNumber,
@@ -200,7 +201,7 @@ export default function TourDetail() {
                       >
                         <div className="panel-body content-tour-item content-tour-tab-program-tour-0 active">
                           {data?.tourSchedule.map((value, index) => (
-                            <>
+                            <div key={index}>
                               <h3
                                 className="title"
                                 style={{
@@ -226,7 +227,7 @@ export default function TourDetail() {
                                   </ReactMarkdown>
                                 </p>
                               </div>
-                            </>
+                            </div>
                           ))}
                         </div>
                       </div>
@@ -540,8 +541,8 @@ export default function TourDetail() {
               </div>
             </div>
           </div>
-        </div>
-      </Layout>
+        </div >
+      </Layout >
     </>
   );
 }

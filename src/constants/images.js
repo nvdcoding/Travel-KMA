@@ -47,3 +47,5 @@ export { default as banner9 } from "../assets/images/banner9.jpg";
 export { default as vnpay } from "../assets/images/vnpay.png";
 export { default as vnpayv2 } from "../assets/images/pay.png";
 export { default as note } from "../assets/images/note1.png";
+export { default as add } from "../assets/images/add.png";
+export { default as nodata } from "../assets/images/No data-cuate.svg";

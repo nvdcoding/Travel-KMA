@@ -77,20 +77,20 @@ export default function Request() {
                 }
               >
                 <p>
-                  <strong>Mã yêu cầu: </strong>
-                  {item?.id}
+                  <i class="fa-solid fa-gear"></i> Mã yêu cầu:
+                  <strong> {item?.id} </strong>
                 </p>
                 <p>
-                  <strong>Nội dung: </strong>
-                  {item?.content}
+                  <i class="fa-solid fa-pen-to-square"></i> Nội dung:
+                  <strong> {item?.content} </strong>
                 </p>
                 <p>
-                  <strong>Loại hình: </strong>
-                  {item?.type}
+                  <i class="fa-solid fa-quote-left"></i>Loại hình:
+                  <strong> {item?.type}</strong>
                 </p>
                 <p>
-                  <strong>Thời gian mong muốn: </strong>
-                  {item?.startDate}
+                  <i class="fa-solid fa-calendar-days"></i>Thời gian mong muốn:
+                  <strong>{item?.startDate} </strong>
                 </p>
               </Card>
             ))

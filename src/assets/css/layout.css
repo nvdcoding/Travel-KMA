@@ -134,8 +134,8 @@
 .tour-footer-sub .tour-footer-logo {
   width: 35%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
 }
 

@@ -81,7 +81,7 @@ export default function PayHistory() {
         </div>
 
         <li class="History-list__info-year">
-          <h4 className="search-title">Kết quả tìm kiếm </h4>
+          <h4 className="search-title">Kết quả tìm kiếm ({history.length})</h4>
           <ul class="History-list__info">
             {history.map((item, index) => (
               <li class="History-item__info">
@@ -94,8 +94,8 @@ export default function PayHistory() {
                       {item?.status == 1
                         ? "Nạp tiền thành công"
                         : item?.status == 2
-                        ? "Đang xử lý"
-                        : "Thanh toán thất bại"}
+                          ? "Đang xử lý"
+                          : "Thanh toán thất bại"}
                     </h4>
                     <div class="History-des__sub-price">
                       <p>{formatterPrice.format(item?.amount)}đ</p>
