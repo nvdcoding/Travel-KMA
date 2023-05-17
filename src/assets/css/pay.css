@@ -206,7 +206,7 @@
   }
 }
 
-.payment-online__form .check-box__input:checked ~ .check-box__txt {
+.payment-online__form .check-box__input:checked~.check-box__txt {
   color: #727272;
 }
 
@@ -1199,8 +1199,7 @@ background-color: #ccc; */
   white-space: nowrap;
 }
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
 .md-1 {
   justify-content: flex-end !important;
@@ -1263,14 +1262,11 @@ background-color: #ccc; */
   font-size: 20px;
 }
 
-.mytrip-sub-menu {
-}
+.mytrip-sub-menu {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-order {
-}
+.mytrip-order {}
 
 .mytrip-order-item {
   margin-bottom: 30px;
@@ -1365,8 +1361,7 @@ background-color: #ccc; */
   /* text-decoration: line-through; */
 }
 
-.mytrip-order__main-price-km {
-}
+.mytrip-order__main-price-km {}
 
 .mytrip-order__rate .button {
   width: auto;
@@ -1374,20 +1369,15 @@ background-color: #ccc; */
   border-radius: 5px;
 }
 
-.mytrip-order__rate-note {
-}
+.mytrip-order__rate-note {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
-.mytrip-voucher__search {
-}
+.mytrip-voucher__search {}
 
 .mytrip-voucher-box-search {
   display: flex;
@@ -1407,11 +1397,9 @@ background-color: #ccc; */
   margin-right: 10px;
 }
 
-.mytrip-sub-menu {
-}
+.mytrip-sub-menu {}
 
-.mytrip-sub-menu-name {
-}
+.mytrip-sub-menu-name {}
 
 .mytrip-voucher {
   display: grid;
@@ -1571,8 +1559,8 @@ background-color: #ccc; */
   padding: 10px 80px;
 }
 
-.ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap,
-.ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-wrap {
+.ant-tabs>.ant-tabs-nav .ant-tabs-nav-wrap,
+.ant-tabs>div>.ant-tabs-nav .ant-tabs-nav-wrap {
   justify-content: "center";
   align-items: center;
   justify-content: space-around;
@@ -1937,35 +1925,26 @@ background-color: #ccc; */
   font-size: 16px;
 }
 
-.ant-form-item-label > label {
+.ant-form-item-label>label {
   font-size: 23px;
   font-weight: 600;
   color: #484848;
 }
 
-.ant-form-item-label > label::before {
+.ant-form-item-label>label::before {
   content: "";
 }
 
-.ant-form-item-label
-  > label.ant-form-item-required:not(
-    .ant-form-item-required-mark-optional
-  ):before {
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
   content: "";
 }
 
-.ant-radio-button-wrapper-checked:not(
-    [class*=" ant-radio-button-wrapper-disabled"]
-  ).ant-radio-button-wrapper:first-child {
+.ant-radio-button-wrapper-checked:not([class*=" ant-radio-button-wrapper-disabled"]).ant-radio-button-wrapper:first-child {
   border-right-color: var(--color-sub);
 }
 
-.ant-radio-group-solid
-  .ant-radio-button-wrapper-checked:not(
-    .ant-radio-button-wrapper-disabled
-  ):hover,
-.ant-radio-group-solid
-  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover,
+.ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
   background: var(--color-sub);
   border-color: var(--color-sub);
 }
@@ -2083,8 +2062,11 @@ background-color: #ccc; */
 }
 
 .request-bottom__detail {
-  margin-left: -13px;
   flex: 1;
+}
+
+.request-bottom__detail i {
+  margin-right: 5px;
 }
 
 .Result-request__item hr {
@@ -2099,7 +2081,6 @@ background-color: #ccc; */
   font-weight: 400;
   font-size: 14px;
   line-height: 25px;
-  color: #fe7d05;
 }
 
 .red-color {
@@ -2128,6 +2109,7 @@ background-color: #ccc; */
 .icon-bottom {
   margin-right: 7px;
 }
+
 .payment-money {
   font-size: 17px;
   font-weight: 700;
@@ -2135,6 +2117,7 @@ background-color: #ccc; */
   text-align: center;
   cursor: pointer;
 }
+
 .search-title {
   margin: 20px 0;
   font-size: 17px;
@@ -2147,6 +2130,7 @@ background-color: #ccc; */
   padding: 7px 11px;
   margin-right: 20px;
 }
+
 .pay-search .button {
   padding: 7px 20px;
   border-radius: 5px;

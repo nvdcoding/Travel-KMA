@@ -44,6 +44,15 @@ export default function Pay() {
     hour: "2-digit",
     minute: "numeric",
   });
+  const formatterDate = new Intl.DateTimeFormat("vi-VN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const formatterTime = new Intl.DateTimeFormat("vi-VN", {
+    hour: "2-digit",
+    minute: "numeric",
+  });
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -362,6 +371,7 @@ const DrwarMoney = ({ coin }) => {
       const res = await sendPost("/transactions/user-withdraw", value);
       if (res.statusCode == 200) {
         message.success("Tạo yêu cầu rút tiền thành công");
+        await gethistoryDraw();
       } else {
         //đơn hàng thất bại
       }
@@ -549,62 +559,48 @@ const DrwarMoney = ({ coin }) => {
         </div>
         <h4 className="search-title">Kết quả tìm kiếm </h4>
         <ul className="Result-request__list">
-          <li className="Result-request__item">
-            <div className="box-request__top">
-              <div className="code-request">
-                <p className="code-request__name">
-                  Mã yêu cầu:{" "}
-                  <span className="code-request__name name-highlight">
-                    261696
-                  </span>
-                </p>
-              </div>{" "}
-              <a href="#" className="icon-request__detail">
-                <img src="images/registeragency/detail.png" alt="" />
-              </a>
-            </div>{" "}
-            <div className="box-request__body">
-              <p className="box-request__title">Tạo mã rút tiền</p>{" "}
-            </div>{" "}
-            <div className="box-request__bottom">
-              <div className="request-bottom__detail">
-                <i class="fa-solid fa-rotate-right"></i>
-                <p className="request-bottom__name">Đang thực hiện</p>
-              </div>{" "}
-              <div className="request-bottom__time">
-                <i class="fa-regular fa-clock"></i>
-                <p className="request-bottom__datetime">1:25 18/08/2022</p>
-              </div>
-            </div>
-          </li>
-          <li className="Result-request__item">
-            <div className="box-request__top">
-              <div className="code-request">
-                <p className="code-request__name">
-                  Mã yêu cầu:{" "}
-                  <span className="code-request__name name-highlight">
-                    261696
-                  </span>
-                </p>
-              </div>{" "}
-              <a href="#" className="icon-request__detail">
-                <img src="images/registeragency/detail.png" alt="" />
-              </a>
-            </div>{" "}
-            <div className="box-request__body">
-              <p className="box-request__title">Tạo mã rút tiền</p>{" "}
-            </div>{" "}
-            <div className="box-request__bottom">
-              <div className="request-bottom__detail">
-                <i class="fa-solid fa-rotate-right"></i>
-                <p className="request-bottom__name">Đang thực hiện</p>
-              </div>{" "}
-              <div className="request-bottom__time">
-                <i class="fa-regular fa-clock"></i>
-                <p className="request-bottom__datetime">1:25 18/08/2022</p>
-              </div>
-            </div>
-          </li>
+          {history &&
+            history.length > 0 &&
+            history.map((item, index) => (
+              <li className="Result-request__item" key={index}>
+                <div className="box-request__top">
+                  <div className="code-request">
+                    <p className="code-request__name">
+                      Mã yêu cầu:{" "}
+                      <span className="code-request__name name-highlight">
+                        {item?.id}
+                      </span>
+                    </p>
+                  </div>{" "}
+                  <a href="#" className="icon-request__detail">
+                    <img src="images/registeragency/detail.png" alt="" />
+                  </a>
+                </div>{" "}
+                <div className="box-request__body">
+                  <p className="box-request__title">Số tiền giao dịch:  <span className="code-request__name name-highlight">
+                    {formatterPrice.format(item?.amount)} đ
+                  </span></p>{" "}
+                </div>{" "}
+                <div className="box-request__bottom">{
+                  item?.status == 1 ? <div className="request-bottom__detail" style={{ color: "#51bb4c" }}>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p className="request-bottom__name">Đã thanh toán</p>
+                  </div> : item?.status == 0 ? <div className="request-bottom__detail" style={{ color: "#dc1b1b" }}>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <p className="request-bottom__name">Thất bại</p>
+                  </div> : <div className="request-bottom__detail" style={{ color: "#fe7d05" }}>
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <p className="request-bottom__name">Đang thực hiện</p>
+                  </div>
+                }
+                  {" "}
+                  <div className="request-bottom__time">
+                    <i class="fa-regular fa-clock"></i>
+                    <p className="request-bottom__datetime"> {formatterTime.format(Date.parse(item?.time))}  {formatterDate.format(Date.parse(item?.time))}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
         </ul>
       </Tabs.TabPane>
     </Tabs>
