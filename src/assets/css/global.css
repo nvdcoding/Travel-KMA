@@ -292,6 +292,13 @@ opacity: 0.75; */
   color: #fff !important;
 }
 
+.button--plus {
+  margin-left: 10px;
+  color: #fff;
+  border-color: 1px solid var(--color-sub);
+  background-color: var(--color-sub);
+  border-radius: 8px;
+}
 .radio-custom1 span {
   display: block;
 }
@@ -322,7 +329,7 @@ opacity: 0.75; */
   display: none;
 }
 
-.radio-custom1 input:checked~.checkmark:after {
+.radio-custom1 input:checked ~ .checkmark:after {
   display: block;
   background: var(--color-primary-hover);
   width: 10px;
@@ -814,12 +821,12 @@ opacity: 0.75; */
   width: 85%;
 }
 
-.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
   color: var(--color-text-title);
   margin: 15px 0;
 }
 
-.ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-arrow {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
   font-size: 16px;
   color: var(--color-primary-hover);
 }
@@ -836,7 +843,7 @@ opacity: 0.75; */
   }
 }
 
-.ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-arrow {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
   font-size: 16px;
   color: var(--color-primary-hover);
 }
@@ -984,14 +991,18 @@ iframe {
   width: 18px !important;
 }
 
-.check-box__input:checked~.check-box__checkmark {
-  background: -webkit-linear-gradient(bottom,
+.check-box__input:checked ~ .check-box__checkmark {
+  background: -webkit-linear-gradient(
+      bottom,
       rgba(209, 19, 19, 0.2),
-      rgba(209, 19, 19, 0.2)),
+      rgba(209, 19, 19, 0.2)
+    ),
     #fff;
-  background: linear-gradient(0deg,
+  background: linear-gradient(
+      0deg,
       rgba(209, 19, 19, 0.2),
-      rgba(209, 19, 19, 0.2)),
+      rgba(209, 19, 19, 0.2)
+    ),
     #fff;
   border-color: #ee0033;
 }
@@ -1011,7 +1022,7 @@ iframe {
   width: 4px;
 }
 
-.check-box__input:checked~.check-box__checkmark:after {
+.check-box__input:checked ~ .check-box__checkmark:after {
   display: block;
 }
 
@@ -1093,6 +1104,17 @@ iframe {
   font-size: 15px;
   line-height: 24px;
   margin-top: 10px;
+}
+
+.modal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.modal-btn .button {
+  width: 48%;
 }
 
 .button-group {

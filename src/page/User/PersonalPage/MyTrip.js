@@ -14,9 +14,10 @@ import {
 import RateScreen from "../../../components/rate";
 import { Link } from "react-router-dom";
 import Condition from "../../../components/condition";
-import { sendDelete, sendGet, sendPut } from "../../../utils/api";
+import { sendDelete, sendGet, sendPost, sendPut } from "../../../utils/api";
 import OrderDetail from "./OrderDetail";
 import Request from "./Request";
+import { getItem } from "../../../utils/storage";
 export default function MyTrip() {
   const { TabPane } = Tabs;
   const [dataProcessing, setDataProcessing] = useState([]);
@@ -180,16 +181,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -317,16 +318,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -369,15 +370,20 @@ export default function MyTrip() {
                                 </div>
                               </div>
                             ) : (
-                              <div className="mytrip-order__rate">
-                                Kết thúc vào ngày vào ngày {value?.endDate}
-                                <div
-                                  className="button button--primary"
-                                  onClick={() => endTour(value)}
-                                >
-                                  Kết thúc
+                              <>
+                                <div className="mytrip-order__rate">
+                                  Kết thúc vào ngày vào ngày {value?.endDate}
+                                  <div className="mytrip-group">
+                                    <div
+                                      className="button button--primary"
+                                      onClick={() => endTour(value)}
+                                    >
+                                      Kết thúc
+                                    </div>
+                                    <Report data={value} />
+                                  </div>
                                 </div>
-                              </div>
+                              </>
                             )}
                           </div>
                         ))}
@@ -409,16 +415,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -451,23 +457,24 @@ export default function MyTrip() {
                               </div>
                             </div>
                             <div className="mytrip-order__rate ">
-                              {value?.tour?.rates.length > 0 ? (
+                              {value.status == 5 && (
                                 <>
-                                  <p className="mytrip-order__rate-note">
-                                    Đã đánh giá
-                                  </p>
-                                  {/* <RateScreen
-                                  data={value}
-                                  rate={value?.tour?.rates}
-                                /> */}
-                                </>
-                              ) : (
-                                <>
-                                  <p className="mytrip-order__rate-note">
-                                    Chưa nhận được đánh giá
-                                  </p>
-
-                                  <RateScreen data={value} />
+                                  {value?.tour?.rates.length > 0 ? (
+                                    <>
+                                      <p className="mytrip-order__rate-note">
+                                        Đã đánh giá
+                                      </p>
+                                    </>
+                                  ) : (
+                                    <>
+                                      <p className="mytrip-order__rate-note">
+                                        Chưa nhận được đánh giá
+                                      </p>
+                                      <div className="right-trip">
+                                        <RateScreen data={value} />
+                                      </div>
+                                    </>
+                                  )}
                                 </>
                               )}
                             </div>
@@ -633,6 +640,73 @@ const Voucher = () => {
           </div>
         </TabPane>
       </Tabs>
+    </>
+  );
+};
+const Report = ({ data }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [content, setContent] = useState("");
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = async () => {
+    if (!content) {
+      message.error("Vui lòng nhập nội dung báo cáo");
+      return;
+    }
+    const response = await sendPost(`/reports/tourguide`, {
+      orderId: data?.id,
+      content: content,
+    });
+    if (response.statusCode === 200) {
+      message.success("Đã gửi báo cáo tới quản trị viên");
+      setIsModalOpen(false);
+      setContent("");
+    } else {
+      message.error("Báo cáo thất bại !!!");
+    }
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setContent("");
+  };
+  const getcontent = (e) => {
+    setContent(e.target.value);
+  };
+  return (
+    <>
+      <div className="button button--plus" onClick={showModal}>
+        Báo cáo
+      </div>
+      <Modal
+        className="modal-report"
+        title=""
+        open={isModalOpen}
+        visible={isModalOpen}
+        onOk={handleOk}
+        centered
+        footer={null}
+        onCancel={handleCancel}
+      >
+        <h1 className="modal-title">Báo cáo HDV</h1>
+        <p className="modal-des">
+          Chuyến đi có vấn đề? Hãy báo lại cho chúng tôi ngay nhé!
+        </p>
+        <textarea
+          value={content}
+          onChange={getcontent}
+          rows={3}
+          placeholder="Nội dung báo cáo...."
+        />
+        <div className="modal-btn">
+          <div className="button button--primary" onClick={handleOk}>
+            Báo cáo ngay
+          </div>
+          <div className="button button--normal" onClick={handleCancel}>
+            Hủy
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

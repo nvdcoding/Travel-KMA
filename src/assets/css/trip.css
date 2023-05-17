@@ -16,9 +16,11 @@
   margin-left: 10px;
 }
 
-.mytrip-sub-menu {}
+.mytrip-sub-menu {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
 .mytrip-order {
   min-height: 50vh;
@@ -39,7 +41,7 @@
 
 .stardust1 {
   font-size: 16px;
-  margin: 5px 0
+  margin: 5px 0;
 }
 
 .stardust1 span {
@@ -148,15 +150,20 @@
   border-radius: 5px;
 }
 
-.mytrip-order__rate-note {}
+.mytrip-order__rate-note {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-menu-item {}
+.mytrip-menu-item {
+}
 
 .mytrip-voucher__search {
   font-size: 26px;
@@ -186,9 +193,11 @@
   margin-right: 10px;
 }
 
-.mytrip-sub-menu {}
+.mytrip-sub-menu {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
 .mytrip-voucher {
   display: grid;
@@ -212,7 +221,8 @@
   width: 160px;
 }
 
-.mytrip-voucher-img {}
+.mytrip-voucher-img {
+}
 
 .mytrip-voucher-name {
   color: #fff;
@@ -247,7 +257,8 @@
   white-space: nowrap;
 }
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
 .md-1 {
   justify-content: flex-end;
@@ -310,11 +321,14 @@
   font-size: 20px;
 }
 
-.mytrip-sub-menu {}
+.mytrip-sub-menu {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-order {}
+.mytrip-order {
+}
 
 .mytrip-order-item {
   margin-bottom: 30px;
@@ -419,7 +433,8 @@
   font-weight: 600;
 }
 
-.mytrip-order__main-price-km {}
+.mytrip-order__main-price-km {
+}
 
 .mytrip-order__rate .button {
   width: auto;
@@ -427,15 +442,20 @@
   border-radius: 5px;
 }
 
-.mytrip-order__rate-note {}
+.mytrip-order__rate-note {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-voucher__search {}
+.mytrip-voucher__search {
+}
 
 .mytrip-voucher-box-search {
   display: flex;
@@ -455,9 +475,11 @@
   margin-right: 10px;
 }
 
-.mytrip-sub-menu {}
+.mytrip-sub-menu {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
 .mytrip-voucher {
   display: grid;
@@ -527,7 +549,8 @@
   cursor: pointer;
 }
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
 .md-1 {
   justify-content: flex-end;
@@ -614,7 +637,8 @@
   border-radius: 10px;
 }
 
-.voucher-popup-des {}
+.voucher-popup-des {
+}
 
 .mytrip-voucher.voucher-expires .mytrip-voucher-item {
   opacity: 0.5;
@@ -664,13 +688,13 @@
   cursor: pointer;
 }
 
-.yO9lYJ>span,
-.yO9lYJ>svg {
+.yO9lYJ > span,
+.yO9lYJ > svg {
   line-height: 16px;
   vertical-align: bottom;
 }
 
-.yO9lYJ>svg {
+.yO9lYJ > svg {
   height: 16px;
   margin: 0 5px 0 0;
   font-size: 14px;
@@ -936,7 +960,7 @@
   font-size: 12px;
 }
 
-._8kMYJ3>span {
+._8kMYJ3 > span {
   display: inline-block;
   vertical-align: middle;
 }
@@ -992,7 +1016,7 @@
   margin-top: -2px;
 }
 
-.yDc2ND>svg {
+.yDc2ND > svg {
   display: block;
   fill: #fff;
   width: 30px;
@@ -1004,7 +1028,7 @@
   padding: 0;
 }
 
-.SYeKXM>svg {
+.SYeKXM > svg {
   display: block;
   fill: #fff;
 }
@@ -1013,7 +1037,7 @@
   margin-bottom: 1px;
 }
 
-.DojxHk>svg {
+.DojxHk > svg {
   display: block;
   fill: #fff;
   width: 24px;
@@ -1072,11 +1096,11 @@
   border-color: #1d951b;
 }
 
-.ant-steps-item-finish .ant-steps-item-icon>.ant-steps-icon {
+.ant-steps-item-finish .ant-steps-item-icon > .ant-steps-icon {
   color: #2c9f40;
 }
 
-.ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon {
+.ant-steps-item-process > .ant-steps-item-container > .ant-steps-item-icon {
   background: #1d951b;
 }
 
@@ -1084,7 +1108,10 @@
   border-color: #2c9f40;
 }
 
-.ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title:after {
+.ant-steps-item-finish
+  > .ant-steps-item-container
+  > .ant-steps-item-content
+  > .ant-steps-item-title:after {
   background-color: #229231;
 }
 
@@ -1128,13 +1155,13 @@
   font-size: 18px;
 }
 
-._5fvHLp>svg {
+._5fvHLp > svg {
   margin: 0 6px 0 0;
   line-height: 0;
 }
 
-._5fvHLp>span,
-._5fvHLp>svg {
+._5fvHLp > span,
+._5fvHLp > svg {
   vertical-align: middle;
 }
 
@@ -1189,13 +1216,13 @@
   opacity: 0.4;
 }
 
-._3Bq3iJ>svg {
+._3Bq3iJ > svg {
   margin: 0 6px 0 0;
   line-height: 0;
 }
 
-._3Bq3iJ>span,
-._3Bq3iJ>svg {
+._3Bq3iJ > span,
+._3Bq3iJ > svg {
   vertical-align: middle;
 }
 
@@ -1204,13 +1231,13 @@
   font-size: 18px;
 }
 
-.F9Nsej>svg {
+.F9Nsej > svg {
   margin: 0 6px 0 0;
   line-height: 0;
 }
 
-.F9Nsej>span,
-.F9Nsej>svg {
+.F9Nsej > span,
+.F9Nsej > svg {
   vertical-align: middle;
 }
 
@@ -1220,7 +1247,7 @@
   text-overflow: ellipsis;
 }
 
-.RQmssw>a {
+.RQmssw > a {
   white-space: nowrap;
   color: #0046ab;
 }
@@ -1292,13 +1319,13 @@
   font-size: 18px;
 }
 
-._5fvHLp>svg {
+._5fvHLp > svg {
   margin: 0 6px 0 0;
   line-height: 0;
 }
 
-._5fvHLp>span,
-._5fvHLp>svg {
+._5fvHLp > span,
+._5fvHLp > svg {
   vertical-align: middle;
 }
 
@@ -1353,13 +1380,13 @@
   opacity: 0.4;
 }
 
-._3Bq3iJ>svg {
+._3Bq3iJ > svg {
   margin: 0 6px 0 0;
   line-height: 0;
 }
 
-._3Bq3iJ>span,
-._3Bq3iJ>svg {
+._3Bq3iJ > span,
+._3Bq3iJ > svg {
   vertical-align: middle;
 }
 
@@ -1368,13 +1395,13 @@
   font-size: 18px;
 }
 
-.F9Nsej>svg {
+.F9Nsej > svg {
   margin: 0 6px 0 0;
   line-height: 0;
 }
 
-.F9Nsej>span,
-.F9Nsej>svg {
+.F9Nsej > span,
+.F9Nsej > svg {
   vertical-align: middle;
 }
 
@@ -1384,7 +1411,7 @@
   text-overflow: ellipsis;
 }
 
-.RQmssw>a {
+.RQmssw > a {
   white-space: nowrap;
   color: #0046ab;
 }
@@ -1584,7 +1611,7 @@
 .ant-card-head-title {
   font-weight: 600;
   font-size: 18px;
-  color: #333333
+  color: #333333;
 }
 
 .ant-card-extra {
@@ -1646,4 +1673,11 @@
 
 .tour-request-group .ant-input {
   line-height: 17px;
+}
+.mytrip-group {
+  display: flex;
+  align-items: center;
+}
+.ant-modal.modal-report textarea {
+  margin-top: 30px;
 }

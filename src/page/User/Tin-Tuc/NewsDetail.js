@@ -3,8 +3,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/news.css";
 import { Link, useParams } from "react-router-dom";
-import { sendGet } from "../../../utils/api";
+import { sendGet, sendPost } from "../../../utils/api";
 import { avt, logo } from "../../../constants/images";
+import { Modal, TextArea, message } from "antd";
+import { getItem } from "../../../utils/storage";
 export default function NewsDetail() {
   const params = useParams();
   const [show, setShow] = useState(false);
@@ -32,6 +34,41 @@ export default function NewsDetail() {
     month: "2-digit",
     day: "2-digit",
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [content, setContent] = useState("");
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const user = getItem("user") ? JSON.parse(getItem("user")) : {};
+
+  const handleOk = async () => {
+    if (!user) {
+      message.error("Vui lòng đăng nhập để báo cáo");
+      return;
+    }
+    if (!content) {
+      message.error("Vui lòng nhập nội dung báo cáo");
+      return;
+    }
+    const response = await sendPost(`/reports/post`, {
+      postId: data?.id,
+      content: content,
+    });
+    if (response.statusCode === 200) {
+      message.success("Bài viết đã được báo cáo tới quản trị viên");
+      setIsModalOpen(false);
+      setContent("");
+    } else {
+      message.error("Báo cáo bài viết thất bại !!!");
+    }
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    setContent("");
+  };
+  const getcontent = (e) => {
+    setContent(e.target.value);
+  };
   useEffect(() => {
     getData();
     listNews();
@@ -96,29 +133,44 @@ export default function NewsDetail() {
                       <li>
                         <i className="fa-solid fa-bookmark"></i>Lưu bài viết
                       </li>
-                      <li>
-                        <a
-                          href="https://www.facebook.com/sharer/sharer.php?u=http://learnit-kma.me/learn/reactjs4"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <i className="fa-brands fa-facebook-f"></i>Chia sẻ lên
-                          FaceBook
-                        </a>
+                      <li onClick={showModal}>
+                        <i class="fa-solid fa-flag"></i>Báo cáo bài viết
                       </li>
-                      <li>
-                        <a
-                          href="https://mail.google.com/mail/u/0/?view=cm&fs=1&to&su=Tiêu đề &body=http://learnit-kma.me/learn/reactjs4"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          <i className="fa-solid fa-envelope"></i>Chia sẻ tới
-                          Email
-                        </a>
-                      </li>
-                      <li>
-                        <i className="fa-regular fa-copy"></i>Sao chép liên kết
-                      </li>
+                      <Modal
+                        title=""
+                        open={isModalOpen}
+                        visible={isModalOpen}
+                        onOk={handleOk}
+                        centered
+                        footer={null}
+                        onCancel={handleCancel}
+                      >
+                        <h1 className="modal-title">Báo cáo bài viết</h1>
+                        <p className="modal-des">
+                          Nội dung bài viết có vấn đề? Hãy báo lại cho chúng tôi
+                          ngay nhé!
+                        </p>
+                        <textarea
+                          value={content}
+                          onChange={getcontent}
+                          rows={3}
+                          placeholder="Nội dung báo cáo...."
+                        />
+                        <div className="modal-btn">
+                          <div
+                            className="button button--primary"
+                            onClick={handleOk}
+                          >
+                            Báo cáo ngay
+                          </div>
+                          <div
+                            className="button button--normal"
+                            onClick={handleCancel}
+                          >
+                            Hủy
+                          </div>
+                        </div>
+                      </Modal>
                     </ul>
                   </div>
                 </div>
