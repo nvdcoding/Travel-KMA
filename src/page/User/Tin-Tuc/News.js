@@ -68,47 +68,45 @@ export default function News() {
                 </div>
               </div>
               <div className="news-list">
-                {data
-                  ?.slice(minValue, maxValue)
-                  ?.map((item, index) => (
-                    <div className="news-item" key={index}>
-                      <div className="news-img">
-                        <Link to={`/tin-tuc/${item?.id}`}>
-                          <img alt="" src={item?.image} />
-                        </Link>
-                      </div>
-                      <div className="news-main">
-                        <h2 className="news-title">
-                          <Link to={`/tin-tuc/${item?.id}`}>{item?.title}</Link>
-                        </h2>
-                        <p
-                          className="news-des"
-                          dangerouslySetInnerHTML={{
-                            __html: item?.currentContent,
-                          }}
-                        />
-                        <div className="news-post-share-box">
-                          <div className="news-post-share-item">
-                            <a href="#" className="news-post-like" title="Like">
-                              <i className="fa-regular fa-heart"></i>
-                            </a>
-                            <a
-                              className="post-share-facebook"
-                              target="_blank"
-                              rel="noreferrer"
-                              href="#"
-                              title="Facebook"
-                            >
-                              <i className="fa-brands fa-facebook-f"></i>
-                            </a>
-                          </div>
+                {data?.slice(minValue, maxValue)?.map((item, index) => (
+                  <div className="news-item" key={index}>
+                    <div className="news-img">
+                      <Link to={`/tin-tuc/${item?.id}`}>
+                        <img alt="" src={item?.image} />
+                      </Link>
+                    </div>
+                    <div className="news-main">
+                      <h2 className="news-title">
+                        <Link to={`/tin-tuc/${item?.id}`}>{item?.title}</Link>
+                      </h2>
+                      <p
+                        className="news-des"
+                        dangerouslySetInnerHTML={{
+                          __html: item?.currentContent,
+                        }}
+                      />
+                      <div className="news-post-share-box">
+                        <div className="news-post-share-item">
+                          <a href="#" className="news-post-like" title="Like">
+                            <i className="fa-regular fa-heart"></i>
+                          </a>
+                          <a
+                            className="post-share-facebook"
+                            target="_blank"
+                            rel="noreferrer"
+                            href="#"
+                            title="Facebook"
+                          >
+                            <i className="fa-brands fa-facebook-f"></i>
+                          </a>
                         </div>
                       </div>
                     </div>
-                  ))}
+                  </div>
+                ))}
               </div>
               <div className="news-paging">
-                {data.length > 0 && (
+                {data && data.length > 0 && (
                   <Pagination
                     defaultCurrent={1}
                     defaultPageSize={numberPage}

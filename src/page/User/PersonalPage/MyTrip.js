@@ -182,16 +182,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -319,16 +319,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -416,16 +416,16 @@ export default function MyTrip() {
                                 {value.status == 0
                                   ? "Chờ xác nhận"
                                   : value.status == 1
-                                    ? "Chờ đặt cọc"
-                                    : value.status == 2
-                                      ? "Chờ thanh toán"
-                                      : value.status == 3
-                                        ? "Chưa thực hiện"
-                                        : value.status == 4
-                                          ? "Đang thực hiện"
-                                          : value.status == 5
-                                            ? "Đã thực hiện"
-                                            : "Đã hủy"}
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
                               </div>
                             </div>
                             <div className="mytrip-order__main">
@@ -527,7 +527,7 @@ const Voucher = () => {
   const [dataVoucherAvailable, setdataVoucherAvailable] = useState([]);
 
   const listVoucher = async () => {
-    let res = await sendGet(`/vourchers`, { limit: 100 });
+    let res = await sendGet(`/vouchers`, { limit: 100 });
     if (res.statusCode == 200) {
       setDataVoucher(res.returnValue.data);
     } else {
@@ -535,7 +535,7 @@ const Voucher = () => {
     }
   };
   const listVoucherAvailable = async () => {
-    let res1 = await sendGet(`/vourchers/available`, { limit: 100 });
+    let res1 = await sendGet(`/vouchers/available`, { limit: 100 });
     if (res1.statusCode == 200) {
       setdataVoucherAvailable(res1.returnValue);
     } else {
@@ -544,7 +544,7 @@ const Voucher = () => {
   };
   const saveVoucher = async (e) => {
     try {
-      let result = await sendPut(`/vourchers/${e}`);
+      let result = await sendPut(`/vouchers/${e}`);
       if (result.statusCode == 200) {
         message.success("Lưu voucher thành công");
       } else {
@@ -553,11 +553,9 @@ const Voucher = () => {
     } catch (error) {
       if (error?.response.status == 400) {
         message.error("Bạn đã lưu Voucher này trước đó");
-      }
-      else {
+      } else {
         message.error("Bạn ko đủ xu để đổi voucher");
       }
-
     }
   };
   const formatterDate = new Intl.DateTimeFormat("vi-VN", {
@@ -569,14 +567,12 @@ const Voucher = () => {
     listVoucher();
     listVoucherAvailable();
   }, []);
-  if (!Object.keys(dataVoucher).length) return <Skeleton />;
-
   return (
     <>
       <Tabs defaultActiveKey="1" className="mytrip-sub-menu">
         <TabPane tab={<p className="mytrip-sub-menu-name">Của bạn</p>} key="1">
           <div className="mytrip-voucher">
-            {dataVoucherAvailable ? (
+            {dataVoucherAvailable.length > 0 ? (
               <>
                 {dataVoucherAvailable?.map((item, index) => (
                   <div className="mytrip-voucher-item" key={index}>
@@ -590,10 +586,10 @@ const Voucher = () => {
                     </div>
                     <div className="mytrip-voucher-right">
                       <div className="mytrip-voucher-top">
-                        <h3 className="mytrip-voucher-title">
-                          {item?.name}
-                        </h3>
-                        <Link to="/tour" className="mytrip-voucher-use">Dùng ngay</Link>
+                        <h3 className="mytrip-voucher-title">{item?.name}</h3>
+                        <Link to="/tour" className="mytrip-voucher-use">
+                          Dùng ngay
+                        </Link>
                       </div>
                       <div className="mytrip-voucher-bottom">
                         <h3 className="mytrip-voucher-time">
@@ -612,10 +608,17 @@ const Voucher = () => {
         </TabPane>
         <TabPane tab={<p className="mytrip-sub-menu-name">Săn mã</p>} key="2">
           <div className="mytrip-voucher">
-            {dataVoucher ? (
+            {dataVoucher.length > 0 ? (
               <>
                 {dataVoucher.map((item, index) => (
-                  <div className={item?.claimed == item?.quantity ? "mytrip-voucher-item mytrip-voucher-item-not-allow" : "mytrip-voucher-item"} key={index}>
+                  <div
+                    className={
+                      item?.claimed == item?.quantity
+                        ? "mytrip-voucher-item mytrip-voucher-item-not-allow"
+                        : "mytrip-voucher-item"
+                    }
+                    key={index}
+                  >
                     <div className="mytrip-voucher-left">
                       <img
                         className="mytrip-voucher-img"
@@ -626,9 +629,7 @@ const Voucher = () => {
                     </div>
                     <div className="mytrip-voucher-right">
                       <div className="mytrip-voucher-top">
-                        <h3 className="mytrip-voucher-title">
-                          {item?.name}
-                        </h3>
+                        <h3 className="mytrip-voucher-title">{item?.name}</h3>
                         <p
                           className="mytrip-voucher-use"
                           onClick={() => saveVoucher(item.id)}
@@ -639,15 +640,18 @@ const Voucher = () => {
 
                       <div className="mytrip-voucher-bottom">
                         <h3 className="mytrip-voucher-time">
-                          Hạn sử dụng: {formatterDate.format(Date.parse(item?.endDate))}
+                          Hạn sử dụng:{" "}
+                          {formatterDate.format(Date.parse(item?.endDate))}
                         </h3>
                         <Condition data={item} />
                       </div>
                       <div className="mytrip-voucher-claimed">
                         <h3 className="mytrip-voucher-claimed">
-                          <i class="fa-solid fa-bag-shopping"></i> <span>{item?.claimed}/{item?.quantity}</span>
+                          <i class="fa-solid fa-bag-shopping"></i>{" "}
+                          <span>
+                            {item?.claimed}/{item?.quantity}
+                          </span>
                         </h3>
-
                       </div>
                     </div>
                   </div>
