@@ -13,20 +13,24 @@ export default function SignIn() {
   const history = useHistory();
   const isSetting = 1;
   const onFinish = async (values) => {
-    const res = await sendPost("/auth/login", values);
-    if (res.statusCode == 200) {
-      notification.open({
-        message: "Đăng nhập thành công",
-        // description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
-        icon: <SmileOutlined style={{ color: "#e52525" }} />,
-      });
-      setToken(res.returnValue.accessToken);
-      setRefreshToken(res.returnValue.refreshToken);
-      setItem("user", JSON.stringify(res?.returnValue));
-      history.push("/");
-      form.resetFields();
-    } else {
-      message.error("Không khớp");
+    try {
+      const res = await sendPost("/auth/login", values);
+      if (res.statusCode == 200) {
+        notification.open({
+          message: "Đăng nhập thành công",
+          // description: "Bạn vui lòng kiểm tra Email để có thể vào học nhé~~",
+          icon: <SmileOutlined style={{ color: "#e52525" }} />,
+        });
+        setToken(res.returnValue.accessToken);
+        setRefreshToken(res.returnValue.refreshToken);
+        setItem("user", JSON.stringify(res?.returnValue));
+        history.push("/");
+        form.resetFields();
+      } else {
+        message.error("Không khớp");
+      }
+    } catch (error) {
+      message.error("Đăng nhập không hợp lệ");
     }
   };
 
@@ -34,20 +38,23 @@ export default function SignIn() {
     console.log("Failed:", errorInfo);
   };
   const onFinishHDV = async (values) => {
-    const res = await sendPost("/auth/login-tourguide", values);
-    if (res.statusCode === 200) {
-      notification.open({
-        message: "Đăng nhập thành công",
-        icon: <SmileOutlined style={{ color: "#e52525" }} />,
-      });
-      setToken(res.returnValue.accessToken);
-      setRefreshToken(res.returnValue.refreshToken);
-
-      setItem("user", JSON.stringify(res?.returnValue));
-      history.push("/kenh-hdv");
-      form.resetFields();
-    } else {
-      message.error("Không khớp");
+    try {
+      const res = await sendPost("/auth/login-tourguide", values);
+      if (res.statusCode === 200) {
+        notification.open({
+          message: "Đăng nhập thành công",
+          icon: <SmileOutlined style={{ color: "#e52525" }} />,
+        });
+        setToken(res.returnValue.accessToken);
+        setRefreshToken(res.returnValue.refreshToken);
+        setItem("user", JSON.stringify(res?.returnValue));
+        history.push("/kenh-hdv");
+        form.resetFields();
+      } else {
+        message.error("Không khớp");
+      }
+    } catch (error) {
+      message.error("Đăng nhập không hợp lệ");
     }
   };
 

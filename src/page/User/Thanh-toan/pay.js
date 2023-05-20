@@ -25,6 +25,7 @@ export default function Pay() {
 
   const PayOnline = async (value) => {
     value.amount = parseInt(value.amount);
+    value.fromWeb = true;
     const res = await sendPost("/users/deposit", value);
     if (res.statusCode == 200) {
       window.location.href = res.returnValue;

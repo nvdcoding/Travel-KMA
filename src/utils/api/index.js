@@ -38,11 +38,11 @@ axiosInstance.interceptors.response.use(
     }
 
     if (error?.response?.status === 401) {
-      const refreshToken = getRefreshToken();
-      if (!refreshToken) {
-        logout();
-        return Promise.reject(error);
-      }
+      // const refreshToken = getRefreshToken();
+      // if (!refreshToken) {
+      logout();
+      return Promise.reject(error);
+      // }
     }
     return Promise.reject(error);
   }

@@ -1,13 +1,14 @@
 /* eslint-disable eqeqeq */
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { Tabs, Popconfirm, message, Card, Space, Skeleton, Modal } from "antd";
+import { Tabs, Popconfirm, message, Modal } from "antd";
 
 import "../../../assets/css/trip.css";
 import {
   avt,
   banner,
   error,
+  nodata2,
   voucher1,
   voucher2,
 } from "../../../constants/images";
@@ -178,134 +179,145 @@ export default function MyTrip() {
                       key="0"
                     >
                       <div className="mytrip-order">
-                        {dataWaiting?.map((value, index) => (
-                          <div className="mytrip-order-item" key={index}>
-                            <div className="mytrip-order__header">
-                              <div className="mytrip-order__header-left">
-                                <p className="mytrip-order__name">
-                                  {value?.tourGuide?.name}
-                                </p>
-                                <Link to={`/chat/${value?.tourGuide?.id}`}>
-                                  <div className="mytrip-order__chat">
-                                    <i className="fa-regular fa-comments"></i>
-                                    <p className="mytrip-order__contact">
-                                      Chat
+                        {dataWaiting.length > 0 ? (
+                          <>
+                            {dataWaiting?.map((value, index) => (
+                              <div className="mytrip-order-item" key={index}>
+                                <div className="mytrip-order__header">
+                                  <div className="mytrip-order__header-left">
+                                    <p className="mytrip-order__name">
+                                      {value?.tourGuide?.name}
                                     </p>
+                                    <Link to={`/chat/${value?.tourGuide?.id}`}>
+                                      <div className="mytrip-order__chat">
+                                        <i className="fa-regular fa-comments"></i>
+                                        <p className="mytrip-order__contact">
+                                          Chat
+                                        </p>
+                                      </div>
+                                    </Link>
                                   </div>
-                                </Link>
-                              </div>
-                              <div className="mytrip-order__header-right">
-                                {value.status == 0
-                                  ? "Chờ xác nhận"
-                                  : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
-                              </div>
-                            </div>
-                            <div className="mytrip-order__main">
-                              <div
-                                className="mytrip-order__main-left"
-                                onClick={() => handleStep(value?.id)}
-                              >
-                                <img
-                                  className="mytrip-order-img"
-                                  alt=""
-                                  src={
-                                    value?.tour?.images[0].url
-                                      ? value?.tour?.images[0].url
-                                      : banner
-                                  }
-                                />
-                                <div className="info-group">
-                                  <h4
-                                    className="mytrip-order-name"
+                                  <div className="mytrip-order__header-right">
+                                    {value.status == 0
+                                      ? "Chờ xác nhận"
+                                      : value.status == 1
+                                      ? "Chờ đặt cọc"
+                                      : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                      ? "Chưa thực hiện"
+                                      : value.status == 4
+                                      ? "Đang thực hiện"
+                                      : value.status == 5
+                                      ? "Đã thực hiện"
+                                      : "Đã hủy"}
+                                  </div>
+                                </div>
+                                <div className="mytrip-order__main">
+                                  <div
+                                    className="mytrip-order__main-left"
                                     onClick={() => handleStep(value?.id)}
                                   >
-                                    {value?.tour?.name}
-                                  </h4>
-                                  <h4 className="mytrip-order-time">
-                                    {value?.startDate}
-                                  </h4>
-                                </div>
-                              </div>
-                              <div className="mytrip-order__main-right">
-                                <p className="mytrip-order__main-price">
-                                  {formatterPrice.format(
-                                    value?.tour?.basePrice
-                                  )}{" "}
-                                  đ
-                                </p>
-                              </div>
-                            </div>
-                            <div className="mytrip-order__rate md-1">
-                              {value.status < 2 ? (
-                                <div className="button button--primary">
-                                  <Popconfirm
-                                    title="Hủy yêu cầu?"
-                                    description="Xác nhận hủy chuyến đi"
-                                    onConfirm={() => cancelTour(value)}
-                                    okText="Đồng ý"
-                                    cancelText="Hủy"
-                                  >
-                                    Hủy
-                                  </Popconfirm>
-                                </div>
-                              ) : (
-                                <>
-                                  <div
-                                    className="button button--primary"
-                                    onClick={() => showModal()}
-                                  >
-                                    Hủy
-                                  </div>
-                                  <Modal
-                                    title=""
-                                    open={isCancelTour}
-                                    visible={isCancelTour}
-                                    onOk={handleOk}
-                                    onCancel={handleCancel}
-                                    footer={null}
-                                  >
-                                    <div className="modal-content">
-                                      <p className="modal-title">
-                                        Xác nhận hủy chuyến?
-                                      </p>
-                                      <div className="modal-img">
-                                        <img alt="" src={error} />
-                                      </div>
-                                      <p className="modal-desc">
-                                        Tiền cọc sẽ không được hoàn lại. Chắc
-                                        chắn hủy?
-                                      </p>
-                                      <div className="button-group">
-                                        <div
-                                          className="button button--primary"
-                                          onClick={() => cancelTour(value)}
-                                        >
-                                          Đồng ý
-                                        </div>
-                                        <div
-                                          className="button button--normal"
-                                          onClick={() => handleCancel()}
-                                        >
-                                          Hủy
-                                        </div>
-                                      </div>
+                                    <img
+                                      className="mytrip-order-img"
+                                      alt=""
+                                      src={
+                                        value?.tour?.images[0].url
+                                          ? value?.tour?.images[0].url
+                                          : banner
+                                      }
+                                    />
+                                    <div className="info-group">
+                                      <h4
+                                        className="mytrip-order-name"
+                                        onClick={() => handleStep(value?.id)}
+                                      >
+                                        {value?.tour?.name}
+                                      </h4>
+                                      <h4 className="mytrip-order-time">
+                                        {value?.startDate}
+                                      </h4>
                                     </div>
-                                  </Modal>
-                                </>
-                              )}
-                            </div>
+                                  </div>
+                                  <div className="mytrip-order__main-right">
+                                    <p className="mytrip-order__main-price">
+                                      {formatterPrice.format(
+                                        value?.tour?.basePrice
+                                      )}{" "}
+                                      đ
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="mytrip-order__rate md-1">
+                                  {value.status < 2 ? (
+                                    <div className="button button--primary">
+                                      <Popconfirm
+                                        title="Hủy yêu cầu?"
+                                        description="Xác nhận hủy chuyến đi"
+                                        onConfirm={() => cancelTour(value)}
+                                        okText="Đồng ý"
+                                        cancelText="Hủy"
+                                      >
+                                        Hủy
+                                      </Popconfirm>
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <div
+                                        className="button button--primary"
+                                        onClick={() => showModal()}
+                                      >
+                                        Hủy
+                                      </div>
+                                      <Modal
+                                        title=""
+                                        open={isCancelTour}
+                                        visible={isCancelTour}
+                                        onOk={handleOk}
+                                        onCancel={handleCancel}
+                                        footer={null}
+                                      >
+                                        <div className="modal-content">
+                                          <p className="modal-title">
+                                            Xác nhận hủy chuyến?
+                                          </p>
+                                          <div className="modal-img">
+                                            <img alt="" src={error} />
+                                          </div>
+                                          <p className="modal-desc">
+                                            Tiền cọc sẽ không được hoàn lại.
+                                            Chắc chắn hủy?
+                                          </p>
+                                          <div className="button-group">
+                                            <div
+                                              className="button button--primary"
+                                              onClick={() => cancelTour(value)}
+                                            >
+                                              Đồng ý
+                                            </div>
+                                            <div
+                                              className="button button--normal"
+                                              onClick={() => handleCancel()}
+                                            >
+                                              Hủy
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </Modal>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <div className="no-data">
+                            <img alt="" src={nodata2} />
+                            <p className="no-data-title">
+                              Không thấy thông tin chuyến đi
+                            </p>
                           </div>
-                        ))}
+                        )}
                       </div>
                     </TabPane>
                     <TabPane
@@ -315,134 +327,145 @@ export default function MyTrip() {
                       key="1"
                     >
                       <div className="mytrip-order">
-                        {dataPurchase?.map((value, index) => (
-                          <div className="mytrip-order-item" key={index}>
-                            <div className="mytrip-order__header">
-                              <div className="mytrip-order__header-left">
-                                <p className="mytrip-order__name">
-                                  {value?.tourGuide?.name}
-                                </p>
-                                <Link to={`/chat/${value?.tourGuide?.id}`}>
-                                  <div className="mytrip-order__chat">
-                                    <i className="fa-regular fa-comments"></i>
-                                    <p className="mytrip-order__contact">
-                                      Chat
+                        {dataPurchase.length > 0 ? (
+                          <>
+                            {dataPurchase?.map((value, index) => (
+                              <div className="mytrip-order-item" key={index}>
+                                <div className="mytrip-order__header">
+                                  <div className="mytrip-order__header-left">
+                                    <p className="mytrip-order__name">
+                                      {value?.tourGuide?.name}
                                     </p>
+                                    <Link to={`/chat/${value?.tourGuide?.id}`}>
+                                      <div className="mytrip-order__chat">
+                                        <i className="fa-regular fa-comments"></i>
+                                        <p className="mytrip-order__contact">
+                                          Chat
+                                        </p>
+                                      </div>
+                                    </Link>
                                   </div>
-                                </Link>
-                              </div>
-                              <div className="mytrip-order__header-right">
-                                {value.status == 0
-                                  ? "Chờ xác nhận"
-                                  : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
-                              </div>
-                            </div>
-                            <div className="mytrip-order__main">
-                              <div
-                                className="mytrip-order__main-left"
-                                onClick={() => handleStep(value?.id)}
-                              >
-                                <img
-                                  className="mytrip-order-img"
-                                  alt=""
-                                  src={
-                                    value?.tour?.images[0].url
-                                      ? value?.tour?.images[0].url
-                                      : banner
-                                  }
-                                />
-                                <div className="info-group">
-                                  <h4
-                                    className="mytrip-order-name"
+                                  <div className="mytrip-order__header-right">
+                                    {value.status == 0
+                                      ? "Chờ xác nhận"
+                                      : value.status == 1
+                                      ? "Chờ đặt cọc"
+                                      : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                      ? "Chưa thực hiện"
+                                      : value.status == 4
+                                      ? "Đang thực hiện"
+                                      : value.status == 5
+                                      ? "Đã thực hiện"
+                                      : "Đã hủy"}
+                                  </div>
+                                </div>
+                                <div className="mytrip-order__main">
+                                  <div
+                                    className="mytrip-order__main-left"
                                     onClick={() => handleStep(value?.id)}
                                   >
-                                    {value?.tour?.name}
-                                  </h4>
-                                  <h4 className="mytrip-order-time">
-                                    {value?.startDate}
-                                  </h4>
-                                </div>
-                              </div>
-                              <div className="mytrip-order__main-right">
-                                <p className="mytrip-order__main-price">
-                                  {formatterPrice.format(
-                                    value?.tour?.basePrice
-                                  )}{" "}
-                                  đ
-                                </p>
-                              </div>
-                            </div>
-                            <div className="mytrip-order__rate md-1">
-                              {value.status < 2 ? (
-                                <div className="button button--primary">
-                                  <Popconfirm
-                                    title="Hủy yêu cầu?"
-                                    description="Xác nhận hủy chuyến đi"
-                                    onConfirm={() => cancelTour(value)}
-                                    okText="Đồng ý"
-                                    cancelText="Hủy"
-                                  >
-                                    Hủy
-                                  </Popconfirm>
-                                </div>
-                              ) : (
-                                <>
-                                  <div
-                                    className="button button--primary"
-                                    onClick={() => showModal()}
-                                  >
-                                    Hủy
-                                  </div>
-                                  <Modal
-                                    title=""
-                                    open={isCancelTour}
-                                    visible={isCancelTour}
-                                    onOk={handleOk}
-                                    onCancel={handleCancel}
-                                    footer={null}
-                                  >
-                                    <div className="modal-content">
-                                      <p className="modal-title">
-                                        Xác nhận hủy chuyến?
-                                      </p>
-                                      <div className="modal-img">
-                                        <img alt="" src={error} />
-                                      </div>
-                                      <p className="modal-desc">
-                                        Tiền cọc sẽ không được hoàn lại. Chắc
-                                        chắn hủy?
-                                      </p>
-                                      <div className="button-group">
-                                        <div
-                                          className="button button--primary"
-                                          onClick={() => cancelTour(value)}
-                                        >
-                                          Đồng ý
-                                        </div>
-                                        <div
-                                          className="button button--normal"
-                                          onClick={() => handleCancel()}
-                                        >
-                                          Hủy
-                                        </div>
-                                      </div>
+                                    <img
+                                      className="mytrip-order-img"
+                                      alt=""
+                                      src={
+                                        value?.tour?.images[0].url
+                                          ? value?.tour?.images[0].url
+                                          : banner
+                                      }
+                                    />
+                                    <div className="info-group">
+                                      <h4
+                                        className="mytrip-order-name"
+                                        onClick={() => handleStep(value?.id)}
+                                      >
+                                        {value?.tour?.name}
+                                      </h4>
+                                      <h4 className="mytrip-order-time">
+                                        {value?.startDate}
+                                      </h4>
                                     </div>
-                                  </Modal>
-                                </>
-                              )}
-                            </div>
+                                  </div>
+                                  <div className="mytrip-order__main-right">
+                                    <p className="mytrip-order__main-price">
+                                      {formatterPrice.format(
+                                        value?.tour?.basePrice
+                                      )}{" "}
+                                      đ
+                                    </p>
+                                  </div>
+                                </div>
+                                <div className="mytrip-order__rate md-1">
+                                  {value.status < 2 ? (
+                                    <div className="button button--primary">
+                                      <Popconfirm
+                                        title="Hủy yêu cầu?"
+                                        description="Xác nhận hủy chuyến đi"
+                                        onConfirm={() => cancelTour(value)}
+                                        okText="Đồng ý"
+                                        cancelText="Hủy"
+                                      >
+                                        Hủy
+                                      </Popconfirm>
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <div
+                                        className="button button--primary"
+                                        onClick={() => showModal()}
+                                      >
+                                        Hủy
+                                      </div>
+                                      <Modal
+                                        title=""
+                                        open={isCancelTour}
+                                        visible={isCancelTour}
+                                        onOk={handleOk}
+                                        onCancel={handleCancel}
+                                        footer={null}
+                                      >
+                                        <div className="modal-content">
+                                          <p className="modal-title">
+                                            Xác nhận hủy chuyến?
+                                          </p>
+                                          <div className="modal-img">
+                                            <img alt="" src={error} />
+                                          </div>
+                                          <p className="modal-desc">
+                                            Tiền cọc sẽ không được hoàn lại.
+                                            Chắc chắn hủy?
+                                          </p>
+                                          <div className="button-group">
+                                            <div
+                                              className="button button--primary"
+                                              onClick={() => cancelTour(value)}
+                                            >
+                                              Đồng ý
+                                            </div>
+                                            <div
+                                              className="button button--normal"
+                                              onClick={() => handleCancel()}
+                                            >
+                                              Hủy
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </Modal>
+                                    </>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <div className="no-data">
+                            <img alt="" src={nodata2} />
+                            <p className="no-data-title">
+                              Không thấy thông tin chuyến đi
+                            </p>
                           </div>
-                        ))}
+                        )}
                       </div>
                     </TabPane>
                     <TabPane
@@ -452,95 +475,107 @@ export default function MyTrip() {
                       key="2"
                     >
                       <div className="mytrip-order">
-                        {dataProcessing?.map((value, index) => (
-                          <div className="mytrip-order-item" key={index}>
-                            <div className="mytrip-order__header">
-                              <div className="mytrip-order__header-left">
-                                <p className="mytrip-order__name">
-                                  {value?.tourGuide?.name}
-                                </p>
-                                <Link to={`/chat/${value?.tourGuide?.id}`}>
-                                  <div className="mytrip-order__chat">
-                                    <i className="fa-regular fa-comments"></i>
-                                    <p className="mytrip-order__contact">
-                                      Chat
+                        {dataProcessing.length > 0 ? (
+                          <>
+                            {dataProcessing?.map((value, index) => (
+                              <div className="mytrip-order-item" key={index}>
+                                <div className="mytrip-order__header">
+                                  <div className="mytrip-order__header-left">
+                                    <p className="mytrip-order__name">
+                                      {value?.tourGuide?.name}
+                                    </p>
+                                    <Link to={`/chat/${value?.tourGuide?.id}`}>
+                                      <div className="mytrip-order__chat">
+                                        <i className="fa-regular fa-comments"></i>
+                                        <p className="mytrip-order__contact">
+                                          Chat
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  </div>{" "}
+                                  <div className="mytrip-order__header-right">
+                                    {value.status == 0
+                                      ? "Chờ xác nhận"
+                                      : value.status == 1
+                                      ? "Chờ đặt cọc"
+                                      : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                      ? "Chưa thực hiện"
+                                      : value.status == 4
+                                      ? "Đang thực hiện"
+                                      : value.status == 5
+                                      ? "Đã thực hiện"
+                                      : "Đã hủy"}
+                                  </div>
+                                </div>
+                                <div className="mytrip-order__main">
+                                  <div
+                                    className="mytrip-order__main-left"
+                                    onClick={() => handleStep(value?.id)}
+                                  >
+                                    <img
+                                      className="mytrip-order-img"
+                                      alt=""
+                                      src={
+                                        value?.tour?.images[0].url
+                                          ? value?.tour?.images[0].url
+                                          : banner
+                                      }
+                                    />
+                                    <div className="info-group">
+                                      <h4 className="mytrip-order-name">
+                                        {value?.tour?.name}
+                                      </h4>{" "}
+                                      <h4 className="mytrip-order-time">
+                                        {value?.startDate}
+                                      </h4>
+                                    </div>
+                                  </div>
+                                  <div className="mytrip-order__main-right">
+                                    <p className="mytrip-order__main-price">
+                                      {formatterPrice.format(value?.price)} đ
                                     </p>
                                   </div>
-                                </Link>
-                              </div>{" "}
-                              <div className="mytrip-order__header-right">
-                                {value.status == 0
-                                  ? "Chờ xác nhận"
-                                  : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
-                              </div>
-                            </div>
-                            <div className="mytrip-order__main">
-                              <div
-                                className="mytrip-order__main-left"
-                                onClick={() => handleStep(value?.id)}
-                              >
-                                <img
-                                  className="mytrip-order-img"
-                                  alt=""
-                                  src={
-                                    value?.tour?.images[0].url
-                                      ? value?.tour?.images[0].url
-                                      : banner
-                                  }
-                                />
-                                <div className="info-group">
-                                  <h4 className="mytrip-order-name">
-                                    {value?.tour?.name}
-                                  </h4>{" "}
-                                  <h4 className="mytrip-order-time">
-                                    {value?.startDate}
-                                  </h4>
                                 </div>
-                              </div>
-                              <div className="mytrip-order__main-right">
-                                <p className="mytrip-order__main-price">
-                                  {formatterPrice.format(value?.price)} đ
-                                </p>
-                              </div>
-                            </div>
-                            {value.status == 3 ? (
-                              <div className="mytrip-order__rate">
-                                Khởi hành vào ngày {value?.startDate}
-                                <div
-                                  className="button button--primary"
-                                  onClick={() => startUser(value)}
-                                >
-                                  Bắt đầu
-                                </div>
-                              </div>
-                            ) : (
-                              <>
-                                <div className="mytrip-order__rate">
-                                  Kết thúc vào ngày vào ngày {value?.endDate}
-                                  <div className="mytrip-group">
+                                {value.status == 3 ? (
+                                  <div className="mytrip-order__rate">
+                                    Khởi hành vào ngày {value?.startDate}
                                     <div
                                       className="button button--primary"
-                                      onClick={() => endTour(value)}
+                                      onClick={() => startUser(value)}
                                     >
-                                      Kết thúc
+                                      Bắt đầu
                                     </div>
-                                    <Report data={value} />
                                   </div>
-                                </div>
-                              </>
-                            )}
+                                ) : (
+                                  <>
+                                    <div className="mytrip-order__rate">
+                                      Kết thúc vào ngày vào ngày{" "}
+                                      {value?.endDate}
+                                      <div className="mytrip-group">
+                                        <div
+                                          className="button button--primary"
+                                          onClick={() => endTour(value)}
+                                        >
+                                          Kết thúc
+                                        </div>
+                                        <Report data={value} />
+                                      </div>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <div className="no-data">
+                            <img alt="" src={nodata2} />
+                            <p className="no-data-title">
+                              Không thấy thông tin chuyến đi
+                            </p>
                           </div>
-                        ))}
+                        )}
                       </div>
                     </TabPane>
                     <TabPane
@@ -549,91 +584,102 @@ export default function MyTrip() {
                     >
                       {" "}
                       <div className="mytrip-order">
-                        {dataEnd?.map((value, index) => (
-                          <div className="mytrip-order-item" key={index}>
-                            <div className="mytrip-order__header">
-                              <div className="mytrip-order__header-left">
-                                <p className="mytrip-order__name">
-                                  {value?.tourGuide?.name}
-                                </p>
-                                <Link to={`/chat/${value?.tourGuide?.id}`}>
-                                  <div className="mytrip-order__chat">
-                                    <i className="fa-regular fa-comments"></i>
-                                    <p className="mytrip-order__contact">
-                                      Chat
+                        {dataEnd.length > 0 ? (
+                          <>
+                            {dataEnd?.map((value, index) => (
+                              <div className="mytrip-order-item" key={index}>
+                                <div className="mytrip-order__header">
+                                  <div className="mytrip-order__header-left">
+                                    <p className="mytrip-order__name">
+                                      {value?.tourGuide?.name}
+                                    </p>
+                                    <Link to={`/chat/${value?.tourGuide?.id}`}>
+                                      <div className="mytrip-order__chat">
+                                        <i className="fa-regular fa-comments"></i>
+                                        <p className="mytrip-order__contact">
+                                          Chat
+                                        </p>
+                                      </div>
+                                    </Link>
+                                  </div>{" "}
+                                  <div className="mytrip-order__header-right">
+                                    {value.status == 0
+                                      ? "Chờ xác nhận"
+                                      : value.status == 1
+                                      ? "Chờ đặt cọc"
+                                      : value.status == 2
+                                      ? "Chờ thanh toán"
+                                      : value.status == 3
+                                      ? "Chưa thực hiện"
+                                      : value.status == 4
+                                      ? "Đang thực hiện"
+                                      : value.status == 5
+                                      ? "Đã thực hiện"
+                                      : "Đã hủy"}
+                                  </div>
+                                </div>
+                                <div className="mytrip-order__main">
+                                  <div
+                                    className="mytrip-order__main-left"
+                                    onClick={() => handleStep(value?.id)}
+                                  >
+                                    <img
+                                      className="mytrip-order-img"
+                                      alt=""
+                                      src={
+                                        value?.tour?.images[0].url
+                                          ? value?.tour?.images[0].url
+                                          : banner
+                                      }
+                                    />
+                                    <div className="info-group">
+                                      <h4 className="mytrip-order-name">
+                                        {value?.tour?.name}
+                                      </h4>{" "}
+                                      <h4 className="mytrip-order-time">
+                                        {value?.startDate}
+                                      </h4>
+                                    </div>
+                                  </div>
+                                  <div className="mytrip-order__main-right">
+                                    <p className="mytrip-order__main-price">
+                                      {formatterPrice.format(value?.price)} đ
                                     </p>
                                   </div>
-                                </Link>
-                              </div>{" "}
-                              <div className="mytrip-order__header-right">
-                                {value.status == 0
-                                  ? "Chờ xác nhận"
-                                  : value.status == 1
-                                  ? "Chờ đặt cọc"
-                                  : value.status == 2
-                                  ? "Chờ thanh toán"
-                                  : value.status == 3
-                                  ? "Chưa thực hiện"
-                                  : value.status == 4
-                                  ? "Đang thực hiện"
-                                  : value.status == 5
-                                  ? "Đã thực hiện"
-                                  : "Đã hủy"}
-                              </div>
-                            </div>
-                            <div className="mytrip-order__main">
-                              <div
-                                className="mytrip-order__main-left"
-                                onClick={() => handleStep(value?.id)}
-                              >
-                                <img
-                                  className="mytrip-order-img"
-                                  alt=""
-                                  src={
-                                    value?.tour?.images[0].url
-                                      ? value?.tour?.images[0].url
-                                      : banner
-                                  }
-                                />
-                                <div className="info-group">
-                                  <h4 className="mytrip-order-name">
-                                    {value?.tour?.name}
-                                  </h4>{" "}
-                                  <h4 className="mytrip-order-time">
-                                    {value?.startDate}
-                                  </h4>
                                 </div>
-                              </div>
-                              <div className="mytrip-order__main-right">
-                                <p className="mytrip-order__main-price">
-                                  {formatterPrice.format(value?.price)} đ
-                                </p>
-                              </div>
-                            </div>
-                            <div className="mytrip-order__rate ">
-                              {value.status == 5 && (
-                                <>
-                                  {value?.tour?.rates.length > 0 ? (
+                                <div className="mytrip-order__rate ">
+                                  {value.status == 5 && (
                                     <>
-                                      <p className="mytrip-order__rate-note">
-                                        Đã đánh giá
-                                      </p>
-                                    </>
-                                  ) : (
-                                    <>
-                                      <p className="mytrip-order__rate-note">
-                                        Chưa nhận được đánh giá
-                                      </p>
-                                      <div className="right-trip">
-                                        <RateScreen data={value} />
-                                      </div>
+                                      {value?.tour?.rates.length > 0 ? (
+                                        <>
+                                          <p className="mytrip-order__rate-note">
+                                            Đã đánh giá
+                                          </p>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <p className="mytrip-order__rate-note">
+                                            Chưa nhận được đánh giá
+                                          </p>
+                                          <div className="right-trip">
+                                            <RateScreen data={value} />
+                                          </div>
+                                        </>
+                                      )}
                                     </>
                                   )}
-                                </>
-                              )}
-                            </div>
+                                </div>
+                              </div>
+                            ))}
+                          </>
+                        ) : (
+                          <div className="no-data">
+                            <img alt="" src={nodata2} />
+                            <p className="no-data-title">
+                              Không thấy thông tin chuyến đi
+                            </p>
                           </div>
-                        ))}
+                        )}
                       </div>
                     </TabPane>
                   </Tabs>
