@@ -85,7 +85,7 @@ function LayoutHDV({ children }) {
                     <NavLink to="/kenh-hdv/them-tour">Tạo tour</NavLink>
                   </Menu.Item>
                 )}
-                {window.location.pathname === "/kenh-hdv/danh-gia-tour" ? (
+                {/* {window.location.pathname === "/kenh-hdv/danh-gia-tour" ? (
                   <Menu.Item className="ant-menu-item-selected ">
                     <NavLink to="/kenh-hdv/danh-gia-tour">
                       Đánh giá tour
@@ -95,6 +95,19 @@ function LayoutHDV({ children }) {
                   <Menu.Item>
                     <NavLink to="/kenh-hdv/danh-gia-tour">
                       Đánh giá tour
+                    </NavLink>
+                  </Menu.Item>
+                )} */}
+                {window.location.pathname === "/kenh-hdv/yeu-cau-chuyen-di" ? (
+                  <Menu.Item className="ant-menu-item-selected ">
+                    <NavLink to="/kenh-hdv/yeu-cau-chuyen-di">
+                      Yêu cầu chuyến đi
+                    </NavLink>
+                  </Menu.Item>
+                ) : (
+                  <Menu.Item>
+                    <NavLink to="/kenh-hdv/yeu-cau-chuyen-di">
+                      Yêu cầu chuyến đi
                     </NavLink>
                   </Menu.Item>
                 )}

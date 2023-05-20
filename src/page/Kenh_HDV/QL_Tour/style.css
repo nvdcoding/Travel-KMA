@@ -194,3 +194,20 @@
   background-color: #fff;
   padding: 20px;
 }
+
+.request-search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.request-search .ant-picker {
+  padding: 7px 11px;
+  margin-right: 20px;
+  width: 38%;
+}
+.request-search .button {
+  padding: 7px 20px;
+  border-radius: 5px;
+}

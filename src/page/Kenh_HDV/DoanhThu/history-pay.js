@@ -91,26 +91,35 @@ export default function PayHistory() {
                   <div class="History-des">
                     <div class="History-des__title_group">
                       <h4 class="History-des__title">
-                        {item?.status == 1
-                          ? "Nạp tiền thành công"
-                          : item?.status == 2
-                          ? "Đang xử lý"
-                          : "Thanh toán thất bại"}
+                        {item?.type == "WITHDRAW"
+                          ? "Rút tiền"
+                          : item?.type == "DEPOSIT"
+                          ? "Nạp tiền"
+                          : "Đang xử lý"}
                       </h4>
                       <div class="History-des__sub-price">
                         <p>{formatterPrice.format(item?.amount)}đ</p>
                       </div>
                     </div>
-                    <div class="History-des__sub-title">
-                      <div class="History-des__sub-date_time">
-                        <p>
-                          {formatterTime.format(Date.parse(item?.createdAt))}
-                        </p>
-                      </div>
-                      <div class="History-des__sub-date_time">
-                        <p>
-                          {formatterDate.format(Date.parse(item?.createdAt))}
-                        </p>
+                    <div className="History-des__sub-bottom">
+                      <p>
+                        {item?.status == 1
+                          ? "Hoàn tất"
+                          : item?.status == 2
+                          ? "Đang xử lý"
+                          : "Thất bại"}
+                      </p>
+                      <div class="History-des__sub-title">
+                        <div class="History-des__sub-date_time">
+                          <p>
+                            {formatterTime.format(Date.parse(item?.createdAt))}
+                          </p>
+                        </div>
+                        <div class="History-des__sub-date_time">
+                          <p>
+                            {formatterDate.format(Date.parse(item?.createdAt))}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>

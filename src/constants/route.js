@@ -37,5 +37,5 @@ export const ROUTES = {
   UPDATEPAY: "/update-pay",
   EDITPOST: "/edit-post/:id",
   CHATHDV: "/kenh-hdv/chat/:chatId",
-
+  YEUCAUCHUYENDI: "/kenh-hdv/yeu-cau-chuyen-di",
 };

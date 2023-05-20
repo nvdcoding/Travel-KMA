@@ -41,6 +41,7 @@ const UpdatePay = lazy(() => import("../page/User/Thanh-toan/updatePay"));
 const listPost = lazy(() => import("../page/User/Tin-Tuc/ListPost"));
 const EditPost = lazy(() => import("../page/User/Tin-Tuc/EditPost"));
 const ChatHdv = lazy(() => import("../page/Kenh_HDV/Chat/index"));
+const yeucau = lazy(() => import("../page/Kenh_HDV/QL_Tour/yeucau"));
 
 /**
  * define main pages routes
@@ -254,6 +255,12 @@ const RoutePage = [
     path: ROUTES.CHITIETORDER,
     exact: true,
     component: chitietOrder,
+    roles: ["TOURGUIDE"],
+  },
+  {
+    path: ROUTES.YEUCAUCHUYENDI,
+    exact: true,
+    component: yeucau,
     roles: ["TOURGUIDE"],
   },
   {

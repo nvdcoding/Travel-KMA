@@ -5,7 +5,7 @@ import Layout from "../../../components/layout/layout";
 import { Link, useHistory, useParams } from "react-router-dom";
 import "../../../assets/css/tour-detail.css";
 import OwlCarousel from "react-owl-carousel";
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown from "react-markdown";
 
 import {
   Input,
@@ -19,13 +19,59 @@ import {
 } from "antd";
 import Condition from "../../../components/condition";
 import { sendGet, sendPost } from "../../../utils/api";
-import { haiphong, halong, hanoi } from "../../../constants/images";
+import {
+  haiphong,
+  halong,
+  hanoi,
+  voucher1,
+  voucher2,
+} from "../../../constants/images";
+import Voucher from "../../Kenh_HDV/Voucher";
 
 export default function TourDetail() {
   const [number, setNumber] = useState(1);
   const [priceNumber, setPriceNumber] = useState(20000);
   const [date, setdate] = useState("");
   const [data, setData] = useState([]);
+  const [voucher, setVoucher] = useState();
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const handleVoucher = (value) => {
+    setVoucher(value);
+    if (value) {
+      if (value.discountType == 1) {
+        if (number - data.numOfFreeMember > 0) {
+          setTotalPrice(
+            data.basePrice +
+              (number - data.numOfFreeMember) * data.feePerMember -
+              value.value
+          );
+        } else setTotalPrice(data.basePrice - value.value);
+      } else {
+        if (number - data.numOfFreeMember > 0) {
+          let discountPrice =
+            (value.value / 100) *
+            (data.basePrice +
+              (number - data.numOfFreeMember) * data.feePerMember);
+          setTotalPrice(
+            data.basePrice +
+              (number - data.numOfFreeMember) * data.feePerMember -
+              discountPrice
+          );
+        } else {
+          let discountPrice = (value.value / 100) * data.basePrice;
+          setTotalPrice(data.basePrice - discountPrice);
+        }
+      }
+    } else {
+      if (number - data.numOfFreeMember > 0) {
+        setTotalPrice(
+          data.basePrice + (number - data.numOfFreeMember) * data.feePerMember
+        );
+      } else setTotalPrice(data.basePrice);
+    }
+  };
+
   const [tourProvice, setTourProvice] = useState();
   const formatterPrice = new Intl.NumberFormat("vi-VN", {
     hour: "2-digit",
@@ -53,13 +99,44 @@ export default function TourDetail() {
   };
   const handleNumber = (value) => {
     setNumber(value);
-    setPriceNumber(priceNumber * number);
-    return priceNumber * number;
+    if (voucher) {
+      if (voucher.discountType == 1) {
+        if (value - data.numOfFreeMember > 0) {
+          setTotalPrice(
+            data.basePrice +
+              (value - data.numOfFreeMember) * data.feePerMember -
+              voucher.value
+          );
+        } else setTotalPrice(data.basePrice - voucher.value);
+      } else {
+        if (value - data.numOfFreeMember > 0) {
+          let discountPrice =
+            (voucher.value / 100) *
+            (data.basePrice +
+              (value - data.numOfFreeMember) * data.feePerMember);
+          setTotalPrice(
+            data.basePrice +
+              (value - data.numOfFreeMember) * data.feePerMember -
+              discountPrice
+          );
+        } else {
+          let discountPrice = (voucher.value / 100) * data.basePrice;
+          setTotalPrice(data.basePrice - discountPrice);
+        }
+      }
+    } else {
+      if (value - data.numOfFreeMember > 0) {
+        setTotalPrice(
+          data.basePrice + (value - data.numOfFreeMember) * data.feePerMember
+        );
+      } else setTotalPrice(data.basePrice);
+    }
   };
   const dataTour = async () => {
     const res = await sendGet(`/tours/${param.id}`);
     if (res.statusCode == 200) {
       setData(res.returnValue);
+      setTotalPrice(res.returnValue?.basePrice);
       await tourFiltter(res.returnValue?.province.id);
     } else {
       message.error("Lỗi hệ thống");
@@ -306,13 +383,12 @@ export default function TourDetail() {
                             </u>
                           </p>
                           <p dir="ltr" style={{ textAlign: "justify" }}>
-                            Nếu <strong>HDV</strong> không thực hiện được
-                            chuyến du lịch/ dịch vụ, HDV phải báo ngay cho
-                            khách hàng biết và thanh toán lại cho khách hàng
-                            toàn bộ số tiền mà khách hàng đã đóng trong vòng 3
-                            ngày kể từ lúc chính thức thông báo hủy chuyến đi/
-                            dịch vụ du lịch bằng hình thức tiền mặt hoặc chuyển
-                            khoản.
+                            Nếu <strong>HDV</strong> không thực hiện được chuyến
+                            du lịch/ dịch vụ, HDV phải báo ngay cho khách hàng
+                            biết và thanh toán lại cho khách hàng toàn bộ số
+                            tiền mà khách hàng đã đóng trong vòng 3 ngày kể từ
+                            lúc chính thức thông báo hủy chuyến đi/ dịch vụ du
+                            lịch bằng hình thức tiền mặt hoặc chuyển khoản.
                           </p>
                           <p dir="ltr" style={{ textAlign: "justify" }}>
                             <em>
@@ -329,7 +405,8 @@ export default function TourDetail() {
                           </p>
                           <ul dir="ltr">
                             <li style={{ textAlign: "justify" }}>
-                              Các trường hợp chuyển/ đổi dịch vụ/ tour: Khách hàng sẽ không được hoàn lại phí đặt cọc
+                              Các trường hợp chuyển/ đổi dịch vụ/ tour: Khách
+                              hàng sẽ không được hoàn lại phí đặt cọc
                             </li>
                             <li style={{ textAlign: "justify" }}>
                               Trường hợp hủy dịch vụ/ tour: Quý khách phải chịu
@@ -343,8 +420,9 @@ export default function TourDetail() {
                           </p>
 
                           <p>
-                            Việc huỷ bỏ chuyến đi phải được hủy bỏ trên hệ thống. Việc huỷ bỏ bằng liên hệ qua kênh chat, trao đổi
-                            không được chấp nhận.
+                            Việc huỷ bỏ chuyến đi phải được hủy bỏ trên hệ
+                            thống. Việc huỷ bỏ bằng liên hệ qua kênh chat, trao
+                            đổi không được chấp nhận.
                           </p>
                           <p>
                             Đến ngày hẹn thanh toán 100% giá trị tour, nếu quý
@@ -352,7 +430,6 @@ export default function TourDetail() {
                             tiền, xem như quý khách tự ý&nbsp;hủy tour và mất
                             hết số tiền đặt cọc giữ chỗ.
                           </p>
-
                         </div>
                       </div>
                     </div>
@@ -449,11 +526,6 @@ export default function TourDetail() {
                               </span>
                             </td>
                           </tr>
-                          {/* <tr>
-                            <span className="price-tour">
-                                <span>Từ người thứ {data?.numOfFreeMember + 1}, chi phí phụ thu thêm: {data?.feePerMember.toLocaleString('en-US', {style : 'currency', currency : 'VND'}).replace('₫','')} / người</span>
-                            </span>
-                          </tr> */}
                           <tr>
                             <Form.Item
                               name="startDate"
@@ -488,6 +560,19 @@ export default function TourDetail() {
                                 onChange={handleNumber}
                               />
                             </Form.Item>
+                          </tr>
+                          <tr>
+                            <ModalVoucher voucher={handleVoucher} />
+                          </tr>
+                          <tr>
+                            <div className="total-price">
+                              <p className="total-price-title">
+                                Tổng thanh toán
+                              </p>
+                              <p className="total-price-price">
+                                {formatterPrice.format(totalPrice)} đ
+                              </p>
+                            </div>
                           </tr>
                         </tbody>
                       </table>
@@ -541,14 +626,15 @@ export default function TourDetail() {
               </div>
             </div>
           </div>
-        </div >
-      </Layout >
+        </div>
+      </Layout>
     </>
   );
 }
 
-const ModalVoucher = () => {
+const ModalVoucher = ({ voucher }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [discountPrice, setDiscountPrice] = useState();
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -558,21 +644,36 @@ const ModalVoucher = () => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
-  const handleVoucher = () => {
+  const handleVoucher = (item) => {
     setIsModalOpen(false);
-    setVoucher("TM12");
+    voucher(item);
+    setDiscountPrice(item);
   };
-  const [voucher, setVoucher] = useState();
+  const [vouchers, setListVoucher] = useState("");
+
+  const listVoucherAvailable = async () => {
+    let res1 = await sendGet(`/vouchers/available`, { limit: 100 });
+    if (res1.statusCode == 200) {
+      setListVoucher(res1.returnValue);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  useEffect(() => {
+    listVoucherAvailable();
+  }, []);
   return (
     <>
       <span className="order-payment_voucher" onClick={showModal}>
-        <span className="coupon-label success">{voucher}</span>
-        {/* <i className="fa-solid fa-percent"></i> */}
-        Mã Voucher
+        {discountPrice && (
+          <span className="coupon-label success">{discountPrice?.code}</span>
+        )}
+        <i className="fa-solid fa-percent"></i>
+        Sử dụng Voucher
       </span>
       <Modal
         footer={null}
-        width="90%"
+        width="50%"
         title="Mã giảm giá "
         visible={isModalOpen}
         open={isModalOpen}
@@ -581,55 +682,37 @@ const ModalVoucher = () => {
         centered
       >
         <div className="mytrip-voucher">
-          <div className="mytrip-voucher-item">
-            <div className="mytrip-voucher-left">
-              <img
-                className="mytrip-voucher-img"
-                alt=""
-                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-              />
-              <h4 className="mytrip-voucher-name">Voucher</h4>
-            </div>
-            <div className="mytrip-voucher-right">
-              <div className="mytrip-voucher-top">
-                <h3 className="mytrip-voucher-title">
-                  Giảm 10% đơn 20k giảm 210k
-                </h3>
-                <p
-                  className="mytrip-voucher-use"
-                  onClick={() => handleVoucher()}
-                >
-                  Dùng ngay
-                </p>
-              </div>
-              <div className="mytrip-voucher-bottom">
-                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
-                <Condition />
-              </div>
-            </div>
-          </div>
-          <div className="mytrip-voucher-item">
-            <div className="mytrip-voucher-left">
-              <img
-                className="mytrip-voucher-img"
-                alt=""
-                src="https://vietteltelecom.vn/images_content/img-travel-pack-3.png"
-              />
-              <h4 className="mytrip-voucher-name">Voucher</h4>
-            </div>
-            <div className="mytrip-voucher-right">
-              <div className="mytrip-voucher-top">
-                <h3 className="mytrip-voucher-title">
-                  Giảm 10% đơn 20k giảm 210k
-                </h3>
-                <p className="mytrip-voucher-use">Dùng ngay</p>
-              </div>
-              <div className="mytrip-voucher-bottom">
-                <h3 className="mytrip-voucher-time">Sắp hết hạn: Còn 4 giờ</h3>
-                <Condition />
-              </div>
-            </div>
-          </div>
+          {vouchers && vouchers.length > 0 ? (
+            <>
+              {vouchers?.map((item, index) => (
+                <div className="mytrip-voucher-item" key={index}>
+                  <div className="mytrip-voucher-left">
+                    <img className="mytrip-voucher-img" alt="" src={voucher1} />
+                    <h4 className="mytrip-voucher-name">{item?.code}</h4>
+                  </div>
+                  <div className="mytrip-voucher-right">
+                    <div className="mytrip-voucher-top">
+                      <h3 className="mytrip-voucher-title">{item?.name}</h3>
+                      <div
+                        onClick={() => handleVoucher(item)}
+                        className="mytrip-voucher-use"
+                      >
+                        Dùng ngay
+                      </div>
+                    </div>
+                    <div className="mytrip-voucher-bottom">
+                      <h3 className="mytrip-voucher-time">
+                        Hạn sử dụng: {item?.endDate}
+                      </h3>
+                      {/* <Condition data={item} /> */}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </>
+          ) : (
+            <p>Bạn chưa có voucher nào</p>
+          )}
         </div>
       </Modal>
     </>

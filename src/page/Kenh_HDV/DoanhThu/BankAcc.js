@@ -11,6 +11,7 @@ export default function Pay() {
 
   const PayOnline = async (value) => {
     value.amount = parseInt(value.amount);
+    value.fromWeb = true;
     const res = await sendPost("/tour-guide/deposit", value);
     if (res.statusCode == 200) {
       window.location.href = res.returnValue;
@@ -44,7 +45,7 @@ export default function Pay() {
     },
     {
       label: "5.000.000đ",
-      value: "5000000",
+      value: coin,
     },
   ];
   const HdvTransactions = async () => {

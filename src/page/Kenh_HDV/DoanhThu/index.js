@@ -168,150 +168,144 @@ export default function AddTour() {
     <>
       <LayoutHDV>
         <div class="container">
-          <div class="left">
-            <div class="seller-meta">
-              <div className="section-group-header">
-                <div class="section-title">Tổng Quan</div>
-                <RangePicker
-                  defaultValue={[moment(), moment()]}
-                  format={dateFormat}
-                />
-              </div>
-              <div class="meta-section">
-                <div class="meta-overview">
-                  <div class="meta-to-release">
-                    <div class="meta-item-title">
-                      Doanh thu <span class="sprites-guarantee" />
-                    </div>
-                    <div class="label">Tổng cộng</div>
-                    <div
-                      class="meta-numeric-content"
-                      style={{ width: "212px" }}
-                    >
-                      <span class="currency-symbol">₫</span>10.000
-                    </div>
+          <div class="seller-meta">
+            <div className="section-group-header">
+              <div class="section-title">Tổng Quan</div>
+              <RangePicker
+                defaultValue={[moment(), moment()]}
+                format={dateFormat}
+              />
+            </div>
+            <div class="meta-section">
+              <div class="meta-overview">
+                <div class="meta-to-release">
+                  <div class="meta-item-title">
+                    Doanh thu <span class="sprites-guarantee" />
                   </div>
-                  <div class="meta-released">
-                    <div class="meta-item-title">
-                      Tháng này <span class="sprites-guarantee" />
-                    </div>
-                    <div class="meta-time-box">
-                      <div class="meta-time-item mr16">
-                        <div class="label">Tổng</div>
-                        <div
-                          class="meta-numeric-content"
-                          style={{ width: "212px" }}
-                        >
-                          <span class="currency-symbol">₫</span>0
-                        </div>
+                  <div class="label">Tổng cộng</div>
+                  <div class="meta-numeric-content" style={{ width: "212px" }}>
+                    <span class="currency-symbol">₫</span>10.000
+                  </div>
+                </div>
+                <div class="meta-released">
+                  <div class="meta-item-title">
+                    Tháng này <span class="sprites-guarantee" />
+                  </div>
+                  <div class="meta-time-box">
+                    <div class="meta-time-item mr16">
+                      <div class="label">Tổng</div>
+                      <div
+                        class="meta-numeric-content"
+                        style={{ width: "212px" }}
+                      >
+                        <span class="currency-symbol">₫</span>0
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="default-bank">
-                  <div class="bank-account"></div>
-                  <div
-                    type="button"
-                    class="wallet-entry shopee-button shopee-button--link shopee-button--normal"
-                    onClick={showModal}
-                  >
-                    <span>Rút tiền {`>>`} </span>
-                  </div>
-                  <Modal
-                    open={isModalOpen}
-                    visible={isModalOpen}
-                    footer={null}
-                    centered
-                    onCancel={handleCancel}
-                  >
-                    <h2 className="pay-title">Rút tiền</h2>
-                    <Form
-                      name="basic"
-                      initialValues={{
-                        remember: true,
-                      }}
-                      onFinish={handleOk}
-                      onFinishFailed={onFinishFailed}
-                      autoComplete="off"
-                    >
-                      <Form.Item
-                        label="Số tiền thanh toán"
-                        name="amount"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Nhập số tiền bạn muốn rút toán.",
-                          },
-                        ]}
-                      >
-                        <Input placeholder="Nhập số tiền bạn muốn rút toán" />
-                      </Form.Item>
-                      <Form.Item label="" name="amount">
-                        <Radio.Group
-                          options={optionsWithDisabled}
-                          optionType="button"
-                          buttonStyle="solid"
-                        />
-                      </Form.Item>
-
-                      <Form.Item
-                        wrapperCol={{
-                          offset: 8,
-                          span: 16,
-                        }}
-                      >
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          className="button button--primary"
-                        >
-                          Rút tiền
-                        </Button>
-                      </Form.Item>
-                    </Form>
-                  </Modal>
-                </div>
               </div>
-            </div>
-            <div class="right-main-table">
-              <div class="main-content">
-                <div className="pay-search">
-                  <RangePicker
-                    defaultValue={[
-                      moment().subtract(1, "months").startOf("month"),
-                      moment(),
-                    ]}
-                    format={dateFormat}
-                    onChange={changeDate}
-                  />
-                  <div
-                    className="btn-pay-search button button--primary"
-                    onClick={() => historyDrawFilterTour()}
-                  >
-                    Tìm kiếm
-                  </div>
+              <div class="default-bank">
+                <div class="bank-account"></div>
+                <div
+                  type="button"
+                  class="wallet-entry shopee-button shopee-button--link shopee-button--normal"
+                  onClick={showModal}
+                >
+                  <span>Rút tiền {`>>`} </span>
                 </div>
-                <Tabs defaultActiveKey="0">
-                  <Tabs.TabPane tab="Yêu cầu thanh toán" key="0">
-                    <div class="transactions-table-wrap">
-                      <Table columns={columns} dataSource={request} />
-                    </div>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab="Thành công" key="1">
-                    <div class="transactions-table-wrap">
-                      <Table columns={columns} dataSource={accept} />
-                    </div>
-                  </Tabs.TabPane>
-                  <Tabs.TabPane tab="Thất bại" key="2">
-                    <div class="transactions-table-wrap">
-                      <Table columns={columns} dataSource={deny} />
-                    </div>
-                  </Tabs.TabPane>
-                </Tabs>
+                <Modal
+                  open={isModalOpen}
+                  visible={isModalOpen}
+                  footer={null}
+                  centered
+                  onCancel={handleCancel}
+                >
+                  <h2 className="pay-title">Rút tiền</h2>
+                  <Form
+                    name="basic"
+                    initialValues={{
+                      remember: true,
+                    }}
+                    onFinish={handleOk}
+                    onFinishFailed={onFinishFailed}
+                    autoComplete="off"
+                  >
+                    <Form.Item
+                      label="Số tiền thanh toán"
+                      name="amount"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Nhập số tiền bạn muốn rút toán.",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Nhập số tiền bạn muốn rút toán" />
+                    </Form.Item>
+                    <Form.Item label="" name="amount">
+                      <Radio.Group
+                        options={optionsWithDisabled}
+                        optionType="button"
+                        buttonStyle="solid"
+                      />
+                    </Form.Item>
+
+                    <Form.Item
+                      wrapperCol={{
+                        offset: 8,
+                        span: 16,
+                      }}
+                    >
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="button button--primary"
+                      >
+                        Rút tiền
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </Modal>
               </div>
             </div>
           </div>
-          <div class="right"></div>
+          <div class="right-main-table">
+            <div class="main-content">
+              <div className="pay-search">
+                <RangePicker
+                  defaultValue={[
+                    moment().subtract(1, "months").startOf("month"),
+                    moment(),
+                  ]}
+                  format={dateFormat}
+                  onChange={changeDate}
+                />
+                <div
+                  className="btn-pay-search button button--primary"
+                  onClick={() => historyDrawFilterTour()}
+                >
+                  Tìm kiếm
+                </div>
+              </div>
+              <Tabs defaultActiveKey="0">
+                <Tabs.TabPane tab="Yêu cầu thanh toán" key="0">
+                  <div class="transactions-table-wrap">
+                    <Table columns={columns} dataSource={request} />
+                  </div>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="Thành công" key="1">
+                  <div class="transactions-table-wrap">
+                    <Table columns={columns} dataSource={accept} />
+                  </div>
+                </Tabs.TabPane>
+                <Tabs.TabPane tab="Thất bại" key="2">
+                  <div class="transactions-table-wrap">
+                    <Table columns={columns} dataSource={deny} />
+                  </div>
+                </Tabs.TabPane>
+              </Tabs>
+            </div>
+          </div>
         </div>
       </LayoutHDV>
     </>

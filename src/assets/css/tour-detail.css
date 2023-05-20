@@ -118,7 +118,8 @@ table.table-journeys td {
   border-width: 0px;
 }
 
-.tour-detail__basic {}
+.tour-detail__basic {
+}
 
 td {
   font-family: "Mulish";
@@ -511,10 +512,12 @@ table.table-journeys tr td:first-child {
 }
 
 .order-payment_voucher {
-  color: #0071c4;
+  color: #fff;
   font-size: 15px;
   text-decoration: underline;
   cursor: pointer;
+  margin-top: 20px;
+  display: block;
 }
 
 .order-payment_voucher i {
@@ -523,7 +526,24 @@ table.table-journeys tr td:first-child {
 border: 1px solid #ccc;
 background-color: #ccc; */
 }
-
+.total-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  margin-top: 20px;
+}
+.total-price-title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+}
+.total-price-price {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: #fec32d;
+}
 .order-payment__note {
   font-style: italic;
   font-size: 12px;
@@ -531,8 +551,8 @@ background-color: #ccc; */
 }
 
 .coupon-label {
-  border: 1px solid #080;
-  color: #080;
+  border: 1px solid #fec32d;
+  color: #fec32d;
   padding: 3px 15px;
   border-radius: 5px;
   display: inline-block;
@@ -553,6 +573,7 @@ background-color: #ccc; */
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 20px;
   max-height: 450px;
+  min-height: 450px;
   overflow: scroll;
 }
 
@@ -605,7 +626,8 @@ background-color: #ccc; */
   white-space: nowrap;
 }
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
 .md-1 {
   justify-content: flex-end !important;
@@ -668,11 +690,14 @@ background-color: #ccc; */
   font-size: 20px;
 }
 
-.mytrip-sub-menu {}
+.mytrip-sub-menu {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-order {}
+.mytrip-order {
+}
 
 .mytrip-order-item {
   margin-bottom: 30px;
@@ -767,7 +792,8 @@ background-color: #ccc; */
   /* text-decoration: line-through; */
 }
 
-.mytrip-order__main-price-km {}
+.mytrip-order__main-price-km {
+}
 
 .mytrip-order__rate .button {
   width: auto;
@@ -775,15 +801,20 @@ background-color: #ccc; */
   border-radius: 5px;
 }
 
-.mytrip-order__rate-note {}
+.mytrip-order__rate-note {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
-.mytrip-voucher__search {}
+.mytrip-voucher__search {
+}
 
 .mytrip-voucher-box-search {
   display: flex;
@@ -803,9 +834,11 @@ background-color: #ccc; */
   margin-right: 10px;
 }
 
-.mytrip-sub-menu {}
+.mytrip-sub-menu {
+}
 
-.mytrip-sub-menu-name {}
+.mytrip-sub-menu-name {
+}
 
 .mytrip-voucher {
   display: grid;
@@ -944,7 +977,7 @@ background-color: #ccc; */
   height: 38px;
 }
 
-.sendyc-form .ant-form-item-label>label {
+.sendyc-form .ant-form-item-label > label {
   height: 23px;
 }
 
@@ -964,7 +997,11 @@ background-color: #ccc; */
   background-color: var(--color-primary-hover);
 }
 
-.sendyc-form .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional):before {
+.sendyc-form
+  .ant-form-item-label
+  > label.ant-form-item-required:not(
+    .ant-form-item-required-mark-optional
+  ):before {
   content: "";
 }
 
@@ -1087,7 +1124,11 @@ table {
   text-transform: uppercase;
 }
 
-.single-box-content .single-content .tlb-info-tour tr:first-child td:last-child {
+.single-box-content
+  .single-content
+  .tlb-info-tour
+  tr:first-child
+  td:last-child {
   text-align: right;
 }
 
@@ -1128,9 +1169,9 @@ ul.list-extra-services li {
   font-size: 14px;
 }
 
-.single-content .nav-tabs>li.active>a,
-.single-content .nav-tabs>li.active>a:hover,
-.single-content .nav-tabs>li.active>a:focus {
+.single-content .nav-tabs > li.active > a,
+.single-content .nav-tabs > li.active > a:hover,
+.single-content .nav-tabs > li.active > a:focus {
   background: #f0f2f5;
   color: #fefefe;
   height: 30px;
@@ -1146,7 +1187,7 @@ ul.list-extra-services li {
   padding: 0px 15px;
 }
 
-.single-content .nav-tabs>li>a {
+.single-content .nav-tabs > li > a {
   background: #00a1fe;
   color: #a09295;
   font-size: 18px;
@@ -1440,7 +1481,8 @@ ul.list-extra-services li {
   margin-bottom: 0px;
 }
 
-.full-box-form.full-box-form-tour .full-box-form-inner div.title-h2 span {}
+.full-box-form.full-box-form-tour .full-box-form-inner div.title-h2 span {
+}
 
 .full-box-form.full-box-form-tour .full-box-form-inner div.title-h3 {
   margin: 0px;
@@ -1758,7 +1800,10 @@ ul.list-extra-services li {
   padding-left: 35px;
 }
 
-.tour-box-details .tlb-page-set-tour.tlb-info-confirm-tour tr td:first-child:after {
+.tour-box-details
+  .tlb-page-set-tour.tlb-info-confirm-tour
+  tr
+  td:first-child:after {
   content: ":";
   position: absolute;
   right: 0px;
@@ -1773,7 +1818,8 @@ ul.list-extra-services li {
   border-bottom: 1px solid #00c9e7;
 }
 
-.tour-box-details .tlb-page-set-tour.tlb-info-confirm-tour tr td {}
+.tour-box-details .tlb-page-set-tour.tlb-info-confirm-tour tr td {
+}
 
 .tour-box-details .tlb-deatils-tour.page-confirm {
   margin: 20px 0px;
@@ -1806,13 +1852,21 @@ ul.list-extra-services li {
   padding: 0px 10px;
 }
 
-.tour-box-details .tlb-deatils-tour.page-confirm tr td:last-child span.number-people {
+.tour-box-details
+  .tlb-deatils-tour.page-confirm
+  tr
+  td:last-child
+  span.number-people {
   font-size: 12px;
   color: #000;
   padding: 0px 20px;
 }
 
-.tour-box-details .tlb-deatils-tour.page-confirm tr td:last-child span.number-people:first-child {
+.tour-box-details
+  .tlb-deatils-tour.page-confirm
+  tr
+  td:last-child
+  span.number-people:first-child {
   padding-left: 0px;
 }
 
@@ -1822,7 +1876,11 @@ ul.list-extra-services li {
   padding: 0px 10px;
 }
 
-.tour-box-details .tlb-deatils-tour.page-confirm tr td:last-child span.note-deputy {
+.tour-box-details
+  .tlb-deatils-tour.page-confirm
+  tr
+  td:last-child
+  span.note-deputy {
   padding-left: 0px;
 }
 
@@ -1976,7 +2034,8 @@ ul.list-extra-services li {
 /* END TOUR PRODUCT RELATEVE */
 /* post relation tour */
 .box-post-relation.type-tour {
-  background: url(https://data.vietnambooking.com/common/svg/bg/bg_combo_tour.svg) no-repeat bottom center;
+  background: url(https://data.vietnambooking.com/common/svg/bg/bg_combo_tour.svg)
+    no-repeat bottom center;
   padding: 20px;
   line-height: 1.4;
   min-height: 170px;
@@ -2039,7 +2098,9 @@ table.tlb-contact-payment-tour .box-voucher-promo-results.voucher-tour {
   color: #ff0000;
 }
 
-table.tlb-contact-payment-tour .box-voucher-promo-results.voucher-tour .btn-submit-cancel {
+table.tlb-contact-payment-tour
+  .box-voucher-promo-results.voucher-tour
+  .btn-submit-cancel {
   display: inline-block;
   background: red;
   color: #fff;
@@ -2057,7 +2118,9 @@ table.tlb-contact-payment-tour .box-voucher-code {
   top: 5px;
 }
 
-table.tlb-contact-payment-tour .box-voucher-promo-results.voucher-tour .box-error {
+table.tlb-contact-payment-tour
+  .box-voucher-promo-results.voucher-tour
+  .box-error {
   text-align: center;
 }
 
@@ -2094,7 +2157,12 @@ ul.box-ul-anchor-text li a {
   font-size: 16px;
 }
 
-.single-box-content .single-content .box-form-price-tour.horizontal table tr td {
+.single-box-content
+  .single-content
+  .box-form-price-tour.horizontal
+  table
+  tr
+  td {
   vertical-align: bottom;
 }
 
@@ -2112,7 +2180,8 @@ ul.box-ul-anchor-text li a {
   border-radius: 5px;
 }
 
-.panel.panel-tour-product h4.panel-title {}
+.panel.panel-tour-product h4.panel-title {
+}
 
 .panel.panel-tour-product h4.panel-title a {
   display: block;
@@ -2191,7 +2260,8 @@ ul.box-ul-anchor-text li a {
 }
 
 /*  TOUR SPECIAL */
-.box-tour-special {}
+.box-tour-special {
+}
 
 .box-tour-special .list-item {
   margin: 0px;
@@ -2298,24 +2368,48 @@ ul.box-ul-anchor-text li a {
   font-size: 20px;
 }
 
-.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  table.tlb-time-and-traffic-tour
+  tr
+  td {
   padding: 0px;
   border-top: 0px;
 }
 
-.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td:first-child {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  table.tlb-time-and-traffic-tour
+  tr
+  td:first-child {
   text-align: left;
 }
 
-.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td:last-child {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  table.tlb-time-and-traffic-tour
+  tr
+  td:last-child {
   text-align: right;
 }
 
-.single-post_special .box-content .box-content-promotion-tour table.tlb-time-and-traffic-tour tr td:last-child img {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  table.tlb-time-and-traffic-tour
+  tr
+  td:last-child
+  img {
   padding: 0px 2px;
 }
 
-.single-post_special .box-content .box-content-promotion-tour .box-summary-content-tour {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  .box-summary-content-tour {
   font-size: 14px;
   color: #5c5c5c;
 
@@ -2332,22 +2426,38 @@ ul.box-ul-anchor-text li a {
   margin-top: 10px;
 }
 
-.single-post_special .box-content .box-content-promotion-tour .box-price-promotion-tour span {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  .box-price-promotion-tour
+  span {
   display: block;
   font-size: 24px;
   color: #fc0309;
 }
 
-.single-post_special .box-content .box-content-promotion-tour .box-price-promotion-tour span sup {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  .box-price-promotion-tour
+  span
+  sup {
   font-size: 17px;
 }
 
-.single-post_special .box-content .box-content-promotion-tour .box-price-promotion-tour del {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  .box-price-promotion-tour
+  del {
   font-size: 18px;
   color: #bcbfc4;
 }
 
-.single-post_special .box-content .box-content-promotion-tour .box-percent-tour {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  .box-percent-tour {
   background: #ff0000;
   font-size: 16px;
 
@@ -2361,7 +2471,11 @@ ul.box-ul-anchor-text li a {
   top: 10px;
 }
 
-.single-post_special .box-content .box-content-promotion-tour .box-percent-tour .arrow-left {
+.single-post_special
+  .box-content
+  .box-content-promotion-tour
+  .box-percent-tour
+  .arrow-left {
   width: 0;
   height: 0;
   border-top: 10px solid transparent;
@@ -2388,11 +2502,17 @@ ul.box-ul-anchor-text li a {
   color: #161616;
 }
 
-#ui-datepicker-div.tour-box-date .ui-datepicker-calendar tr th.ui-datepicker-week-end {
+#ui-datepicker-div.tour-box-date
+  .ui-datepicker-calendar
+  tr
+  th.ui-datepicker-week-end {
   color: #10bef3;
 }
 
-#ui-datepicker-div.tour-box-date .ui-datepicker-calendar tr th.ui-datepicker-week-end:last-child {
+#ui-datepicker-div.tour-box-date
+  .ui-datepicker-calendar
+  tr
+  th.ui-datepicker-week-end:last-child {
   color: #ff0000;
 }
 
@@ -2415,11 +2535,17 @@ ul.box-ul-anchor-text li a {
   color: #fff;
 }
 
-#ui-datepicker-div.tour-box-date .ui-datepicker-current-day .ui-state-active .ui-datepicker-day {
+#ui-datepicker-div.tour-box-date
+  .ui-datepicker-current-day
+  .ui-state-active
+  .ui-datepicker-day {
   color: #fff;
 }
 
-#ui-datepicker-div.tour-box-date .ui-datepicker-current-day .ui-state-active .ui-datepicker-lunar {
+#ui-datepicker-div.tour-box-date
+  .ui-datepicker-current-day
+  .ui-state-active
+  .ui-datepicker-lunar {
   color: #fff;
 }
 
@@ -2455,7 +2581,12 @@ ul.box-ul-anchor-text li a {
   font-size: 16px;
 }
 
-#ui-datepicker-div.tour-box-date .ui-datepicker-calendar tbody tr td a.ui-state-default {
+#ui-datepicker-div.tour-box-date
+  .ui-datepicker-calendar
+  tbody
+  tr
+  td
+  a.ui-state-default {
   border: 1px solid #0096ff;
 }
 
@@ -2467,7 +2598,8 @@ ul.box-ul-anchor-text li a {
 
 /* END FORM TOUR */
 /* CAT TOUR */
-.fullcat-hot-tour-data {}
+.fullcat-hot-tour-data {
+}
 
 #owl-slider-product-tour-cat-hot {
   padding: 20px 0px;
@@ -2493,7 +2625,8 @@ ul.box-ul-anchor-text li a {
   text-decoration: none;
 }
 
-#owl-slider-product-tour-cat-hot .item a .box-img {}
+#owl-slider-product-tour-cat-hot .item a .box-img {
+}
 
 #owl-slider-product-tour-cat-hot .item a .box-img img {
   max-width: 100%;
@@ -2554,7 +2687,12 @@ ul.box-ul-anchor-text li a {
   margin-top: 23px;
 }
 
-.single-box-content .single-content .box-form-price-tour.horizontal.box-left table tr td {
+.single-box-content
+  .single-content
+  .box-form-price-tour.horizontal.box-left
+  table
+  tr
+  td {
   vertical-align: middle;
   margin: 0px 3px;
   display: inline-block;
