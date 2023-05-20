@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/province-details.css";
-import { data } from "../../../constants/images";
+import { data, banner } from "../../../constants/images";
 export default function ProvinceDetails() {
   let params = useParams();
+  console.log("params", params);
   const [province, setProvince] = useState([]);
   const [currentTab, setCurrentTab] = useState(0);
   const [dataShow, setDataShow] = useState([]);
@@ -26,11 +27,17 @@ export default function ProvinceDetails() {
     }
   };
   useEffect(() => {
+    let check = false;
     data.forEach((e) => {
       if (e.path === params.id) {
         setProvince(e);
+        check = true;
+        return;
       }
     });
+    if (check == false) {
+      setProvince(data[data.length - 1]);
+    }
   }, [params]);
   useEffect(() => {
     dataTab();
@@ -42,11 +49,7 @@ export default function ProvinceDetails() {
           <div className="discover-detail">
             <div className="discover-detail__banner">
               <img
-                src={
-                  province.banner
-                    ? province.banner
-                    : "https://vietteltelecom.vn/images_content/banner-travel.png"
-                }
+                src={province.banner ? province.banner : { banner }}
                 alt={province?.label}
               />
               {province.label && (

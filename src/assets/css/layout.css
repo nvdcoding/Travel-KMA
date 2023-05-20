@@ -23,7 +23,7 @@
   color: var(--color-primary);
 }
 
-.ant-layout.ant-layout-has-sider>.ant-layout {
+.ant-layout.ant-layout-has-sider > .ant-layout {
   min-height: 91vh;
   overflow: scroll;
 }
@@ -98,6 +98,17 @@
   cursor: pointer;
 }
 
+.menu-right .pc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-right .button.pc {
+  padding: 8px 12px;
+  background-color: #4e710eed;
+  color: #fff;
+  border-color: #758511;
+}
 .your-trip:hover {
   background-color: var(--color-sub);
   color: #fff;
@@ -510,11 +521,15 @@
   background-color: var(--color-sub);
 }
 
-.InfoUser-wwrapper .ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+.InfoUser-wwrapper
+  .ant-form-item-label
+  > label.ant-form-item-required:not(
+    .ant-form-item-required-mark-optional
+  )::before {
   content: "";
 }
 
-.InfoUser-wwrapper .ant-form-item-label>label {
+.InfoUser-wwrapper .ant-form-item-label > label {
   font-weight: 600;
   color: #000;
   width: 150px;
@@ -542,6 +557,6 @@
   font-size: 16px !important;
 }
 
-.ant-message .ant-message-notice .ant-message-custom-content>.anticon {
+.ant-message .ant-message-notice .ant-message-custom-content > .anticon {
   font-size: 24px !important;
 }

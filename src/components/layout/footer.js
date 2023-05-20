@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { logo } from "../../constants/images";
 
 function Footer() {
-  useEffect(() => { }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <footer className="foorwr__wrapper">
@@ -28,7 +28,7 @@ function Footer() {
                 </li>
                 <li className="tour-footer__item">
                   <i className="fa-regular fa-heart"></i>
-                  <p className="tour-footer__text">Quality Agencies</p>
+                  <p className="tour-footer__text">Yêu thích</p>
                 </li>
                 <li className="tour-footer__item">
                   <i className="fa-solid fa-shield-halved"></i>
@@ -36,18 +36,17 @@ function Footer() {
                 </li>
                 <li className="tour-footer__item">
                   <i className="fa-solid fa-person-walking-luggage"></i>
-                  <p className="tour-footer__text">Personal Ktravel Contact</p>
+                  <p className="tour-footer__text">Nhanh chóng, dễ dàng</p>
                 </li>
                 <li className="tour-footer__item">
                   <i className="fa-solid fa-comments"></i>
-                  <p className="tour-footer__text">Customer Reviews</p>
+                  <p className="tour-footer__text">Liên hệ hỏi đáp </p>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </footer>
-
     </>
   );
 }

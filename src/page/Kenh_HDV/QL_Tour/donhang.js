@@ -176,7 +176,7 @@ export default function MyPage() {
     } else message.success("Chuyến đi đang được thực hiện");
   };
   useEffect(() => {
-    listOrder(1, "waiting");
+    listOrder(1, "waiting_confirm");
   }, []);
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -232,27 +232,27 @@ export default function MyPage() {
               <ul className="tab-nav">
                 <li
                   className={active == 1 ? "tab-item active" : "tab-item"}
-                  onClick={() => listOrder(1, "waiting")}
+                  onClick={() => listOrder(1, "waiting_confirm")}
                 >
                   Yêu cầu người dùng
                 </li>
                 <li
                   className={active == 2 ? "tab-item active" : "tab-item"}
-                  onClick={() => listOrder(2, "processing")}
+                  onClick={() => listOrder(2, "waiting_purchase")}
                 >
-                  Đang thực hiện
+                  Chờ thanh toán
                 </li>
                 <li
                   className={active == 3 ? "tab-item active" : "tab-item"}
-                  onClick={() => listOrder(3, "end")}
+                  onClick={() => listOrder(3, "processing")}
                 >
-                  Hoàn thành
+                  Đang thực hiện
                 </li>
                 <li
                   className={active == 4 ? "tab-item active" : "tab-item"}
                   onClick={() => listOrder(4, "end")}
                 >
-                  Đơn hủy
+                  Hoàn thành
                 </li>
               </ul>
             </div>

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { banner, address } from "../../../constants/images";
+import { banner, address, nodata } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
 import { Pagination, message } from "antd";
 import TourItem from "../../../components/tourItem";
@@ -30,6 +30,18 @@ export default function ToursFilter() {
   const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [show, setShow] = useState(false);
+  const numberPage = 6;
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(numberPage);
+  const handleChange = (value) => {
+    if (value <= 1) {
+      setMinValue(0);
+      setMaxValue(numberPage);
+    } else {
+      setMinValue((value - 1) * numberPage);
+      setMaxValue(value * numberPage);
+    }
+  };
   const handleOk = () => {
     setIsModalOpen(false);
   };
@@ -50,7 +62,7 @@ export default function ToursFilter() {
   };
   const onChangeTimeStart = (date, dateString) => {
     console.log("dataa", dateString);
-    setTime(dateString)
+    setTime(dateString);
   };
   let params = useParams();
   const tourFiltter = async () => {
@@ -134,7 +146,11 @@ export default function ToursFilter() {
                         </Form.Item>
 
                         <Form.Item name="content" label="Mô tả:">
-                          <TextArea placeholder="Nhập yêu cầu" rows={3} onChange={(e) => setDesc(e.target.value)} />
+                          <TextArea
+                            placeholder="Nhập yêu cầu"
+                            rows={3}
+                            onChange={(e) => setDesc(e.target.value)}
+                          />
                         </Form.Item>
 
                         <Button
@@ -156,7 +172,6 @@ export default function ToursFilter() {
                         <div className="modal-content">
                           {show && (
                             <div className="modal-body">
-
                               <p className="modal-place">
                                 <strong>Địa điểm:</strong> {nameProvice}
                               </p>
@@ -197,12 +212,32 @@ export default function ToursFilter() {
                 <h3 className="tour-all-result">
                   Chúng tôi tìm thấy {data.length} tours cho Quý khách.
                 </h3>
-                <div className="tours-all__list">
-                  {data.map((item, index) => (
-                    <TourItem item={item} key={index} />
-                  ))}
-                </div>
-                <Pagination defaultCurrent={1} total={50} />
+                {data && data.length > 0 ? (
+                  <>
+                    <div className="tours-all__list">
+                      {data.slice(minValue, maxValue).map((item, index) => (
+                        <TourItem item={item} key={index} />
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="no-data">
+                      <img alt="" src={nodata} />
+                      <p className="no-data-text">
+                        Không tìm thấy tour trong hệ thống
+                      </p>
+                    </div>
+                  </>
+                )}
+                {data.length > 0 && (
+                  <Pagination
+                    defaultCurrent={1}
+                    defaultPageSize={numberPage}
+                    total={data.length}
+                    onChange={(value) => handleChange(value)}
+                  />
+                )}
               </div>
             </div>
           </div>

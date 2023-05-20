@@ -21,6 +21,7 @@ import { getItem } from "../../../utils/storage";
 export default function MyTrip() {
   const { TabPane } = Tabs;
   const [dataProcessing, setDataProcessing] = useState([]);
+  const [dataPurchase, setDataPurchase] = useState([]);
   const [dataWaiting, setDataWaiting] = useState([]);
   const [dataEnd, setDataEnd] = useState([]);
   const [step, setStep] = useState(false);
@@ -38,11 +39,22 @@ export default function MyTrip() {
   };
   const tourWaitting = async () => {
     const result = await sendGet(`/orders/user`, {
-      type: "waiting",
+      type: "waiting_confirm",
       limit: 100,
     });
     if (result.statusCode == 200) {
       setDataWaiting(result.returnValue);
+    } else {
+      message.error("thất bại");
+    }
+  };
+  const waiting_purchase = async () => {
+    const result = await sendGet(`/orders/user`, {
+      type: "waiting_purchase",
+      limit: 100,
+    });
+    if (result.statusCode == 200) {
+      setDataPurchase(result.returnValue);
     } else {
       message.error("thất bại");
     }
@@ -91,6 +103,7 @@ export default function MyTrip() {
         // huy chuyen di
         message.success("Hủy chuyến đi thành công");
         tourWaitting();
+        waiting_purchase();
       } else {
         message.error("thất bại");
       }
@@ -125,6 +138,7 @@ export default function MyTrip() {
   useEffect(() => {
     tourWaitting();
     tourEnd();
+    waiting_purchase();
     tourProcessing();
   }, []);
   // if (!Object.keys(dataWaiting).length) return <Skeleton />;
@@ -153,13 +167,15 @@ export default function MyTrip() {
                     dataDetail={dataDetail}
                     handleStep={handleStep}
                     tourWaitting={tourWaitting}
+                    waiting_purchase={waiting_purchase}
+                    tourEnd={tourEnd}
                     tourProcessing={tourProcessing}
                   />
                 ) : (
-                  <Tabs defaultActiveKey="1" className="mytrip-sub-menu">
+                  <Tabs defaultActiveKey="0" className="mytrip-sub-menu">
                     <TabPane
                       tab={<p className="mytrip-sub-menu-name">Chờ xác nhận</p>}
-                      key="1"
+                      key="0"
                     >
                       <div className="mytrip-order">
                         {dataWaiting?.map((value, index) => (
@@ -294,7 +310,144 @@ export default function MyTrip() {
                     </TabPane>
                     <TabPane
                       tab={
-                        <p className="mytrip-sub-menu-name">Đang thực hiện</p>
+                        <p className="mytrip-sub-menu-name">Chờ thanh toán</p>
+                      }
+                      key="1"
+                    >
+                      <div className="mytrip-order">
+                        {dataPurchase?.map((value, index) => (
+                          <div className="mytrip-order-item" key={index}>
+                            <div className="mytrip-order__header">
+                              <div className="mytrip-order__header-left">
+                                <p className="mytrip-order__name">
+                                  {value?.tourGuide?.name}
+                                </p>
+                                <Link to={`/chat/${value?.tourGuide?.id}`}>
+                                  <div className="mytrip-order__chat">
+                                    <i className="fa-regular fa-comments"></i>
+                                    <p className="mytrip-order__contact">
+                                      Chat
+                                    </p>
+                                  </div>
+                                </Link>
+                              </div>
+                              <div className="mytrip-order__header-right">
+                                {value.status == 0
+                                  ? "Chờ xác nhận"
+                                  : value.status == 1
+                                  ? "Chờ đặt cọc"
+                                  : value.status == 2
+                                  ? "Chờ thanh toán"
+                                  : value.status == 3
+                                  ? "Chưa thực hiện"
+                                  : value.status == 4
+                                  ? "Đang thực hiện"
+                                  : value.status == 5
+                                  ? "Đã thực hiện"
+                                  : "Đã hủy"}
+                              </div>
+                            </div>
+                            <div className="mytrip-order__main">
+                              <div
+                                className="mytrip-order__main-left"
+                                onClick={() => handleStep(value?.id)}
+                              >
+                                <img
+                                  className="mytrip-order-img"
+                                  alt=""
+                                  src={
+                                    value?.tour?.images[0].url
+                                      ? value?.tour?.images[0].url
+                                      : banner
+                                  }
+                                />
+                                <div className="info-group">
+                                  <h4
+                                    className="mytrip-order-name"
+                                    onClick={() => handleStep(value?.id)}
+                                  >
+                                    {value?.tour?.name}
+                                  </h4>
+                                  <h4 className="mytrip-order-time">
+                                    {value?.startDate}
+                                  </h4>
+                                </div>
+                              </div>
+                              <div className="mytrip-order__main-right">
+                                <p className="mytrip-order__main-price">
+                                  {formatterPrice.format(
+                                    value?.tour?.basePrice
+                                  )}{" "}
+                                  đ
+                                </p>
+                              </div>
+                            </div>
+                            <div className="mytrip-order__rate md-1">
+                              {value.status < 2 ? (
+                                <div className="button button--primary">
+                                  <Popconfirm
+                                    title="Hủy yêu cầu?"
+                                    description="Xác nhận hủy chuyến đi"
+                                    onConfirm={() => cancelTour(value)}
+                                    okText="Đồng ý"
+                                    cancelText="Hủy"
+                                  >
+                                    Hủy
+                                  </Popconfirm>
+                                </div>
+                              ) : (
+                                <>
+                                  <div
+                                    className="button button--primary"
+                                    onClick={() => showModal()}
+                                  >
+                                    Hủy
+                                  </div>
+                                  <Modal
+                                    title=""
+                                    open={isCancelTour}
+                                    visible={isCancelTour}
+                                    onOk={handleOk}
+                                    onCancel={handleCancel}
+                                    footer={null}
+                                  >
+                                    <div className="modal-content">
+                                      <p className="modal-title">
+                                        Xác nhận hủy chuyến?
+                                      </p>
+                                      <div className="modal-img">
+                                        <img alt="" src={error} />
+                                      </div>
+                                      <p className="modal-desc">
+                                        Tiền cọc sẽ không được hoàn lại. Chắc
+                                        chắn hủy?
+                                      </p>
+                                      <div className="button-group">
+                                        <div
+                                          className="button button--primary"
+                                          onClick={() => cancelTour(value)}
+                                        >
+                                          Đồng ý
+                                        </div>
+                                        <div
+                                          className="button button--normal"
+                                          onClick={() => handleCancel()}
+                                        >
+                                          Hủy
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </Modal>
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </TabPane>
+                    <TabPane
+                      tab={
+                        <p className="mytrip-sub-menu-name">Đã thanh toán</p>
                       }
                       key="2"
                     >
@@ -391,7 +544,7 @@ export default function MyTrip() {
                       </div>
                     </TabPane>
                     <TabPane
-                      tab={<p className="mytrip-sub-menu-name">Đã đi</p>}
+                      tab={<p className="mytrip-sub-menu-name">Hoàn thành</p>}
                       key="3"
                     >
                       {" "}

@@ -330,7 +330,7 @@ opacity: 0.75; */
   display: none;
 }
 
-.radio-custom1 input:checked~.checkmark:after {
+.radio-custom1 input:checked ~ .checkmark:after {
   display: block;
   background: var(--color-primary-hover);
   width: 10px;
@@ -822,12 +822,12 @@ opacity: 0.75; */
   width: 85%;
 }
 
-.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
   color: var(--color-text-title);
   margin: 15px 0;
 }
 
-.ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-arrow {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
   font-size: 16px;
   color: var(--color-primary-hover);
 }
@@ -844,7 +844,7 @@ opacity: 0.75; */
   }
 }
 
-.ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-arrow {
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
   font-size: 16px;
   color: var(--color-primary-hover);
 }
@@ -865,19 +865,13 @@ iframe {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
 }
-
 .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover,
 .ant-input-affix-wrapper:focus,
 .ant-input-affix-wrapper-focused,
 .ant-input:focus,
 .ant-input-focused {
-  border-color: var(--color-primary-hover);
+  border-color: var(--colour-link);
   box-shadow: 0 0 0 2px #91a4173d;
-}
-
-.ant-input:hover {
-  border-color: var(--color-primary-hover);
-  border-right-width: 1px !important;
 }
 
 .ant-form-item-control-input {
@@ -992,14 +986,18 @@ iframe {
   width: 18px !important;
 }
 
-.check-box__input:checked~.check-box__checkmark {
-  background: -webkit-linear-gradient(bottom,
+.check-box__input:checked ~ .check-box__checkmark {
+  background: -webkit-linear-gradient(
+      bottom,
       rgba(209, 19, 19, 0.2),
-      rgba(209, 19, 19, 0.2)),
+      rgba(209, 19, 19, 0.2)
+    ),
     #fff;
-  background: linear-gradient(0deg,
+  background: linear-gradient(
+      0deg,
       rgba(209, 19, 19, 0.2),
-      rgba(209, 19, 19, 0.2)),
+      rgba(209, 19, 19, 0.2)
+    ),
     #fff;
   border-color: #ee0033;
 }
@@ -1019,7 +1017,7 @@ iframe {
   width: 4px;
 }
 
-.check-box__input:checked~.check-box__checkmark:after {
+.check-box__input:checked ~ .check-box__checkmark:after {
   display: block;
 }
 
@@ -1140,6 +1138,11 @@ iframe {
   min-height: 96vh;
 }
 
+.ant-input:hover,
+.ant-input-number:hover,
+.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: var(--colour-link);
+}
 /* responsive */
 @media (max-width: 1120px) {
   html {

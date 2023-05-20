@@ -46,11 +46,8 @@ export default function MyPage() {
       render: (_, record) => (
         <Space size="middle">
           <div className="action" style={{ backgroundColor: "rgb(255 79 32)" }}>
-            <Link
-              to={`/kenh-hdv/chi-tiet-tour/${record.id}`}
-              style={{ color: "#fff" }}
-            >
-              Sửa
+            <Link to={`/tour/${record.id}`} style={{ color: "#fff" }}>
+              Xem
             </Link>
           </div>
           <div className="action" style={{ backgroundColor: "#1890ff" }}>

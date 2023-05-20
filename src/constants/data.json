@@ -1,14 +1,14 @@
 [
   {
     "id": 1,
-    "banner": "bannerhn.jpg",
-    "path": "hanoi",
+    "banner": "https://cdn3.ivivu.com/2022/07/h%E1%BB%93-g%C6%B0%C6%A1m-du-l%E1%BB%8Bch-H%C3%A0-N%E1%BB%99i-ivivu.jpg",
+    "path": "thanh-pho-ha-noi",
     "label": "Hà Nội",
     "intro": "Nhắc về Hà Nội, nhiều người sẽ nghĩ ngay về nét xưa cũ của phố cổ cùng lịch sử “nghìn năm văn hiến”. Nhưng không hề dừng lại ở đó, Hà Nội còn mang trong mình nhịp sống năng động của một thành phố đang không ngừng phát triển từng ngày. Vẻ đẹp văn hóa, kết hợp với nét trẻ trung, nhộn nhịp đã góp phần tạo nên một Hà Nội đa sắc màu, đủ sức thu hút bất kỳ vị khách phương xa nào.",
     "kham_pha": [
       {
         "title": "Hồ Hoàn Kiếm",
-        "content": "Hồ Hoàn Kiếm là thắng cảnh nổi tiếng ở Hà Nội, có vị trí kết nối giữa khu phố cổ gồm các phố Hàng Ngang, Hàng Đào, Cầu Gỗ, Lương Văn Can, Lò Sũ… với khu phố Tây do người Pháp quy hoạch cách đây hơn một thế kỷ là Bảo Khánh, Nhà thờ, Tràng Thi, Hàng Bài, Đinh Tiên Hoàng, Tràng Tiền, Hàng Khay, Bà Triệu. Hồ Hoàn Kiếm là khu vực trung tâm của thủ đô Hà Nội, vì vậy các bạn có thể đến đây dễ dàng bằng phương tiện cá nhân hay phương tiện công cộng.<br /><img src='http://127.0.0.1:8000/travel/images/hoguom.jpg' alt='Hồ Hoàn Kiếm' /><br />Được mệnh danh là trái tim của thủ đô Hà Nội, dưới thời vua Lê, hồ Hoàn Kiếm có tên là hồ Thủy Quân. Theo truyền thuyết kể lại tại hồ Thủy Quân, vua Lê đã trao trả kiếm rùa vàng, nên hồ Hoàn Kiếm có tên từ đó."
+        "content": "Hồ Hoàn Kiếm là thắng cảnh nổi tiếng ở Hà Nội, có vị trí kết nối giữa khu phố cổ gồm các phố Hàng Ngang, Hàng Đào, Cầu Gỗ, Lương Văn Can, Lò Sũ… với khu phố Tây do người Pháp quy hoạch cách đây hơn một thế kỷ là Bảo Khánh, Nhà thờ, Tràng Thi, Hàng Bài, Đinh Tiên Hoàng, Tràng Tiền, Hàng Khay, Bà Triệu. Hồ Hoàn Kiếm là khu vực trung tâm của thủ đô Hà Nội, vì vậy các bạn có thể đến đây dễ dàng bằng phương tiện cá nhân hay phương tiện công cộng.<br /><img src='https://suckhoedoisong.qltns.mediacdn.vn/Images/thanhloan/2020/11/28/Nam-2030-du-lich-ha-noi-phan-dau-tro-thanh-nganh-kinh-te-mui-nhon-cua-thu-do-19.jpg' alt='Hồ Hoàn Kiếm' /><br />Được mệnh danh là trái tim của thủ đô Hà Nội, dưới thời vua Lê, hồ Hoàn Kiếm có tên là hồ Thủy Quân. Theo truyền thuyết kể lại tại hồ Thủy Quân, vua Lê đã trao trả kiếm rùa vàng, nên hồ Hoàn Kiếm có tên từ đó."
       },
       {
         "title": "Lăng Bác",
@@ -16,7 +16,7 @@
       },
       {
         "title": "Nhà thờ Lớn Hà Nội",
-        "content": "Nhà thờ Lớn nằm ở 40 phố Nhà Chung, Hàng Trống, Hoàn Kiếm, Hà Nội. Về tổng thể, công trình mang phong cách kiến trúc Gothic châu Âu, nhưng vẫn có sự kết hợp với kiến trúc bản địa được thể hiện ở hệ thống mái ngói đất nung, cách trang trí nội thất đậm chất truyền thống Việt Nam. Vì thế nó chính là sản phẩm của sự giao lưu văn hóa Đông Tây hết sức đặc sắc.<br /><img src='http://127.0.0.1:8000/travel/images/nhathohn.jpg' alt='Nhà thờ Lớn Hà Nội' />"
+        "content": "Nhà thờ Lớn nằm ở 40 phố Nhà Chung, Hàng Trống, Hoàn Kiếm, Hà Nội. Về tổng thể, công trình mang phong cách kiến trúc Gothic châu Âu, nhưng vẫn có sự kết hợp với kiến trúc bản địa được thể hiện ở hệ thống mái ngói đất nung, cách trang trí nội thất đậm chất truyền thống Việt Nam. Vì thế nó chính là sản phẩm của sự giao lưu văn hóa Đông Tây hết sức đặc sắc.<br /><img src='https://ik.imagekit.io/tvlk/blog/2022/08/nha-tho-lon-ha-noi-3-819x1024.jpg?tr=dpr-2,w-675' alt='Nhà thờ Lớn Hà Nội' />"
       },
       {
         "title": "Hồ Tây",
@@ -24,7 +24,7 @@
       },
       {
         "title": "Văn miếu Quốc Tử Giám",
-        "content": "Được mệnh danh là ngôi trường đại học đầu tiên của Việt Nam, Văn Miếu Quốc Tử Giám không chỉ là di tích lịch sử Hà Nội nổi tiếng mà còn là nơi chứa đựng những tinh hoa của những giai đoạn lịch sử phong kiến trước kia và lưu giữ những giá trị truyền thống của đất Việt.<br /><img src='http://127.0.0.1:8000/travel/images/ongdo.jpg' alt='Văn miếu Quốc Tử Giám' /><br />Ngày nay, Văn Miếu – Quốc Tử Giám còn là nơi tổ chức hội thơ, là nơi khen tặng những học sinh ưu tú, xuất sắc và là địa điểm tham quan nổi tiếng thu hút đông đảo du khách trong nước và quốc tế. Đồng thời, đây cũng là điểm hẹn “xin chữ” của người dân Hà thành trong những ngày tết truyền thống với ước mong năm mới an lành hay trong những mùa thi quan trọng của đất nước với niềm tin đỗ đạt của các “sĩ tử”. Đặt khách sạn ở Quận Đống Đa để tiện cho việc tham quan địa điểm nổi tiếng này nhé."
+        "content": "Được mệnh danh là ngôi trường đại học đầu tiên của Việt Nam, Văn Miếu Quốc Tử Giám không chỉ là di tích lịch sử Hà Nội nổi tiếng mà còn là nơi chứa đựng những tinh hoa của những giai đoạn lịch sử phong kiến trước kia và lưu giữ những giá trị truyền thống của đất Việt.<br /><img src='https://huesmiletravel.com.vn/wp-content/uploads/2019/08/van-mieu-quoc-tu-giam-hue-dlh.jpg' alt='Văn miếu Quốc Tử Giám' /><br />Ngày nay, Văn Miếu – Quốc Tử Giám còn là nơi tổ chức hội thơ, là nơi khen tặng những học sinh ưu tú, xuất sắc và là địa điểm tham quan nổi tiếng thu hút đông đảo du khách trong nước và quốc tế. Đồng thời, đây cũng là điểm hẹn “xin chữ” của người dân Hà thành trong những ngày tết truyền thống với ước mong năm mới an lành hay trong những mùa thi quan trọng của đất nước với niềm tin đỗ đạt của các “sĩ tử”. Đặt khách sạn ở Quận Đống Đa để tiện cho việc tham quan địa điểm nổi tiếng này nhé."
       }
     ],
     "am_thuc": [
@@ -34,15 +34,15 @@
       },
       {
         "title": "Phở Hà Nội",
-        "content": "Phở Hà Nội là món ăn truyền thống lâu đời, mang hương vị riêng của đất Bắc. Sự khác biệt dễ nhận thấy nhất giữa phở Hà Nội và phở trong Nam chính là bánh phở dẹp và to hơn, đồng thời, một số nơi sẽ ăn kèm phở với quẩy. Khách du lịch Hà Nội có thể chọn phở gà, phở bò hay phở ngan tùy theo sở thích ăn uống của mỗi người.<br /><img src=`${}'http://127.0.0.1:8000/travel/images/phobo.jpg' alt='Phở Hà Nội' /><br />Địa chỉ bán phở ngon ở Hà Nội:<br />- Phở Gia Truyền: 49 Bát Đàn, Q.Hoàn Kiếm<br />- Phở Thìn: 13 Lò Đúc, Q.Hai Bà Trưng<br />- Phở Vui (chuyên bò): 25 Hàng Giấy, Q.Hoàn Kiếm."
+        "content": "Phở Hà Nội là món ăn truyền thống lâu đời, mang hương vị riêng của đất Bắc. Sự khác biệt dễ nhận thấy nhất giữa phở Hà Nội và phở trong Nam chính là bánh phở dẹp và to hơn, đồng thời, một số nơi sẽ ăn kèm phở với quẩy. Khách du lịch Hà Nội có thể chọn phở gà, phở bò hay phở ngan tùy theo sở thích ăn uống của mỗi người.<br /><img src='https://cdn.pastaxi-manager.onepas.vn/content/uploads/articles/01-Phuong-Mon%20ngon&congthuc/1.%20pho%20ha%20noi/canh-nau-pho-ha-noi-xua-mang-huong-vi-kinh-do-cua-80-nam-ve-truoc-1.jpg' alt='Phở Hà Nội' /><br />Địa chỉ bán phở ngon ở Hà Nội:<br />- Phở Gia Truyền: 49 Bát Đàn, Q.Hoàn Kiếm<br />- Phở Thìn: 13 Lò Đúc, Q.Hai Bà Trưng<br />- Phở Vui (chuyên bò): 25 Hàng Giấy, Q.Hoàn Kiếm."
       },
       {
         "title": "Chả Cá Lã Vọng Hà Nội",
-        "content": "Chả cá Lã Vọng là món ăn đặc sản Hà Nội được làm từ cá lăng, là loại cá nhiều chất dinh dưỡng, thịt ngọt, ít xương. Miếng chả được chiên giòn ăn kèm rau thơm, bún tươi hoặc cơm trong những bữa trưa hoặc cơm tối gia đình đều phù hợp. Đặc biệt, bạn phải ăn cùng mắm tôm mới đúng điệu nhé! Món ăn hứa hẹn đánh thức vị giác của bạn với hương vị khó quên.<br /><img src='http://127.0.0.1:8000/travel/images/bunca.jpg' alt='Chả Cá Lã Vọng Hà Nội' /><br />Địa chỉ chả cá Lã Vọng Hà Nội:<br />- Chả Cá Vọng Ngư: 29 Nguyễn Chí Thanh, Q.Ba Đình<br />- Vua Chả Cá: Số 76A Mai Hắc Đế, Q.Hai Bà Trưng<br />- Chả cá Lão Ngư: Số 171 Thái Hà, Q.Hoàn Kiếm"
+        "content": "Chả cá Lã Vọng là món ăn đặc sản Hà Nội được làm từ cá lăng, là loại cá nhiều chất dinh dưỡng, thịt ngọt, ít xương. Miếng chả được chiên giòn ăn kèm rau thơm, bún tươi hoặc cơm trong những bữa trưa hoặc cơm tối gia đình đều phù hợp. Đặc biệt, bạn phải ăn cùng mắm tôm mới đúng điệu nhé! Món ăn hứa hẹn đánh thức vị giác của bạn với hương vị khó quên.<br /><img src='https://beptruong.edu.vn/wp-content/uploads/2014/06/bun-ca-ha-noi.jpg' alt='Chả Cá Lã Vọng Hà Nội' /><br />Địa chỉ chả cá Lã Vọng Hà Nội:<br />- Chả Cá Vọng Ngư: 29 Nguyễn Chí Thanh, Q.Ba Đình<br />- Vua Chả Cá: Số 76A Mai Hắc Đế, Q.Hai Bà Trưng<br />- Chả cá Lão Ngư: Số 171 Thái Hà, Q.Hoàn Kiếm"
       },
       {
         "title": "Bún chả",
-        "content": "Món chả được làm từ thịt nạc xay nhỏ rồi tẩm ướp gia vị, sau đó người ta nặn thành những miếng tròn và cho lên vỉ nướng trên than hồng cho đến khi miếng chả vàng rộm và dậy mùi thơm là được. Nước chấm bún chả Hà Nội là nước mắm chua ngọt với giấm, tỏi, ớt, hạt tiêu trộn với đu đủ xanh cắt miếng mỏng chua ngọt. Món này ăn kèm bún và rau sống cùng lá tía tô.<br /><img src='http://127.0.0.1:8000/travel/images/chalalot.jpg' alt='Bún chả' /><br />Danh sách các địa chỉ ăn ngon mà bạn có thể ghé qua thưởng thức:<br />Bún chả Hương Liên: 24 Lê Văn Hưu, Hai Bà Trưng, Hà Nội.<br />Bún chả Đắc Kim: số 1 Hàng Mành, Hoàn Kiếm, Hà Nội.<br />Bún chả kẹp que tre: đoạn giao ngã tư Nguyễn Du – Bà Triệu."
+        "content": "Món chả được làm từ thịt nạc xay nhỏ rồi tẩm ướp gia vị, sau đó người ta nặn thành những miếng tròn và cho lên vỉ nướng trên than hồng cho đến khi miếng chả vàng rộm và dậy mùi thơm là được. Nước chấm bún chả Hà Nội là nước mắm chua ngọt với giấm, tỏi, ớt, hạt tiêu trộn với đu đủ xanh cắt miếng mỏng chua ngọt. Món này ăn kèm bún và rau sống cùng lá tía tô.<br /><img src='cid:db79cf4246027b77f58a011539928634@hitexglobal.vn' alt='Bún chả' /><br />Danh sách các địa chỉ ăn ngon mà bạn có thể ghé qua thưởng thức:<br />Bún chả Hương Liên: 24 Lê Văn Hưu, Hai Bà Trưng, Hà Nội.<br />Bún chả Đắc Kim: số 1 Hàng Mành, Hoàn Kiếm, Hà Nội.<br />Bún chả kẹp que tre: đoạn giao ngã tư Nguyễn Du – Bà Triệu."
       },
       {
         "title": "Bún Thang",
@@ -87,9 +87,9 @@
     ]
   },
   {
-    "id": 22,
-    "banner": "bannerqn.jpg",
-    "path": "quangninh",
+    "id": 14,
+    "banner": "https://media.truyenhinhdulich.vn/upload/news/88_quang_ninh.jpg",
+    "path": "quang-ninh",
     "label": "Quảng Ninh",
     "intro": "Du thuyền trên làn nước xanh ngọc lục bảo yên bình, giữa hàng ngàn hòn đảo và đảo nhỏ, dừng chân tại một số hang động ngoạn mục nhất mà du khách có thể đi lang thang, ngắm nhìn những thành tạo ấn tượng hàng thế kỷ. Vẻ đẹp huyền bí đã khiến Hạ Long & Quảng Ninh trở thành một trong những điểm du lịch nổi tiếng nhất tại Việt Nam, nhưng tại đây bạn vẫn có thể tìm thấy những góc nhỏ cho riêng mình.",
     "kham_pha": [
@@ -180,8 +180,8 @@
   },
   {
     "id": 2,
-    "banner": "bannerhg.jpg",
-    "path": "hagiang",
+    "banner": "https://elitetour.com.vn/files/images/Blogs/ha-giang-12.jpg",
+    "path": "ha-giang",
     "label": "Hà Giang",
     "intro": "Cao nguyên vẫn lặng lẽ xinh đẹp để rồi con người nơi ấy luôn xao động vì vẻ đẹp bình yên ấy nơi đấy là vùng đông bắc Việt nam một Hà Giang khí chất anh hùng ẩn dật ở nơi cực Bắc địa đầu của Tổ quốc. Đi giữa sương mờ giữa mây, giữa núi non đại ngàn như lạc vào một nơi nào xa lắm. Hà Giang mùa nào cũng đẹp lúc giao mùa lúc sang xuân trên mọi cung đường từ hoang sơ đến hùng vĩ từ hoang dại đến hữu tình.",
     "kham_pha": [
@@ -271,9 +271,9 @@
   },
   {
     "id": 10,
-    "banner": "bannersp.jpg",
-    "path": "sapa",
-    "label": "SaPa",
+    "banner": "https://buiquyet.com/wp-content/uploads/2019/09/Sapa-th%C3%A1ng-10-1400x788.jpg",
+    "path": "lao-cai",
+    "label": "Lào Cai",
     "intro": "SaPa - một vùng đất khiêm nhường, lặng lẽ nhưng ẩn chứa bao điều kỳ diệu của cảnh sắc thiên nhiên. Có thể nói, bất kể mùa nào, bất kể nắng mưa hay mây mù, SaPa luôn để lại cho những du khách du lịch SaPa sự dễ chịu, thoải mái. Có lẽ chính độ cao hơn 1600m của SaPa cùng núi rừng trùng điệp bao phủ xung quanh đã tạo nên một vùng thiên nhiên, khí hậu đáng tới như vậy",
     "kham_pha": [
       {
@@ -358,9 +358,9 @@
   },
   {
     "id": 14,
-    "banner": "bannermc.jpg",
-    "path": "mocchau",
-    "label": "Mộc Châu",
+    "banner": "https://elitetour.com.vn/files/images/DulichMocChau/hoa-man-moc-chau-6.jpg",
+    "path": "son-la",
+    "label": "Sơn La",
     "intro": "Mộc Châu nơi luôn yên bình, tĩnh lặng. Nơi giúp để bạn rời xa cái ồn ào của phố thị và hòa mình vào thiên nhiên núi rừng để tận hưởng phút giây thư giãn sau những ngày làm việc căng thẳng. Ở đây mọc lên san sát những ngôi làng dân tộc thiểu số nhỏ hay những homestay giữa cánh đồng lúa được bao quanh bởi những đỉnh núi cao vút.",
     "kham_pha": [
       {
@@ -453,8 +453,8 @@
   },
   {
     "id": 37,
-    "banner": "bannernb.jpg",
-    "path": "ninhbinh",
+    "banner": "https://file1.dangcongsan.vn/DATA/0/2019/10/tam_coc-09_33_08_975.jpg",
+    "path": "ninh-binh",
     "label": "Ninh Bình",
     "intro": "Ninh Bình, một mảnh đất mê hoặc người dân tứ phương, còn được gọi là ‘Vịnh Hạ Long trên cạn” nhờ vào phong cảnh sông nước kỳ diệu của nó, với những ngọn núi đá vôi tuyệt đẹp mọc lên san sát những cánh đồng. Cách tốt nhất để cảm nhận về địa điểm được UNESCO công nhận này là tham gia một chuyến đi thuyền dọc theo những dòng sông lung linh hay leo lên những đỉnh núi ấn tượng tại nơi đây.",
     "kham_pha": [
@@ -540,8 +540,8 @@
   },
   {
     "id": 40,
-    "banner": "bannerna.jpg",
-    "path": "nghean",
+    "banner": "https://ngheandata.com/wp-content/uploads/2021/05/dia-diem-du-lich-nghe-an.jpg",
+    "path": "nghe-an",
     "label": "Nghệ An",
     "intro": "Nghệ An là một tỉnh lớn nằm ở phía Bắc miền Trung với cảnh quan thiên nhiên đẹp như tranh vẽ. Nghệ An còn là mảnh đất đã sản sinh nhiều danh nhân lịch sử, nhà khoa bảng, nhà khoa học, nhà văn hóa nổi tiếng như Mai Hắc Đế, thi sĩ Hồ Xuân Hương… Đặc biệt Nghệ An là quê hương của Chủ tịch Hồ Chí Minh, vị lãnh tụ vĩ đại của dân tộc Việt Nam, một nhà yêu nước lớn, một danh nhân văn hóa thế giới và anh hùng giải phóng dân tộc.",
     "kham_pha": [
@@ -627,8 +627,8 @@
   },
   {
     "id": 44,
-    "banner": "bannerqb.jpg",
-    "path": "quangbinh",
+    "banner": "https://ik.imagekit.io/tvlk/blog/2021/09/du-lich-quang-binh-1.jpg?tr=dpr-2,w-675",
+    "path": "quang-binh",
     "label": "Quảng Bình",
     "intro": "Với nhiều danh lam thắng cảnh nổi tiếng với vẻ đẹp thiên nhiên hoang sơ hùng vĩ, Quảng Bình là điểm đến hấp dẫn của khách du lịch yêu thiên nhiên và đam mê mạo hiểm. Du lịch Quảng Bình đang có nhiều bước chuyển mình mạnh mẽ, nhiều sản phẩm du lịch hấp dẫn nổi tiếng được đưa vào khai thác du lịch, mang đến những trải nghiệm tuyệt vời cho du khách",
     "kham_pha": [
@@ -718,8 +718,8 @@
   },
   {
     "id": 46,
-    "banner": "bannerh.jpg",
-    "path": "hue",
+    "banner": "https://vietsensetravel.com/view/at_nen-di-du-lich-hue-vao-thang-nao_5a06d2932d1bc437a73d2d3eaf127369.jpg",
+    "path": "thua-thien-hue",
     "label": "Huế",
     "intro": "Nhắc đến du lịch Huế không thể không nhớ tới các cung điện, đền đài mang hơi thờ cổ kính và truyền thống của một thời huy hoàng xưa kia. Bao đời nay cố đô Huế luôn được nhớ tới như một vùng đất của sự mộng mơ, thanh tao và dịu dàng. Thế nhưng nơi đây còn được mẹ thiên nhiên ưu ái ban tặng cho muôn vàn cảnh đẹp của biển, của sông, của núi,… qua bao đời vẫn như thuở ban đầu.",
     "kham_pha": [
@@ -801,8 +801,8 @@
   },
   {
     "id": 48,
-    "banner": "bannerdn.jpg",
-    "path": "danang",
+    "banner": "https://vcdn1-dulich.vnecdn.net/2022/06/03/cauvang-1654247842-9403-1654247849.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=Swd6JjpStebEzT6WARcoOA",
+    "path": "thanh-pho-da-nang",
     "label": "Đà Nẵng",
     "intro": "Với những bãi biển rộng, thức ăn đường phố tuyệt vời, đèo Hải Vân huyền thoại và bộ sưu tập các quán cà phê, nhà hàng và quán bar đang phát triển, nó không có gì lạ khi Đà Nẵng là “thành phố đáng đến nhất” tại Việt Nam.",
     "kham_pha": [
@@ -892,8 +892,8 @@
   },
   {
     "id": 52,
-    "banner": "bannerbd.jpg",
-    "path": "binhdinh",
+    "banner": "https://dubaothoitiet.info/uploads/news-c4dbdfb3.jpeg",
+    "path": "binh-dinh",
     "label": "Bình Định",
     "intro": "Du lịch Bình Định từ lâu đã luôn nổi tiếng với những địa điểm đẹp và nổi tiếng, không chỉ nổi tiếng với Gềnh Đá Đĩa, Đầm Ô Loan… Với khung cảnh thiên nhiên tuyệt đẹp, nhiều đặc sản hấp dẫn, Bình Định sẽ là điểm dừng chân thú vị cho du khách muốn tránh xa những nơi ồn ào, đông đúc.",
     "kham_pha": [
@@ -979,8 +979,8 @@
   },
   {
     "id": 66,
-    "banner": "bannerdlk.jpg",
-    "path": "daklak",
+    "banner": "https://hanoimoi.com.vn/Uploads/images/phananh/2022/04/01/dulich1.jpg",
+    "path": "dak-lak",
     "label": "Đắk Lắk",
     "intro": "Đắk Lắk nằm ở trung tâm Tây Nguyên được xem là một trong những chiếc nôi nuôi dưỡng Không gian văn hóa Cồng chiêng Tây Nguyên. Với  bản sắc văn hoá đa dạng, cảnh quan thiên nhiên hoang sơ hùng vĩ, du lịch Đắk Lắk đang ngày càng hấp dẫn du khách.",
     "kham_pha": [
@@ -1058,9 +1058,9 @@
   },
   {
     "id": 56,
-    "banner": "bannernt.jpg",
-    "path": "nhatrang",
-    "label": "Nha Trang",
+    "banner": "https://image.nhandan.vn/w800/Uploaded/2023/jaijae/2023_02_14/a2-6292.jpg",
+    "path": "khanh-hoa",
+    "label": "Khánh Hòa",
     "intro": "Nha Trang - thành phố biển miền Trung không chỉ đi vào thơ, hoạ mà còn “được lòng” du khách với những gì đẹp nhất của một vùng duyên hải. Hòn ngọc quý của tỉnh Khánh Hòa luôn là một điểm sáng trên bản đồ du lịch Việt, với những trải nghiệm lặn biển tuyệt đẹp, thể thao dưới nước ly kỳ, hay còn là một hành trình văn hóa ấn tượng. ",
     "kham_pha": [
       {
@@ -1149,9 +1149,9 @@
   },
   {
     "id": 68,
-    "banner": "bannerdl.jpg",
-    "path": "dalat",
-    "label": "Đà Lạt",
+    "banner": "https://kinhnghiemdulichkct.com/wp-content/uploads/2018/05/Da-lat-lam-dong-thanh-pho-xu-lanh.jpg",
+    "path": "lam-dong",
+    "label": "Lâm Đồng",
     "intro": "Được mệnh danh là thành phố Đà Lạt mộng mơ, nơi đây trở thành sự lựa chọn lý tưởng khi thu hút du khách trong nước và quốc tế đến đây. Chắc chắn du khách sẽ không tìm được một nơi nào thứ 2 giống như ở Đà Lạt. Đi nơi khác có thể cần mùa, nhưng riêng đi Đà Lạt bạn có thể đi quanh năm.",
     "kham_pha": [
       {
@@ -1248,8 +1248,8 @@
   },
   {
     "id": 79,
-    "banner": "bannerhcm.jpg",
-    "path": "tphochiminh",
+    "banner": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/DJI_0550-HDR-Pano.jpg/1200px-DJI_0550-HDR-Pano.jpg",
+    "path": "thanh-pho-ho-chi-minh",
     "label": "Tp. Hồ Chí Minh",
     "intro": "Nếu Hà Nội được biết đến là thủ đô ngàn năm văn hiến với vẻ đẹp yên bình, trầm mạc cùng nhịp sống chậm rãi thì Sài Gòn lại là thành phố của những chuyển động, sự sôi nổi, sầm uất bậc nhất cả nước nhưng lại đan xen một chút cổ kính, một chút châu Âu giữa lòng Việt Nam.",
     "kham_pha": [
@@ -1335,8 +1335,8 @@
   },
   {
     "id": 83,
-    "banner": "bannerbt.jpg",
-    "path": "bentre",
+    "banner": "https://cdnimg.vietnamplus.vn/uploaded/fsmsy/2021_11_14/vuon_dua_ben_tre_3.jpg",
+    "path": "ben-tre",
     "label": "Bến Tre",
     "intro": "Bến Tre, miền quê bình yên rợp bóng dừa xanh là một trong những địa điểm lý tưởng cho những ai muốn cảm nhận sự thư thái, rời xa phồn hoa đô thị về với vùng đất miệt vườn. ",
     "kham_pha": [
@@ -1438,8 +1438,8 @@
   },
   {
     "id": 92,
-    "banner": "bannerct.jpg",
-    "path": "cantho",
+    "banner": "https://scontent.iocvnpt.com/resources/portal/Images/CTO/superadminportal.cto/trangchu/Slider/cantho_2_381274342.jpg",
+    "path": "thanh-pho-can-tho",
     "label": "Cần Thơ",
     "intro": "Cần Thơ là xứ Tây Đô với những con người chân phương và cảnh sắc miền sông nước bình dị mà cuốn hút. Đến Cần Thơ, bạn hãy cùng khám phá các địa điểm du lịch không thể bỏ qua này nhé!",
     "kham_pha": [
@@ -1533,9 +1533,9 @@
   },
   {
     "id": 91,
-    "banner": "bannerpq.jpg",
-    "path": "phuquoc",
-    "label": "Phú Quốc",
+    "banner": "https://vcdn1-dulich.vnecdn.net/2022/04/08/dulichPhuQuoc-1649392573-9234-1649405369.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=SU6n3IvJxW1Sla0xqg31Kg",
+    "path": "kien-giang",
+    "label": "Kiên Giang",
     "intro": "Đảo Phú Quốc thuộc tỉnh Kiên Giang, được mệnh danh là đảo ngọc, là hòn đảo lớn nhất Việt Nam nằm trong vịnh Thái Lan. Đảo Phú Quốc nổi tiếng với những bãi biển trong xanh, những dòng suối yên bình và hải sản tươi ngon.",
     "kham_pha": [
       {
@@ -1619,6 +1619,37 @@
       {
         "title": "\"Phụ kiện check-in\"",
         "content": "Máy ảnh, sạc dự phòng, gậy tự sướng, máy sấy tóc mini đều rất cần thiết cho chuyến đi của bạn nhé. Ngoài ra, bạn còn cần chuẩn bị những chiếc túi chuyên dụng để đựng hết những vật dụng này cho gọn gàng để có thể bỏ vừa vào trong vali khi cần sẽ dễ dàng lấy ra."
+      }
+    ]
+  },
+  {
+    "id": 0,
+    "banner": "https://www.vietfuntravel.com.vn/image/data/viet-nam/tour-du-lich-xuyen-viet-1.jpg",
+    "path": "viet-nam",
+    "label": "Việt Nam",
+    "intro": "",
+    "kham_pha": [
+      {
+        "title": "Dữ liệu đang đưọc cập nhật thêm",
+        "content": "Chưa có dữ liệu về tỉnh <br /><div class='nodata'><img src='https://img.freepik.com/premium-vector/couple-got-lost-while-traveling-abroad_701961-947.jpg?w=360' alt='' /></div>"
+      }
+    ],
+    "am_thuc": [
+      {
+        "title": "Dữ liệu đang đưọc cập nhật thêm",
+        "content": "Chưa có dữ liệu về tỉnh <br /><div class='nodata'><img src='https://img.freepik.com/premium-vector/couple-got-lost-while-traveling-abroad_701961-947.jpg?w=360' alt='' /></div>"
+      }
+    ],
+    "mua_sam": [
+      {
+        "title": "Dữ liệu đang đưọc cập nhật thêm",
+        "content": "Chưa có dữ liệu về tỉnh <br /><div class='nodata'><img src='https://img.freepik.com/premium-vector/couple-got-lost-while-traveling-abroad_701961-947.jpg?w=360' alt='' /></div>"
+      }
+    ],
+    "hanh_trang": [
+      {
+        "title": "Dữ liệu đang đưọc cập nhật thêm",
+        "content": "Chưa có dữ liệu về tỉnh <br /><div class='nodata'><img src='https://img.freepik.com/premium-vector/couple-got-lost-while-traveling-abroad_701961-947.jpg?w=360' alt='' /></div>"
       }
     ]
   }

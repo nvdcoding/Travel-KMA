@@ -15,6 +15,7 @@ import {
 import HdvItem from "../../../components/hdvItem";
 import { AppContext } from "../../../Context/AppContext";
 import { sendGet } from "../../../utils/api";
+import { nodata } from "../../../constants/images";
 
 const { Option } = Select;
 export default function HdvAll() {
@@ -173,15 +174,24 @@ export default function HdvAll() {
                     </div>
                   </div>
                 </div>
-                <div className="hdv-all__list">
-                  {data &&
-                    data.length > 0 &&
-                    data
-                      .slice(minValue, maxValue)
-                      .map((item, index) => (
+                {data && data.length > 0 ? (
+                  <>
+                    <div className="hdv-all__list">
+                      {data.slice(minValue, maxValue).map((item, index) => (
                         <HdvItem item={item} key={index} />
                       ))}
-                </div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="no-data">
+                      <img alt="" src={nodata} />
+                      <p className="no-data-text">
+                        Không tìm thấy HDV nào trong hệ thống
+                      </p>
+                    </div>
+                  </>
+                )}
                 {data.length > 0 && (
                   <Pagination
                     defaultCurrent={1}

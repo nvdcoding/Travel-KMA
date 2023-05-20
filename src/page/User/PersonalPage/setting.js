@@ -140,7 +140,7 @@ function Account() {
             <div className="info">
               <h3>Email</h3>
               <Form.Item name="email" initialValue={infoUser?.email}>
-                <Input placeholder={"learnit@gmail.com"} readOnly />
+                <Input placeholder={"ktravel@gmail.com"} readOnly />
               </Form.Item>
             </div>
           </Form>
