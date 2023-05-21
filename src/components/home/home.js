@@ -536,63 +536,69 @@ function Home() {
             </div>
           </div>
           {/* bai viet */}
-          {post && <div className="news">
-            <div className="travel-title-all">
-              <h2 className="travel-title">Bài viết</h2>
-              <Link to='/tin-tuc' className="travel-link">
-                Xem tất cả <i class="fa-solid fa-angle-right"></i>
-              </Link>
-            </div>
-            <div className="news-main">
-              <ul className="news-left">
-                <li className="news-left-item">
-                  <Link to={`/tin-tuc/${post[0]?.id}`}>
-                    <div className="news-left-thumb">
-                      <img
-                        alt=""
-                        src={post[0]?.image}
-                      />
-                    </div>{" "}
-                  </Link>
-                  <div className="news-left__intro">
+          {post && (
+            <div className="news">
+              <div className="travel-title-all">
+                <h2 className="travel-title">Bài viết</h2>
+                <Link to="/tin-tuc" className="travel-link">
+                  Xem tất cả <i class="fa-solid fa-angle-right"></i>
+                </Link>
+              </div>
+              <div className="news-main">
+                <ul className="news-left">
+                  <li className="news-left-item">
                     <Link to={`/tin-tuc/${post[0]?.id}`}>
-                      <h3 className="news-left__name"> {post[0]?.title}</h3>
+                      <div className="news-left-thumb">
+                        <img alt="" src={post[0]?.image} />
+                      </div>{" "}
                     </Link>
-                    <p className="news-left-des" dangerouslySetInnerHTML={{
-                      __html: post[0]?.currentContent,
-                    }}>
-                    </p>
-                    <Link to={`/tin-tuc/${post[0]?.id}`} className="news-link">
-                      Xem chi tiết
-                    </Link>
-                  </div>
-                </li>
-              </ul>
-              <ul className="news-right">
-                {post?.slice(1, 3)?.map((item, index) => (
-                  <li className="news-right-item" key={index}>
-                    <div className="news-right-thumb">
-                      <Link to={`/tin-tuc/${item?.id}`}>
-                        <img alt="" src={item?.image} />
+                    <div className="news-left__intro">
+                      <Link to={`/tin-tuc/${post[0]?.id}`}>
+                        <h3 className="news-left__name"> {post[0]?.title}</h3>
                       </Link>
-                    </div>
-                    <div className="news-right__intro">
-                      <Link to={`/tin-tuc/${item?.id}`}>
-                        <h3 className="news-right__name"> {item?.title}</h3>
-                      </Link>
-                      <p className="news-right-des" dangerouslySetInnerHTML={{
-                        __html: data[0]?.currentContent,
-                      }}>
-                      </p>
-                      <Link to={`/tin-tuc/${item?.id}`} className="news-link">
+                      <p
+                        className="news-left-des"
+                        dangerouslySetInnerHTML={{
+                          __html: post[0]?.currentContent,
+                        }}
+                      ></p>
+                      <Link
+                        to={`/tin-tuc/${post[0]?.id}`}
+                        className="news-link"
+                      >
                         Xem chi tiết
                       </Link>
                     </div>
                   </li>
-                ))}
-              </ul>
+                </ul>
+                <ul className="news-right">
+                  {post?.slice(1, 3)?.map((item, index) => (
+                    <li className="news-right-item" key={index}>
+                      <div className="news-right-thumb">
+                        <Link to={`/tin-tuc/${item?.id}`}>
+                          <img alt="" src={item?.image} />
+                        </Link>
+                      </div>
+                      <div className="news-right__intro">
+                        <Link to={`/tin-tuc/${item?.id}`}>
+                          <h3 className="news-right__name"> {item?.title}</h3>
+                        </Link>
+                        <p
+                          className="news-right-des"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.currentContent,
+                          }}
+                        ></p>
+                        <Link to={`/tin-tuc/${item?.id}`} className="news-link">
+                          Xem chi tiết
+                        </Link>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>}
+          )}
 
           <div className="tour-view">
             <div className="travel-title-all">

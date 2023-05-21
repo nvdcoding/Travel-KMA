@@ -210,8 +210,8 @@ export default function NewsDetail() {
                 <div class="news-content__hot-main">
                   {dataHot?.slice(0, 3)?.map((item, index) => (
                     <div class="news-content__hot-item" key={index}>
-                      <Link
-                        to={`/tin-tuc/${item?.id}`}
+                      <a
+                        href={`/tin-tuc/${item?.id}`}
                         class="news-content__hot-link"
                       >
                         <div className="news-content__hot-img">
@@ -224,7 +224,7 @@ export default function NewsDetail() {
                           </span>
                           <p class="news-content__hot-name">{item?.title}</p>
                         </div>
-                      </Link>
+                      </a>
                     </div>
                   ))}
                 </div>
