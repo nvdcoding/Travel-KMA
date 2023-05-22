@@ -16,6 +16,7 @@ import {
 import { sendGet } from "../../../utils/api";
 import { AppContext } from "../../../Context/AppContext";
 import PaginationComponent from "../../../components/pagination";
+import { nodata } from "../../../constants/images";
 
 export default function ToursAll() {
   const { Option } = Select;
@@ -24,17 +25,6 @@ export default function ToursAll() {
   const { provice } = useContext(AppContext);
   const [hdv, setHdv] = useState([]);
   const numberPage = 6;
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(numberPage);
-  const handleChange = (value) => {
-    if (value <= 1) {
-      setMinValue(0);
-      setMaxValue(numberPage);
-    } else {
-      setMinValue((value - 1) * numberPage);
-      setMaxValue(value * numberPage);
-    }
-  };
   const options = [
     {
       label: "Sinh thái",
@@ -98,7 +88,7 @@ export default function ToursAll() {
     },
   ];
   const listTour = async () => {
-    const res = await sendGet(`/tours?page=1`, { limit: 2 });
+    const res = await sendGet(`/tours?page=1`, { limit: numberPage });
     if (res.returnValue.data.length >= 0) {
       setData(
         res.returnValue.data.map((e) => {
@@ -111,14 +101,15 @@ export default function ToursAll() {
     }
   };
   const tourFiltter = async (values) => {
-    values.limit = 100;
-    const result = await sendGet("/tours", values);
+    values.limit = numberPage;
+    const result = await sendGet("/tours?page=1", values);
     if (result.returnValue.data.length >= 0) {
       setData(
         result.returnValue.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };
         })
       );
+      setTotalPages(result.returnValue?.totalPages);
     } else {
       message.error("thất bại");
     }
@@ -255,13 +246,24 @@ export default function ToursAll() {
                     </div>
                   </div>
                 </div>
-                <div className="tours-all__list">
-                  {data &&
-                    data.length > 0 &&
-                    data.map((item, index) => (
+
+                {data && data.length > 0 ? (
+                  <div className="tours-all__list">
+                    {data.map((item, index) => (
                       <TourItem item={item} key={index} />
                     ))}
-                </div>
+                  </div>
+                ) : (
+                  <>
+                    <div className="no-data">
+                      <img alt="" src={nodata} />
+                      <p className="no-data-text">
+                        Không tìm thấy tour nào trong hệ thống
+                      </p>
+                    </div>
+                  </>
+                )}
+
                 {/* {data.length > 0 && (
                   <Pagination
                     defaultCurrent={1}
@@ -271,7 +273,7 @@ export default function ToursAll() {
                   />
                 )} */}
                 <PaginationComponent
-                  limit={2}
+                  limit={numberPage}
                   enpoint="tours"
                   totalPages={totalPages}
                   changePaginationData={changePaginationData}

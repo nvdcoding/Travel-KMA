@@ -3,7 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/province-details.css";
-import { data, banner } from "../../../constants/images";
+import {
+  data,
+  banner,
+  item1,
+  item2,
+  item3,
+  item4,
+} from "../../../constants/images";
 export default function ProvinceDetails() {
   let params = useParams();
   console.log("params", params);
@@ -79,10 +86,7 @@ export default function ProvinceDetails() {
                         <br />
                         TRẢI NGHIỆM
                       </h5>
-                      <img
-                        src="https://vietteltelecom.vn/images_content/img-travel-menu-4.png"
-                        alt="icon KHÁM PHÁ TRẢI NGHIỆM"
-                      />
+                      <img src={item1} alt="icon KHÁM PHÁ TRẢI NGHIỆM" />
                     </a>
                   </li>
                   <li
@@ -95,10 +99,7 @@ export default function ProvinceDetails() {
                   >
                     <a href="#" className="discover-detail__menu-link">
                       <h5 className="discover-detail__menu-name">ẩm thực</h5>
-                      <img
-                        src="https://vietteltelecom.vn/images_content/img-travel-menu-3.png"
-                        alt="icon ẩm thực"
-                      />
+                      <img src={item2} alt="icon ẩm thực" />
                     </a>
                   </li>
                   <li
@@ -111,10 +112,7 @@ export default function ProvinceDetails() {
                   >
                     <a href="#" className="discover-detail__menu-link">
                       <h5 className="discover-detail__menu-name">mua sắm</h5>
-                      <img
-                        src="https://vietteltelecom.vn/images_content/img-travel-menu-2.png"
-                        alt="icon mua sắm"
-                      />
+                      <img src={item3} alt="icon mua sắm" />
                     </a>
                   </li>
                   <li
@@ -127,10 +125,7 @@ export default function ProvinceDetails() {
                   >
                     <a href="#" className="discover-detail__menu-link">
                       <h5 className="discover-detail__menu-name">hành trang</h5>
-                      <img
-                        src="https://vietteltelecom.vn/images_content/img-travel-menu-1.png"
-                        alt="icon hành trang"
-                      />
+                      <img src={item4} alt="icon hành trang" />
                     </a>
                   </li>
                 </ul>

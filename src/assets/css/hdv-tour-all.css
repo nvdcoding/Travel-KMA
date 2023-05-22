@@ -131,12 +131,14 @@
   background: #13294b;
   border-radius: 8px 8px 0px 0px;
   display: flex;
+  align-items: center;
   padding: 4rem 2rem;
 }
 
 .tour-detail__plan-header img {
   width: 90px;
   height: 90px;
+  margin-right: 10px;
 }
 
 .tour-plan__review {

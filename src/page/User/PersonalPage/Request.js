@@ -1,5 +1,5 @@
 /* eslint-disable eqeqeq */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Tabs,
   Input,
@@ -13,10 +13,10 @@ import {
 
 import "../../../assets/css/trip.css";
 import { sendDelete, sendGet } from "../../../utils/api";
+import { AppContext } from "../../../Context/AppContext";
 export default function Request() {
   const [tourRequest, setTourRequest] = useState();
-  const { Search } = Input;
-
+  const { provice } = useContext(AppContext);
   const request = async (e) => {
     try {
       let res = await sendGet(`/requests/user`, { limit: 100 });
@@ -29,7 +29,21 @@ export default function Request() {
       message.error("Chưa đến hạn kết thúc chuyến đi");
     }
   };
-  const onSearch = (value) => console.log(value);
+  const onSearch = async (value) => {
+    try {
+      let res = await sendGet(`/requests/user`, {
+        limit: 100,
+        provinceId: parseInt(value),
+      });
+      if (res.statusCode == 200) {
+        setTourRequest(res.returnValue?.data);
+      } else {
+        message.error("thất bại");
+      }
+    } catch (error) {
+      message.error("Có lỗi hệ thống");
+    }
+  };
   const confirm = async (e) => {
     try {
       let res = await sendDelete(`/requests/user/${e}`);
@@ -53,15 +67,26 @@ export default function Request() {
       <div className="tour-request">
         <div className="tour-request-group">
           <h3>Các chuyến đi bạn yêu cầu</h3>
-          <Search
-            placeholder="Tìm kiếm..."
-            onSearch={onSearch}
-            style={{ width: 300 }}
-          />
+
+          <div className="tour-request-search">
+            <div className="tour-request-search-title">
+              <i class="fa-solid fa-filter"></i>Tìm kiếm theo:{" "}
+            </div>
+            <div className="tour-request-search-main">
+              <select onChange={(e) => onSearch(e.target.value)}>
+                <option>Tỉnh/Thành phố</option>
+                {provice.map((item, index) => (
+                  <option value={item?.id} key={index}>
+                    {item?.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
         <div className="vertical">
-          {tourRequest
-            ? tourRequest.map((item, index) => (
+          {tourRequest && tourRequest.length > 0 ? (
+            tourRequest.map((item, index) => (
               <Card
                 title={item.province?.name}
                 key={index}
@@ -85,16 +110,14 @@ export default function Request() {
                   <strong> {item?.content} </strong>
                 </p>
                 <p>
-                  <i class="fa-solid fa-quote-left"></i>Loại hình:
-                  <strong> {item?.type}</strong>
-                </p>
-                <p>
                   <i class="fa-solid fa-calendar-days"></i>Thời gian mong muốn:
                   <strong>{item?.startDate} </strong>
                 </p>
               </Card>
             ))
-            : "loading"}
+          ) : (
+            <p>KO </p>
+          )}
         </div>
       </div>
     </>

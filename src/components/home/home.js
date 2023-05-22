@@ -17,6 +17,7 @@ import {
   banner8,
   banner9,
 } from "../../constants/images";
+import moment from "moment";
 import OwlCarousel from "react-owl-carousel";
 import { DatePicker, Skeleton } from "antd";
 import { Link } from "react-router-dom";
@@ -213,7 +214,7 @@ function Home() {
   const [post, setPost] = useState([]);
 
   const onChangeTime = (date, dateString) => {
-    localStorage.setItem("Timeprovice", date);
+    localStorage.setItem("Timeprovice", dateString);
   };
   const handelProvice = (e) => {
     setSelectedOption(e.target.value);
@@ -223,7 +224,7 @@ function Home() {
     );
     localStorage.setItem("proviceId", e.target.value);
   };
-  const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
+  const dateFormatList = "YYYY-MM-DD";
   const getData = async () => {
     const result = await sendGet("/tour-guide", { limit: 100 });
     if (result.returnValue.data.length >= 0) {
@@ -323,6 +324,12 @@ function Home() {
                     onChange={onChangeTime}
                     placeholder="Chọn ngày"
                     format={dateFormatList}
+                    disabledDate={(current) => {
+                      let customDate = moment().format("YYYY-MM-DD");
+                      return (
+                        current && current < moment(customDate, "YYYY-MM-DD")
+                      );
+                    }}
                   />
                 </div>
               )}

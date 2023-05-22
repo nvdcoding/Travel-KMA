@@ -90,7 +90,7 @@ export default function Request() {
   };
   const deleteOrder = async (value) => {
     try {
-      const res = await sendDelete("/", { orderId: value });
+      const res = await sendDelete(`/requests/${value}`);
       if (res.statusCode === 200) {
         message.success("Từ chối thành công");
         listRequest();
@@ -144,6 +144,7 @@ const ModalTour = ({ listRequest, item }) => {
   const [data, setData] = useState(false);
 
   const showModal = () => {
+    getTour();
     setIsModalOpen(true);
   };
   const user = getItem("user") ? JSON.parse(getItem("user")) : {};
@@ -151,7 +152,7 @@ const ModalTour = ({ listRequest, item }) => {
     try {
       const res = await sendGet("/tours", { tourGuideId: user?.id });
       if (res.statusCode === 200) {
-        message.error("Thành công");
+        message.success("Lấy dữ liệu thành công");
         setData(res.returnValue?.data);
       } else {
         message.error(" thất bại");
@@ -180,9 +181,7 @@ const ModalTour = ({ listRequest, item }) => {
     setIsModalOpen(false);
   };
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  useEffect(() => {
-    getTour();
-  }, []);
+  useEffect(() => {}, []);
   return (
     <>
       <Button type="submit" onClick={showModal}>
@@ -193,6 +192,7 @@ const ModalTour = ({ listRequest, item }) => {
         open={isModalOpen}
         visible={isModalOpen}
         onOk={handleOk}
+        className="modal-tour-option"
         onCancel={handleCancel}
       >
         <Table
@@ -207,7 +207,7 @@ const ModalTour = ({ listRequest, item }) => {
               console.log("selectedRowKeys changed: ", selectedRowKeys);
             },
           }}
-          scroll={{ x: 500 }}
+          scroll={{ x: 600 }}
         />
       </Modal>
     </>

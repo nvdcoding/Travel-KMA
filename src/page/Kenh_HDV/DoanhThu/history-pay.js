@@ -95,7 +95,19 @@ export default function PayHistory() {
                           ? "Rút tiền"
                           : item?.type == "DEPOSIT"
                           ? "Nạp tiền"
-                          : "Đang xử lý"}
+                          : item?.type == "PAY_ORDER"
+                          ? "Thanh toán chuyến đi"
+                          : item?.type == "USER_PREPAID_ORDER"
+                          ? "Đặt cọc chuyến đi"
+                          : item?.type == "TOURGUIDE_APPROVE_ORDER"
+                          ? "Đặt cọc nhận chuyến"
+                          : item?.type == "TOURGUIDE_RECEIVE_ORDER"
+                          ? "Lợi nhuận chuyến đi"
+                          : item?.type == "CANCEL_ORDER"
+                          ? "Hủy chuyến"
+                          : item?.type == "BACK_PREPAID"
+                          ? "Hoàn tiền đặt cọc"
+                          : "Giao dịch khác"}
                       </h4>
                       <div class="History-des__sub-price">
                         <p>{formatterPrice.format(item?.amount)}đ</p>

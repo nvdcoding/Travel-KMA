@@ -25,6 +25,12 @@ export default function MyPage() {
   const [data, setData] = useState([]);
   const columns = [
     {
+      title: "STT",
+      dataIndex: "STT",
+      key: "STT",
+      render: (_, value, index) => <p>{index + 1}</p>,
+    },
+    {
       title: "Tên tour",
       dataIndex: "name",
       key: "name",

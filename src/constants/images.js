@@ -50,3 +50,8 @@ export { default as note } from "../assets/images/note1.png";
 export { default as add } from "../assets/images/add.png";
 export { default as nodata } from "../assets/images/No data-cuate.svg";
 export { default as nodata2 } from "../assets/images/nodata2.png";
+export { default as dulich } from "../assets/images/dulich.png";
+export { default as item1 } from "../assets/images/img-travel-menu-4.png";
+export { default as item2 } from "../assets/images/img-travel-menu-3.png";
+export { default as item3 } from "../assets/images/img-travel-menu-2.png";
+export { default as item4 } from "../assets/images/img-travel-menu-1.png";

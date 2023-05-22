@@ -16,63 +16,62 @@ import HdvItem from "../../../components/hdvItem";
 import { AppContext } from "../../../Context/AppContext";
 import { sendGet } from "../../../utils/api";
 import { nodata } from "../../../constants/images";
+import PaginationComponent from "../../../components/pagination";
 
 const { Option } = Select;
 export default function HdvAll() {
   const { provice } = useContext(AppContext);
   const [data, setData] = useState([]);
+  const [totalPages, setTotalPages] = useState([]);
+
   const numberPage = 6;
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(numberPage);
   const getData = async (values) => {
-    const result = await sendGet("/tour-guide", {
-      limit: 100,
+    const result = await sendGet("/tour-guide?page=1", {
+      limit: numberPage,
     });
     if (result.returnValue.data.length >= 0) {
       setData(result.returnValue.data);
+      setTotalPages(result.returnValue?.totalPages);
     } else {
       message.error("thất bại");
     }
   };
   const getDataSearch = async (values) => {
-    values.limit = 100;
-    const result = await sendGet("/tour-guide", values);
+    values.limit = numberPage;
+    const result = await sendGet("/tour-guide?page=1", values);
     if (result.returnValue.data.length >= 0) {
+      setTotalPages(result.returnValue?.totalPages);
       setData(result.returnValue.data);
     } else {
       message.error("thất bại");
     }
   };
-  const handleChange = (value) => {
-    if (value <= 1) {
-      setMinValue(0);
-      setMaxValue(numberPage);
-    } else {
-      setMinValue((value - 1) * numberPage);
-      setMaxValue(value * numberPage);
-    }
-  };
   const getDataFilterTourDirection = async (e) => {
-    const result = await sendGet("/tour-guide", {
+    const result = await sendGet("/tour-guide?page=1", {
       totalTourDirection: e,
-      limit: 100,
+      limit: numberPage,
     });
     if (result.returnValue.data.length >= 0) {
+      setTotalPages(result.returnValue?.totalPages);
       setData(result.returnValue.data);
     } else {
       message.error("thất bại");
     }
   };
   const getDataFilterFavorite = async (e) => {
-    const result = await sendGet("/tour-guide", {
+    const result = await sendGet("/tour-guide?page=1", {
       totalFavorite: e,
-      limit: 100,
+      limit: numberPage,
     });
     if (result.returnValue.data.length >= 0) {
       setData(result.returnValue.data);
+      setTotalPages(result.returnValue?.totalPages);
     } else {
       message.error("thất bại");
     }
+  };
+  const changePaginationData = async (dataPagination) => {
+    setData(dataPagination);
   };
   useEffect(() => {
     getData();
@@ -177,7 +176,7 @@ export default function HdvAll() {
                 {data && data.length > 0 ? (
                   <>
                     <div className="hdv-all__list">
-                      {data.slice(minValue, maxValue).map((item, index) => (
+                      {data?.map((item, index) => (
                         <HdvItem item={item} key={index} />
                       ))}
                     </div>
@@ -193,11 +192,11 @@ export default function HdvAll() {
                   </>
                 )}
                 {data.length > 0 && (
-                  <Pagination
-                    defaultCurrent={1}
-                    defaultPageSize={numberPage}
-                    total={data.length}
-                    onChange={(value) => handleChange(value)}
+                  <PaginationComponent
+                    limit={numberPage}
+                    enpoint="tour-guide"
+                    totalPages={totalPages}
+                    changePaginationData={changePaginationData}
                   />
                 )}
               </div>

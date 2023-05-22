@@ -61,7 +61,7 @@
   flex-direction: row-reverse;
 }
 
-.news-main {
+.news__wrapper .news-main {
   padding: 20px;
   flex: 0 0 70%;
   width: 70%;

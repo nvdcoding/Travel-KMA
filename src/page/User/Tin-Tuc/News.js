@@ -5,54 +5,53 @@ import Layout from "../../../components/layout/layout";
 import "../../../assets/css/news.css";
 import { sendGet } from "../../../utils/api";
 import { Pagination } from "antd";
+import PaginationComponent from "../../../components/pagination";
 export default function News() {
   const numberPage = 6;
   const [data, setData] = useState();
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(numberPage);
+  const [totalPages, setTotalPages] = useState([]);
   const [keySearch, setKeySearch] = useState("");
   const [valueTopic, setValueTopic] = useState("");
 
-  const handleChange = (value) => {
-    if (value <= 1) {
-      setMinValue(0);
-      setMaxValue(numberPage);
-    } else {
-      setMinValue((value - 1) * numberPage);
-      setMaxValue(value * numberPage);
-    }
-  };
   const listNews = async () => {
-    const res = await sendGet("/posts/user-tourguide", { limit: 100 });
+    const res = await sendGet("/posts/user-tourguide?page=1", {
+      limit: numberPage,
+    });
     if (res.statusCode == 200) {
       setData(res.returnValue.data);
+      setTotalPages(res.returnValue?.totalPages);
     } else {
       message.error("Thất bại");
     }
   };
   const handleKeyDown = async (event) => {
     if (event.key === "Enter") {
-      let res = await sendGet("/posts/user-tourguide", {
-        limit: 100,
+      let res = await sendGet("/posts/user-tourguide?page=1", {
+        limit: numberPage,
         keyword: keySearch,
       });
       if (res.statusCode == 200) {
         setData(res.returnValue.data);
+        setTotalPages(res.returnValue?.totalPages);
       } else {
         message.error("Thất bại");
       }
     }
   };
   const handleChangeTopic = async (e) => {
-    let res = await sendGet("/posts/user-tourguide", {
-      limit: 100,
+    let res = await sendGet("/posts/user-tourguide?page=1", {
+      limit: numberPage,
       topics: e,
     });
     if (res.statusCode == 200) {
       setData(res.returnValue.data);
+      setTotalPages(res.returnValue?.totalPages);
     } else {
       message.error("Thất bại");
     }
+  };
+  const changePaginationData = async (dataPagination) => {
+    setData(dataPagination);
   };
   useEffect(() => {
     listNews();
@@ -116,50 +115,51 @@ export default function News() {
                 </div>
               </div>
               <div className="news-list">
-                {data?.slice(minValue, maxValue)?.map((item, index) => (
-                  <div className="news-item" key={index}>
-                    <div className="news-img">
-                      <Link to={`/tin-tuc/${item?.id}`}>
-                        <img alt="" src={item?.image} />
-                      </Link>
-                    </div>
-                    <div className="news-main">
-                      <h2 className="news-title">
-                        <Link to={`/tin-tuc/${item?.id}`}>{item?.title}</Link>
-                      </h2>
-                      <p
-                        className="news-des"
-                        dangerouslySetInnerHTML={{
-                          __html: item?.currentContent,
-                        }}
-                      />
-                      <div className="news-post-share-box">
-                        <div className="news-post-share-item">
-                          <a href="#" className="news-post-like" title="Like">
-                            <i className="fa-regular fa-heart"></i>
-                          </a>
-                          <a
-                            className="post-share-facebook"
-                            target="_blank"
-                            rel="noreferrer"
-                            href="#"
-                            title="Facebook"
-                          >
-                            <i className="fa-brands fa-facebook-f"></i>
-                          </a>
+                {data &&
+                  data?.map((item, index) => (
+                    <div className="news-item" key={index}>
+                      <div className="news-img">
+                        <Link to={`/tin-tuc/${item?.id}`}>
+                          <img alt="" src={item?.image} />
+                        </Link>
+                      </div>
+                      <div className="news-main">
+                        <h2 className="news-title">
+                          <Link to={`/tin-tuc/${item?.id}`}>{item?.title}</Link>
+                        </h2>
+                        <p
+                          className="news-des"
+                          dangerouslySetInnerHTML={{
+                            __html: item?.currentContent,
+                          }}
+                        />
+                        <div className="news-post-share-box">
+                          <div className="news-post-share-item">
+                            <a href="#" className="news-post-like" title="Like">
+                              <i className="fa-regular fa-heart"></i>
+                            </a>
+                            <a
+                              className="post-share-facebook"
+                              target="_blank"
+                              rel="noreferrer"
+                              href="#"
+                              title="Facebook"
+                            >
+                              <i className="fa-brands fa-facebook-f"></i>
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
               <div className="news-paging">
                 {data && data.length > 0 && (
-                  <Pagination
-                    defaultCurrent={1}
-                    defaultPageSize={numberPage}
-                    total={data.length}
-                    onChange={(value) => handleChange(value)}
+                  <PaginationComponent
+                    limit={numberPage}
+                    enpoint="posts/user-tourguide"
+                    totalPages={totalPages}
+                    changePaginationData={changePaginationData}
                   />
                 )}
               </div>

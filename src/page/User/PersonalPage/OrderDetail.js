@@ -33,7 +33,10 @@ export default function OrderDetail({
       });
       if (res.statusCode == 200) {
         message.success("Thanh toán thành công");
-        await tourProcessing();
+        tourWaitting();
+        tourEnd();
+        waiting_purchase();
+        tourProcessing();
         handleStep();
       } else {
         message.error("thất bại");
@@ -50,7 +53,10 @@ export default function OrderDetail({
       });
       if (res.statusCode == 200) {
         message.success("Thanh toán thành công");
-        await tourProcessing();
+        tourWaitting();
+        tourEnd();
+        waiting_purchase();
+        tourProcessing();
         handleStep();
       } else {
         message.error("thất bại");

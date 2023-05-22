@@ -88,6 +88,7 @@ export default function MyTrip() {
         let res = await sendPut(`/orders/start-user/${e.id}`);
         if (res.statusCode == 200) {
           message.success("Thanh công");
+          tourProcessing();
         } else {
           message.error("thất bại");
         }
@@ -104,7 +105,9 @@ export default function MyTrip() {
         // huy chuyen di
         message.success("Hủy chuyến đi thành công");
         tourWaitting();
+        tourEnd();
         waiting_purchase();
+        tourProcessing();
       } else {
         message.error("thất bại");
       }
@@ -541,11 +544,25 @@ export default function MyTrip() {
                                 {value.status == 3 ? (
                                   <div className="mytrip-order__rate">
                                     Khởi hành vào ngày {value?.startDate}
-                                    <div
-                                      className="button button--primary"
-                                      onClick={() => startUser(value)}
-                                    >
-                                      Bắt đầu
+                                    <div className="my-trip-order-group">
+                                      {value?.userStart == false ? (
+                                        <>
+                                          <div
+                                            className="button button--primary"
+                                            onClick={() => startUser(value)}
+                                          >
+                                            Bắt đầu
+                                          </div>
+                                          <div
+                                            className="button button--normal"
+                                            onClick={() => handleCancel()}
+                                          >
+                                            Hủy
+                                          </div>
+                                        </>
+                                      ) : (
+                                        <p>Chờ HDV bắt đầu chuyến </p>
+                                      )}
                                     </div>
                                   </div>
                                 ) : (

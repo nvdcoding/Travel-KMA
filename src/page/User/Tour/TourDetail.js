@@ -6,6 +6,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import "../../../assets/css/tour-detail.css";
 import OwlCarousel from "react-owl-carousel";
 import ReactMarkdown from "react-markdown";
+import moment from "moment";
 
 import {
   Input,
@@ -30,7 +31,6 @@ import Voucher from "../../Kenh_HDV/Voucher";
 
 export default function TourDetail() {
   const [number, setNumber] = useState(1);
-  const [priceNumber, setPriceNumber] = useState(20000);
   const [date, setdate] = useState("");
   const [data, setData] = useState([]);
   const [voucher, setVoucher] = useState();
@@ -83,18 +83,26 @@ export default function TourDetail() {
     setdate(dateString);
   };
   const onFinish = async (values) => {
-    try {
-      values.tourId = data.id;
-      values.startDate = date;
-      let respon = await sendPost("/orders", values);
-      if (respon.statusCode == 200) {
-        message.success("gửi yêu cầu thành công");
-        history.push("/chuyen-di");
-      } else {
-        message.error("thất bại");
+    if (date < moment().add(7, "days").format("YYYY-MM-DD")) {
+      message.error("Vui lòng đặt tour trước 7 ngày diễn ra");
+    } else {
+      try {
+        values.tourId = data.id;
+        values.startDate = date;
+        if (voucher && voucher?.id) {
+          values.voucherId = voucher.id;
+        }
+        let respon = await sendPost("/orders", values);
+        if (respon.statusCode == 200) {
+          message.success("gửi yêu cầu thành công");
+          history.push("/chuyen-di");
+        } else {
+          message.error("thất bại");
+        }
+      } catch (error) {
+        console.log(`error`, error);
+        message.error("Bạn đang là HDV");
       }
-    } catch (error) {
-      message.error("Bạn đang là HDV");
     }
   };
   const handleNumber = (value) => {
@@ -540,6 +548,14 @@ export default function TourDetail() {
                               <DatePicker
                                 onChange={onChange}
                                 className="form-control txt-date-start hasDatepicker"
+                                disabledDate={(current) => {
+                                  let customDate =
+                                    moment().format("YYYY-MM-DD");
+                                  return (
+                                    current &&
+                                    current < moment(customDate, "YYYY-MM-DD")
+                                  );
+                                }}
                               />
                             </Form.Item>
                           </tr>

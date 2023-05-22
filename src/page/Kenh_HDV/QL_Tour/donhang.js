@@ -30,18 +30,17 @@ export default function MyPage() {
       title: "STT",
       dataIndex: "STT",
       key: "STT",
-      render: (_, value, index) => <p>{index}</p>,
+      render: (_, value, index) => <p>{index + 1}</p>,
     },
     {
       title: "Tên tour",
       dataIndex: "name",
       key: "name",
-      render: (text) => <a>{text}</a>,
     },
     {
       title: "Thời gian",
-      dataIndex: "timeOrder",
-      key: "timeOrder",
+      dataIndex: "updatedAt",
+      key: "updatedAt",
     },
     {
       title: "Trạng thái",
@@ -64,6 +63,38 @@ export default function MyPage() {
             : "Đã hủy"}
         </p>
       ),
+      filters: [
+        {
+          text: "Chờ xác nhận",
+          value: 0,
+        },
+        {
+          text: "Chờ đặt cọc",
+          value: 1,
+        },
+        {
+          text: "Chờ thanh toán",
+          value: 2,
+        },
+        {
+          text: "Chưa thực hiện",
+          value: 3,
+        },
+        {
+          text: "Đang thực hiện",
+          value: 4,
+        },
+        {
+          text: "Đã thực hiện",
+          value: 5,
+        },
+        {
+          text: "Đã hủy",
+          value: 6,
+        },
+      ],
+      onFilter: (value, record) => record.status.startsWith(value),
+      filterSearch: true,
     },
     {
       title: "Giá tiền",
@@ -75,7 +106,7 @@ export default function MyPage() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          {record.status < 3 ? (
+          {record.status == 0 ? (
             <div
               className="action"
               style={{ backgroundColor: "rgb(255 79 32)", color: "#fff" }}
@@ -89,6 +120,8 @@ export default function MyPage() {
               </Link> */}
               Chấp nhận
             </div>
+          ) : record.status == 1 || record.status == 2 ? (
+            <p>Chờ User thanh toán</p>
           ) : record.status == 3 ? (
             <div
               className="action"
@@ -97,8 +130,8 @@ export default function MyPage() {
             >
               Bắt đầu
             </div>
-          ) : null}{" "}
-          {data.length >= 1 && record.status <= 4 ? (
+          ) : null}
+          {data.length >= 1 && record.status <= 3 ? (
             <div
               className="action"
               style={{ backgroundColor: "#1890ff", color: "#fff" }}
@@ -125,9 +158,6 @@ export default function MyPage() {
           return {
             ...e,
             name: e.tour?.name ? e.tour?.name : "",
-            timeOrder: e?.orderSchedule[0].createdAt
-              ? e?.orderSchedule[0].createdAt
-              : "",
           };
         })
       );
@@ -187,8 +217,8 @@ export default function MyPage() {
       <LayoutHDV>
         <div className="main">
           <div className="search_body">
-            <div className="landing-page-title">Danh sách đơn hàng</div>
-            <div className="search-group">
+            <div className="landing-page-title">Danh sách yêu cầu</div>
+            {/* <div className="search-group">
               <Form
                 name="normal_login"
                 className="login-form"
@@ -225,7 +255,7 @@ export default function MyPage() {
                   </Button>
                 </Form.Item>
               </Form>
-            </div>
+            </div> */}
           </div>
           <div className="main-body">
             <div className="header-tab">

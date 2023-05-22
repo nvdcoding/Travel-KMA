@@ -1,7 +1,7 @@
 /* eslint-disable */
 import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { banner, address, nodata } from "../../../constants/images";
+import { banner, address, nodata, dulich } from "../../../constants/images";
 import "../../../assets/css/hdv-tour-all.css";
 import { Pagination, message } from "antd";
 import TourItem from "../../../components/tourItem";
@@ -27,7 +27,7 @@ export default function ToursFilter() {
 
   const nameProvice = localStorage.getItem("provice");
   const timeStart = localStorage.getItem("Timeprovice");
-  const dateFormatList = ["DD/MM/YYYY", "DD/MM/YY", "DD-MM-YYYY", "DD-MM-YY"];
+  const dateFormatList = "YYYY-MM-DD";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [show, setShow] = useState(false);
   const numberPage = 6;
@@ -51,14 +51,19 @@ export default function ToursFilter() {
   };
   const handleRequest = async (values) => {
     values.provinceId = parseInt(params.id);
-    let res = await sendPost(`/requests`, values);
-    if (res.statusCode === 200) {
-      setIsModalOpen(true);
-      message.success("Bạn đã gửi yêu cầu thành công");
+    values.startDate = time;
+    if (time < moment().add(7, "days").format("YYYY-MM-DD")) {
+      message.error("Vui lòng đặt tour trước 7 ngày diễn ra");
     } else {
-      message.error("thất bại");
+      let res = await sendPost(`/requests`, values);
+      if (res.statusCode === 200) {
+        setIsModalOpen(true);
+        message.success("Bạn đã gửi yêu cầu thành công");
+      } else {
+        message.error("thất bại");
+      }
+      setIsModalOpen(true);
     }
-    setIsModalOpen(true);
   };
   const onChangeTimeStart = (date, dateString) => {
     console.log("dataa", dateString);
@@ -114,10 +119,7 @@ export default function ToursFilter() {
                 <div className="request_tour">
                   <div className="tour-detail__plan">
                     <div className="tour-detail__plan-header">
-                      <img
-                        alt=""
-                        src="https://viettel.vn/images_content/img-solution-camera-2.png"
-                      />
+                      <img alt="" src={dulich} />
                       <div className="tour-detail__plan-info">
                         <span className="tour-plan__review">
                           Lên kế hoạch cho chuyến tham quan
@@ -136,15 +138,30 @@ export default function ToursFilter() {
                       >
                         <label htmlFor="place">Địa điểm:</label>
                         <p className="ant-input">{nameProvice}</p>
-                        <Form.Item name="startDate" label="Ngày bắt đầu:">
+                        <Form.Item
+                          name="startDate"
+                          label="Ngày bắt đầu:"
+                          rules={[
+                            {
+                              required: true,
+                              message: "Ngày bắt đầu ko để trống!",
+                            },
+                          ]}
+                        >
                           <DatePicker
                             onChange={onChangeTimeStart}
                             placeholder="Chọn ngày"
                             format={dateFormatList}
                             defaultValue={moment(timeStart)}
+                            disabledDate={(current) => {
+                              let customDate = moment().format("YYYY-MM-DD");
+                              return (
+                                current &&
+                                current < moment(customDate, "YYYY-MM-DD")
+                              );
+                            }}
                           />
                         </Form.Item>
-
                         <Form.Item name="content" label="Mô tả:">
                           <TextArea
                             placeholder="Nhập yêu cầu"

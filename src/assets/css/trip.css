@@ -1786,3 +1786,26 @@
   color: #6a6a6a;
   font-family: "Roboto", sans-serif;
 }
+.my-trip-order-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.my-trip-order-group .button {
+  margin: 0 4px;
+}
+.tour-request-search {
+  display: flex;
+  align-items: center;
+}
+.tour-request-search-title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 25px;
+  margin-right: 10px;
+  color: #3b3b3b;
+}
+.tour-request-search-title i {
+  margin-right: 5px;
+}
