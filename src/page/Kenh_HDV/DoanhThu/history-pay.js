@@ -112,12 +112,12 @@ export default function PayHistory() {
                       <div class="History-des__sub-title">
                         <div class="History-des__sub-date_time">
                           <p>
-                            {formatterTime.format(Date.parse(item?.createdAt))}
+                            {formatterTime.format(Date.parse(item?.updatedAt))}
                           </p>
                         </div>
                         <div class="History-des__sub-date_time">
                           <p>
-                            {formatterDate.format(Date.parse(item?.createdAt))}
+                            {formatterDate.format(Date.parse(item?.updatedAt))}
                           </p>
                         </div>
                       </div>

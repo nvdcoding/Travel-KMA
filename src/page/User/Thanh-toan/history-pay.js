@@ -125,8 +125,8 @@ export default function PayHistory() {
                       <i class="fa-regular fa-clock"></i>
                       <p className="request-bottom__datetime">
                         {" "}
-                        {formatterTime.format(Date.parse(item?.time))}{" "}
-                        {formatterDate.format(Date.parse(item?.time))}
+                        {formatterTime.format(Date.parse(item?.updatedAt))}{" "}
+                        {formatterDate.format(Date.parse(item?.updatedAt))}
                       </p>
                     </div>
                   </div>
