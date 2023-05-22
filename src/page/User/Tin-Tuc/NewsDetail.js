@@ -175,6 +175,9 @@ export default function NewsDetail() {
                   </div>
                 </div>
                 <div className="news-detail__main">
+                  <div className="image-detail">
+                    <img alt="" src={data?.image} />
+                  </div>
                   <p
                     dangerouslySetInnerHTML={{ __html: data?.currentContent }}
                   />

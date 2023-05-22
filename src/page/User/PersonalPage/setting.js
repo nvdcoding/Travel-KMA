@@ -3,17 +3,22 @@ import { Form, Button, Input, Skeleton, message } from "antd";
 import axios from "axios";
 import "../../../assets/css/personal.css";
 import { avt, camera } from "../../../constants/images";
-import { sendGet, sendPost } from "../../../utils/api";
+import { sendGet, sendPost, sendPut } from "../../../utils/api";
 import Layout from "../../../components/layout/layout";
 import { AppContext } from "../../../Context/AppContext";
 function Account() {
-  // const { infoUser } = useContext(AppContext);
+  const { infoUser } = useContext(AppContext);
   const [show, setShow] = useState(true);
-  const [infoUser, setInfoUser] = useState([]);
   const [form] = Form.useForm();
-  const onFinish = async (values) => {};
-  // eslint-disable-next-line no-unused-vars
-  // const user = getItem("user") ? JSON.parse(getItem("user")) : {};
+  const onFinish = async (values) => {
+    console.log("va", values);
+    let res = await sendPut("/tour-guide/infor", values);
+    if (res.statusCode === 200) {
+      window.location.reload();
+    } else {
+      message.error("Cập nhật voucher thất bại");
+    }
+  };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -44,22 +49,12 @@ function Account() {
   const onCancelChangePass = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const getData = async (values) => {
-    const res = await sendGet("/users");
-    if (res.statusCode === 200) {
-      console.log(`data`, res.returnValue.data);
-      setInfoUser(res.returnValue.data);
-    }
-  };
-  useEffect(() => {
-    getData();
-  }, []);
-  // if (!Object.keys(infoUser).length)
-  // return (
-  //   <>
-  //     <Skeleton />
-  //   </>
-  // );
+  if (!Object.keys(infoUser).length)
+    return (
+      <>
+        <Skeleton />
+      </>
+    );
   return (
     <>
       <Layout>
@@ -73,20 +68,11 @@ function Account() {
             autoComplete="off"
             form={form}
           >
-            <Form.Item>
-              <div className="btn-active">
-                <Button className="active" htmlType="submit">
-                  Lưu
-                </Button>
-                <button>Hủy</button>
-              </div>
-            </Form.Item>
-
             <h2>Thông tin cá nhân</h2>
             <div className="info">
               <h3>Họ tên</h3>
               <Form.Item name="name" initialValue={infoUser?.username}>
-                <Input />
+                <Input readOnly />
               </Form.Item>
               <p>
                 Tên của bạn xuất hiện trên trang cá nhân và bên cạnh các bình
@@ -94,21 +80,28 @@ function Account() {
               </p>
             </div>
             <div className="info">
+              <h3>Giới thiệu</h3>
+              <Form.Item name="bio" initialValue={infoUser?.bio}>
+                <Input />
+              </Form.Item>
+              <p>Bio của bạn xuất hiện trên trang cá nhân của bạn.</p>
+            </div>
+            <div className="info">
               <h3>SĐT</h3>
-              <Form.Item name="bio" initialValue={infoUser?.phone}>
+              <Form.Item name="phone" initialValue={infoUser?.phone}>
                 <Input placeholder="Số điện thoại" />
               </Form.Item>
               {/* <p>
-                Bio hiển thị trên trang cá nhân và trong các bài viết (blog) của
-                bạn.
-              </p> */}
+Bio hiển thị trên trang cá nhân và trong các bài viết (blog) của
+bạn.
+</p> */}
             </div>
 
             <div className="info">
               <h3>Avatar</h3>
-              <p>
+              <div>
                 Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.
-                <Form.Item initialValue={infoUser?.avatar}>
+                <Form.Item name="avatar" initialValue={infoUser?.avatar}>
                   <div class="avtUpload">
                     <div class="avtUploadImg">
                       <img src={infoUser?.avatar} alt="Avatar" />
@@ -134,7 +127,7 @@ function Account() {
                     </label>
                   </div>
                 </Form.Item>
-              </p>
+              </div>
             </div>
 
             <div className="info">
@@ -143,6 +136,14 @@ function Account() {
                 <Input placeholder={"ktravel@gmail.com"} readOnly />
               </Form.Item>
             </div>
+            <Form.Item>
+              <div className="btn-active">
+                <Button className="active" htmlType="submit">
+                  Lưu
+                </Button>
+                <button>Hủy</button>
+              </div>
+            </Form.Item>
           </Form>
           <div className="ChangPassword">
             <div className="changeinfo">

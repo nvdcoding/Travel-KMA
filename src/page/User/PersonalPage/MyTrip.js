@@ -1,7 +1,7 @@
 /* eslint-disable eqeqeq */
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
-import { Tabs, Popconfirm, message, Modal } from "antd";
+import { Tabs, Popconfirm, message, Card, Space, Skeleton, Modal } from "antd";
 
 import "../../../assets/css/trip.css";
 import {
@@ -694,12 +694,6 @@ export default function MyTrip() {
                 }
                 key="2"
               >
-                <h3 className="mytrip-voucher__search">Kho vocher</h3>
-                <div className="mytrip-voucher-box-search">
-                  <h4 className="mytrip-voucher__title">Mã giảm giá</h4>
-                  <input placeholder="nhập mã voucher..." />
-                  <div className="button button--primary">Tìm</div>
-                </div>
                 <Voucher />
               </TabPane>
               <TabPane
@@ -724,6 +718,7 @@ const Voucher = () => {
   const { TabPane } = Tabs;
   const [dataVoucher, setDataVoucher] = useState([]);
   const [dataVoucherAvailable, setdataVoucherAvailable] = useState([]);
+  const [searchVoucher, setSearchVoucher] = useState("");
 
   const listVoucher = async () => {
     let res = await sendGet(`/vouchers`, { limit: 100 });
@@ -733,6 +728,19 @@ const Voucher = () => {
       message.error("thất bại");
     }
   };
+  // const listVoucherSearch = async () => {
+  // let res = await sendGet(`/vouchers`,
+  // {
+  // limit: 100 ,
+  // discountType: 1
+  // }
+  // );
+  // if (res.statusCode == 200) {
+  // setDataVoucher(res.returnValue.data);
+  // } else {
+  // message.error("thất bại");
+  // }
+  // };
   const listVoucherAvailable = async () => {
     let res1 = await sendGet(`/vouchers/available`, { limit: 100 });
     if (res1.statusCode == 200) {
@@ -806,6 +814,15 @@ const Voucher = () => {
           </div>
         </TabPane>
         <TabPane tab={<p className="mytrip-sub-menu-name">Săn mã</p>} key="2">
+          <h3 className="mytrip-voucher__search">Kho vocher</h3>
+          <div className="mytrip-voucher-box-search">
+            <h4 className="mytrip-voucher__title">Mã giảm giá</h4>
+            <input
+              placeholder="nhập mã voucher..."
+              onChange={(e) => setSearchVoucher(e.target.value)}
+            />
+            <div className="button button--primary">Tìm</div>
+          </div>
           <div className="mytrip-voucher">
             {dataVoucher.length > 0 ? (
               <>

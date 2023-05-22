@@ -15,10 +15,12 @@ import {
 } from "antd";
 import { sendGet } from "../../../utils/api";
 import { AppContext } from "../../../Context/AppContext";
+import PaginationComponent from "../../../components/pagination";
 
 export default function ToursAll() {
   const { Option } = Select;
   const [data, setData] = useState([]);
+  const [totalPages, setTotalPages] = useState([]);
   const { provice } = useContext(AppContext);
   const [hdv, setHdv] = useState([]);
   const numberPage = 6;
@@ -96,13 +98,14 @@ export default function ToursAll() {
     },
   ];
   const listTour = async () => {
-    const res = await sendGet("/tours", { limit: 100 });
+    const res = await sendGet(`/tours?page=1`, { limit: 2 });
     if (res.returnValue.data.length >= 0) {
       setData(
         res.returnValue.data.map((e) => {
           return { ...e, place: e.province?.name ? e.province?.name : "" };
         })
       );
+      setTotalPages(res.returnValue?.totalPages);
     } else {
       message.error("Cập nhật tour thất bại");
     }
@@ -127,6 +130,9 @@ export default function ToursAll() {
     } else {
       message.error("thất bại");
     }
+  };
+  const changePaginationData = async (dataPagination) => {
+    setData(dataPagination);
   };
   useEffect(() => {
     listTour();
@@ -252,20 +258,24 @@ export default function ToursAll() {
                 <div className="tours-all__list">
                   {data &&
                     data.length > 0 &&
-                    data
-                      .slice(minValue, maxValue)
-                      .map((item, index) => (
-                        <TourItem item={item} key={index} />
-                      ))}
+                    data.map((item, index) => (
+                      <TourItem item={item} key={index} />
+                    ))}
                 </div>
-                {data.length > 0 && (
+                {/* {data.length > 0 && (
                   <Pagination
                     defaultCurrent={1}
                     defaultPageSize={numberPage}
                     total={data.length}
                     onChange={(value) => handleChange(value)}
                   />
-                )}
+                )} */}
+                <PaginationComponent
+                  limit={2}
+                  enpoint="tours"
+                  totalPages={totalPages}
+                  changePaginationData={changePaginationData}
+                />
               </div>
             </div>
           </div>

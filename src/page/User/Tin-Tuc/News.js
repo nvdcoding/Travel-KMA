@@ -10,6 +10,9 @@ export default function News() {
   const [data, setData] = useState();
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(numberPage);
+  const [keySearch, setKeySearch] = useState("");
+  const [valueTopic, setValueTopic] = useState("");
+
   const handleChange = (value) => {
     if (value <= 1) {
       setMinValue(0);
@@ -21,6 +24,30 @@ export default function News() {
   };
   const listNews = async () => {
     const res = await sendGet("/posts/user-tourguide", { limit: 100 });
+    if (res.statusCode == 200) {
+      setData(res.returnValue.data);
+    } else {
+      message.error("Thất bại");
+    }
+  };
+  const handleKeyDown = async (event) => {
+    if (event.key === "Enter") {
+      let res = await sendGet("/posts/user-tourguide", {
+        limit: 100,
+        keyword: keySearch,
+      });
+      if (res.statusCode == 200) {
+        setData(res.returnValue.data);
+      } else {
+        message.error("Thất bại");
+      }
+    }
+  };
+  const handleChangeTopic = async (e) => {
+    let res = await sendGet("/posts/user-tourguide", {
+      limit: 100,
+      topics: e,
+    });
     if (res.statusCode == 200) {
       setData(res.returnValue.data);
     } else {
@@ -61,10 +88,31 @@ export default function News() {
                 <div className="news-input">
                   <i className="fa-solid fa-magnifying-glass"></i>
                   <input
+                    value={keySearch}
                     type="text"
                     placeholder="Tìm kiếm"
                     className="form-control"
+                    onKeyDown={handleKeyDown}
+                    onChange={(e) => setKeySearch(e.target.value)}
                   />
+                </div>
+                <div className="news-topic">
+                  <div className="news-topic-title">
+                    <i class="fa-solid fa-filter"></i>Tìm kiếm theo:{" "}
+                  </div>
+                  <div className="news-topic-main">
+                    <select
+                      id="topic"
+                      onChange={(e) => handleChangeTopic(e.target.value)}
+                      value={valueTopic}
+                    >
+                      <option value="">Chủ đề</option>
+                      <option value="FOOD">Đồ ăn</option>
+                      <option value="SHARE">Chia sẻ kinh nghiệm</option>
+                      <option value="REVIEW">REVIEW</option>
+                      <option value="SUGGEST">Gợi ý</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               <div className="news-list">
