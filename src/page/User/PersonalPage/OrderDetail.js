@@ -88,13 +88,13 @@ export default function OrderDetail({
         </div>
         <div className="process">
           {/* sttus = 0: chờ xác nhận
-          1: chờ đặt cọc
-          2: chờ thanh toán:
-          3: chưa thực hiện
-          4: đang thực hiện
-          5: đã thực hiện
-          6: đã hủy
-          */}
+1: chờ đặt cọc
+2: chờ thanh toán:
+3: chưa thực hiện
+4: đang thực hiện
+5: đã thực hiện
+6: đã hủy
+*/}
           <Steps
             current={
               data.status == 0
@@ -235,6 +235,15 @@ export default function OrderDetail({
                         </u>
                       </div>
                     </div>
+                    <div role="button" class="stardust-popover__target">
+                      <p className="stardust-popover__target-title">
+                        Vui lòng thanh toán
+                        <u className="price">
+                          {formatterPrice.format(data.price - data.paid)} đ
+                        </u>{" "}
+                        <br /> trước ngày 30/4/2022 bằng tài khoản Ví VNPay
+                      </p>
+                    </div>
                   </div>
                   .
                 </div>
@@ -295,12 +304,13 @@ export default function OrderDetail({
                     tabindex="0"
                   >
                     <div role="button" class="stardust-popover__target">
-                      <div>
-                        Số tiền cần đặt cọc
+                      <p className="stardust-popover__target-title">
+                        Vui lòng đặt cọc
                         <u className="price">
                           {formatterPrice.format(data?.price * 0.1)} đ
-                        </u>
-                      </div>
+                        </u>{" "}
+                        <br /> trước ngày 30/4/2022 bằng tài khoản Ví VNPay
+                      </p>
                     </div>
                   </div>
                   .

@@ -1809,3 +1809,9 @@
 .tour-request-search-title i {
   margin-right: 5px;
 }
+.stardust-popover__target {
+  margin: 10px 0;
+}
+.stardust-popover__target-title {
+  line-height: 120%;
+}

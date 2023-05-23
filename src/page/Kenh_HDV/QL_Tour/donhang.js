@@ -113,11 +113,11 @@ export default function MyPage() {
               onClick={() => acceptOrder(record)}
             >
               {/* <Link
-                to={`/kenh-hdv/chi-tiet-don/${record.id}`}
-                style={{ color: "#fff" }}
-              >
-                Xem
-              </Link> */}
+to={`/kenh-hdv/chi-tiet-don/${record.id}`}
+style={{ color: "#fff" }}
+>
+Xem
+</Link> */}
               Chấp nhận
             </div>
           ) : record.status == 1 || record.status == 2 ? (
@@ -166,10 +166,13 @@ export default function MyPage() {
     }
   };
   const deleteOrder = async (value) => {
-    const res = await sendDelete("/orders/tourguide", { orderId: value });
+    const res = await sendPut("/orders/tourguide/approve-order", {
+      action: "reject",
+      orderId: parseInt(value),
+    });
     if (res.statusCode === 200) {
       message.success("Từ chối order");
-      listOrder(1, "waiting");
+      listOrder(1, "waiting_confirm");
     } else {
       message.error("Thất bại");
     }
@@ -182,7 +185,7 @@ export default function MyPage() {
       });
       if (res.statusCode === 200) {
         message.error("Thành công");
-        listOrder(1, "waiting");
+        listOrder(1, "waiting_confirm");
       } else {
         message.error(" thất bại");
       }
@@ -219,43 +222,43 @@ export default function MyPage() {
           <div className="search_body">
             <div className="landing-page-title">Danh sách yêu cầu</div>
             {/* <div className="search-group">
-              <Form
-                name="normal_login"
-                className="login-form"
-                initialValues={{
-                  remember: true,
-                }}
-                onFinish={onFinish}
-              >
-                <Form.Item name="name" label="Khoảng thời gian">
-                  <RangePicker
-                    defaultValue={[moment(), moment()]}
-                    format={dateFormat}
-                  />
-                </Form.Item>
-                <Form.Item name="code">
-                  <Search
-                    addonBefore="Mã đơn hàng"
-                    placeholder="Nhập mã đơn hàng"
-                    allowClear
-                    onSearch={onSearch}
-                    style={{
-                      width: 304,
-                    }}
-                  />
-                </Form.Item>
+<Form
+name="normal_login"
+className="login-form"
+initialValues={{
+remember: true,
+}}
+onFinish={onFinish}
+>
+<Form.Item name="name" label="Khoảng thời gian">
+<RangePicker
+defaultValue={[moment(), moment()]}
+format={dateFormat}
+/>
+</Form.Item>
+<Form.Item name="code">
+<Search
+addonBefore="Mã đơn hàng"
+placeholder="Nhập mã đơn hàng"
+allowClear
+onSearch={onSearch}
+style={{
+width: 304,
+}}
+/>
+</Form.Item>
 
-                <Form.Item>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="form-button"
-                  >
-                    Tìm kiếm
-                  </Button>
-                </Form.Item>
-              </Form>
-            </div> */}
+<Form.Item>
+<Button
+type="primary"
+htmlType="submit"
+className="form-button"
+>
+Tìm kiếm
+</Button>
+</Form.Item>
+</Form>
+</div> */}
           </div>
           <div className="main-body">
             <div className="header-tab">

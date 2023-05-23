@@ -21,11 +21,10 @@ import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import { useState } from "react";
 import { sendPost } from "../../../utils/api";
-import { AppContext } from "../../../Context/AppContext";
+import { getItem } from "../../../utils/storage/index.js";
 import { useHistory } from "react-router-dom";
 export default function AddTour() {
   const { TextArea } = Input;
-  const { provice } = useContext(AppContext);
   const [showtt, setShowtt] = useState(true);
   const defileTime = 100000;
   const history = useHistory();
@@ -34,7 +33,7 @@ export default function AddTour() {
   const handleChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
   };
-
+  const user = getItem("user") ? JSON.parse(getItem("user")) : {};
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -175,11 +174,12 @@ export default function AddTour() {
                   ]}
                 >
                   <Select placeholder="Tỉnh thành">
-                    {provice.map((item, index) => (
-                      <Option value={item?.id} key={index}>
-                        {item?.name}
-                      </Option>
-                    ))}
+                    {user?.provinces &&
+                      user?.provinces?.map((item, index) => (
+                        <Option value={item?.id} key={index}>
+                          {item?.name}
+                        </Option>
+                      ))}
                   </Select>
                 </Form.Item>
 
@@ -198,7 +198,7 @@ export default function AddTour() {
                   </Form.Item>
                   <Form.Item
                     name="feePerMember"
-                    label="Phí phị thu thêm khi quá số người người"
+                    label="Phí phụ thu thêm"
                     rules={[
                       {
                         required: true,
