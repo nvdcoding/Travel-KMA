@@ -55,3 +55,4 @@ export { default as item1 } from "../assets/images/img-travel-menu-4.png";
 export { default as item2 } from "../assets/images/img-travel-menu-3.png";
 export { default as item3 } from "../assets/images/img-travel-menu-2.png";
 export { default as item4 } from "../assets/images/img-travel-menu-1.png";
+export { default as banner15 } from "../assets/images/dulich1.webp";

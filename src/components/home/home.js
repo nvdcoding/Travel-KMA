@@ -16,6 +16,7 @@ import {
   banner7,
   banner8,
   banner9,
+  banner15,
 } from "../../constants/images";
 import moment from "moment";
 import OwlCarousel from "react-owl-carousel";
@@ -25,7 +26,7 @@ import { sendGet } from "../../utils/api";
 import { AppContext } from "../../Context/AppContext";
 const images = [
   {
-    img: banner2,
+    img: banner4,
     link: "#",
   },
   {

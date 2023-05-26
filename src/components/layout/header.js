@@ -20,6 +20,7 @@ function HeaderLayout() {
   const SignOut = () => {
     setToken("");
     setRefreshToken("");
+    localStorage.removeItem("user");
     history.push("/dang-nhap");
   };
   useEffect(() => {}, []);

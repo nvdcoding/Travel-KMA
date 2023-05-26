@@ -323,7 +323,7 @@
 }
 
 .news-detail__item-main {
-  padding: 10px;
+  padding: 3px 10px;
   background-color: #e0e0e0;
   display: flex;
   flex-direction: column;
@@ -639,4 +639,65 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+.news-detail_item-group {
+  min-width: 40%;
+  position: relative;
+}
+.news-detail_item-group .time {
+  margin: 0 8px;
+  font-weight: 600;
+  font-size: 11px;
+  cursor: pointer;
+}
+.news-detail__item-cmt .active {
+  margin-left: 16px;
+  width: 25px;
+  height: 25px;
+  color: #6e6d6d;
+}
+.active i {
+  position: relative;
+  font-size: 16px;
+}
+.active i:hover ul {
+  display: block;
+}
+.active i:hover ul li {
+  cursor: pointer;
+}
+.active i:hover ul li:hover {
+  color: #f75555;
+}
+.active ul {
+  box-shadow: -2px 3px 9px -1px #ccc;
+  position: absolute;
+  list-style: none;
+  width: 76px;
+  border-radius: 5px;
+  display: none;
+}
+.active ul li {
+  padding: 4px 7px;
+  color: #383737;
+  font-family: "Montserrat", "Fira Code";
+  font-weight: 400;
+}
+.editCmt {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+  left: 10px;
+  bottom: 22px;
+  align-items: center;
+  width: 94%;
+}
+.editCmt {
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.editCmt input {
+  border: none;
+  background-color: #e0e0e0;
 }

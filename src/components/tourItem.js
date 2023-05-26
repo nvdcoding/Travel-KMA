@@ -49,7 +49,9 @@ function TourItem(props) {
         </div>
         <div className="tour-view__card-content">
           <div className="tour-view__head">
-            <p className="tour-view__name">{props?.item?.tourGuide?.name}</p>
+            <p className="tour-view__name">
+              {props?.item?.tourGuide?.username}
+            </p>
             <p className="tour-view__time">
               {props?.item?.tourSchedule.length} ngày
             </p>
@@ -71,7 +73,6 @@ function TourItem(props) {
             <p className="tour-view__price">
               khoảng
               <span> {currencyFormat(props?.item?.basePrice)}đ </span>
-              /một người
             </p>
             <div className="tour-view__evaluate">
               <div className="tour-view__star">

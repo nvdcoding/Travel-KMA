@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/news.css";
 import { Link, useParams } from "react-router-dom";
-import { sendGet, sendPost } from "../../../utils/api";
+import { sendDelete, sendGet, sendPost, sendPut } from "../../../utils/api";
 import { avt, logo } from "../../../constants/images";
 import { Modal, TextArea, message } from "antd";
 import { getItem } from "../../../utils/storage";
@@ -182,29 +182,7 @@ export default function NewsDetail() {
                     dangerouslySetInnerHTML={{ __html: data?.currentContent }}
                   />
                 </div>
-                <div className="news-detail__comment">
-                  <div className="news-detail__create-comment">
-                    <img alt="" src={logo} />
-                    <input
-                      className="comment--text"
-                      placeholder="Viết bình luận... "
-                    />
-                    <div className="news-detail__send">
-                      <i class="fa-regular fa-paper-plane"></i>
-                    </div>
-                  </div>
-                  <div className="news-detail__list-cmt">
-                    <div className="news-detail__item-cmt">
-                      <img alt="" src={avt} />
-                      <div className="news-detail__item-main">
-                        <p className="news-detail__name">Nguyễn A</p>
-                        <p className="news-detail__des ">
-                          đây là nội dung bình luận
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <Comment params={params} />
               </div>
               <div className="news-content-right">
                 <div class="news-content__hot-title">
@@ -239,3 +217,134 @@ export default function NewsDetail() {
     </>
   );
 }
+const Comment = ({ params }) => {
+  const [content, setContent] = useState("");
+  const [contentEdit, setContentEdit] = useState("");
+  const [comment, setComment] = useState([]);
+  const [active, setActive] = useState(null);
+  const [hidden, setHidden] = useState(false);
+
+  const user = getItem("user") ? JSON.parse(getItem("user")) : {};
+  const listComment = async () => {
+    const res = await sendGet(`/comments`, {
+      postId: params.id,
+      limit: 100,
+    });
+    if (res.statusCode === 200) {
+      setComment(res.returnValue.data);
+    } else {
+      message.error("Không thể đăng bình luận");
+    }
+  };
+  const deleteComment = async (e) => {
+    try {
+    } catch (error) {
+      message.error("Không thể xóa bình luận");
+    }
+    await sendDelete(`/comments/${e}`);
+    await listComment();
+  };
+
+  const showEditCmt = (value, content) => {
+    setActive(value);
+    setHidden(false);
+    setContentEdit(content);
+  };
+  const handleEdit = async (key, value) => {
+    const res = await sendPut(`/comments`, { content: value, commentId: key });
+    try {
+      if (res.statusCode === 200) {
+        await listComment();
+        setHidden(!hidden);
+      }
+    } catch (error) {}
+  };
+  useEffect(() => {}, []);
+  const formatterDate = new Intl.DateTimeFormat("vi-VN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  useEffect(() => {
+    listComment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const handleSubmit = async (values) => {
+    try {
+      const data = {
+        content: content,
+        parrentCommentId: null,
+        postId: parseInt(params.id),
+      };
+      const res = await sendPost(`/comments`, data);
+      if (res.statusCode === 200) {
+        listComment();
+        setContent("");
+      } else {
+        message.error("Không thể đăng bình luận");
+      }
+    } catch (error) {
+      message.error("Không thể đăng bình luận");
+    }
+  };
+  return (
+    <>
+      <div className="news-detail__comment">
+        <div className="news-detail__create-comment">
+          <img alt="" src={logo} />
+          <input
+            value={content}
+            className="comment--text"
+            placeholder="Viết bình luận... "
+            onChange={(e) => setContent(e.target.value)}
+          />
+          <div className="news-detail__send" onClick={() => handleSubmit()}>
+            <i class="fa-regular fa-paper-plane"></i>
+          </div>
+        </div>
+        <div className="news-detail__list-cmt">
+          {comment?.map((item, index) => (
+            <div className="news-detail__item-cmt" key={index}>
+              <img alt="" src={avt} />
+              <div className="news-detail_item-group">
+                <div className="news-detail__item-main">
+                  <p className="news-detail__name">{item?.user?.username}</p>
+                  <p className="news-detail__des ">{item?.content}</p>
+                </div>
+                <span class="time">
+                  {formatterDate.format(Date.parse(item?.createdAt))}
+                </span>
+                {active === item?.id ? (
+                  <div className="editCmt" hidden={hidden}>
+                    <input
+                      value={contentEdit}
+                      onChange={(e) => setContentEdit(e.target.value)}
+                    ></input>
+                    <a onClick={() => handleEdit(item?.id, contentEdit)}>
+                      <i class="fas fa-paper-plane"></i>
+                    </a>
+                  </div>
+                ) : null}
+              </div>{" "}
+              {item?.user?.id == user?.id ? (
+                <div className="active">
+                  <i className="fas fa-ellipsis-h">
+                    <ul>
+                      <li onClick={() => deleteComment(item?.id)}>Xóa</li>
+                      <li
+                        onClick={() => showEditCmt(item?.id, item?.content)}
+                        key={item?.id}
+                      >
+                        Sửa
+                      </li>
+                    </ul>
+                  </i>
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};

@@ -25,6 +25,7 @@ axiosInstance.interceptors.request.use(
 const logout = () => {
   clearToken();
   clearRefreshToken();
+  localStorage.removeItem("user");
   window.location.replace("/dang-nhap");
 };
 
