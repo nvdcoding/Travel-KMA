@@ -28,6 +28,7 @@ import {
   voucher2,
 } from "../../../constants/images";
 import Voucher from "../../Kenh_HDV/Voucher";
+import { getItem } from "../../../utils/storage";
 
 export default function TourDetail() {
   const [number, setNumber] = useState(1);
@@ -666,21 +667,25 @@ const ModalVoucher = ({ voucher }) => {
     setDiscountPrice(item);
   };
   const [vouchers, setListVoucher] = useState("");
-
+  const user = getItem("user") ? JSON.parse(getItem("user")) : {};
+  console.log("user", user);
   const listVoucherAvailable = async () => {
-    let res1 = await sendGet(`/vouchers/available`, { limit: 100 });
-    if (res1.statusCode == 200) {
-      setListVoucher(res1.returnValue);
+    if (user && user.id) {
+      let res1 = await sendGet(`/vouchers/available`, { limit: 100 });
+      if (res1.statusCode == 200) {
+        setListVoucher(res1.returnValue);
+        setIsModalOpen(true);
+      } else {
+        message.error("thất bại");
+      }
     } else {
-      message.error("thất bại");
+      message.error("Bạn cần đăng nhập để lấy voucher");
     }
   };
-  useEffect(() => {
-    listVoucherAvailable();
-  }, []);
+  useEffect(() => {}, []);
   return (
     <>
-      <span className="order-payment_voucher" onClick={showModal}>
+      <span className="order-payment_voucher" onClick={listVoucherAvailable}>
         {discountPrice && (
           <span className="coupon-label success">{discountPrice?.code}</span>
         )}
