@@ -1705,7 +1705,7 @@ background-color: #ccc; */
   padding: 23px 30px;
   align-items: center;
   border-radius: 8px 8px 8px 0;
-  border: 1px solid #ee003400;
+  border: 1px solid #c6c6c6b0;
 }
 
 .History-item__info:hover {
@@ -1728,7 +1728,11 @@ background-color: #ccc; */
   width: 100%;
   display: flex;
 }
-
+.History-des__sub-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .History-des__title {
   font-family: "FS PFBeauSansPro", sans-serif;
   font-style: normal;
@@ -1743,6 +1747,7 @@ background-color: #ccc; */
 
 .History-des__sub-title {
   display: flex;
+  align-items: center;
 }
 
 .History-des__sub-price {

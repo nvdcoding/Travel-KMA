@@ -106,9 +106,14 @@ export default function AddTour() {
         .startOf("month")
         .format("YYYY-MM-DD"),
       endDate: moment().format("YYYY-MM-DD"),
+      isHistory: true,
     });
     if (res.statusCode == 200) {
-      setRequest(res.returnValue?.data?.filter((item) => item.status == 3));
+      setRequest(
+        res.returnValue?.data?.filter(
+          (item) => item.status == 3 || item.status == 2
+        )
+      );
       setAccept(res.returnValue?.data?.filter((item) => item.status == 1));
       setDeny(res.returnValue?.data?.filter((item) => item.status == 0));
     } else {
@@ -288,7 +293,7 @@ export default function AddTour() {
                     <Table columns={columns} dataSource={request} />
                   </div>
                 </Tabs.TabPane>
-                {/* <Tabs.TabPane tab="Thành công" key="1">
+                <Tabs.TabPane tab="Thành công" key="1">
                   <div class="transactions-table-wrap">
                     <Table columns={columns} dataSource={accept} />
                   </div>
@@ -297,7 +302,7 @@ export default function AddTour() {
                   <div class="transactions-table-wrap">
                     <Table columns={columns} dataSource={deny} />
                   </div>
-                </Tabs.TabPane> */}
+                </Tabs.TabPane>
               </Tabs>
             </div>
           </div>

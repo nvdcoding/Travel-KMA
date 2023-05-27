@@ -228,7 +228,10 @@ export default function Pay() {
                       </div>
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Rút tiền" key="2">
-                      <DrwarMoney coin={coin} />
+                      <DrwarMoney
+                        coin={coin}
+                        UserTransactions={UserTransactions}
+                      />
                     </Tabs.TabPane>
                     <Tabs.TabPane tab="Giao dịch" key="3">
                       <PayHistory />
@@ -243,20 +246,23 @@ export default function Pay() {
     </>
   );
 }
-const DrwarMoney = ({ coin }) => {
+const DrwarMoney = ({ coin, UserTransactions }) => {
   const [amountDraw, setAmountDraw] = useState(0);
+  const [form] = Form.useForm();
   const DrawOnline = async (value) => {
-    value.amount = parseInt(value.amount);
     try {
+      value.amount = parseInt(value.amount);
       const res = await sendPost("/transactions/user-withdraw", value);
       if (res.statusCode == 200) {
         message.success("Tạo yêu cầu rút tiền thành công");
-        await gethistoryDraw();
+        await UserTransactions();
+        setAmountDraw("");
+        form.resetFields();
       } else {
         //đơn hàng thất bại
       }
     } catch (error) {
-      message.success("Lỗi");
+      message.error("Không thành công, có lỗi xảy ra!");
     }
   };
   const formatterPrice = new Intl.NumberFormat("vi-VN", {
@@ -305,6 +311,7 @@ const DrwarMoney = ({ coin }) => {
       <div className="payment-online__left">
         <div className="order-payment">
           <Form
+            form={form}
             name="basic"
             initialValues={{
               remember: true,

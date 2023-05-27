@@ -86,12 +86,32 @@ export default function PayHistory() {
                   </div>
                   <div className="box-request__body">
                     <p className="box-request__title">
-                      {item?.type == "WITHDRAW" ? "Rút tiền" : "Nạp tiền"}
+                      {item?.type == "WITHDRAW"
+                        ? "Rút tiền"
+                        : item?.type == "DEPOSIT"
+                        ? "Nạp tiền"
+                        : item?.type == "PAY_ORDER"
+                        ? "Thanh toán chuyến đi"
+                        : item?.type == "USER_PREPAID_ORDER"
+                        ? "Đặt cọc chuyến đi"
+                        : item?.type == "TOURGUIDE_APPROVE_ORDER"
+                        ? "Đặt cọc nhận chuyến"
+                        : item?.type == "TOURGUIDE_RECEIVE_ORDER"
+                        ? "Lợi nhuận chuyến đi"
+                        : item?.type == "CANCEL_ORDER"
+                        ? "Hủy chuyến"
+                        : item?.type == "BACK_PREPAID"
+                        ? "Hoàn tiền đặt cọc"
+                        : "Giao dịch khác"}
                     </p>
                     <p class="box-request__des">
                       Số tiền giao dịch:{" "}
                       <span className="code-request__name name-highlight">
-                        {formatterPrice.format(item?.amount)} đ
+                        {item?.type == "DEPOSIT" ||
+                        item?.type == "BACK_PREPAID" ||
+                        item?.type == "TOURGUIDE_RECEIVE_ORDER"
+                          ? `+ ${formatterPrice.format(item?.amount)} đ`
+                          : `- ${formatterPrice.format(item?.amount)} đ`}
                       </span>
                     </p>
                   </div>{" "}

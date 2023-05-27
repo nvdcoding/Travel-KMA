@@ -243,7 +243,6 @@ const RoutePage = [
     path: ROUTES.QUENMATKHAU,
     exact: true,
     component: Quenmk,
-    authen: true,
   },
   {
     path: ROUTES.CHITIETTOUR,

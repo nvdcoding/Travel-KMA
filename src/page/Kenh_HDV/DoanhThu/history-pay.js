@@ -110,18 +110,44 @@ export default function PayHistory() {
                           : "Giao dịch khác"}
                       </h4>
                       <div class="History-des__sub-price">
-                        <p>{formatterPrice.format(item?.amount)}đ</p>
+                        <p>
+                          {item?.type == "DEPOSIT" ||
+                          item?.type == "BACK_PREPAID" ||
+                          item?.type == "TOURGUIDE_RECEIVE_ORDER"
+                            ? `+ ${formatterPrice.format(item?.amount)} đ`
+                            : `- ${formatterPrice.format(item?.amount)} đ`}
+                        </p>
                       </div>
                     </div>
                     <div className="History-des__sub-bottom">
-                      <p>
-                        {item?.status == 1
-                          ? "Hoàn tất"
-                          : item?.status == 2
-                          ? "Đang xử lý"
-                          : "Thất bại"}
-                      </p>
+                      {item?.status == 1 ? (
+                        <div
+                          className="request-bottom__detail"
+                          style={{ color: "#51bb4c" }}
+                        >
+                          <i class="fa-solid fa-circle-check"></i>
+                          <p className="request-bottom__name">Hoàn tất</p>
+                        </div>
+                      ) : item?.status == 0 ? (
+                        <div
+                          className="request-bottom__detail"
+                          style={{ color: "#dc1b1b" }}
+                        >
+                          <i class="fa-solid fa-circle-exclamation"></i>
+                          <p className="request-bottom__name">Thất bại</p>
+                        </div>
+                      ) : (
+                        <div
+                          className="request-bottom__detail"
+                          style={{ color: "#fe7d05" }}
+                        >
+                          <i class="fa-solid fa-rotate-right"></i>
+                          <p className="request-bottom__name">Đang thực hiện</p>
+                        </div>
+                      )}
                       <div class="History-des__sub-title">
+                        {" "}
+                        <i class="fa-regular fa-clock"></i>
                         <div class="History-des__sub-date_time">
                           <p>
                             {formatterTime.format(Date.parse(item?.updatedAt))}
