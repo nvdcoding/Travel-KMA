@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../../../assets/css/homehdv.css";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
@@ -16,6 +16,7 @@ import {
 } from "antd";
 import moment from "moment";
 import { sendGet, sendPost } from "../../../utils/api";
+import { AppContext } from "../../../Context/AppContext";
 
 export default function AddTour() {
   const [startDate, setStartDate] = useState(
@@ -25,7 +26,9 @@ export default function AddTour() {
   const [request, setRequest] = useState([]);
   const [deny, setDeny] = useState([]);
   const [accept, setAccept] = useState([]);
+  const [revenue, setRevenue] = useState([]);
   const dateFormat = "YYYY-MM-DD";
+  const { infoUser } = useContext(AppContext);
   const columns = [
     {
       title: "STT",
@@ -60,11 +63,6 @@ export default function AddTour() {
       dataIndex: "amount",
       key: "amount",
       render: (_, record) => <>{formatterPrice.format(record?.amount)} đ</>,
-    },
-    {
-      title: "Phương thức ",
-      dataIndex: "wallet",
-      key: "wallet",
     },
   ];
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -117,25 +115,24 @@ export default function AddTour() {
       //đơn hàng thất bại
     }
   };
-  const changeDate = (date, dateString) => {
-    setStartDate(dateString[0]);
-    setEndDate(dateString[1]);
-  };
-  const historyDrawFilterTour = async () => {
-    const res = await sendGet("/transactions/my-request-witrhdraw", {
+  const historyPayOnline = async () => {
+    const res = await sendGet("/tour-guide/transaction", {
       startDate: startDate,
       endDate: endDate,
     });
     if (res.statusCode == 200) {
-      setRequest(res.returnValue?.data?.filter((item) => item.status == 3));
-      setAccept(res.returnValue?.data?.filter((item) => item.status == 1));
-      setDeny(res.returnValue?.data?.filter((item) => item.status == 0));
+      setRevenue(res?.options);
+      gethistoryDrawTour();
     } else {
       //đơn hàng thất bại
     }
   };
+  const changeDate = (date, dateString) => {
+    setStartDate(dateString[0]);
+    setEndDate(dateString[1]);
+  };
   useEffect(() => {
-    gethistoryDrawTour();
+    historyPayOnline();
   }, []);
   const optionsWithDisabled = [
     {
@@ -160,7 +157,7 @@ export default function AddTour() {
     },
     {
       label: "Rút hết",
-      value: "5000000",
+      value: infoUser.availableBalance,
     },
   ];
   const { RangePicker } = DatePicker;
@@ -171,10 +168,22 @@ export default function AddTour() {
           <div class="seller-meta">
             <div className="section-group-header">
               <div class="section-title">Tổng Quan</div>
-              <RangePicker
-                defaultValue={[moment(), moment()]}
-                format={dateFormat}
-              />
+              <div className="pay-search">
+                <RangePicker
+                  defaultValue={[
+                    moment().subtract(1, "months").startOf("month"),
+                    moment(),
+                  ]}
+                  format={dateFormat}
+                  onChange={changeDate}
+                />
+                <div
+                  className="btn-pay-search button button--primary"
+                  onClick={() => historyPayOnline()}
+                >
+                  Tìm kiếm
+                </div>
+              </div>
             </div>
             <div class="meta-section">
               <div class="meta-overview">
@@ -184,7 +193,8 @@ export default function AddTour() {
                   </div>
                   <div class="label">Tổng cộng</div>
                   <div class="meta-numeric-content" style={{ width: "212px" }}>
-                    <span class="currency-symbol">₫</span>10.000
+                    <span class="currency-symbol">₫</span>
+                    {formatterPrice.format(revenue.totalProfit)}
                   </div>
                 </div>
                 <div class="meta-released">
@@ -198,7 +208,8 @@ export default function AddTour() {
                         class="meta-numeric-content"
                         style={{ width: "212px" }}
                       >
-                        <span class="currency-symbol">₫</span>0
+                        <span class="currency-symbol">₫</span>
+                        {formatterPrice.format(revenue.totalProfitTimeRange)}
                       </div>
                     </div>
                   </div>
@@ -271,29 +282,13 @@ export default function AddTour() {
           </div>
           <div class="right-main-table">
             <div class="main-content">
-              <div className="pay-search">
-                <RangePicker
-                  defaultValue={[
-                    moment().subtract(1, "months").startOf("month"),
-                    moment(),
-                  ]}
-                  format={dateFormat}
-                  onChange={changeDate}
-                />
-                <div
-                  className="btn-pay-search button button--primary"
-                  onClick={() => historyDrawFilterTour()}
-                >
-                  Tìm kiếm
-                </div>
-              </div>
               <Tabs defaultActiveKey="0">
                 <Tabs.TabPane tab="Yêu cầu thanh toán" key="0">
                   <div class="transactions-table-wrap">
                     <Table columns={columns} dataSource={request} />
                   </div>
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="Thành công" key="1">
+                {/* <Tabs.TabPane tab="Thành công" key="1">
                   <div class="transactions-table-wrap">
                     <Table columns={columns} dataSource={accept} />
                   </div>
@@ -302,7 +297,7 @@ export default function AddTour() {
                   <div class="transactions-table-wrap">
                     <Table columns={columns} dataSource={deny} />
                   </div>
-                </Tabs.TabPane>
+                </Tabs.TabPane> */}
               </Tabs>
             </div>
           </div>

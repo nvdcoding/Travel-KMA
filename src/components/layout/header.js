@@ -64,7 +64,7 @@ function HeaderLayout() {
               </div>
               <div className="menu-right">
                 <div className="pc">
-                  {Token ? (
+                  {Token && user.role == "USER" ? (
                     <div className="your-trip">
                       <Link to="/chuyen-di"> Chuyến đi của bạn</Link>
                     </div>
@@ -156,7 +156,7 @@ function HeaderLayout() {
                           <i class="fa-solid fa-house"></i> Home
                         </NavLink>
                       </li>
-                      {Token && (
+                      {Token && user.role == "USER" && (
                         <li className="menu-item-mb">
                           <NavLink to="/chuyen-di">
                             <i class="fa-solid fa-user"></i>Chuyến đi của bạn

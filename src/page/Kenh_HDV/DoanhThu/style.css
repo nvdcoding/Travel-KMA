@@ -1,8 +1,7 @@
 .section-title {
   margin-bottom: 8px;
-  font-size: 18px;
-  font-weight: 500;
-  font-weight: var(--font-weight);
+  font-size: 23px;
+  font-weight: 700;
   white-space: nowrap;
   margin-right: 25px;
 }

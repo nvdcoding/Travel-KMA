@@ -18,11 +18,13 @@ import { Link } from "react-router-dom";
 import { sendDelete, sendGet } from "../../../utils/api/index";
 import { useState } from "react";
 import { AppContext } from "../../../Context/AppContext";
+import { getItem } from "../../../utils/storage";
 
 export default function MyPage() {
   const { provice } = useContext(AppContext);
   const { Option } = Select;
   const [data, setData] = useState([]);
+  const user = getItem("user") ? JSON.parse(getItem("user")) : {};
   const columns = [
     {
       title: "STT",
@@ -59,10 +61,10 @@ export default function MyPage() {
           <div className="action" style={{ backgroundColor: "#1890ff" }}>
             {data.length >= 1 ? (
               <Popconfirm
-                title="Xóa Tour?"
+                title="Ẩn Tour?"
                 onConfirm={() => handleDelete(record.id)}
               >
-                Xóa
+                Ẩn
               </Popconfirm>
             ) : null}
           </div>
@@ -81,20 +83,28 @@ export default function MyPage() {
     }
   };
   const listTour = async () => {
-    const res = await sendGet("/tours", { limit: 100 });
-    if (res.returnValue.data.length >= 0) {
-      setData(
-        res.returnValue.data.map((e) => {
-          return { ...e, place: e.province?.name ? e.province?.name : "" };
-        })
-      );
-    } else {
-      message.error("Cập nhật khóa học thất bại");
+    try {
+      const res = await sendGet("/tours", {
+        limit: 100,
+        tourGuideId: user?.id,
+      });
+      if (res.returnValue.data.length >= 0) {
+        setData(
+          res.returnValue.data.map((e) => {
+            return { ...e, place: e.province?.name ? e.province?.name : "" };
+          })
+        );
+      } else {
+        message.error("Cập nhật tour thất bại");
+      }
+    } catch (error) {
+      message.error("Cập nhật tour thất bại");
     }
   };
 
   const tourFiltter = async (values) => {
     values.limit = 100;
+    values.tourGuideId = user?.id;
     const result = await sendGet("/tours", values);
     if (result.returnValue.data.length >= 0) {
       setData(
@@ -126,11 +136,11 @@ export default function MyPage() {
               >
                 <div className="price-group">
                   <Form.Item name="minPrice" label="đ Từ">
-                    <InputNumber placeholder="" />
+                    <InputNumber placeholder="" min={1} />
                   </Form.Item>
                   -
                   <Form.Item name="maxPrice" label="đ Đến">
-                    <InputNumber placeholder="" />
+                    <InputNumber placeholder="" min={1} />
                   </Form.Item>
                 </div>
                 <Form.Item name="provinceId" label="Tỉnh thành">

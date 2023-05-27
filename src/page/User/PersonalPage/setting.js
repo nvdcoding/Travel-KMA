@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import React, { useState, useEffect, useContext } from "react";
 import { Form, Button, Input, Skeleton, message } from "antd";
 import axios from "axios";
@@ -11,32 +12,50 @@ function Account() {
   const [show, setShow] = useState(true);
   const [form] = Form.useForm();
   const onFinish = async (values) => {
-    console.log("va", values);
-    let res = await sendPut("/tour-guide/infor", values);
-    if (res.statusCode === 200) {
-      window.location.reload();
+    values.avatar = await handleGetImage();
+    if (infoUser.role == "TOURGUIDE") {
+      try {
+        let res = await sendPut("/tour-guide/infor", values);
+        if (res.statusCode === 200) {
+          window.location.reload();
+        } else {
+          message.error("Cập nhật HDV thất bại");
+        }
+      } catch (error) {
+        message.error("Cập nhật HDV thất bại");
+      }
     } else {
-      message.error("Cập nhật voucher thất bại");
+      message.error("Cập nhật user thất bại");
     }
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  const [imageUrl, setImageUrl] = useState(avt);
-  const handleChangeImage = async () => {
+  const [imageUrl, setImageUrl] = useState(
+    infoUser?.avatar ? infoUser?.avatar : avt
+  );
+  const onImageChange = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      setImageUrl(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+  const handleGetImage = async () => {
     const { files } = document.querySelector(".img-input");
     const formData = new FormData();
     formData.append("file", files[0]);
     formData.append("upload_preset", "avatar");
-    axios
-      .post(
+    try {
+      const { data } = await axios.post(
         "https://api.cloudinary.com/v1_1/learnit2022/image/upload",
         formData
-      )
-      .then((response) => setImageUrl(response.data.secure_url))
-      .catch((err) => console.error(err));
-    return imageUrl;
+      );
+      setImageUrl(data.secure_url);
+      return data.secure_url;
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   const onChangePass = async (values) => {
     const res = await sendPost("/api/user/password", values);
     if (res.status === 200) {
@@ -91,23 +110,19 @@ function Account() {
               <Form.Item name="phone" initialValue={infoUser?.phone}>
                 <Input placeholder="Số điện thoại" />
               </Form.Item>
-              {/* <p>
-Bio hiển thị trên trang cá nhân và trong các bài viết (blog) của
-bạn.
-</p> */}
             </div>
 
-            <div className="info">
+            <div className="info info-image">
               <h3>Avatar</h3>
               <div>
                 Nên là ảnh vuông, chấp nhận các tệp: JPG, PNG hoặc GIF.
-                <Form.Item name="avatar" initialValue={infoUser?.avatar}>
+                <Form.Item name="avatar" initialValue={imageUrl}>
                   <div class="avtUpload">
                     <div class="avtUploadImg">
-                      <img src={infoUser?.avatar} alt="Avatar" />
+                      <img src={imageUrl} alt="Avatar" />
                     </div>
-                    <label for="img">
-                      <div class="photoupload" onChange={handleChangeImage}>
+                    <label for="img" className="infor-before">
+                      <div class="photoupload" onChange={onImageChange}>
                         <img
                           src={camera}
                           class="photoupload-img"
@@ -121,7 +136,7 @@ bạn.
                           id="img"
                           name="img"
                           accept="image/*"
-                          onChange={handleChangeImage}
+                          onChange={onImageChange}
                         />
                       </div>
                     </label>

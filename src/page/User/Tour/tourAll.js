@@ -189,11 +189,11 @@ export default function ToursAll() {
                     </Form.Item>
                     <div className="price-group price-range">
                       <Form.Item name="minPrice" label="đ Từ">
-                        <InputNumber placeholder="" />
+                        <InputNumber placeholder="" min={1} />
                       </Form.Item>
                       <span>-</span>
                       <Form.Item name="maxPrice" label="đ Đến">
-                        <InputNumber placeholder="" />
+                        <InputNumber placeholder="" min={1} />
                       </Form.Item>
                     </div>
                     <Form.Item>

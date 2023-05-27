@@ -49,7 +49,7 @@ export default function SignIn() {
         setRefreshToken(res.returnValue.refreshToken);
         setItem("user", JSON.stringify(res?.returnValue));
         history.push("/kenh-hdv");
-        form.resetFields();
+        formHDV.resetFields();
       } else {
         message.error("Không khớp");
       }

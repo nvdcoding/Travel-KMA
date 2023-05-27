@@ -194,23 +194,10 @@ export default function Personal() {
       message.error("thất bại");
     }
   };
-  // const allHdv = async () => {
-  //   let id = await detailHdv();
-  //   console.log("id1", id);
-  //   const result = await sendGet("/tour-guide", {
-  //     provinces: id,
-  //   });
-  //   if (result.statusCode == 200) {
-  //     setGuide(result.returnValue.data);
-  //   } else {
-  //     message.error("thất bại");
-  //   }
-  // };
   useEffect(() => {
     detailHdv();
   }, []);
   if (!Object.keys(data).length) return <Skeleton />;
-  // if (!Object.keys(guide).length) return <Skeleton />;
 
   return (
     <>
@@ -234,15 +221,22 @@ export default function Personal() {
                     ))}
                   </h3>
                   <div className="personal-page__contact">
-                    <Link to={`/chat/${data?.id}`} className="button button--primary">
+                    <Link
+                      to={`/chat/${data?.id}`}
+                      className="button button--primary"
+                    >
                       Liên hệ
                     </Link>
                   </div>
 
                   <div className="evaluate">
-                    <h4 className="evaluate-title">Hài lòng</h4>
+                    <h4 className="evaluate-title">
+                      {data?.avgStar != null ? "Hài lòng" : "Chưa có đánh giá"}
+                    </h4>
                     <div className="evaluate-star">
-                      <Rate allowHalf disabled defaultValue={data?.avgStar} />
+                      {data?.avgStar != null && (
+                        <Rate allowHalf disabled defaultValue={data?.avgStar} />
+                      )}
                     </div>
                     {/* <p className="evaluate-des">({data?.avgStar} đánh giá)</p> */}
                   </div>
@@ -294,7 +288,11 @@ export default function Personal() {
                             <p className="personal-page__des">Đánh giá</p>
                           </div>
                           <p className="personal-page__value">
-                            {parseFloat(data?.avgStar).toFixed(1)}/5 sao
+                            {data?.avgStar != null ? (
+                              <>{parseFloat(data?.avgStar).toFixed(1)}/5 sao</>
+                            ) : (
+                              "Chưa có đánh giá"
+                            )}
                           </p>
                         </li>
                         <li className="personal-page__item">
@@ -324,8 +322,10 @@ export default function Personal() {
                 </div>
               </div>
               <div className="personal-page__container">
-                {data?.tours.length > 0 &&
-                  <> <p className="trip-suggest-title">Các chuyến đi gợi ý</p>
+                {data?.tours.length > 0 && (
+                  <>
+                    {" "}
+                    <p className="trip-suggest-title">Các chuyến đi gợi ý</p>
                     <div className="trip-suggest">
                       <OwlCarousel
                         className="trip-suggest__list owl-theme"
@@ -335,25 +335,31 @@ export default function Personal() {
                           // <TourItem key={index} item={item} />
                           <div className="tour-view__item" key={index}>
                             <div className="tour-view__card-img">
-                              <img alt="" className="tour-view__img" src={banner} />
+                              <img
+                                alt=""
+                                className="tour-view__img"
+                                src={banner}
+                              />
                               <div className="tour-view__tag">
                                 <p className="tour-view__tag-name tour-primary">
                                   {item.type == "Ecotourism"
                                     ? "Văn hóa"
                                     : item.type == "Cultural"
-                                      ? "Nghỉ dưỡng"
-                                      : item.type == "Entertainment"
-                                        ? "Giải trí"
-                                        : item.type == "Sports"
-                                          ? "Thể thao"
-                                          : "Khác"}
+                                    ? "Nghỉ dưỡng"
+                                    : item.type == "Entertainment"
+                                    ? "Giải trí"
+                                    : item.type == "Sports"
+                                    ? "Thể thao"
+                                    : "Khác"}
                                 </p>
                               </div>
                             </div>
                             <div className="tour-view__card-content">
                               <div className="tour-view__head"></div>
                               <div className="tour-view-body">
-                                <h3 className="tour-view__title">{item?.name}</h3>
+                                <h3 className="tour-view__title">
+                                  {item?.name}
+                                </h3>
                                 <p className="tour-view__des">
                                   {item?.description}
                                 </p>
@@ -373,7 +379,9 @@ export default function Personal() {
                               <div className="tour-view-footer">
                                 <p className="tour-view__price">
                                   khoảng
-                                  <span>{currencyFormat(item?.basePrice)}đ</span>
+                                  <span>
+                                    {currencyFormat(item?.basePrice)}đ
+                                  </span>
                                   /một người
                                 </p>
                                 <div className="tour-view__evaluate">
@@ -393,7 +401,7 @@ export default function Personal() {
                       </OwlCarousel>
                     </div>
                   </>
-                }
+                )}
 
                 <p className="trip-suggest-title">Đánh giá từ du khách</p>
                 <div className="tour-feedback__main">
