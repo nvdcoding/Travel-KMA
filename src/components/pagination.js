@@ -38,7 +38,9 @@ const PaginationComponent = ({
         {Array.from({ length: totalPages }, (_, index) => index + 1).map(
           (page) => (
             <div
-              className="paging__item"
+              className={
+                page === currentPage ? "paging__item active" : "paging__item"
+              }
               key={page}
               onClick={() => goToPage(page)}
               disabled={page === currentPage}

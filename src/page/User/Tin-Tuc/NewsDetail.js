@@ -62,6 +62,20 @@ export default function NewsDetail() {
       message.error("Báo cáo bài viết thất bại !!!");
     }
   };
+  const newSave = async () => {
+    if (!user) {
+      message.error("Vui lòng đăng nhập để lưu bài viết");
+      return;
+    }
+    const response = await sendPut(`/users/add-favorite`, {
+      postId: data?.id,
+    });
+    if (response.statusCode === 200) {
+      message.success("Bài viết đã được lưu");
+    } else {
+      message.error("Lưu không thành công!");
+    }
+  };
   const handleCancel = () => {
     setIsModalOpen(false);
     setContent("");
@@ -130,7 +144,7 @@ export default function NewsDetail() {
                     <ul
                       className={show ? "Blog-options active" : "Blog-options"}
                     >
-                      <li>
+                      <li onClick={() => newSave()}>
                         <i className="fa-solid fa-bookmark"></i>Lưu bài viết
                       </li>
                       <li onClick={showModal}>

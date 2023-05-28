@@ -24,13 +24,13 @@ function TourItem(props) {
           />
           <div className="tour-view__tag">
             <p className="tour-view__tag-name tour-primary">
-              {props.type == "Ecotourism"
+              {props?.item.type == "Ecotourism"
                 ? "Văn hóa"
-                : props.type == "Cultural"
+                : props?.item.type == "Cultural"
                 ? "Nghỉ dưỡng"
-                : props.type == "Entertainment"
+                : props?.item.type == "Entertainment"
                 ? "Giải trí"
-                : props.type == "Sports"
+                : props?.item.type == "Sports"
                 ? "Thể thao"
                 : "Khác"}
             </p>
@@ -75,14 +75,16 @@ function TourItem(props) {
               <span> {currencyFormat(props?.item?.basePrice)}đ </span>
             </p>
             <div className="tour-view__evaluate">
-              <div className="tour-view__star">
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star-half-stroke"></i>
-                <i className="fa-regular fa-star"></i>
-                {/* <span>Đã đi {props?.item?.rate}</span> */}
-              </div>
+              {/* <div className="tour-view__star">
+                {props?.item?.star != null && (
+                  <Rate allowHalf disabled defaultValue={props?.item?.star} />
+                )}
+                {props?.item?.totalTour != 0 ? (
+                  <span>{props?.item?.totalTour} lượt đi</span>
+                ) : (
+                  <span>Chưa có lượt đi</span>
+                )}
+              </div> */}
               <Link to={`/tour/${props?.item?.id}`}>
                 <div className="button button--primary button-contact">
                   Tùy chỉnh và liên hệ
