@@ -364,12 +364,12 @@
   width: 80%;
 }
 
-.InfoUser-wwrapper h1 {
+.InfoUser-wwrapper_title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 35px;
   color: var(--color-primary);
-  font-size: 18px;
-  font-weight: 600;
 }
-
 .InfoUser-wwrapper .btn-active {
   display: flex;
   align-items: center;
@@ -419,8 +419,8 @@
 .InfoUser-wwrapper .info h3 {
   color: #403e3e;
   font-weight: 600;
+  margin-bottom: 5px;
 }
-
 .InfoUser-wwrapper .info input {
   padding: 5px 5px;
   border: none;
@@ -433,7 +433,9 @@
 .ant-form-item-control-input {
   border-radius: 0;
 }
-
+.info .ant-form-item-control-input {
+  border-radius: 4px;
+}
 .InfoUser-wwrapper .info p {
   width: 80%;
   margin: 10px 0;

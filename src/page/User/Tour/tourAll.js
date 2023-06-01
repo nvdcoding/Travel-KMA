@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Layout from "../../../components/layout/layout";
 import "../../../assets/css/hdv-tour-all.css";
-import { Pagination } from "antd";
+import { Pagination, Radio } from "antd";
 import TourItem from "../../../components/tourItem";
 import {
   Modal,
@@ -171,7 +171,7 @@ export default function ToursAll() {
                       label="Loại hình du lịch"
                       className="tour-select"
                     >
-                      <Checkbox.Group options={options} />
+                      <Radio.Group options={options} />
                     </Form.Item>
                     <Form.Item
                       name="rate"

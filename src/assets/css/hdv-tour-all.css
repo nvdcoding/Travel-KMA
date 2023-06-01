@@ -48,7 +48,7 @@
 }
 
 .tour-all-box__search {
-  background: #ecebeb;
+  background: #ecebeb5e;
   padding: 30px 15px;
 }
 
@@ -286,11 +286,24 @@
   display: none;
 }
 
-.tour-select .ant-checkbox-group {
+.tour-select .ant-radio {
+  display: none;
 }
-
+.tour-select .ant-radio-wrapper span {
+  font-size: 14px;
+  background-color: #fff;
+  padding: 7px 7px;
+  border-radius: 5px;
+}
+.tour-select .ant-radio-wrapper {
+  margin: 7px 8px 0 0;
+}
 .tour-select .ant-form-item-control-input {
   overflow: inherit;
+}
+.tour-select .ant-radio-wrapper-checked span {
+  background-color: var(--colour-link);
+  color: #fff;
 }
 
 .tour-select .ant-checkbox-wrapper {

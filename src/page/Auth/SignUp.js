@@ -24,21 +24,25 @@ export default function SignUp() {
   const [formhdv] = Form.useForm();
   const history = useHistory();
   const onFinish = async (values) => {
-    const res = await sendPost("/auth/register", values);
-    if (res.statusCode == 200) {
-      notification.open({
-        message: "Đăng kí thành công",
-        description: "Bạn vui lòng kiểm tra Email ",
-        icon: <SmileOutlined style={{ color: "#e52525" }} />,
-      });
-      form.resetFields();
-      history.push(`/active-user/${values.email}`);
-    }
-    if (res.statusCode === 400) {
-      if (values.password < 6) {
-        return message.error("Password cần trên 6 kí tự!");
+    try {
+      const res = await sendPost("/auth/register", values);
+      if (res.statusCode == 200) {
+        notification.open({
+          message: "Đăng kí thành công",
+          description: "Bạn vui lòng kiểm tra Email ",
+          icon: <SmileOutlined style={{ color: "#e52525" }} />,
+        });
+        form.resetFields();
+        history.push(`/active-user/${values.email}`);
       }
-      return message.error("Email đã tồn tại");
+      if (res.statusCode === 400) {
+        if (values.password < 6) {
+          return message.error("Password cần trên 6 kí tự!");
+        }
+        return message.error("Email đã tồn tại");
+      }
+    } catch (error) {
+      return message.error("Đăng ký không thành công");
     }
   };
 
@@ -46,16 +50,22 @@ export default function SignUp() {
     console.log("Failed:", errorInfo);
   };
   const onFinishHDV = async (values) => {
-    const res = await sendPost("/auth/register-tourguide", values);
-    if (res.statusCode === 200) {
-      notification.open({
-        message: "Đăng kí thành công",
-        description: "Bạn vui lòng kiểm tra Email ",
-        icon: <SmileOutlined style={{ color: "#e52525" }} />,
-      });
-      formhdv.resetFields();
-    } else {
-      return message.error("Vui lòng kiểm tra lại, email đã tồn tại.");
+    try {
+      const res = await sendPost("/auth/register-tourguide", values);
+      if (res.statusCode === 200) {
+        notification.open({
+          message: "Đăng kí thành công",
+          description: "Bạn vui lòng kiểm tra Email ",
+          icon: <SmileOutlined style={{ color: "#e52525" }} />,
+        });
+        formhdv.resetFields();
+      } else {
+        message.error(
+          "Admin sẽ gửi Email hẹn phỏng vấn cho bạn trong giây lát"
+        );
+      }
+    } catch (error) {
+      message.error("Đăng ký không thành công, tài khoản đã tồn tại");
     }
   };
 

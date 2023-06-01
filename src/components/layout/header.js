@@ -94,7 +94,7 @@ function HeaderLayout() {
                         <li>
                           <div class="box-list-info">
                             <i class="fas fa-user"></i>
-                            <Link to="/account">Cài đặt</Link>
+                            <Link to="/account">Thông tin tài khoản</Link>
                           </div>
                         </li>
                         <li>

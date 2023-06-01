@@ -162,7 +162,7 @@ export default function AddTour() {
     },
     {
       label: "Rút hết",
-      value: infoUser.availableBalance,
+      value: revenue.totalProfit,
     },
   ];
   const { RangePicker } = DatePicker;

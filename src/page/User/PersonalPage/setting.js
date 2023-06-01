@@ -78,7 +78,13 @@ function Account() {
     <>
       <Layout>
         <div className="InfoUser-wwrapper">
-          <h1>Cài đặt</h1>
+          <h1 className="InfoUser-wwrapper_title">Thông tin tài khoản</h1>
+          <h2>Tổng điểm trong hệ thống</h2>
+          <div className="info">
+            <Input readOnly value={infoUser?.voucherPoint} />
+            <p>Điểm sẻ tự động cộng khi bạn kết thúc chuyến đi.</p>
+            <p>Điểm dùng để quy đổi lấy Voucher</p>
+          </div>
           <Form
             name="basic"
             initialValues={{ remember: true }}

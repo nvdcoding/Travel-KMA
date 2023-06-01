@@ -1,16 +1,24 @@
-import React, { createRef, useEffect, useState } from "react";
+import React, { createRef, useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
-import { sendGet } from "../../../../utils/api";
+import { AppContext } from "../../../../Context/AppContext";
 
 import Avatar from "../chatList/Avatar";
 import ChatItem from "./ChatItem";
 
-export default function ChatContent({ messages, setMessages, socket }) {
+export default function ChatContent({ messages, setMessages, socket, users }) {
   const { chatId } = useParams();
+  const { infoUser } = useContext(AppContext);
+
+  const user = users.find((e) => {
+    const id = infoUser.role === "USER" ? e.tourGuideId : e.userId;
+    if (id === chatId) {
+      return true;
+    }
+    return false;
+  });
+  console.log(user);
 
   const messagesEndRef = createRef(null);
-
-  const [profile, setProfile] = useState({ role: "USER" });
 
   const [msg, setMsg] = useState("");
   const scrollToBottom = () => {
@@ -20,23 +28,11 @@ export default function ChatContent({ messages, setMessages, socket }) {
     });
   };
 
-  useEffect(() => {
-    const getProfile = async () => {
-      const res = await sendGet("/auth/me");
-      console.log(res);
-      if (res) {
-        setProfile(res.returnValue);
-      }
-    };
-
-    getProfile();
-  }, []);
-
   const handleChat = () => {
     if (msg !== "") {
       const newChat = {
         message: msg,
-        sender: profile.role,
+        sender: infoUser.role,
       };
       setMessages((chatItms) => [...chatItms, newChat]);
       setMsg("");
@@ -63,11 +59,8 @@ export default function ChatContent({ messages, setMessages, socket }) {
       <div className="content__header">
         <div className="blocks">
           <div className="current-chatting-user">
-            <Avatar
-              isOnline="active"
-              image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTA78Na63ws7B7EAWYgTr9BxhX_Z8oLa1nvOA&usqp=CAU"
-            />
-            <p>Tim Hover</p>
+            <Avatar isOnline="active" image={infoUser?.avatar} />
+            <p>{infoUser?.username}</p>
           </div>
         </div>
 
@@ -87,8 +80,9 @@ export default function ChatContent({ messages, setMessages, socket }) {
                 animationDelay={index + 1}
                 key={index}
                 sender={itm.sender || "USER"}
-                message={itm.message}
-                profile={profile}
+                message={itm}
+                profile={infoUser}
+                user={user}
               />
             );
           })}

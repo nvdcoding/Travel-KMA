@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
+import { AppContext } from "../../../../Context/AppContext";
 
 import Avatar from "./Avatar";
 
 export default function ChatList({ users }) {
   const history = useHistory();
 
-  const selectChat = (e, user) => {
+  const { infoUser } = useContext(AppContext);
+
+  const selectChat = (e, id) => {
     for (
       let index = 0;
       index < e.currentTarget.parentNode.children.length;
@@ -15,15 +18,15 @@ export default function ChatList({ users }) {
       e.currentTarget.parentNode.children[index].classList.remove("active");
     }
     e.currentTarget.classList.add("active");
-    history.push(`/chat/${user.id}`);
+    history.push(`/chat/${id}`);
   };
 
   return (
     <div className="main__chatlist">
-      <button className="btn">
+      {/* <button className="btn">
         <i className="fa fa-plus"></i>
         <span>New conversation</span>
-      </button>
+      </button> */}
       <div className="chatlist__heading">
         <h2>Chats</h2>
         <button className="btn-nobg">
@@ -40,21 +43,30 @@ export default function ChatList({ users }) {
       </div>
       <div className="chatlist__items">
         {users.map((item, index) => {
+          const chattedUser =
+            infoUser.role === "USER" ? item.tourGuide : item.user;
+          console.log(chattedUser);
+          const id = infoUser.role === "USER" ? item.tourGuideId : item.userId;
+
           return (
             <div
               style={{ animationDelay: `0.${item.animationDelay}s` }}
-              onClick={(e) => selectChat(e, item)}
+              onClick={(e) => selectChat(e, id)}
               className={`chatlist__item ${item.active ? item.active : ""} `}
               key={index}
             >
               <Avatar
-                image={item.image ? item.image : "http://placehold.it/80x80"}
+                image={
+                  chattedUser?.avatar
+                    ? chattedUser?.avatar
+                    : "http://placehold.it/80x80"
+                }
                 isOnline={item.isOnline}
               />
 
               <div className="userMeta">
-                <p>{item.name}</p>
-                <span className="activeTime">32 mins ago</span>
+                <p>{chattedUser?.name}</p>
+                {/* <span className="activeTime">32 mins ago</span> */}
               </div>
             </div>
           );

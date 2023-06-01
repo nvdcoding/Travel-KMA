@@ -6,6 +6,8 @@ import Condition from "../../../components/condition";
 import PayHistory from "./history-pay";
 import "../../../assets/css/pay.css";
 import moment from "moment";
+import OtpInput from "react-otp-input";
+
 import {
   Form,
   Input,
@@ -249,22 +251,7 @@ export default function Pay() {
 const DrwarMoney = ({ coin, UserTransactions }) => {
   const [amountDraw, setAmountDraw] = useState(0);
   const [form] = Form.useForm();
-  const DrawOnline = async (value) => {
-    try {
-      value.amount = parseInt(value.amount);
-      const res = await sendPost("/transactions/user-withdraw", value);
-      if (res.statusCode == 200) {
-        message.success("Tạo yêu cầu rút tiền thành công");
-        await UserTransactions();
-        setAmountDraw("");
-        form.resetFields();
-      } else {
-        //đơn hàng thất bại
-      }
-    } catch (error) {
-      message.error("Không thành công, có lỗi xảy ra!");
-    }
-  };
+
   const formatterPrice = new Intl.NumberFormat("vi-VN", {
     hour: "2-digit",
     minute: "numeric",
@@ -316,7 +303,6 @@ const DrwarMoney = ({ coin, UserTransactions }) => {
             initialValues={{
               remember: true,
             }}
-            onFinish={DrawOnline}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
@@ -360,13 +346,12 @@ const DrwarMoney = ({ coin, UserTransactions }) => {
                 span: 16,
               }}
             >
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="button button--primary"
-              >
-                Rút tiền
-              </Button>
+              <ModalOtp
+                amountDraw={amountDraw}
+                form={form}
+                UserTransactions={UserTransactions}
+                setAmountDraw={setAmountDraw}
+              />
             </Form.Item>
           </Form>
         </div>
@@ -387,5 +372,76 @@ const DrwarMoney = ({ coin, UserTransactions }) => {
         </div>
       </div>
     </div>
+  );
+};
+
+const ModalOtp = ({ amountDraw, UserTransactions, form, setAmountDraw }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const [otp, setOtp] = useState("");
+  const DrawOnline = async () => {
+    try {
+      const res = await sendPost("/transactions/user-withdraw", {
+        amount: parseInt(amountDraw),
+      });
+      if (res.statusCode == 200) {
+        message.success("Tạo yêu cầu rút tiền thành công");
+        await UserTransactions();
+        setAmountDraw("");
+        form.resetFields();
+        setIsModalOpen(false);
+        setOtp("");
+      } else {
+        //đơn hàng thất bại
+      }
+    } catch (error) {
+      message.error("Không thành công, có lỗi xảy ra!");
+    }
+  };
+  useEffect(() => {}, []);
+  return (
+    <>
+      <Button type="primary" onClick={showModal}>
+        Rút tiền
+      </Button>
+      <Modal
+        visible={isModalOpen}
+        title=""
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <h3 className="modal-title">
+          Nhập OTP đã được gửi về mail của quý khách
+        </h3>
+        <div className="modal-otp">
+          <OtpInput
+            value={otp}
+            onChange={setOtp}
+            numInputs={4}
+            renderSeparator={<span>-</span>}
+            renderInput={(props) => <input {...props} />}
+          />
+        </div>
+
+        <div className="modal-btn">
+          <div className="button button--primary" onClick={() => DrawOnline()}>
+            Rút tiền
+          </div>
+          <div className="button button--normal" onClick={() => setOtp("")}>
+            Nhập lại
+          </div>
+        </div>
+      </Modal>
+    </>
   );
 };

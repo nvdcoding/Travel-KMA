@@ -6,6 +6,7 @@ import "../../../assets/css/news.css";
 import { sendGet } from "../../../utils/api";
 import { Pagination } from "antd";
 import PaginationComponent from "../../../components/pagination";
+import { nodata } from "../../../constants/images";
 export default function News() {
   const numberPage = 6;
   const [data, setData] = useState();
@@ -115,43 +116,61 @@ export default function News() {
                 </div>
               </div>
               <div className="news-list">
-                {data &&
-                  data?.map((item, index) => (
-                    <div className="news-item" key={index}>
-                      <div className="news-img">
-                        <Link to={`/tin-tuc/${item?.id}`}>
-                          <img alt="" src={item?.image} />
-                        </Link>
-                      </div>
-                      <div className="news-main">
-                        <h2 className="news-title">
-                          <Link to={`/tin-tuc/${item?.id}`}>{item?.title}</Link>
-                        </h2>
-                        <p
-                          className="news-des"
-                          dangerouslySetInnerHTML={{
-                            __html: item?.currentContent,
-                          }}
-                        />
-                        <div className="news-post-share-box">
-                          <div className="news-post-share-item">
-                            <a href="#" className="news-post-like" title="Like">
-                              <i className="fa-regular fa-heart"></i>
-                            </a>
-                            <a
-                              className="post-share-facebook"
-                              target="_blank"
-                              rel="noreferrer"
-                              href="#"
-                              title="Facebook"
-                            >
-                              <i className="fa-brands fa-facebook-f"></i>
-                            </a>
+                {data && data.length > 0 ? (
+                  <>
+                    {data?.map((item, index) => (
+                      <div className="news-item" key={index}>
+                        <div className="news-img">
+                          <Link to={`/tin-tuc/${item?.id}`}>
+                            <img alt="" src={item?.image} />
+                          </Link>
+                        </div>
+                        <div className="news-main">
+                          <h2 className="news-title">
+                            <Link to={`/tin-tuc/${item?.id}`}>
+                              {item?.title}
+                            </Link>
+                          </h2>
+                          <p
+                            className="news-des"
+                            dangerouslySetInnerHTML={{
+                              __html: item?.currentContent,
+                            }}
+                          />
+                          <div className="news-post-share-box">
+                            <div className="news-post-share-item">
+                              <a
+                                href="#"
+                                className="news-post-like"
+                                title="Like"
+                              >
+                                <i className="fa-regular fa-heart"></i>
+                              </a>
+                              <a
+                                className="post-share-facebook"
+                                target="_blank"
+                                rel="noreferrer"
+                                href="#"
+                                title="Facebook"
+                              >
+                                <i className="fa-brands fa-facebook-f"></i>
+                              </a>
+                            </div>
                           </div>
                         </div>
                       </div>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    <div className="no-data">
+                      <img alt="" src={nodata} />
+                      <p className="no-data-text">
+                        Không tìm thấy tour trong hệ thống
+                      </p>
                     </div>
-                  ))}
+                  </>
+                )}
               </div>
               <div className="news-paging">
                 {data && data.length > 0 && (

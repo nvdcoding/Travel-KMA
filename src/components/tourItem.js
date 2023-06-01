@@ -25,13 +25,17 @@ function TourItem(props) {
           <div className="tour-view__tag">
             <p className="tour-view__tag-name tour-primary">
               {props?.item.type == "Ecotourism"
-                ? "Văn hóa"
+                ? "Sinh thái"
                 : props?.item.type == "Cultural"
-                ? "Nghỉ dưỡng"
+                ? "Văn hóa"
                 : props?.item.type == "Entertainment"
                 ? "Giải trí"
                 : props?.item.type == "Sports"
                 ? "Thể thao"
+                : props?.item.type == "Discovery"
+                ? "Khám phá"
+                : props?.item.type == "Adventure"
+                ? "Mạo hiểm"
                 : "Khác"}
             </p>
           </div>

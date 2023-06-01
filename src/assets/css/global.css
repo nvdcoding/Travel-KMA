@@ -1172,7 +1172,13 @@ iframe {
   border-color: #9eb60a82;
   background-color: #91a4179e;
 }
-
+input:read-only {
+  border: none !important;
+  outline: none !important;
+  background-color: #e3e3e3;
+  line-height: 30px !important;
+  cursor: default;
+}
 /* responsive */
 @media (max-width: 1120px) {
   html {
