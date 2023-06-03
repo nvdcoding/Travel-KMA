@@ -2,6 +2,8 @@ import React from "react";
 import Avatar from "../chatList/Avatar";
 
 export default function ChatItem(props) {
+  const chatWith = props.profile?.role === 'USER' ? props.chat.tourGuide : props.chat.user
+
   return (
     <div
       style={{ animationDelay: `0.8s` }}
@@ -25,9 +27,9 @@ export default function ChatItem(props) {
       <Avatar
         isOnline="active"
         image={
-          props.sender === "USER"
+          props.sender ===  props.profile?.role
             ? props.profile?.avatar
-            : props.user?.avatar
+            : chatWith.avatar
         }
       />
     </div>

@@ -45,7 +45,7 @@ export default function ChatList({ users }) {
         {users.map((item, index) => {
           const chattedUser =
             infoUser.role === "USER" ? item.tourGuide : item.user;
-            console.log(chattedUser);
+            console.log("1111", chattedUser);
           const id = infoUser.role === "USER" ? item.tourGuideId : item.userId;
 
           return (

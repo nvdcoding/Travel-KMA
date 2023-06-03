@@ -9,15 +9,15 @@ import ChatItem from "./ChatItem";
 export default function ChatContent({ messages, setMessages, socket, users }) {
   const { chatId } = useParams();
     const { infoUser } = useContext(AppContext);
-
-  const user = users.find(e => {
+  const chat = users.find(e => {
     const id =  infoUser.role === "USER" ? e.tourGuideId : e.userId;
-    if(id === chatId) {
+    if(id == chatId) {
       return true;
     }
     return false;
   });
-  console.log(user);
+
+  console.log(chat , "user chat cung")
 
   const messagesEndRef = createRef(null);
 
@@ -83,7 +83,7 @@ export default function ChatContent({ messages, setMessages, socket, users }) {
                 sender={itm.sender || "USER"}
                 message={itm}
                 profile={infoUser}
-                user={user}
+                chat={chat}
               />
             );
           })}
