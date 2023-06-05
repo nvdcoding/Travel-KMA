@@ -2,13 +2,41 @@
 import React, { useEffect, useState } from "react";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
-import { Button, Switch, Tabs } from "antd";
+import { Switch, Tabs, message } from "antd";
+import { sendGet, sendPut } from "../../../utils/api";
 export default function Setting() {
-  useEffect(() => {}, []);
   const [active, setActive] = useState(false);
-  const onChange = (checked) => {
-    setActive(checked);
+  const getSetting = async () => {
+    try {
+      const res = await sendGet("/tour-guide/available-status");
+      if (res.statusCode === 200) {
+        setActive(res.returnValue);
+      } else {
+        message.error("Có lỗi xảy ra");
+      }
+    } catch (error) {
+      message.error("Có lỗi xảy ra");
+    }
   };
+  const onChange = async (checked) => {
+    try {
+      const res = await sendPut("/tour-guide/available-status", {
+        status: checked,
+      });
+      if (res.statusCode === 200) {
+        setActive(checked);
+        await getSetting();
+        message.success("Cập nhật trạng thái thành công");
+      } else {
+        message.error("Có lỗi xảy ra");
+      }
+    } catch (error) {
+      message.error("Có lỗi xảy ra");
+    }
+  };
+  useEffect(() => {
+    getSetting();
+  }, []);
   return (
     <>
       <LayoutHDV>
@@ -32,11 +60,11 @@ export default function Setting() {
                   </div>
                 </div>
                 <div className="tab_right">
-                  <Switch defaultChecked onChange={onChange} />
+                  <Switch checked={active} onChange={onChange} />
                 </div>
               </div>
             </Tabs.TabPane>
-            <Tabs.TabPane tab="Cài đặt thông báo" key="item-2">
+            {/* <Tabs.TabPane tab="Cài đặt thông báo" key="item-2">
               <div className="content_tab">
                 <div className="tab-left">
                   <i class="fa-regular fa-envelope"></i>
@@ -48,7 +76,6 @@ export default function Setting() {
                   </div>
                 </div>
                 <div className="tab_right">
-                  {/* ấn vào ẩn hiện nội dung bên dưới */}
                   <Button>Bỏ Email</Button>
                 </div>
               </div>
@@ -57,7 +84,7 @@ export default function Setting() {
                 <SubItem text="Tin tức mới" />
                 <SubItem text="Tour du lịch" />
               </div>
-            </Tabs.TabPane>
+            </Tabs.TabPane> */}
           </Tabs>
         </div>
       </LayoutHDV>

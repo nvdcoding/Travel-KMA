@@ -10,12 +10,13 @@ import {
   Popconfirm,
   Select,
   InputNumber,
+  message,
 } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import LayoutHDV from "../../../components/layout/layoutHDV";
 import "./style.css";
 import { Link } from "react-router-dom";
-import { sendDelete, sendGet } from "../../../utils/api/index";
+import { sendDelete, sendGet, sendPut } from "../../../utils/api/index";
 import { useState } from "react";
 import { AppContext } from "../../../Context/AppContext";
 import { getItem } from "../../../utils/storage";
@@ -42,6 +43,7 @@ export default function MyPage() {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",
+      render: (status) => <p>{status == 1 ? "Đang hoạt động" : "Đang khóa"}</p>,
     },
     {
       title: "Địa điểm",
@@ -58,7 +60,7 @@ export default function MyPage() {
               Xem
             </Link>
           </div>
-          <div className="action" style={{ backgroundColor: "#1890ff" }}>
+          {/* <div className="action" style={{ backgroundColor: "#1890ff" }}>
             {data.length >= 1 ? (
               <Popconfirm
                 title="Ẩn Tour?"
@@ -67,24 +69,29 @@ export default function MyPage() {
                 Ẩn
               </Popconfirm>
             ) : null}
-          </div>
+          </div> */}
         </Space>
       ),
     },
   ];
-  const { RangePicker } = DatePicker;
   const handleDelete = async (key) => {
-    // eslint-disable-next-line no-unused-vars
-    const del = await sendDelete(`/tours/${key}`);
-    if (del.status === 200) {
-      await listTour();
-    } else {
-      message.error("Không thể xóa khóa học");
+    try {
+      const del = await sendPut(`/tours`, {
+        tourId: key,
+        action: "",
+      });
+      if (del.statusCode === 200) {
+        await listTour();
+      } else {
+        message.error("Không thể ẩn tour");
+      }
+    } catch (error) {
+      message.error("Không thể ẩn tour");
     }
   };
   const listTour = async () => {
     try {
-      const res = await sendGet("/tours", {
+      const res = await sendGet("/tours/tourGuide-get", {
         limit: 100,
         tourGuideId: user?.id,
       });
@@ -115,6 +122,20 @@ export default function MyPage() {
     } else {
       message.error("thất bại");
     }
+  };
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 8,
+      total: data.length,
+    },
+  });
+  const handleTableChange = (pagination, filters, sorter) => {
+    setTableParams({
+      pagination,
+      filters,
+      ...sorter,
+    });
   };
   useEffect(() => {
     listTour();
@@ -173,7 +194,13 @@ export default function MyPage() {
           <div className="main-body">
             <div className="main-content">
               <h3 className="landing-page-title">Danh sách tour</h3>
-              <Table columns={columns} dataSource={data} />
+              <Table
+                rowKey={(record) => record.id}
+                columns={columns}
+                dataSource={data}
+                onChange={handleTableChange}
+                pagination={tableParams.pagination}
+              />
             </div>
           </div>
         </div>

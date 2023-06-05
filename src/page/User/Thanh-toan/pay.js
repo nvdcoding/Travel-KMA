@@ -251,6 +251,7 @@ export default function Pay() {
 const DrwarMoney = ({ coin, UserTransactions }) => {
   const [amountDraw, setAmountDraw] = useState(0);
   const [form] = Form.useForm();
+  const [isModalOTP, setIsModalOTP] = useState(false);
 
   const formatterPrice = new Intl.NumberFormat("vi-VN", {
     hour: "2-digit",
@@ -292,112 +293,115 @@ const DrwarMoney = ({ coin, UserTransactions }) => {
   const onChangeAmountDraw = (e) => {
     setAmountDraw(e.target.value);
   };
-
-  return (
-    <div className="payment-online__inner">
-      <div className="payment-online__left">
-        <div className="order-payment">
-          <Form
-            form={form}
-            name="basic"
-            initialValues={{
-              remember: true,
-            }}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-          >
-            <Form.Item
-              label="Số tiền cần rút"
-              name="amount"
-              rules={[
-                {
-                  required: true,
-                  message: "Nhập số tiền bạn muốn rút.",
-                },
-              ]}
-            >
-              <Input
-                placeholder="Nhập số tiền bạn muốn rút"
-                onChange={(e) => setAmountDraw(e.target.value)}
-              />
-            </Form.Item>
-            <Form.Item label="" name="amount">
-              <Radio.Group
-                onChange={onChangeAmountDraw}
-                options={optionsPayMoney}
-                optionType="button"
-                buttonStyle="solid"
-              />
-            </Form.Item>
-            <label class="trouble-warn__text">
-              <div>
-                <img src={note} alt=".png" />
-              </div>{" "}
-              <p class="check-box__txt check-box__txt-payment">
-                Nhấn vào "Rút tiền" đồng nghĩa với việc Quý khách đồng ý với
-                <a href="#" class="check-box__link">
-                  điều khoản mua hàng và thanh toán của KTravel
-                </a>
-              </p>
-            </label>
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <ModalOtp
-                amountDraw={amountDraw}
-                form={form}
-                UserTransactions={UserTransactions}
-                setAmountDraw={setAmountDraw}
-              />
-            </Form.Item>
-          </Form>
-        </div>
-      </div>
-      <div className="payment-online__right">
-        <div className="payment-online__row">
-          <h4 className="payment-online__sub">Tổng thanh toán</h4>
-          <div className="method-payment">
-            <ul className="method-payment__list">
-              <li class="order-payment__item last">
-                <span class="order-payment__name">Tổng tiền</span>{" "}
-                <span class="order-payment__value">
-                  {formatterPrice.format(amountDraw)} đ
-                </span>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const ModalOtp = ({ amountDraw, UserTransactions, form, setAmountDraw }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-  const [otp, setOtp] = useState("");
   const DrawOnline = async () => {
     try {
       const res = await sendPost("/transactions/user-withdraw", {
         amount: parseInt(amountDraw),
       });
       if (res.statusCode == 200) {
-        message.success("Tạo yêu cầu rút tiền thành công");
-        await UserTransactions();
         setAmountDraw("");
+        setIsModalOTP(true);
         form.resetFields();
-        setIsModalOpen(false);
+      } else {
+        message.error("Không thành công, có lỗi xảy ra!");
+      }
+    } catch (error) {
+      message.error("Không thành công, có lỗi xảy ra!");
+    }
+  };
+  return (
+    <>
+      <div className="payment-online__inner">
+        <div className="payment-online__left">
+          <div className="order-payment">
+            <Form
+              form={form}
+              name="basic"
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={DrawOnline}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Số tiền cần rút"
+                name="amount"
+                rules={[
+                  {
+                    required: true,
+                    message: "Nhập số tiền bạn muốn rút.",
+                  },
+                ]}
+              >
+                <Input
+                  placeholder="Nhập số tiền bạn muốn rút"
+                  onChange={(e) => setAmountDraw(e.target.value)}
+                />
+              </Form.Item>
+              <Form.Item label="" name="amount">
+                <Radio.Group
+                  onChange={onChangeAmountDraw}
+                  options={optionsPayMoney}
+                  optionType="button"
+                  buttonStyle="solid"
+                />
+              </Form.Item>
+              <label class="trouble-warn__text">
+                <div>
+                  <img src={note} alt=".png" />
+                </div>{" "}
+                <p class="check-box__txt check-box__txt-payment">
+                  Nhấn vào "Rút tiền" đồng nghĩa với việc Quý khách đồng ý với
+                  <a href="#" class="check-box__link">
+                    điều khoản mua hàng và thanh toán của KTravel
+                  </a>
+                </p>
+              </label>
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+                <Button type="primary" htmlType="submit">
+                  Rút tiền
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
+        </div>
+        <div className="payment-online__right">
+          <div className="payment-online__row">
+            <h4 className="payment-online__sub">Tổng thanh toán</h4>
+            <div className="method-payment">
+              <ul className="method-payment__list">
+                <li class="order-payment__item last">
+                  <span class="order-payment__name">Tổng tiền</span>{" "}
+                  <span class="order-payment__value">
+                    {formatterPrice.format(amountDraw)} đ
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ModalOtp isModalOTP={isModalOTP} setIsModalOTP={setIsModalOTP} />
+    </>
+  );
+};
+
+const ModalOtp = ({ isModalOTP, setIsModalOTP }) => {
+  const handleCancel = () => {
+    setIsModalOTP(false);
+  };
+  const [otp, setOtp] = useState("");
+  const handleOk = async () => {
+    try {
+      const res = await sendPost(`/transactions/confirm-withdraw/${otp}`);
+      if (res.statusCode == 200) {
+        setIsModalOTP(false);
         setOtp("");
       } else {
         //đơn hàng thất bại
@@ -406,17 +410,12 @@ const ModalOtp = ({ amountDraw, UserTransactions, form, setAmountDraw }) => {
       message.error("Không thành công, có lỗi xảy ra!");
     }
   };
-  useEffect(() => {}, []);
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Rút tiền
-      </Button>
       <Modal
-        visible={isModalOpen}
+        visible={isModalOTP}
         title=""
-        open={isModalOpen}
-        onOk={handleOk}
+        open={isModalOTP}
         onCancel={handleCancel}
         footer={null}
       >
@@ -434,7 +433,7 @@ const ModalOtp = ({ amountDraw, UserTransactions, form, setAmountDraw }) => {
         </div>
 
         <div className="modal-btn">
-          <div className="button button--primary" onClick={() => DrawOnline()}>
+          <div className="button button--primary" onClick={() => handleOk()}>
             Rút tiền
           </div>
           <div className="button button--normal" onClick={() => setOtp("")}>
