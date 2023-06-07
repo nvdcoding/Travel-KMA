@@ -215,6 +215,20 @@ Xem
     console.log("Success:", values);
   };
   const dateFormat = "DD/MM/YYYY";
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 8,
+      total: data.length,
+    },
+  });
+  const handleTableChange = (pagination, filters, sorter) => {
+    setTableParams({
+      pagination,
+      filters,
+      ...sorter,
+    });
+  };
   return (
     <>
       <LayoutHDV>
@@ -291,7 +305,13 @@ Tìm kiếm
             </div>
             <div className="main-content">
               <h3 className="title">{data.length} đơn hàng</h3>
-              <Table columns={columns} dataSource={data} />
+              <Table
+                rowKey={(record) => record.id}
+                columns={columns}
+                dataSource={data}
+                onChange={handleTableChange}
+                pagination={tableParams.pagination}
+              />
             </div>
           </div>
         </div>

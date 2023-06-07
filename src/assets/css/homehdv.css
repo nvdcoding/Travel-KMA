@@ -241,3 +241,17 @@
   -ms-flex-align: flex-start;
   align-items: flex-start;
 }
+
+.modal-otp {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.modal-otp input {
+  width: 50px !important;
+  height: 50px !important;
+}
+.payment-online__left .ant-form-item-control-input {
+  border-radius: 0px !important;
+}

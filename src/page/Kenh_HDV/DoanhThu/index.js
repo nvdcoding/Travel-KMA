@@ -2,6 +2,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "../../../assets/css/homehdv.css";
 import LayoutHDV from "../../../components/layout/layoutHDV";
+import OtpInput from "react-otp-input";
 import "./style.css";
 import {
   Form,
@@ -66,6 +67,7 @@ export default function AddTour() {
     },
   ];
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOTP, setIsModalOTP] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -75,7 +77,8 @@ export default function AddTour() {
       const res = await sendPost("/transactions/tourguide-withdraw", value);
       if (res.statusCode == 200) {
         setIsModalOpen(false);
-        message.success("Tạo yêu cầu rút tiền thành công");
+        setIsModalOTP(true);
+        form.resetFields();
         await gethistoryDrawTour();
       } else {
         //đơn hàng thất bại
@@ -105,8 +108,8 @@ export default function AddTour() {
         .subtract(1, "months")
         .startOf("month")
         .format("YYYY-MM-DD"),
+      limit: 100,
       endDate: moment().format("YYYY-MM-DD"),
-      isHistory: true,
     });
     if (res.statusCode == 200) {
       setRequest(
@@ -162,10 +165,11 @@ export default function AddTour() {
     },
     {
       label: "Rút hết",
-      value: revenue.totalProfit,
+      value: infoUser.availableBalance,
     },
   ];
   const { RangePicker } = DatePicker;
+  const [form] = Form.useForm();
   return (
     <>
       <LayoutHDV>
@@ -242,6 +246,7 @@ export default function AddTour() {
                     initialValues={{
                       remember: true,
                     }}
+                    form={form}
                     onFinish={handleOk}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
@@ -272,13 +277,15 @@ export default function AddTour() {
                         span: 16,
                       }}
                     >
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="button button--primary"
-                      >
-                        Rút tiền
-                      </Button>
+                      <div className="">
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          className="button button--primary"
+                        >
+                          Rút tiền
+                        </Button>
+                      </div>
                     </Form.Item>
                   </Form>
                 </Modal>
@@ -293,7 +300,7 @@ export default function AddTour() {
                     <Table columns={columns} dataSource={request} />
                   </div>
                 </Tabs.TabPane>
-                <Tabs.TabPane tab="Thành công" key="1">
+                {/* <Tabs.TabPane tab="Thành công" key="1">
                   <div class="transactions-table-wrap">
                     <Table columns={columns} dataSource={accept} />
                   </div>
@@ -302,12 +309,71 @@ export default function AddTour() {
                   <div class="transactions-table-wrap">
                     <Table columns={columns} dataSource={deny} />
                   </div>
-                </Tabs.TabPane>
+                </Tabs.TabPane> */}
               </Tabs>
             </div>
           </div>
         </div>
+        <ModalOtp
+          isModalOTP={isModalOTP}
+          setIsModalOTP={setIsModalOTP}
+          gethistoryDrawTour={gethistoryDrawTour}
+        />
       </LayoutHDV>
     </>
   );
 }
+const ModalOtp = ({ isModalOTP, setIsModalOTP, gethistoryDrawTour }) => {
+  const handleCancel = () => {
+    setIsModalOTP(false);
+  };
+  const [otp, setOtp] = useState("");
+  const DrawOnline = async () => {
+    try {
+      const res = await sendPost(`/transactions/confirm-withdraw/${otp}`);
+      if (res.statusCode == 200) {
+        setIsModalOTP(false);
+        setOtp("");
+        await gethistoryDrawTour();
+      } else {
+        //đơn hàng thất bại
+      }
+    } catch (error) {
+      message.error("Không thành công, có lỗi xảy ra!");
+    }
+  };
+  useEffect(() => {}, []);
+  return (
+    <>
+      <Modal
+        visible={isModalOTP}
+        title=""
+        open={isModalOTP}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <h3 className="modal-title">
+          Nhập OTP đã được gửi về mail của quý khách
+        </h3>
+        <div className="modal-otp">
+          <OtpInput
+            value={otp}
+            onChange={setOtp}
+            numInputs={4}
+            renderSeparator={<span>-</span>}
+            renderInput={(props) => <input {...props} />}
+          />
+        </div>
+
+        <div className="modal-btn">
+          <div className="button button--primary" onClick={() => DrawOnline()}>
+            Rút tiền
+          </div>
+          <div className="button button--normal" onClick={() => setOtp("")}>
+            Nhập lại
+          </div>
+        </div>
+      </Modal>
+    </>
+  );
+};

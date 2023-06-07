@@ -19,10 +19,36 @@ import moment from "moment";
 import { getItem } from "../../../utils/storage";
 import { io } from "socket.io-client";
 
-
 export default function Request() {
   const [data, setData] = useState();
+  const [socket, setSocket] = useState();
+  const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    const socket = io(process.env.REACT_APP_WEB_SOCKET_DOMAIN || "", {
+      path: "/chat",
+      transportOptions: {
+        polling: {
+          extraHeaders: {
+            Authorization: localStorage.accessToken,
+          },
+        },
+      },
+    });
 
+    socket.on("connect", () => {
+      console.log("connected!");
+    });
+
+    setSocket(socket);
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+  const handleChat = (userId, selectedRowKeys) => {
+    console.log(selectedRowKeys);
+    socket.emit("send-message", { chatId: userId, content: "Chào bạn, mình " });
+  };
   const columns = [
     {
       title: "STT",
@@ -59,7 +85,11 @@ export default function Request() {
       key: "action",
       render: (_, record) => (
         <Space size="middle">
-          <ModalTour listRequest={listRequest} item={record} />
+          <ModalTour
+            listRequest={listRequest}
+            item={record}
+            handleChat={handleChat}
+          />
           <div
             className="action"
             style={{ backgroundColor: "#1890ff", color: "#fff" }}
@@ -92,7 +122,7 @@ export default function Request() {
   };
   const deleteOrder = async (value) => {
     try {
-      const res = await sendDelete(`/requests/${value}`);
+      const res = await sendDelete("/", { orderId: value });
       if (res.statusCode === 200) {
         message.success("Từ chối thành công");
         listRequest();
@@ -169,7 +199,6 @@ const ModalTour = ({ listRequest, item }) => {
   const [data, setData] = useState(false);
 
   const showModal = () => {
-    getTour();
     setIsModalOpen(true);
   };
   const user = getItem("user") ? JSON.parse(getItem("user")) : {};
@@ -181,10 +210,10 @@ const ModalTour = ({ listRequest, item }) => {
         message.success("Lấy dữ liệu thành công");
         setData(res.returnValue?.data.filter(f => item.province.id === f.province.id));
       } else {
-        message.error(" thất bại");
+        message.error("Thất bại");
       }
     } catch (error) {
-      message.error("Ko thành công");
+      message.error("Không thành công");
     }
   };
   const sendTour = async (e) => {
@@ -194,10 +223,10 @@ const ModalTour = ({ listRequest, item }) => {
         message.error("Thành công");
         listRequest();
       } else {
-        message.error(" thất bại");
+        message.error("Thất bại");
       }
     } catch (error) {
-      message.error("Ko thành công");
+      message.error("Không thành công");
     }
   };
   const handleOk = () => {
@@ -220,8 +249,24 @@ const ModalTour = ({ listRequest, item }) => {
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const [tableParams, setTableParams] = useState({
+    pagination: {
+      current: 1,
+      pageSize: 8,
+      total: data.length,
+    },
+  });
+  const handleTableChange = (pagination, filters, sorter) => {
+    setTableParams({
+      pagination,
+      filters,
+      ...sorter,
+    });
+  };
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getTour();
+  }, []);
   return (
     <>
       <Button type="submit" onClick={showModal}>
@@ -232,11 +277,11 @@ const ModalTour = ({ listRequest, item }) => {
         open={isModalOpen}
         visible={isModalOpen}
         onOk={handleOk}
-        className="modal-tour-option"
         onCancel={handleCancel}
       >
         <Table
-          pagination={false}
+          onChange={handleTableChange}
+          pagination={tableParams.pagination}
           dataSource={data}
           columns={columns}
           rowKey={(record) => record.id}
@@ -247,7 +292,7 @@ const ModalTour = ({ listRequest, item }) => {
               console.log("selectedRowKeys changed: ", selectedRowKeys);
             },
           }}
-          scroll={{ x: 600 }}
+          scroll={{ x: 500 }}
         />
       </Modal>
     </>

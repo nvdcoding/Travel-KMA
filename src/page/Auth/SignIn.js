@@ -50,7 +50,6 @@ export default function SignIn() {
         setRefreshToken(res.returnValue.refreshToken);
         setItem("user", JSON.stringify(res?.returnValue));
         window.location.replace("/kenh-hdv");
-        console.log("history ", history);
         formHDV.resetFields();
       } else {
         message.error("Không khớp");
