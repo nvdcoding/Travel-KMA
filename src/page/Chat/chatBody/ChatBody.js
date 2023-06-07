@@ -10,6 +10,7 @@ export default function ChatBody() {
   const [messages, setMessages] = useState([]);
 
   const { chatId } = useParams();
+  console.log("chatId ", chatId)
   console.log(users);
   useEffect(() => {
     const socket = io(process.env.REACT_APP_WEB_SOCKET_DOMAIN || "", {
@@ -53,28 +54,35 @@ export default function ChatBody() {
       }
     };
   }, [socket, messages, users]);
-
+  if(chatId) {
+    
+  }
   useEffect(() => {
-    if (socket) {
-      socket.emit("get-users", { chatId });
+    if(socket)
+    socket.emit("get-users", {});
+    if (socket && chatId) {
       socket.emit("get-messages", { chatId });
       socket.emit("join-room", { chatId });
     }
   }, [socket, chatId]);
 
   useEffect(() => {
+    if(chatId)
     setMessages([]);
   }, [chatId]);
 
   return (
     <div className="main__chatbody">
       <ChatList users={users} />
+      { chatId ? 
       <ChatContent
-        messages={messages}
-        setMessages={setMessages}
-        socket={socket}
-        users={users}
-      />
+              messages={messages}
+              setMessages={setMessages}
+              socket={socket}
+              users={users}
+            />: null
+      }
+     
     </div>
   );
 }

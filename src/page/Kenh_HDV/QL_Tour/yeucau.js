@@ -17,6 +17,8 @@ import { useState } from "react";
 import { sendDelete, sendGet, sendPut } from "../../../utils/api";
 import moment from "moment";
 import { getItem } from "../../../utils/storage";
+import { io } from "socket.io-client";
+
 
 export default function Request() {
   const [data, setData] = useState();
@@ -125,6 +127,29 @@ export default function Request() {
   );
 }
 const ModalTour = ({ listRequest, item }) => {
+  const [socket, setSocket] = useState();
+  useEffect(() => {
+    const socket = io(process.env.REACT_APP_WEB_SOCKET_DOMAIN || "", {
+      path: "/chat",
+      transportOptions: {
+        polling: {
+          extraHeaders: {
+            Authorization: localStorage.accessToken,
+          },
+        },
+      },
+    });
+
+    socket.on("connect", () => {
+      console.log("connected!");
+    });
+
+    setSocket(socket);
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   const columns = [
     {
       title: "STT",
@@ -136,7 +161,7 @@ const ModalTour = ({ listRequest, item }) => {
       dataIndex: "name",
     },
     {
-      title: "địa điểm",
+      title: "Địa điểm",
       dataIndex: "address",
     },
   ];
@@ -152,8 +177,9 @@ const ModalTour = ({ listRequest, item }) => {
     try {
       const res = await sendGet("/tours", { tourGuideId: user?.id });
       if (res.statusCode === 200) {
+        // console.log(res.returnValue.data);
         message.success("Lấy dữ liệu thành công");
-        setData(res.returnValue?.data);
+        setData(res.returnValue?.data.filter(f => item.province.id === f.province.id));
       } else {
         message.error(" thất bại");
       }
@@ -175,6 +201,20 @@ const ModalTour = ({ listRequest, item }) => {
     }
   };
   const handleOk = () => {
+    console.log(item, '111112312321312');
+    if(selectedRowKeys.length === 0) {
+      setIsModalOpen(false);
+      return;
+    }
+    const sendData = data.filter(e => selectedRowKeys.includes(e.id));
+    if(sendData.length > 0) {
+      socket.emit("send-message", { chatId: item.user.id, content: `Xin chào ${item.user.username}, mình là ${user.name} hướng dẫn viên hoạt động ở ${item.province.name}. Mình gợi ý bạn một số tour sau nhé, chúc bạn có những chuyến đi vui vẻ nhé ! `, isSuggest: false });
+
+    }
+    for (const data of sendData) {
+      socket.emit("send-message", { chatId: item.user.id, content: `${data.name}&*&${data.images[0]}`, isSuggest: true });
+    }
+
     setIsModalOpen(false);
   };
   const handleCancel = () => {

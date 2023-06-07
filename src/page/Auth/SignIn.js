@@ -24,7 +24,7 @@ export default function SignIn() {
         setToken(res.returnValue.accessToken);
         setRefreshToken(res.returnValue.refreshToken);
         setItem("user", JSON.stringify(res?.returnValue));
-        history.push("/");
+        window.location.replace("/");
         form.resetFields();
       } else {
         message.error("Không khớp");
@@ -40,20 +40,23 @@ export default function SignIn() {
   const onFinishHDV = async (values) => {
     try {
       const res = await sendPost("/auth/login-tourguide", values);
+      console.log(res, "ssss");
       if (res.statusCode === 200) {
         notification.open({
           message: "Đăng nhập thành công",
-          icon: <SmileOutlined style={{ color: "#e52525" }} />,
+          icon: <SmileOutlined style={{ color: "green" }} />,
         });
         setToken(res.returnValue.accessToken);
         setRefreshToken(res.returnValue.refreshToken);
         setItem("user", JSON.stringify(res?.returnValue));
-        history.push("/kenh-hdv");
+        window.location.replace("/kenh-hdv");
+        console.log("history ", history);
         formHDV.resetFields();
       } else {
         message.error("Không khớp");
       }
     } catch (error) {
+      console.log(error);
       message.error("Đăng nhập không hợp lệ");
     }
   };

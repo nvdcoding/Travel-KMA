@@ -38,7 +38,7 @@ export default function ChatContent({ messages, setMessages, socket, users }) {
       setMessages((chatItms) => [...chatItms, newChat]);
       setMsg("");
 
-      socket.emit("send-message", { chatId, content: newChat.message });
+      socket.emit("send-message", { chatId, content: newChat.message, isSuggest: false });
     }
   };
 

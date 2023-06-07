@@ -6,7 +6,7 @@ import Avatar from "./Avatar";
 
 export default function ChatList({ users }) {
   const history = useHistory();
-
+  console.log("users ",users)
   const { infoUser } = useContext(AppContext);
 
   const selectChat = (e, id) => {
@@ -27,7 +27,7 @@ export default function ChatList({ users }) {
         <i className="fa fa-plus"></i>
         <span>New conversation</span>
       </button> */}
-      <div className="chatlist__heading">
+      {/* <div className="chatlist__heading">
         <h2>Chats</h2>
         <button className="btn-nobg">
           <i className="fa fa-ellipsis-h"></i>
@@ -40,7 +40,7 @@ export default function ChatList({ users }) {
             <i className="fa fa-search"></i>
           </button>
         </div>
-      </div>
+      </div> */}
       <div className="chatlist__items">
         {users.map((item, index) => {
           const chattedUser =
@@ -65,7 +65,7 @@ export default function ChatList({ users }) {
               />
 
               <div className="userMeta">
-                <p>{chattedUser?.name}</p>
+                <p>{infoUser.role === "USER" ? chattedUser?.name : chattedUser.username}</p>
                 {/* <span className="activeTime">32 mins ago</span> */}
               </div>
             </div>

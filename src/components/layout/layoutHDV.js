@@ -35,7 +35,7 @@ function LayoutHDV({ children }) {
             </Badge>
           </div>
           <div className="support">
-            <Link to={`/kenh-hdv/chat/10`}>
+            <Link to={`/chat`}>
               <Badge dot>
                 <CommentOutlined
                   style={{

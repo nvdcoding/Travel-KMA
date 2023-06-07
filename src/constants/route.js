@@ -15,7 +15,7 @@ export const ROUTES = {
   SIGNIN: "/dang-nhap",
   SIGNUP: "/dang-ky",
   ONBOARDING: "/onboarding",
-  CHAT: "/chat/:chatId",
+  CHAT: "/chat/:chatId?",
   NEWPOST: "/viet-bai",
   LISTPOST: "/me/posts",
   SETTING: "/account",

@@ -74,7 +74,7 @@ function HeaderLayout() {
                     <i className="fa-solid fa-globe"></i>
                   </div> */}
                   <div className="support">
-                    <Link to={`/chat/10`}>
+                    <Link to={`/chat`}>
                       <Badge dot>
                         <CommentOutlined
                           style={{
