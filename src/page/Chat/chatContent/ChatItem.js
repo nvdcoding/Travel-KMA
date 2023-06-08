@@ -5,7 +5,7 @@ const { Meta } = Card;
 
 export default function ChatItem(props) {
   const chatWith =
-    props.profile?.role === "USER" ? props.chat.tourGuide : props.chat.user;
+    props.profile?.role === "USER" ? props?.chat?.tourGuide : props?.chat?.user;
   console.log(props.message, "mu vo dichj");
   return (
     <div
@@ -32,25 +32,27 @@ export default function ChatItem(props) {
               : "chat__item__content_participant"
           }`}
         >
-          <a href="#" target={'_blank'}>
-           <Card
-          hoverable
-          style={{
-            width: 240,
-          }}
-          bordered={true}
-          cover={
-            <img
-              alt="example"
-              src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
-            />
-          }
-        >
-          <Meta title="Europe Street beat" description="www.instagram.com" />
-        </Card>
+          <a href="#" target={"_blank"}>
+            <Card
+              hoverable
+              style={{
+                width: 240,
+              }}
+              bordered={true}
+              cover={
+                <img
+                  alt="example"
+                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                />
+              }
+            >
+              <Meta
+                title="Europe Street beat"
+                description="www.instagram.com"
+              />
+            </Card>
           </a>
         </div>
-       
       )}
 
       <Avatar

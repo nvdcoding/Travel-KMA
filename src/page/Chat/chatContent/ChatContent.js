@@ -8,16 +8,16 @@ import ChatItem from "./ChatItem";
 
 export default function ChatContent({ messages, setMessages, socket, users }) {
   const { chatId } = useParams();
-    const { infoUser } = useContext(AppContext);
-  const chat = users.find(e => {
-    const id =  infoUser.role === "USER" ? e.tourGuideId : e.userId;
-    if(id == chatId) {
+  const { infoUser } = useContext(AppContext);
+  const chat = users.find((e) => {
+    const id = infoUser.role === "USER" ? e.tourGuideId : e.userId;
+    if (id == chatId) {
       return true;
     }
     return false;
   });
 
-  console.log(chat , "user chat cung")
+  console.log(chat, "user chat cung");
 
   const messagesEndRef = createRef(null);
 
@@ -38,7 +38,11 @@ export default function ChatContent({ messages, setMessages, socket, users }) {
       setMessages((chatItms) => [...chatItms, newChat]);
       setMsg("");
 
-      socket.emit("send-message", { chatId, content: newChat.message, isSuggest: false });
+      socket.emit("send-message", {
+        chatId,
+        content: newChat.message,
+        isSuggest: false,
+      });
     }
   };
 
@@ -96,7 +100,7 @@ export default function ChatContent({ messages, setMessages, socket, users }) {
           </button>
           <input
             type="text"
-            placeholder="Type a message here"
+            placeholder="Gửi lời chào..."
             onChange={onStateChange}
             value={msg}
           />

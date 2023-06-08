@@ -60,34 +60,34 @@ const images = [
 ];
 const feedback = [
   {
-    name: "Nguyễn Văn A",
-    time: "Thứ 2, 20/11/2022",
+    name: "Nguyễn Văn Duy",
+    time: "Thứ 2, 20/4/2022",
     des: "Tour giá tốt, dịch vụ xe cộ khách sạn ổn, hướng dẫn viên thân thiện, nhưng đồ ăn khá ít, nên cải thiện thêm khẩu phần ăn",
-    img: { avt },
+    img: avt,
   },
   {
-    name: "Nguyễn Văn A 1",
-    time: "Thứ 2, 20/11/2022",
+    name: "Nguyễn Tùng",
+    time: "Thứ 3, 24/02/2022",
     des: "Dịch vụ ổn, khách sạn hơi cũ,nói chung phù hợp với giá tiền, sẽ tiếp tục trãi nghiệm các chương trình khác",
-    img: { avt },
+    img: banner2,
   },
   {
-    name: "Nguyễn Văn A 2",
-    time: "Thứ 2, 20/11/2022",
+    name: "Hải Vân Anh",
+    time: "Thứ 7, 20/11/2022",
     des: "Tôi hài lòng, tour đi hướng dẫn viên vui, nhiệt tình, giá tốt",
-    img: { avt },
+    img: banner9,
   },
   {
-    name: "Nguyễn Văn A 3",
-    time: "Thứ 2, 20/11/2022",
+    name: "Tiến Tài",
+    time: "Thứ 5, 15/07/2022",
     des: "Tour đi ổn, khách sạn hơi cũ, đồ ăn còn ít, nhưng bạn hướng dẫn viên rất nhiệt tình!",
-    img: { avt },
+    img: banner4,
   },
   {
-    name: "Nguyễn Văn A 4",
-    time: "Thứ 2, 20/11/2022",
+    name: "Lam Mai",
+    time: "Thứ 6, 15/03/2022",
     des: "HDV thân thiện, Phòng khách sạn 3* đúng tiêu chuẩn tuy nhiên hơi cũ. Bữa ăn đặc sản miền Tây ngon miệng. Giá cả hợp lý",
-    img: { avt },
+    img: banner5,
   },
 ];
 const optionsPerson = {
@@ -747,7 +747,7 @@ function Home() {
                       <img
                         alt=""
                         className="tour-feedback__avt"
-                        src={item.img.avt}
+                        src={item.img}
                       />
                       <div className="tour-feedback__info">
                         <p className="tour-feedback__name">{item.name}</p>

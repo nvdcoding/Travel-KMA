@@ -184,15 +184,18 @@ const ModalTour = ({ listRequest, item }) => {
     {
       title: "STT",
       dataIndex: "STT",
+      width: "40px",
       render: (_, record, index) => <>{index + 1}</>,
     },
     {
       title: "Tour",
       dataIndex: "name",
+      width: "55%",
     },
     {
       title: "Địa điểm",
       dataIndex: "address",
+      render: (_, record) => <>{record?.province?.name}</>,
     },
   ];
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -207,8 +210,11 @@ const ModalTour = ({ listRequest, item }) => {
       const res = await sendGet("/tours", { tourGuideId: user?.id });
       if (res.statusCode === 200) {
         // console.log(res.returnValue.data);
-        message.success("Lấy dữ liệu thành công");
-        setData(res.returnValue?.data.filter(f => item.province.id === f.province.id));
+        setData(
+          res.returnValue?.data.filter(
+            (f) => item.province.id === f.province.id
+          )
+        );
       } else {
         message.error("Thất bại");
       }
@@ -230,18 +236,25 @@ const ModalTour = ({ listRequest, item }) => {
     }
   };
   const handleOk = () => {
-    console.log(item, '111112312321312');
-    if(selectedRowKeys.length === 0) {
+    console.log(item, "111112312321312");
+    if (selectedRowKeys.length === 0) {
       setIsModalOpen(false);
       return;
     }
-    const sendData = data.filter(e => selectedRowKeys.includes(e.id));
-    if(sendData.length > 0) {
-      socket.emit("send-message", { chatId: item.user.id, content: `Xin chào ${item.user.username}, mình là ${user.name} hướng dẫn viên hoạt động ở ${item.province.name}. Mình gợi ý bạn một số tour sau nhé, chúc bạn có những chuyến đi vui vẻ nhé ! `, isSuggest: false });
-
+    const sendData = data.filter((e) => selectedRowKeys.includes(e.id));
+    if (sendData.length > 0) {
+      socket.emit("send-message", {
+        chatId: item.user.id,
+        content: `Xin chào ${item.user.username}, mình là ${user.name} hướng dẫn viên hoạt động ở ${item.province.name}. Mình gợi ý bạn một số tour sau nhé, chúc bạn có những chuyến đi vui vẻ nhé ! `,
+        isSuggest: false,
+      });
     }
     for (const data of sendData) {
-      socket.emit("send-message", { chatId: item.user.id, content: `${data.name}&*&${data.images[0]}`, isSuggest: true });
+      socket.emit("send-message", {
+        chatId: item.user.id,
+        content: `${data.name}&*&${data.images[0]}`,
+        isSuggest: true,
+      });
     }
 
     setIsModalOpen(false);
@@ -278,6 +291,7 @@ const ModalTour = ({ listRequest, item }) => {
         visible={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        className="modal-tour"
       >
         <Table
           onChange={handleTableChange}

@@ -216,3 +216,6 @@
   width: 60% !important;
   max-width: 650px;
 }
+.modal-tour {
+  width: 650px !important;
+}

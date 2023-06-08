@@ -50,7 +50,8 @@ body {
 }
 .main__chatlist {
   border-right: 1px solid #ebe7fb;
-  padding: 0 40px 0 0px;
+  padding: 0 8px 0 0px;
+  flex: 0 0 30%;
 }
 .chatlist__heading {
   display: flex;
@@ -96,6 +97,7 @@ body {
 
 .chatlist__item {
   display: flex;
+  align-items: center;
   border-bottom: 1px solid #ebe7fb;
   padding-bottom: 10px;
   margin-top: 10px;
@@ -157,7 +159,7 @@ body {
 }
 .chatlist__item:hover,
 .chatlist__item.active {
-  background: #fff;
+  background: #eafeffe1;
 
   border-radius: 10px;
 }
@@ -184,7 +186,7 @@ body {
 
 .main__chatcontent {
   flex-grow: 1;
-  padding: 20px 40px;
+  padding: 17px 26px;
   border-right: 1px solid #ebe7fb;
   display: flex;
   flex-direction: column;
@@ -252,7 +254,7 @@ body {
 .chat__item__content {
   background-color: #4462ff;
   color: #fff;
-  padding: 15px;
+  padding: 10px;
   border-radius: 10px 10px 0 10px;
   max-width: 50%;
   min-width: 215px;
