@@ -250,9 +250,10 @@ const ModalTour = ({ listRequest, item }) => {
       });
     }
     for (const data of sendData) {
+      console.log(data);
       socket.emit("send-message", {
         chatId: item.user.id,
-        content: `${data.name}&*&${data.images[0]}`,
+        content: `${data.name}&*&${data.images[0].url}&*&${data.id}`,
         isSuggest: true,
       });
     }

@@ -6,7 +6,7 @@ const { Meta } = Card;
 export default function ChatItem(props) {
   const chatWith =
     props.profile?.role === "USER" ? props?.chat?.tourGuide : props?.chat?.user;
-  console.log(props.message, "mu vo dichj");
+  console.log(props.message.message, "mu vo dichj");
   return (
     <div
       style={{ animationDelay: `0.8s` }}
@@ -32,7 +32,7 @@ export default function ChatItem(props) {
               : "chat__item__content_participant"
           }`}
         >
-          <a href="#" target={"_blank"}>
+          <a href={`https://ktravel.online/tour/${props.message.message.split(`&*&`)[2]}`} target={"_blank"} rel="noreferrer">
             <Card
               hoverable
               style={{
@@ -41,14 +41,14 @@ export default function ChatItem(props) {
               bordered={true}
               cover={
                 <img
-                  alt="example"
-                  src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                  alt="tour du lịch"
+                  src={props.message.message.split(`&*&`)[1]}
                 />
               }
             >
               <Meta
-                title="Europe Street beat"
-                description="www.instagram.com"
+                title={`${props.message.message.split(`&*&`)[0]}`}
+                description="chuyến du lịch"
               />
             </Card>
           </a>
